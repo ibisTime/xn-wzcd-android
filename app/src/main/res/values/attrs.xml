@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyTitleBarLayout">
+        <attr name="txt_title" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MySquareRowLayout">
+        <attr name="txt_content" format="string"></attr>
+        <attr name="img_content" format="reference"></attr>
+        <attr name="isShowRedPoint" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MySelectLayout">
+        <attr name="txt_select_title" format="string"></attr>
+        <attr name="txt_select_content" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyNormalLayout">
+        <attr name="txt_normal_title" format="string"></attr>
+        <attr name="txt_normal_content" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyConfirmBtn">
+        <attr name="txt_confirm_content" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyInputHorizontalLayout">
+        <attr name="txt_input_title" format="string"></attr>
+        <attr name="txt_input_hint" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyImageLayout">
+        <attr name="txt_image_title" format="string"></attr>
+        <attr name="txt_image_hint" format="string"></attr>
+        <attr name="isSingle" format="boolean"></attr>
+
+        <attr name="txt_image_hint_right" format="string"></attr>
+    </declare-styleable>
+
+</resources>
