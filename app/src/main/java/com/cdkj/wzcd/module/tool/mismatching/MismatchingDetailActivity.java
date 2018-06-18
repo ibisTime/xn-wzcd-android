@@ -60,7 +60,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         if (context != null) {
             Intent intent = new Intent(context, MismatchingDetailActivity.class);
             intent.putExtra(DATA_SIGN, code);
-            intent.putExtra(DATA_SIGN2, false);
+            intent.putExtra(DATA_SIGN2, isDetails);
             context.startActivity(intent);
         }
     }
