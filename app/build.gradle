@@ -36,7 +36,7 @@ android {
 
     signingConfigs {
         config {
-            storeFile file('/Users/lei/AndroidStudioProjects/xn-wzcd-android/keystore.jks')
+            storeFile file('../keystore.jks')
             storePassword "wzcd123456"
             keyAlias "wzcd"
             keyPassword "wzcd123456"

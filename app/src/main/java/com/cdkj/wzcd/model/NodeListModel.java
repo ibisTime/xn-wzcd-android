@@ -140,8 +140,9 @@ public class NodeListModel {
     private String loanPeriod;
     private String invoiceCompany;
     private String carBrand;
-    private int originalPrice;
-    private int invoicePrice;
+    private long originalPrice;
+    private String invoicePrice;
+    private String currentInvoicePrice;
     private String carColor;
     private int monthDeposit;
     private int firstAmount;
@@ -242,8 +243,110 @@ public class NodeListModel {
     private String companyName;
     private String loanBankName;
     private String collectBankcardCode;
+
+    private String invoice;
+    private String certification;
+    private String forceInsurance;
+    private String businessInsurance;
+    private String motorRegCertification;
+    private String pdPdf;
+
+    private String deliveryDatetime;
+
+    private String isRightInvoice;
+
+
+
     private BankSubbranchBean bankSubbranch;
     private List<BudgetOrderGpsListBean> budgetOrderGpsList;
+
+    public String getIsRightInvoice() {
+        return isRightInvoice;
+    }
+
+    public void setIsRightInvoice(String isRightInvoice) {
+        this.isRightInvoice = isRightInvoice;
+    }
+
+    public String getDeliveryDatetime() {
+        return deliveryDatetime;
+    }
+
+    public void setDeliveryDatetime(String deliveryDatetime) {
+        this.deliveryDatetime = deliveryDatetime;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getCertification() {
+        return certification;
+    }
+
+    public void setCertification(String certification) {
+        this.certification = certification;
+    }
+
+    public String getForceInsurance() {
+        return forceInsurance;
+    }
+
+    public void setForceInsurance(String forceInsurance) {
+        this.forceInsurance = forceInsurance;
+    }
+
+    public String getBusinessInsurance() {
+        return businessInsurance;
+    }
+
+    public void setBusinessInsurance(String businessInsurance) {
+        this.businessInsurance = businessInsurance;
+    }
+
+    public String getMotorRegCertification() {
+        return motorRegCertification;
+    }
+
+    public void setMotorRegCertification(String motorRegCertification) {
+        this.motorRegCertification = motorRegCertification;
+    }
+
+    public String getPdPdf() {
+        return pdPdf;
+    }
+
+    public void setPdPdf(String pdPdf) {
+        this.pdPdf = pdPdf;
+    }
+
+    public long getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(long originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getInvoicePrice() {
+        return invoicePrice;
+    }
+
+    public void setInvoicePrice(String invoicePrice) {
+        this.invoicePrice = invoicePrice;
+    }
+
+    public String getCurrentInvoicePrice() {
+        return currentInvoicePrice;
+    }
+
+    public void setCurrentInvoicePrice(String currentInvoicePrice) {
+        this.currentInvoicePrice = currentInvoicePrice;
+    }
 
     public BankSubbranchBean getBankSubbranch() {
         return bankSubbranch;
@@ -389,21 +492,6 @@ public class NodeListModel {
         this.carBrand = carBrand;
     }
 
-    public int getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(int originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public int getInvoicePrice() {
-        return invoicePrice;
-    }
-
-    public void setInvoicePrice(int invoicePrice) {
-        this.invoicePrice = invoicePrice;
-    }
 
     public String getCarColor() {
         return carColor;

@@ -38,11 +38,11 @@
 
                 <com.cdkj.wzcd.view.MyNormalLayout
                     android:id="@+id/myNl_date_time"
-                    app:txt_normal_title="安装时间"
-                    app:txt_normal_hint="请选择安装时间"
-                    app:img_normal_right="@drawable/more_right"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:img_normal_right="@drawable/more_right"
+                    app:txt_normal_hint="请选择安装时间"
+                    app:txt_normal_title="安装时间">
 
 
                 </com.cdkj.wzcd.view.MyNormalLayout>
@@ -67,9 +67,9 @@
 
                 <com.cdkj.wzcd.view.MyConfirmBtn
                     android:id="@+id/myCb_confirm"
-                    app:txt_confirm_content="确定"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:txt_confirm_content="确定">
 
 
                 </com.cdkj.wzcd.view.MyConfirmBtn>
@@ -77,8 +77,6 @@
             </LinearLayout>
 
         </ScrollView>
-
-
 
 
     </LinearLayout>

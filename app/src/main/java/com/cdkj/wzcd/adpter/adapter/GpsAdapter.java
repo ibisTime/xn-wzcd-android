@@ -36,8 +36,8 @@ public class GpsAdapter extends BaseQuickAdapter<GpsApplyModel, BaseViewHolder> 
 
         mBinding.myTlIdNode.setText(item.getApplyUserName(), DataDictionaryHelper.getValueOnTheKey(item.getStatus(), mList));
 
-        mBinding.myIlCompany.setText("");
-        mBinding.myIlNumber.setText(item.getApplyCount()+"");
+        mBinding.myIlCompany.setText(item.getCompanyName());
+        mBinding.myIlNumber.setText(item.getApplyCount() + "");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
     }

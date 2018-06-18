@@ -53,7 +53,7 @@ public class FbhListActivity extends AbsRefreshListActivity {
         FbhListAdapter mAdapter = new FbhListAdapter(listData);
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            FbhDetailActivity.open(FbhListActivity.this, mAdapter.getItem(position).getCode());
+            FbhDetailActivity.open(FbhListActivity.this, mAdapter.getItem(position).getCode(),true);
         });
 
         return mAdapter;
@@ -74,7 +74,7 @@ public class FbhListActivity extends AbsRefreshListActivity {
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
             @Override
             protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
-                mRefreshHelper.setData(data.getList(), "暂无放款记录", 0);
+                mRefreshHelper.setData(data.getList(), "暂无发保合记录", 0);
             }
 
             @Override

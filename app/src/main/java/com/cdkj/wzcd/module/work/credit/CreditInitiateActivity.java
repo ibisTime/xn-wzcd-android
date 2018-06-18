@@ -310,7 +310,7 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
             map.put("creditCode", creditCode);
         }
 
-        map.put("bizType", mBinding.mySlWay.getDataKey());
+        map.put("shopWay", mBinding.mySlWay.getDataKey());
         map.put("buttonCode", "1");
         map.put("creditUserList", mList);
         map.put("loanAmount", formatAmountMul(mBinding.myElAmount.getText()));

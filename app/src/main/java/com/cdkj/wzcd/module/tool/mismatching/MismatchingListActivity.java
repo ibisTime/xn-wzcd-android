@@ -12,7 +12,10 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.adpter.adapter.MismatchingListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
+import com.cdkj.wzcd.model.MismatchingRefresh;
 import com.cdkj.wzcd.model.NodeListModel;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 /**
+ * 发票不匹配申请 列表
  * Created by cdkj on 2018/6/16.
  */
 
@@ -53,7 +57,7 @@ public class MismatchingListActivity extends AbsRefreshListActivity {
         MismatchingListAdapter mAdapter = new MismatchingListAdapter(listData);
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            MismatchingDetailActivity.open(MismatchingListActivity.this, mAdapter.getItem(position).getCode());
+            MismatchingDetailActivity.open(MismatchingListActivity.this, mAdapter.getItem(position).getCode(), true);
         });
 
         return mAdapter;
@@ -74,7 +78,7 @@ public class MismatchingListActivity extends AbsRefreshListActivity {
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
             @Override
             protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
-                mRefreshHelper.setData(data.getList(), "暂无放款记录", 0);
+                mRefreshHelper.setData(data.getList(), "暂无不匹配发票", 0);
             }
 
             @Override
@@ -83,4 +87,13 @@ public class MismatchingListActivity extends AbsRefreshListActivity {
             }
         });
     }
+
+
+    @Subscribe
+    public void setId(MismatchingRefresh mismatchingRefresh) {
+        if (mRefreshHelper != null) {
+            mRefreshHelper.onDefaultMRefresh(true);
+        }
+    }
+
 }
