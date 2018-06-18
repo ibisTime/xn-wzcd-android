@@ -134,6 +134,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
             @Override
             protected void onFinish() {
                 disMissLoading();
+                getOldBackList();
             }
         });
     }
@@ -150,6 +151,10 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlBillPriceCurrent.setMoneyText(data.getCurrentInvoicePrice());
     }
 
+
+    /**
+     * 提交
+     */
     public void submit() {
 
         if (TextUtils.isEmpty(code)) return;
@@ -165,6 +170,8 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
         showLoadingDialog();
 
+        addCall(call);
+
         call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(this) {
             @Override
             protected void onSuccess(IsSuccessModes data, String SucMessage) {
@@ -177,6 +184,36 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
                 } else {
                     UITipDialog.showFail(MismatchingDetailActivity.this, "申请失败");
                 }
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+    }
+
+
+    /**
+     * 获取旧返点列表
+     */
+    public void getOldBackList() {
+
+        Map<String, String> map = new HashMap<>();
+
+//        map.put("accountCode",);//返点账号编号
+        map.put("carDealerCode", code);//汽车经销商编号
+
+        Call<BaseResponseModel<String>> call = RetrofitUtils.getBaseAPiService().stringRequest("632297", StringUtils.getJsonToString(map));
+
+        showLoadingDialog();
+
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<String>(this) {
+            @Override
+            protected void onSuccess(String data, String SucMessage) {
+
             }
 
             @Override

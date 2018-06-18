@@ -45,7 +45,9 @@ public class MismatchingListAdapter extends BaseQuickAdapter<NodeListModel, Base
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
         mBinding.myItemCblConfirm.setContent("", "");
-
+        mBinding.myItemCblConfirm.setRightTextAndListener("申请", view -> {
+            MismatchingDetailActivity.open(mContext, item.getCode(),false);
+        });
         if (TextUtils.equals(item.getCurNodeCode(), "011_01")) { // 发票不匹配申请
             mBinding.myItemCblConfirm.setRightTextAndListener("申请", view -> {
                 MismatchingDetailActivity.open(mContext, item.getCode(),false);
