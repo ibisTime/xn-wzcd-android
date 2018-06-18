@@ -169,6 +169,7 @@ public class MainActivity extends AbsBaseLoadActivity {
         SPUtilHelper.saveUserNickName(data.getNickname());
         SPUtilHelper.saveUserPhoto(data.getPhoto());
         SPUtilHelper.saveRoleCode(data.getRoleCode());
+        SPUtilHelper.saveUserCompanyCode(data.getRoleCode());
     }
 
     private void setView(UserModel data) {

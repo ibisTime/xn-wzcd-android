@@ -35,6 +35,24 @@ public class SPUtilHelper {
         return SPUtils.getString(CdApplication.getContext(), USER_TOKE, "");
     }
 
+    /**
+     * 设置用户token
+     *
+     * @param s
+     */
+    public static void saveUserCompanyCode(String s) {
+        SPUtils.put(CdApplication.getContext(), "CompanyCode", s);
+    }
+
+    /**
+     * 设置用户token
+     *
+     * @param
+     */
+    public static String getUserCompanyCode() {
+        return SPUtils.getString(CdApplication.getContext(), "CompanyCode", "");
+    }
+
 
     /**
      * 设置用户token
