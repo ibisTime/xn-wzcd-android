@@ -34,7 +34,6 @@
 
             <ImageView
                 android:id="@+id/iv_right"
-
                 android:visibility="gone"
                 android:layout_marginLeft="@dimen/layout_left_interval"
                 android:layout_width="9dp"

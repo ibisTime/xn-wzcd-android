@@ -57,33 +57,39 @@ public class MyNormalLayout extends LinearLayout {
         mBinding.tvContent.setText(txtContent);
         mBinding.ivRight.setImageResource(resourceId);
 
-        if (resourceId != 0){
+        if (resourceId != 0) {
             mBinding.ivRight.setVisibility(VISIBLE);
         }
+    }
+
+    public void setTextByRequest(String content){
+        mBinding.tvContent.setText(content);
     }
 
 
     private void init(Context context) {
         this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_normal, this, true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_normal, this, true);
 
     }
 
-    public void setText(String content){
+    public void setText(String content) {
         if (!TextUtils.isEmpty(content))
             mBinding.tvContent.setText(content);
     }
 
     /**
      * 获取处理后的金额文本
+     *
      * @return 除以1000的金额字符串
      */
-    public void setMoneyText(String moneyText){
+    public void setMoneyText(String moneyText) {
         mBinding.tvContent.setText(RequestUtil.formatAmountDivSign(moneyText));
     }
-    public String check(){
 
-        if (TextUtils.isEmpty(mBinding.tvContent.getText().toString().trim())){
+    public String check() {
+
+        if (TextUtils.isEmpty(mBinding.tvContent.getText().toString().trim())) {
             ToastUtil.show(context, mBinding.tvContent.getHint().toString());
             return "";
         }
@@ -91,12 +97,12 @@ public class MyNormalLayout extends LinearLayout {
         return mBinding.tvContent.getText().toString();
     }
 
-    public String getText(){
-        return  mBinding.tvContent.getText().toString();
+    public String getText() {
+        return mBinding.tvContent.getText().toString();
     }
 
-    public String getTags(){
-        return  mBinding.tvContent.getTag().toString();
+    public String getTags() {
+        return mBinding.tvContent.getTag().toString();
     }
 
 }

@@ -169,6 +169,7 @@
             </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyConfirmBtn
+                android:visibility="gone"
                 android:id="@+id/myCb_confirm"
                 app:txt_confirm_content="录入"
                 android:layout_width="match_parent"

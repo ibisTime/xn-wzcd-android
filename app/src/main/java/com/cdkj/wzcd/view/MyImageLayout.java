@@ -119,7 +119,7 @@ public class MyImageLayout extends LinearLayout {
 
     public String check(){
         if (TextUtils.isEmpty(FlImgUrl)){
-            ToastUtil.show(context, "请上传"+mBinding.tvHint.getHint().toString());
+            ToastUtil.show(context, mBinding.tvHint.getHint().toString());
             return null;
         }
 
@@ -201,7 +201,6 @@ public class MyImageLayout extends LinearLayout {
 
         FlImgUrl = url;
         ImgUtils.loadQiniuImg(context, FlImgUrl, mBinding.ivImg);
-
 
     }
 

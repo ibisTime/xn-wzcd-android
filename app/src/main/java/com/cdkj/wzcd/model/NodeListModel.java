@@ -243,8 +243,86 @@ public class NodeListModel {
     private String companyName;
     private String loanBankName;
     private String collectBankcardCode;
+
+    private String invoice;
+    private String certification;
+    private String forceInsurance;
+    private String businessInsurance;
+    private String motorRegCertification;
+    private String pdPdf;
+
+    private String deliveryDatetime;
+
+    private String isRightInvoice;
+
+
+
     private BankSubbranchBean bankSubbranch;
     private List<BudgetOrderGpsListBean> budgetOrderGpsList;
+
+    public String getIsRightInvoice() {
+        return isRightInvoice;
+    }
+
+    public void setIsRightInvoice(String isRightInvoice) {
+        this.isRightInvoice = isRightInvoice;
+    }
+
+    public String getDeliveryDatetime() {
+        return deliveryDatetime;
+    }
+
+    public void setDeliveryDatetime(String deliveryDatetime) {
+        this.deliveryDatetime = deliveryDatetime;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getCertification() {
+        return certification;
+    }
+
+    public void setCertification(String certification) {
+        this.certification = certification;
+    }
+
+    public String getForceInsurance() {
+        return forceInsurance;
+    }
+
+    public void setForceInsurance(String forceInsurance) {
+        this.forceInsurance = forceInsurance;
+    }
+
+    public String getBusinessInsurance() {
+        return businessInsurance;
+    }
+
+    public void setBusinessInsurance(String businessInsurance) {
+        this.businessInsurance = businessInsurance;
+    }
+
+    public String getMotorRegCertification() {
+        return motorRegCertification;
+    }
+
+    public void setMotorRegCertification(String motorRegCertification) {
+        this.motorRegCertification = motorRegCertification;
+    }
+
+    public String getPdPdf() {
+        return pdPdf;
+    }
+
+    public void setPdPdf(String pdPdf) {
+        this.pdPdf = pdPdf;
+    }
 
     public long getOriginalPrice() {
         return originalPrice;
