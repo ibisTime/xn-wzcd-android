@@ -140,8 +140,9 @@ public class NodeListModel {
     private String loanPeriod;
     private String invoiceCompany;
     private String carBrand;
-    private int originalPrice;
-    private int invoicePrice;
+    private long originalPrice;
+    private String invoicePrice;
+    private String currentInvoicePrice;
     private String carColor;
     private int monthDeposit;
     private int firstAmount;
@@ -244,6 +245,30 @@ public class NodeListModel {
     private String collectBankcardCode;
     private BankSubbranchBean bankSubbranch;
     private List<BudgetOrderGpsListBean> budgetOrderGpsList;
+
+    public long getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(long originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getInvoicePrice() {
+        return invoicePrice;
+    }
+
+    public void setInvoicePrice(String invoicePrice) {
+        this.invoicePrice = invoicePrice;
+    }
+
+    public String getCurrentInvoicePrice() {
+        return currentInvoicePrice;
+    }
+
+    public void setCurrentInvoicePrice(String currentInvoicePrice) {
+        this.currentInvoicePrice = currentInvoicePrice;
+    }
 
     public BankSubbranchBean getBankSubbranch() {
         return bankSubbranch;
@@ -389,21 +414,6 @@ public class NodeListModel {
         this.carBrand = carBrand;
     }
 
-    public int getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public void setOriginalPrice(int originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public int getInvoicePrice() {
-        return invoicePrice;
-    }
-
-    public void setInvoicePrice(int invoicePrice) {
-        this.invoicePrice = invoicePrice;
-    }
 
     public String getCarColor() {
         return carColor;

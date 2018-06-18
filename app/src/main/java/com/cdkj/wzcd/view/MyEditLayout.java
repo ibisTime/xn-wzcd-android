@@ -140,7 +140,6 @@ public class MyEditLayout extends LinearLayout {
     }
 
     public String getText(){
-
         return mBinding.edtInput.getText().toString();
     }
 

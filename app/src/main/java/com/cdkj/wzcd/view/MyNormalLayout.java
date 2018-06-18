@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyNormalBinding;
+import com.cdkj.wzcd.util.RequestUtil;
 
 /**
  * Created by cdkj on 2018/5/29.
@@ -73,6 +74,13 @@ public class MyNormalLayout extends LinearLayout {
             mBinding.tvContent.setText(content);
     }
 
+    /**
+     * 获取处理后的金额文本
+     * @return 除以1000的金额字符串
+     */
+    public void setMoneyText(String moneyText){
+        mBinding.tvContent.setText(RequestUtil.formatAmountDivSign(moneyText));
+    }
     public String check(){
 
         if (TextUtils.isEmpty(mBinding.tvContent.getText().toString().trim())){
