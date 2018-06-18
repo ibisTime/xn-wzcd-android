@@ -48,21 +48,19 @@ public class MyListItemBtnLayout extends LinearLayout {
 
     private void setData() {
         if (TextUtils.isEmpty(txtContentLeft) && TextUtils.isEmpty(txtContentRight)){
-
             mBinding.llRoot.setVisibility(GONE);
-
         }else {
+            mBinding.llRoot.setVisibility(VISIBLE);
+        }
 
-            mBinding.btnLeft.setText(txtContentLeft);
-            if (!TextUtils.isEmpty(txtContentLeft)){
-                mBinding.btnLeft.setVisibility(VISIBLE);
-            }
+        mBinding.btnLeft.setText(txtContentLeft);
+        if (!TextUtils.isEmpty(txtContentLeft)){
+            mBinding.btnLeft.setVisibility(VISIBLE);
+        }
 
-            mBinding.btnRight.setText(txtContentRight);
-            if (!TextUtils.isEmpty(txtContentRight)){
-                mBinding.btnRight.setVisibility(VISIBLE);
-            }
-
+        mBinding.btnRight.setText(txtContentRight);
+        if (!TextUtils.isEmpty(txtContentRight)){
+            mBinding.btnRight.setVisibility(VISIBLE);
         }
 
     }
@@ -70,21 +68,19 @@ public class MyListItemBtnLayout extends LinearLayout {
     public void setContent(String content, String contentRight){
 
         if (TextUtils.isEmpty(content) && TextUtils.isEmpty(contentRight)){
-
             mBinding.llRoot.setVisibility(GONE);
-
         }else {
+            mBinding.llRoot.setVisibility(VISIBLE);
+        }
 
-            if (!TextUtils.isEmpty(content)){
-                mBinding.btnLeft.setText(content);
-                mBinding.btnLeft.setVisibility(VISIBLE);
-            }
+        if (!TextUtils.isEmpty(content)){
+            mBinding.btnLeft.setText(content);
+            mBinding.btnLeft.setVisibility(VISIBLE);
+        }
 
-            if (!TextUtils.isEmpty(contentRight)){
-                mBinding.btnRight.setText(contentRight);
-                mBinding.btnRight.setVisibility(VISIBLE);
-            }
-
+        if (!TextUtils.isEmpty(contentRight)){
+            mBinding.btnRight.setText(contentRight);
+            mBinding.btnRight.setVisibility(VISIBLE);
         }
     }
 

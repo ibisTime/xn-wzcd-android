@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="客户姓名">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="业务编号">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="贷款银行">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_loan_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="贷款金额">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <View
+                    style="@style/style_split_line_horizontal_broad"/>
+
+                <com.cdkj.wzcd.view.MySelectLayout
+                    android:id="@+id/mySl_cancel_code"
+                    app:txt_select_title="作废GPS设备号"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.cdkj.wzcd.view.MySelectLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_input_hint="请输入备注"
+                    app:txt_input_title="备注">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <View
+                    style="@style/style_split_line_horizontal_broad"/>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="已安装列表">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_gps"
+                    android:paddingTop="15dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <com.cdkj.wzcd.view.MyConfirmBtn
+                    android:id="@+id/myCb_confirm"
+                    app:txt_confirm_content="确认"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                </com.cdkj.wzcd.view.MyConfirmBtn>
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_confirm"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginLeft="@dimen/layout_left_interval"-->
+            <!--android:layout_marginRight="@dimen/layout_right_interval"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:background="@drawable/common_my_confirm_btn"-->
+            <!--android:text="@string/save"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="16sp" />-->
+
+
+    </LinearLayout>
+
+
+</layout>

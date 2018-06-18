@@ -108,7 +108,8 @@ public class GpsDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
 
-        mBinding.llAddGps.setVisibility(View.GONE);
+        mBinding.llAdd.setVisibility(View.GONE);
+        mBinding.myCbConfirm.setVisibility(View.GONE);
 
 
         if (data.getBudgetOrderGpsList() != null || data.getBudgetOrderGpsList().size() != 0){
@@ -118,6 +119,8 @@ public class GpsDetailActivity extends AbsBaseLoadActivity {
 
                 GpsInstallModel model = new GpsInstallModel();
                 model.setCode(bean.getCode());
+                model.setStatus(bean.getStatus());
+                model.setGpsType(bean.getGpsType());
                 model.setGpsDevNo(bean.getGpsDevNo());
                 model.setAzLocation(bean.getAzLocation());
                 model.setAzUser(bean.getAzUser());

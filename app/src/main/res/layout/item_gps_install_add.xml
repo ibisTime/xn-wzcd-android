@@ -19,6 +19,22 @@
         </com.cdkj.wzcd.view.item.MyItemNormalLayout>
 
         <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_status"
+            app:txt_item_normal_title="状\u3000态:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_type"
+            app:txt_item_normal_title="类\u3000型:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
             android:id="@+id/myItemNl_position"
             app:txt_item_normal_title="位\u3000置:"
             android:layout_width="match_parent"

@@ -207,7 +207,7 @@ public class MySelectLayout extends LinearLayout {
 
                 getRequest();
             } else {
-                if (mData == null) {
+                if (mData == null || mData.size() == 0) {
                     ToastUtil.show(getContext(), "没有可选列表");
                     return;
                 }

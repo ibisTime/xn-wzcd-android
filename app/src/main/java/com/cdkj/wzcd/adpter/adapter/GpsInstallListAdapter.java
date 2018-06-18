@@ -2,13 +2,13 @@ package com.cdkj.wzcd.adpter.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemGpsInstallBinding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.tool.gps_install.GPSInstallInfoActivity;
+import com.cdkj.wzcd.module.tool.gps_install.GpsCancelActivity;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -41,12 +41,19 @@ public class GpsInstallListAdapter extends BaseQuickAdapter<NodeListModel, BaseV
         mBinding.myIlCompany.setText(item.getCompanyName());
         mBinding.myIlCode.setText(item.getCarBrand());
 
-        mBinding.myItemCblConfirm.setContent("","");
+        mBinding.myItemCblConfirm.setContent("安装回录","回收作废");
+        mBinding.myItemCblConfirm.setLeftListener( view -> {
+            GPSInstallInfoActivity.open(mContext, item.getCode());
+        });
+        mBinding.myItemCblConfirm.setRightListener( view -> {
+            GpsCancelActivity.open(mContext, item.getCode());
+        });
 
-        if (TextUtils.equals(item.getCurNodeCode(),"002_09") || TextUtils.equals(item.getCurNodeCode(),"002_12")){ // 业务团队安装GPS / 业务团队重新安装GPS
-            mBinding.myItemCblConfirm.setRightTextAndListener("录入", view -> {
-                GPSInstallInfoActivity.open(mContext, item.getCode());
-            });
-        }
+//        if (TextUtils.equals(item.getCurNodeCode(),"002_09") || TextUtils.equals(item.getCurNodeCode(),"002_12")){ // 业务团队安装GPS / 业务团队重新安装GPS
+//
+//        }
+
+
+
     }
 }

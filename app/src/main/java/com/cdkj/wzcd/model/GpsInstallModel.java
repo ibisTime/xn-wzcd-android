@@ -13,7 +13,25 @@ public class GpsInstallModel implements Serializable {
     private String azLocation;
     private String azDatetime;
     private String azUser;
+    private String gpsType;
+    private String status;
     private String remark;
+
+    public String getGpsType() {
+        return gpsType;
+    }
+
+    public void setGpsType(String gpsType) {
+        this.gpsType = gpsType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getCode() {
         return code;

@@ -53,55 +53,64 @@
                 <View
                     style="@style/style_split_line_horizontal_broad"/>
 
-                <com.cdkj.wzcd.view.MySelectLayout
-                    android:id="@+id/mySl_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:txt_select_title="GPS设备号">
-
-                </com.cdkj.wzcd.view.MySelectLayout>
-
-
-                <com.cdkj.wzcd.view.MyEditLayout
-                    android:id="@+id/myEl_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:txt_input_hint="请输入安装位置"
-                    app:txt_input_title="安装位置">
-
-                </com.cdkj.wzcd.view.MyEditLayout>
-
-                <com.cdkj.wzcd.view.MyNormalLayout
-                    android:id="@+id/myNl_date_time"
-                    app:txt_normal_title="安装时间"
-                    app:txt_normal_hint="请选择安装时间"
-                    app:img_normal_right="@drawable/more_right"
+                <LinearLayout
+                    android:id="@+id/ll_gps"
+                    android:visibility="gone"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <com.cdkj.wzcd.view.MySelectLayout
+                        android:id="@+id/mySl_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:txt_select_title="GPS设备号">
 
-                </com.cdkj.wzcd.view.MyNormalLayout>
+                    </com.cdkj.wzcd.view.MySelectLayout>
 
-                <com.cdkj.wzcd.view.MyEditLayout
-                    android:id="@+id/myEl_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:txt_input_hint="请输入安装人员"
-                    app:txt_input_title="安装人员">
 
-                </com.cdkj.wzcd.view.MyEditLayout>
+                    <com.cdkj.wzcd.view.MyEditLayout
+                        android:id="@+id/myEl_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:txt_input_hint="请输入安装位置"
+                        app:txt_input_title="安装位置">
 
-                <com.cdkj.wzcd.view.MyEditLayout
-                    android:id="@+id/myEl_remark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:txt_input_hint="请输入备注"
-                    app:txt_input_title="备注">
+                    </com.cdkj.wzcd.view.MyEditLayout>
 
-                </com.cdkj.wzcd.view.MyEditLayout>
+                    <com.cdkj.wzcd.view.MyNormalLayout
+                        android:id="@+id/myNl_date_time"
+                        app:txt_normal_title="安装时间"
+                        app:txt_normal_hint="请选择安装时间"
+                        app:img_normal_right="@drawable/more_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <View
-                    style="@style/style_split_line_horizontal_broad"/>
+
+                    </com.cdkj.wzcd.view.MyNormalLayout>
+
+                    <com.cdkj.wzcd.view.MyEditLayout
+                        android:id="@+id/myEl_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:txt_input_hint="请输入安装人员"
+                        app:txt_input_title="安装人员">
+
+                    </com.cdkj.wzcd.view.MyEditLayout>
+
+                    <com.cdkj.wzcd.view.MyEditLayout
+                        android:id="@+id/myEl_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:txt_input_hint="请输入备注"
+                        app:txt_input_title="备注">
+
+                    </com.cdkj.wzcd.view.MyEditLayout>
+
+                    <View
+                        style="@style/style_split_line_horizontal_broad"/>
+
+                </LinearLayout>
 
                 <com.cdkj.wzcd.view.MyNormalLayout
                     android:layout_width="match_parent"
@@ -120,8 +129,6 @@
                 </android.support.v7.widget.RecyclerView>
 
                 <LinearLayout
-                    android:id="@+id/ll_add_gps"
-                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

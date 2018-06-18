@@ -82,6 +82,7 @@
         <activity android:name=".module.work.cldy.CldyApplyActivity" />
         <activity android:name=".module.tool.jcdy.JcdyActivity" />
         <activity android:name=".module.tool.jcdy.JcdyListActivity" />
+        <activity android:name=".module.tool.gps_install.GpsCancelActivity" />
 
         <!--<activity android:name=".module.business.join_approval.JoinApplyListActivity" />-->
         <!--<activity android:name=".module.business.face_view.InterviewActivity" />-->

@@ -121,6 +121,8 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
             @Override
             protected void onSuccess(NodeListModel data, String SucMessage) {
 
+                mBinding.llGps.setVisibility(View.VISIBLE);
+
                 setView(data);
                 getGpsRequest();
             }
@@ -136,21 +138,24 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
+        mBinding.myNlLoanAmount.setMoneyText(data.getLoanAmount());
 
 
         if (data.getBudgetOrderGpsList() != null || data.getBudgetOrderGpsList().size() !=0){
             mList.clear();
-//            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()){
-//
-//                GpsInstallModel model = new GpsInstallModel();
-//                model.setCode(bean.getCode());
-//                model.setGpsDevNo(bean.getGpsDevNo());
-//                model.setAzLocation(bean.getAzLocation());
-//                model.setAzUser(bean.getAzUser());
-//                model.setAzDatetime(bean.getAzDatetime());
-//
-//                mList.add(model);
-//            }
+            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()){
+
+                GpsInstallModel model = new GpsInstallModel();
+                model.setCode(bean.getCode());
+                model.setStatus(bean.getStatus());
+                model.setGpsType(bean.getGpsType());
+                model.setGpsDevNo(bean.getGpsDevNo());
+                model.setAzLocation(bean.getAzLocation());
+                model.setAzUser(bean.getAzUser());
+                model.setAzDatetime(bean.getAzDatetime());
+
+                mList.add(model);
+            }
             mAdapter.notifyDataSetChanged();
         }
 
@@ -225,11 +230,16 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
     private void request(){
         Map<String, Object> map = new HashMap<>();
 
-        map.put("code", code);
+        map.put("budgetOrder", code);
         map.put("operator", SPUtilHelper.getUserId());
-        map.put("gpsAzList", mList);
 
-        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632126", StringUtils.getJsonToString(map));
+        map.put("azDatetime", mBinding.myNlDateTime.getText());
+        map.put("azLocation", mBinding.myElLocation.getText());
+        map.put("azUser", mBinding.myElUser.getText());
+        map.put("gpsCode", mBinding.mySlCode.getDataValue());
+        map.put("remark", mBinding.myElRemark.getText());
+
+        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632342", StringUtils.getJsonToString(map));
 
         addCall(call);
 
@@ -239,7 +249,7 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
 
             @Override
             protected void onSuccess(CodeModel data, String SucMessage) {
-                UITipDialog.showSuccess(GPSInstallInfoActivity.this, "保存成功", dialogInterface -> {
+                UITipDialog.showSuccess(GPSInstallInfoActivity.this, "录入成功", dialogInterface -> {
                     finish();
                 });
             }

@@ -1514,11 +1514,20 @@ public class NodeListModel {
         private String code;
         private String gpsDevNo;
         private String gpsType;
+        private String status;
         private String azLocation;
         private String azDatetime;
         private String azUser;
         private String remark;
         private String budgetOrder;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
 
         public String getCode() {
             return code;
