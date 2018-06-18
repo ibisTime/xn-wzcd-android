@@ -82,7 +82,9 @@ public class GpsApplyActivity extends AbsBaseLoadActivity {
 
         Map<String, String> map = RetrofitUtils.getRequestMap();
         map.put("applyStatus", "0");
-        map.put("useStatus", "0");
+//        map.put("useStatus", "0");
+        map.put("companyApplyStatus", "1");
+        map.put("companyCode ", SPUtilHelper.getUserCompanyCode());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class).getGpsList("632707", StringUtils.getJsonToString(map));
 

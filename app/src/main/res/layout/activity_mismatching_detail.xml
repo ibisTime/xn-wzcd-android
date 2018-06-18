@@ -112,7 +112,7 @@
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_rebate"
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white">
