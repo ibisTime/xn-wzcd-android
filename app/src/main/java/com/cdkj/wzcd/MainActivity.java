@@ -25,10 +25,13 @@ import com.cdkj.wzcd.module.tool.fabrication.FabricationListActivity;
 import com.cdkj.wzcd.module.tool.gps.GpsListActivity;
 import com.cdkj.wzcd.module.tool.gps_install.GPSInstallListActivity;
 import com.cdkj.wzcd.module.tool.history.HistoryUserActivity;
+import com.cdkj.wzcd.module.tool.jcdy.JcdyListActivity;
 import com.cdkj.wzcd.module.tool.mismatching.MismatchingListActivity;
 import com.cdkj.wzcd.module.tool.uservoid.UserToVoidActivity;
 import com.cdkj.wzcd.module.user.SignInActivity;
 import com.cdkj.wzcd.module.work.advancefund.AdvanceFundListActivity;
+import com.cdkj.wzcd.module.work.bank_loan.BankLoanListActivity;
+import com.cdkj.wzcd.module.work.cldy.BssCldyListActivity;
 import com.cdkj.wzcd.module.work.credit.CreditListActivity;
 import com.cdkj.wzcd.util.BizTypeHelper;
 import com.cdkj.wzcd.util.NodeHelper;
@@ -177,6 +180,19 @@ public class MainActivity extends AbsBaseLoadActivity {
         if (TextUtils.equals(data.getRoleCode(), ZHRY)){ // 驻行人员
             mBinding.tvRole.setText("[驻行人员]");
 
+            mBinding.mySrAdvanceFund.setVisibility(View.GONE);
+
+            mBinding.mySrLoan.setVisibility(View.VISIBLE);
+            mBinding.mySrCldy.setVisibility(View.VISIBLE);
+
+            mBinding.llTool1.setVisibility(View.GONE);
+            mBinding.llTool2.setVisibility(View.GONE);
+
+            mBinding.mySrLskh.setVisibility(View.GONE);
+            mBinding.mySrJcdy.setVisibility(View.VISIBLE);
+
+            mBinding.llZlcd.setVisibility(View.GONE);
+
         }else if (TextUtils.equals(data.getRoleCode(), YWY)){// 业务员
             mBinding.tvRole.setText("[业务员]");
 
@@ -203,6 +219,16 @@ public class MainActivity extends AbsBaseLoadActivity {
         // 财务垫资
         mBinding.mySrAdvanceFund.setOnClickListener(view -> {
             AdvanceFundListActivity.open(this);
+        });
+
+        // 银行放款
+        mBinding.mySrLoan.setOnClickListener(view -> {
+            BankLoanListActivity.open(this);
+        });
+
+        //车辆抵押
+        mBinding.mySrCldy.setOnClickListener(view -> {
+            BssCldyListActivity.open(this);
         });
 
         // 制卡
@@ -241,6 +267,10 @@ public class MainActivity extends AbsBaseLoadActivity {
             HistoryUserActivity.open(this);
         });
 
+        // 解除抵押
+        mBinding.mySrJcdy.setOnClickListener(view -> {
+            JcdyListActivity.open(this);
+        });
 
         //资料上传
         mBinding.mySrZlcd.setOnClickListener(view -> {

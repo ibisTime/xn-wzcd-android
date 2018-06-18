@@ -8,9 +8,11 @@ import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemCllhListBinding;
 import com.cdkj.wzcd.model.NodeListModel;
+import com.cdkj.wzcd.module.work.cldy.CldyApplyActivity;
 import com.cdkj.wzcd.util.BizTypeHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.cdkj.wzcd.util.RequestUtil;
+import com.cdkj.wzcd.util.UserHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -43,27 +45,17 @@ public class CldyListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
-//        if (UserHelper.isZHRY()){
-//
-//            if (TextUtils.equals(item.getCurNodeCode(),"002_21")){ // 抵押完成
-//                mBinding.myItemCblConfirm.setRightTextAndListener("抵押完成", view -> {
-//                    MortgageFinishActivity.open(mContext, item.getCode());
-//                });
-//            }else {
-//                mBinding.myItemCblConfirm.setContent("","");
-//            }
-//
-//        }else if (UserHelper.isYWY()){
-//            if (TextUtils.equals(item.getCurNodeCode(),"002_18")){ // 业务团队车辆抵押
-//                mBinding.myItemCblConfirm.setRightTextAndListener("录入抵押信息", view -> {
-//                    CldyInputMessageActivity.open(mContext, item.getCode());
-//                });
-//            }else {
-//                mBinding.myItemCblConfirm.setContent("","");
-//            }
-//        }else {
-//            mBinding.myItemCblConfirm.setContent("","");
-//        }
+        mBinding.myItemCblConfirm.setContent("","");
+
+        if (UserHelper.isZHRY()){
+
+            if (TextUtils.equals(item.getCurNodeCode(),"002_21")){ // 回录提交银行
+                mBinding.myItemCblConfirm.setRightTextAndListener("提交", view -> {
+                    CldyApplyActivity.open(mContext, item.getCode());
+                });
+            }
+
+        }
 
 
 

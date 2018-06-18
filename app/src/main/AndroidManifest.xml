@@ -71,22 +71,24 @@
         <activity android:name=".module.tool.gps_install.GPSInfoAddActivity" />
         <activity android:name=".module.work.credit.audit.BankCreditResultActivity" />
 
+        <!--数据请求-->
+
+        <activity android:name=".module.work.cldy.BssCldyListActivity" />
+        <activity android:name=".module.work.cldy.CldyInputMessageActivity" />
+
+        <activity android:name=".module.work.bank_loan.BankLoanListActivity" />
+        <activity android:name=".module.work.bank_loan.BankLoanCommitActivity" />
+        <activity android:name=".module.work.bank_loan.BankLoanInputActivity" />
+        <activity android:name=".module.work.cldy.CldyApplyActivity" />
+        <activity android:name=".module.tool.jcdy.JcdyActivity" />
+        <activity android:name=".module.tool.jcdy.JcdyListActivity" />
+
         <!--<activity android:name=".module.business.join_approval.JoinApplyListActivity" />-->
         <!--<activity android:name=".module.business.face_view.InterviewActivity" />-->
         <!--<activity android:name=".module.business.face_view.InterviewStartActivity" />-->
         <!--<activity android:name=".module.business.join_approval.edit.JoinStep1Activity" />-->
 
-        <!--数据请求-->
-
-        <!--<activity android:name=".module.business.cllh.CllhListActivity" />-->
-        <!--<activity android:name=".module.business.cllh.CllhInputMessageActivity" />-->
-        <!--<activity android:name=".module.business.cldy.BssCldyListActivity" />-->
-        <!--<activity android:name=".module.business.cldy.CldyInputMessageActivity" />-->
-
         <!--<activity android:name=".module.user.UserInfoActivity" />-->
-        <!--<activity android:name=".module.business.bank_loan.BankLoanListActivity" />-->
-        <!--<activity android:name=".module.business.bank_loan.BankLoanCommitActivity" />-->
-        <!--<activity android:name=".module.business.bank_loan.BankLoanInputActivity" />-->
         <!--<activity android:name=".module.business.join_approval.edit.JoinStep2Activity" />-->
         <!--<activity android:name=".module.business.join_approval.edit.JoinStep3Activity" />-->
         <!--<activity android:name=".module.business.join_approval.edit.JoinStep4Activity" />-->
@@ -94,7 +96,6 @@
         <!--<activity android:name=".module.business.join_approval.edit.JoinStep6Activity" />-->
         <!--<activity android:name=".module.business.join_approval.JoinApplyActivity" />-->
 
-        <!--<activity android:name=".module.business.cldy.MortgageFinishActivity" />-->
         <!--<activity android:name=".module.business.face_view.RoomActivity" />-->
         <!--<activity android:name=".module.business.face_view.MainActivity" />-->
 

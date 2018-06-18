@@ -25,6 +25,7 @@ public class DataDictionaryHelper {
 
     public static String credit_user_relation = "credit_user_relation";
     public static String credit_user_loan_role = "credit_user_loan_role";
+    public static String template_id = "template_id";
     public static String make_card_status = "make_card_status";
     public static String budget_orde_biz_typer = "budget_orde_biz_typer";
     public static String loan_period = "loan_period";

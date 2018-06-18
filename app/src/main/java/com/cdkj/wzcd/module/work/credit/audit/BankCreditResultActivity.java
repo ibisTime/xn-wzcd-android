@@ -116,6 +116,8 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
             mBinding.myElOutGuaranteesCount.setTextByRequest(mResult.getOutGuaranteesCount());
             mBinding.myElOutGuaranteesAmount.setMoneyTextByRequest(mResult.getOutGuaranteesAmount());
             mBinding.myElOutGuaranteesRemark.setTextByRequest(mResult.getOutGuaranteesRemark());
+
+            mBinding.myCbConfirm.setVisibility(View.GONE);
         }
 
 

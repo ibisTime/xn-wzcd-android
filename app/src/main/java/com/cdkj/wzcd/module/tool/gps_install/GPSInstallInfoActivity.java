@@ -4,24 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.CodeModel;
+import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.adpter.adapter.GpsInstallAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsInfoInputBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;
+import com.cdkj.wzcd.model.GpsModel;
 import com.cdkj.wzcd.model.NodeListModel;
-
-import org.greenrobot.eventbus.Subscribe;
+import com.cdkj.wzcd.util.DatePickerHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,6 +83,10 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
             GPSInfoAddActivity.open(this);
         });
 
+        mBinding.myNlDateTime.setOnClickListener(view -> {
+            new DatePickerHelper().build(this).getDate(mBinding.myNlDateTime, true, true,  true, false, false, false);
+        });
+
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
             if (check()){
                 request();
@@ -116,12 +122,12 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
             protected void onSuccess(NodeListModel data, String SucMessage) {
 
                 setView(data);
-
+                getGpsRequest();
             }
 
             @Override
             protected void onFinish() {
-                disMissLoading();
+//                disMissLoading();
             }
         });
     }
@@ -134,37 +140,85 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
 
         if (data.getBudgetOrderGpsList() != null || data.getBudgetOrderGpsList().size() !=0){
             mList.clear();
-            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()){
-
-                GpsInstallModel model = new GpsInstallModel();
-                model.setCode(bean.getCode());
-                model.setGpsDevNo(bean.getGpsDevNo());
-                model.setAzLocation(bean.getAzLocation());
-                model.setAzUser(bean.getAzUser());
-                model.setAzDatetime(bean.getAzDatetime());
-
-                mList.add(model);
-            }
+//            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()){
+//
+//                GpsInstallModel model = new GpsInstallModel();
+//                model.setCode(bean.getCode());
+//                model.setGpsDevNo(bean.getGpsDevNo());
+//                model.setAzLocation(bean.getAzLocation());
+//                model.setAzUser(bean.getAzUser());
+//                model.setAzDatetime(bean.getAzDatetime());
+//
+//                mList.add(model);
+//            }
             mAdapter.notifyDataSetChanged();
         }
 
     }
 
 
-    @Subscribe
-    public void doAddCreditPerson(GpsInstallModel model){
-        mList.add(model);
-        mAdapter.notifyDataSetChanged();
+    public void getGpsRequest() {
+
+        Map<String, String> map = RetrofitUtils.getRequestMap();
+        map.put("applyStatus", "1");
+        map.put("useStatus", "0");
+        map.put("applyUser", SPUtilHelper.getUserId());
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getGpsList("632707", StringUtils.getJsonToString(map));
+
+//        showLoadingDialog();
+
+        call.enqueue(new BaseResponseListCallBack<GpsModel>(this) {
+
+            @Override
+            protected void onSuccess(List<GpsModel> data, String SucMessage) {
+                if (data == null || data.size() == 0)
+                    return;
+
+                initCustomView(data);
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
     }
+
+    private void initCustomView(List<GpsModel> data) {
+
+        List<DataDictionary> dictionaryList = new ArrayList<>();
+
+        for (GpsModel model : data){
+            dictionaryList.add(new DataDictionary().setDkey(model.getCode()).setDvalue(model.getGpsDevNo()));
+        }
+
+        mBinding.mySlCode.setData(dictionaryList, null);
+
+    }
+
 
     private boolean check(){
 
-        // Gps
-        if (mList.size() == 0){
-            ToastUtil.show(this, "请添加GPS");
+        // 设备号
+        if (TextUtils.isEmpty(mBinding.mySlCode.getDataKey())){
             return false;
         }
 
+        // 安装位置
+        if (TextUtils.isEmpty(mBinding.myElLocation.check())){
+            return false;
+        }
+
+        // 安装时间
+        if (TextUtils.isEmpty(mBinding.myNlDateTime.check())){
+            return false;
+        }
+
+        // 安装人员
+        if (TextUtils.isEmpty(mBinding.myElUser.check())){
+            return false;
+        }
         return true;
     }
 
