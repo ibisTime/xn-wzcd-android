@@ -62,7 +62,7 @@ public class MyNormalLayout extends LinearLayout {
         }
     }
 
-    public void setTextByRequest(String content){
+    public void setTextByRequest(String content) {
         mBinding.tvContent.setText(content);
     }
 
@@ -76,6 +76,11 @@ public class MyNormalLayout extends LinearLayout {
     public void setText(String content) {
         if (!TextUtils.isEmpty(content))
             mBinding.tvContent.setText(content);
+    }
+
+    public void setTitle(String title) {
+        txtTitle = title;
+        mBinding.tvTitle.setText(txtTitle);
     }
 
     /**

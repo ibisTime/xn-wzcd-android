@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.cdkj.baselibrary.api.BaseResponseModel;
@@ -46,6 +49,8 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
     private String code;
 
+    private String mCarCode;
+
     /**
      * @param context
      * @param code
@@ -55,7 +60,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         if (context != null) {
             Intent intent = new Intent(context, MismatchingDetailActivity.class);
             intent.putExtra(DATA_SIGN, code);
-            intent.putExtra(DATA_SIGN2, isDetails);
+            intent.putExtra(DATA_SIGN2, false);
             context.startActivity(intent);
         }
     }
@@ -73,6 +78,9 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
         initClickListener();
 
+        initBackRecyclerView();
+
+
         if (getIntent() == null)
             return;
 
@@ -80,6 +88,42 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
         code = getIntent().getStringExtra(DATA_SIGN);
         getAdvanceFund();
+    }
+
+    /**
+     * 初始化返点列表
+     */
+    private void initBackRecyclerView() {
+
+        mBinding.recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        mBinding.myElLoanAmount.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (TextUtils.isEmpty(charSequence)) {
+                    mBinding.myNlRebateType.setTitle("旧返点");
+                } else {
+                    mBinding.myNlRebateType.setTitle("新返点");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
     }
 
     /**
@@ -106,7 +150,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         if (getIntent().getBooleanExtra(DATA_SIGN2, false)) {  //详细状态不显示
             mBinding.myElLoanAmount.setVisibility(View.GONE);
             mBinding.myNlRebateType.setVisibility(View.GONE);
-            mBinding.rvRebate.setVisibility(View.GONE);
+            mBinding.recycler.setVisibility(View.GONE);
             mBinding.myCbConfirm.setVisibility(View.GONE);
             mBaseBinding.titleView.setMidTitle("申请");
         } else {
@@ -127,6 +171,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         call.enqueue(new BaseResponseModelCallBack<NodeListModel>(this) {
             @Override
             protected void onSuccess(NodeListModel data, String SucMessage) {
+                mCarCode = data.getCarModel();
                 setView(data);
 
             }
@@ -134,7 +179,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
             @Override
             protected void onFinish() {
                 disMissLoading();
-                getOldBackList();
+//                getOldBackList();
             }
         });
     }
@@ -202,7 +247,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         Map<String, String> map = new HashMap<>();
 
 //        map.put("accountCode",);//返点账号编号
-        map.put("carDealerCode", code);//汽车经销商编号
+        map.put("carDealerCode", "NB520");//汽车经销商编号
 
         Call<BaseResponseModel<String>> call = RetrofitUtils.getBaseAPiService().stringRequest("632297", StringUtils.getJsonToString(map));
 

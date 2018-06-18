@@ -254,8 +254,15 @@ public class NodeListModel {
     private String deliveryDatetime;
 
     private String isRightInvoice;
+    private String carModel;
 
+    public String getCarModel() {
+        return carModel;
+    }
 
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
 
     private BankSubbranchBean bankSubbranch;
     private List<BudgetOrderGpsListBean> budgetOrderGpsList;

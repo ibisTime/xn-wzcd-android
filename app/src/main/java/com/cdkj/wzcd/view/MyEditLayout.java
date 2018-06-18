@@ -9,6 +9,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.cdkj.baselibrary.utils.ToastUtil;
@@ -56,15 +57,15 @@ public class MyEditLayout extends LinearLayout {
     private void setData() {
         mBinding.tvTitle.setText(txtTitle);
         mBinding.tvTitleRight.setText(txtTitleRight);
-        mBinding.tvTitleRight.setVisibility(!TextUtils.isEmpty(txtTitleRight)? VISIBLE : GONE);
+        mBinding.tvTitleRight.setVisibility(!TextUtils.isEmpty(txtTitleRight) ? VISIBLE : GONE);
 
 
         if (!TextUtils.isEmpty(txtHint))
             mBinding.edtInput.setHint(txtHint);
 
-        if (!TextUtils.isEmpty(inputType)){
+        if (!TextUtils.isEmpty(inputType)) {
 
-            switch (inputType){
+            switch (inputType) {
                 case "0": // 电话
                     mBinding.edtInput.setInputType(InputType.TYPE_CLASS_PHONE);
                     InputFilter[] filtersPhone = {new InputFilter.LengthFilter(11)};
@@ -112,13 +113,13 @@ public class MyEditLayout extends LinearLayout {
 
     private void init(Context context) {
         this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_input_horizontal, this, true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_input_horizontal, this, true);
 
     }
 
-    public String check(){
+    public String check() {
 
-        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())){
+        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
             ToastUtil.show(context, mBinding.edtInput.getHint().toString());
             return "";
         }
@@ -126,30 +127,32 @@ public class MyEditLayout extends LinearLayout {
         return mBinding.edtInput.getText().toString();
     }
 
-    public void setText(String content){
+    public void setText(String content) {
         mBinding.edtInput.setText(content);
     }
 
     /**
      * 设置布局内容，内容来自于详情或其他请求，此时布局不可输入
+     *
      * @param content
      */
-    public void setTextByRequest(String content){
+    public void setTextByRequest(String content) {
         mBinding.edtInput.setText(content);
         mBinding.edtInput.setFocusable(false);
     }
 
-    public String getText(){
+    public String getText() {
         return mBinding.edtInput.getText().toString();
     }
 
     /**
      * 获取处理后的金额文本
+     *
      * @return 乘以1000的金额字符串
      */
-    public String getMoneyText(){
+    public String getMoneyText() {
 
-        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())){
+        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
             return "";
         }
 
@@ -158,19 +161,25 @@ public class MyEditLayout extends LinearLayout {
 
     /**
      * 获取处理后的金额文本
+     *
      * @return 除以1000的金额字符串
      */
-    public void setMoneyText(String moneyText){
+    public void setMoneyText(String moneyText) {
 
         mBinding.edtInput.setText(RequestUtil.formatAmountDivSign(moneyText));
     }
 
     /**
      * 设置布局内容，内容来自于详情或其他请求，此时布局不可输入
+     *
      * @param moneyText
      */
-    public void setMoneyTextByRequest(String moneyText){
+    public void setMoneyTextByRequest(String moneyText) {
         mBinding.edtInput.setText(RequestUtil.formatAmountDivSign(moneyText));
         mBinding.edtInput.setFocusable(false);
+    }
+
+    public EditText getEditText() {
+        return mBinding.edtInput;
     }
 }
