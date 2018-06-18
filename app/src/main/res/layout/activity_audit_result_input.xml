@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_name"
+                app:txt_input_title="姓名"
+                app:txt_input_hint="请输入姓名"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_phone"
+                app:txt_input_title="手机号"
+                app:inputType="phone"
+                app:txt_input_hint="请输入手机号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_role"
+                app:txt_select_title="贷款角色"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_relation"
+                app:txt_select_title="与借款人关系"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_id"
+                app:txt_input_title="身份证号"
+                app:inputType="id"
+                app:txt_input_hint="请输入身份证号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_idCard"
+                app:txt_image_title="身份证"
+                app:txt_image_hint="身份证正面"
+                app:isSingle="false"
+                app:txt_image_hint_right="身份证反面"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_credit"
+                app:txt_image_title="征信查询授权书"
+                app:txt_image_hint="征信查询授权书"
+                app:isSingle="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_interview"
+                app:txt_image_title="面签照片"
+                app:txt_image_hint="面签照片"
+                app:isSingle="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                app:txt_confirm_content="保存"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

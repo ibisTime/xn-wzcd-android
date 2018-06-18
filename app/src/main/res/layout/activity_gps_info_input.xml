@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="客户姓名">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="业务编号">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:id="@+id/myNl_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="贷款银行">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <View
+                    style="@style/style_split_line_horizontal_broad"/>
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="GPS">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_gps"
+                    android:paddingTop="15dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:id="@+id/ll_add_gps"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:paddingTop="10dp"
+                        android:paddingBottom="15dp"
+                        android:paddingLeft="@dimen/layout_left_interval"
+                        android:paddingRight="@dimen/layout_right_interval"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/ll_add"
+                            android:background="@drawable/common_my_image_bg"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="132dp">
+
+                            <ImageView
+                                android:src="@mipmap/add"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp" />
+
+                            <TextView
+                                android:text="添加GPS"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.cdkj.wzcd.view.MyConfirmBtn
+                        android:id="@+id/myCb_confirm"
+                        app:txt_confirm_content="确认"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </com.cdkj.wzcd.view.MyConfirmBtn>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+
+
+        <!--<Button-->
+            <!--android:id="@+id/btn_confirm"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginLeft="@dimen/layout_left_interval"-->
+            <!--android:layout_marginRight="@dimen/layout_right_interval"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:background="@drawable/common_my_confirm_btn"-->
+            <!--android:text="@string/save"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="16sp" />-->
+
+
+    </LinearLayout>
+
+
+</layout>

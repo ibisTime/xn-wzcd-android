@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">xn-wzcd-android</string>
+
+    <string name="user_title_sign_in">登录</string>
+    <string name="user_mobile_hint">请填写账号</string>
+    <string name="user_mobile_format_hint">手机号码格式不正确</string>
+    <string name="user_password_format_hint">密码长度不能小于6位</string>
+    <string name="my_apply">我的申请</string>
+    <string name="help_do_thing">代办事宜</string>
+    <string name="no_apply">暂无申请</string>
+    <string name="daiqianzhunru">贷前准入</string>
+    <string name="face_view">面签</string>
+    <string name="start_face_view">发起面签</string>
+    <string name="gps_install">GPS安装</string>
+    <string name="save">保存</string>
+</resources>

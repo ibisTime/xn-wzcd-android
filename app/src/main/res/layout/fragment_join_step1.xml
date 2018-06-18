@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="客户姓名">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="业务编号">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="购车途径">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_loan_product"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:txt_select_title="*贷款产品">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_advance_fund"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*是否垫资">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_biz_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*购车途径">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_loan_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*贷款期限">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_invoiceCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入开票单位"
+                app:txt_input_title="*开票单位">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_invoicePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入开票价"
+                app:txt_input_title="*开票价(元)">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_originalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入市场指导价"
+                app:txt_input_title="*市场指导价">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_loanAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入贷款额"
+                app:txt_input_title="*贷款额(元)">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入月供"
+                app:txt_input_title="*月供(元)">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入首付金额"
+                app:txt_input_title="*首付金额(元)">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入首付比例"
+                app:txt_input_title="*首付比例(%)">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="落户地点"
+                app:txt_input_title="*请输入落户地点">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入品牌"
+                app:txt_input_title="*品牌">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入车系"
+                app:txt_input_title="*车系">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入车型"
+                app:txt_input_title="*车型">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入颜色"
+                app:txt_input_title="*颜色">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入车架号"
+                app:txt_input_title="*车架号">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入合格证号"
+                app:txt_input_title="*合格证号">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入发动机号"
+                app:txt_input_title="*发动机号">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

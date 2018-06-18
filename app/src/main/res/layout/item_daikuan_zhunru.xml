@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/style_my_item_root">
+
+            <com.cdkj.wzcd.view.item.MyItemDoubleLayout
+                android:id="@+id/myItemNl_code_and_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.item.MyItemDoubleLayout>
+
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_name_and_type_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+            <com.cdkj.wzcd.view.item.MyItemDoubleLayout
+                android:id="@+id/myItemNl_dz_and_dateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.item.MyItemDoubleLayout>
+
+
+        </LinearLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemBtnLayout
+            android:id="@+id/myItemCbl_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemBtnLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:showIn="@layout/activity_join_apply_input">
+
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入配偶姓名"
+            app:txt_input_title="*姓名" />
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入手机号"
+            app:txt_input_title="*手机号" />
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入身份证号"
+            app:inputType="id"
+            app:txt_input_title="*身份证号" />
+
+        <com.cdkj.wzcd.view.MySelectLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_select_title="*学历" />
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入工作单位名称"
+            app:txt_input_title="*工作单位名称" />
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入工作单位地址"
+            app:txt_input_title="*工作单位名称地址" />
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_input_hint="请输入工作单位联系电话"
+            app:txt_input_title="*工作单位联系电话" />
+
+
+    </LinearLayout>
+</layout>

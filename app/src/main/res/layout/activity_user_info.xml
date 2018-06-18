@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:background="@color/gray_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="5"
+                android:text="头像"
+                android:textColor="@color/text_black_cd"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/photo_default" />
+
+            <ImageView
+                android:id="@+id/img_right"
+                android:background="@drawable/more_right"
+                android:layout_width="6dp"
+                android:layout_height="11dp" />
+
+        </LinearLayout>
+
+        <View style="@style/style_split_line_horizontal" />
+
+        <com.cdkj.baselibrary.views.RowInfoLayout
+            android:id="@+id/row_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_right="昵称"
+            app:txt_left="昵称" />
+
+        <View
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <View
+            style="@style/style_split_line_horizontal"/>
+
+        <TextView
+            android:id="@+id/tv_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="#ff5757"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</layout>

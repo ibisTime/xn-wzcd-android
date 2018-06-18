@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_applyUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入申请人姓名"
+                app:txt_input_title="*申请人姓名" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*性别 " />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_marryState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*婚姻状况 " />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_nation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*民族 " />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*学历 " />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_idNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="id"
+                app:txt_input_hint="请输入身份证号"
+                app:txt_input_title="*身份证号" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_familyNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入家庭人口"
+                app:txt_input_title="*家庭人口" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入手机号"
+                app:txt_input_title="*手机号" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_nowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入现居住地址"
+                app:txt_input_title="*现居住地址" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_postCode1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入邮编1"
+                app:txt_input_title="*邮编1" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_residenceAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入户口所在地"
+                app:txt_input_title="*户口所在地" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_postCode2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入邮编2"
+                app:txt_input_title="*邮编2" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_familyMainAsset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入家庭主要财产"
+                app:txt_input_title="*家庭主要财产（万元）" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_mainAssetInclude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入主要财产内容"
+                app:txt_input_title="*主要财产包括" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/myEl_mainIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*主要收入来源 " />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_workCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入工作单位名称"
+                app:txt_input_title="*工作单位名称" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="单位经济性质" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_workCompanyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入工作单位地址"
+                app:txt_input_title="*工作单位地址" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_selfCompanyArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入自营单位工作面积"
+                app:txt_input_title="自营单位工作面积" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_employeeQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入员工数量"
+                app:txt_input_title="员工数量" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_enterpriseMonthOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入企业月产值"
+                app:txt_input_title="企业月产值" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="职位" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_postTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入职称"
+                app:txt_input_title="*职称" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="职业" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_monthIncome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入月收入"
+                app:txt_input_title="*月收入（元）" />
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_"
+                app:txt_normal_title="入职时间"
+                app:txt_normal_hint="请选择入职时间"
+                app:img_normal_right="@drawable/more_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                app:txt_normal_title="其它资产资料"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

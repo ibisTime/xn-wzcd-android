@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">cd common</string>
+
+    <string name="confirm">确定</string>
+
+    <string name="money_sing">¥</string>
+    <string name="sure">确定</string>
+    <string name="no_address">您还没有添加收货地址</string>
+    <string name="address_manager">地址管理</string>
+    <string name="sure_delete_address">确认删除该收货地址?</string>
+    <string name="delete_fall">删除失败</string>
+    <string name="sure_setdefault_address">确认设置该收货地址为默认地址?</string>
+    <string name="add_address">添加地址</string>
+    <string name="add_address_fall">添加地址失败</string>
+    <string name="please_input_name">请输入姓名</string>
+    <string name="please_input_phone">请输入手机号</string>
+    <string name="please_input_address">请输入详细地址</string>
+    <string name="please_select_city">请选择省市区</string>
+    <string name="please_input_phone_2">请输入正确的手机号</string>
+    <string name="select_province_def">北京市</string>
+    <string name="select_city_def">北京市</string>
+    <string name="select_district_def">昌平区</string>
+    <string name="add_address_succ">添加成功</string>
+    <string name="do_succ">操作成功</string>
+    <string name="do_fall">操作失败</string>
+    <string name="change_pwd">修改密码</string>
+    <string name="please_input_verification_code">请输入验证码</string>
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="please_reinput_pwd">请重新输入密码</string>
+    <string name="check_pwd_info">密码不少于6位</string>
+    <string name="check_pwd_info_2">两次密码输入不一致</string>
+    <string name="change_pwd_succ">密码修改成功</string>
+    <string name="chagne_pwd_fall">密码修改失败</string>
+    <string name="no_camera_permission">没有获取到权限，无法使用相机和相册功能</string>
+    <string name="change_pay_pwd">修改支付密码</string>
+    <string name="set_pay_pwd">设置支付密码</string>
+    <string name="please_input_pay_pwd">请输入支付密码</string>
+    <string name="check_pay_pwd">支付密码不能低于6位数</string>
+    <string name="change_succ">修改成功</string>
+    <string name="set_succ">设置成功</string>
+    <string name="show_big_photo">查看大图</string>
+    <string name="sure_delete_bank_card">您确定要删除该银行卡吗?</string>
+    <string name="delete">删除</string>
+    <string name="change_bank_card">修改银行卡</string>
+    <string name="please_select_bank">请选择银行</string>
+    <string name="please_input_bank_name">请输入开户支行</string>
+    <string name="please_input_bank_num">请输入卡号</string>
+    <string name="check_bank_num">银行卡号最低为16位数字</string>
+    <string name="delete_succ">删除成功</string>
+    <string name="change_phone_num">修改手机号</string>
+    <string name="please_input_new_phone">请输入新手机号</string>
+    <string name="register">注册</string>
+    <string name="register_succ">注册成功</string>
+
+    <string name="click_open">点击展开</string>
+    <string name="click_close">点击收起</string>
+    <string name="tips">提示</string>
+    <string name="cancel">取消</string>
+    <string name="check">查看</string>
+
+
+    <string name="prompt">提示</string>
+    <string name="sure_">确定</string>
+    <string name="content">内容</string>
+    <string name="net_error">网络加载异常</string>
+    <string name="net_service_time_out">服务器响应超时</string>
+    <string name="net_req_time_out">网络请求超时</string>
+    <string name="net_exception">网络异常</string>
+    <string name="error_unknown">未知错误</string>
+    <string name="net_data_is_null">数据获取为空</string>
+    <string name="no_net">暂无网络</string>
+    <string name="net_req_fail">网络请求失败</string>
+    <string name="upload_pic_fail">图片上传失败</string>
+    <string name="qiniu_token_error">token失败</string>
+    <string name="no_camera">没有可用相机</string>
+    <string name="no_sd_card">SD卡不存在</string>
+    <string name="get_pic_fail">图片获取失败</string>
+    <string name="release_succ">发布成功</string>
+    <string name="release_succ_1">发布成功, 您的评价包含敏感字符,我们将进行审核</string>
+    <string name="realse_fail">发布失败</string>
+
+
+    <string name="activity_find_title">找回密码</string>
+    <string name="activity_find_mobile_hint">请输入手机号</string>
+    <string name="activity_find_code_hint">请输入验证码</string>
+    <string name="activity_find_google_hint">请输入谷歌验证码</string>
+    <string name="activity_find_password_hint">请输入密码</string>
+    <string name="activity_find_repassword_hint">请重新输入密码</string>
+    <string name="activity_find_password_format_hint">密码不少于6位</string>
+    <string name="activity_find_repassword_format_hint">两次密码输入不一致</string>
+    <string name="activity_find_success">密码修改成功</string>
+    <string name="activity_find_failure">密码修改失败</string>
+
+    <string name="activity_find_mobile">手机号</string>
+    <string name="activity_find_code">手机验证码</string>
+    <string name="activity_find_password">新密码</string>
+    <string name="activity_find_repassword">确认密码</string>
+    <string name="activity_find_google_paste">粘贴</string>
+    <string name="activity_find_google">谷歌验证码</string>
+    <string name="activity_find_send">获取验证码</string>
+
+    <string name="activity_nick_title">修改昵称</string>
+    <string name="activity_nick_name_hint">请输入昵称</string>
+    <string name="activity_nick_success">修改成功</string>
+    <string name="activity_nick_name">昵称</string>
+</resources>

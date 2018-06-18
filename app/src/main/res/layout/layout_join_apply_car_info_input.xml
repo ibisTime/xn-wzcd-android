@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:showIn="@layout/activity_join_apply_input">
+
+
+        <com.cdkj.wzcd.view.MyTitleBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_title="拟购车辆信息" />
+
+        <LinearLayout
+            android:background="@color/white"
+            android:paddingLeft="@dimen/layout_left_interval"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_biz_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*购车途径">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*贷款期限">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入开票单位"
+                app:txt_input_title="*开票单位">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入品牌"
+                app:txt_input_title="*品牌">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入市场指导价"
+                app:txt_input_title="*市场指导价">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入开票价"
+                app:txt_input_title="*开票价">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入颜色"
+                app:txt_input_title="*颜色">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入月供"
+                app:txt_input_title="*月供">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入首付金额"
+                app:txt_input_title="*首付金额">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入首付比例"
+                app:txt_input_title="*首付比例">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入贷款额"
+                app:txt_input_title="*贷款额">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="落户地点"
+                app:txt_input_title="*请输入落户地点">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:background="@color/gray_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:id="@+id/myEl_number"
+            app:txt_input_title="申领个数"
+            app:inputType="phone"
+            app:txt_input_hint="请输入申领个数"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyEditLayout>
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:id="@+id/myEl_explain"
+            app:txt_input_title="申领说明"
+            app:inputType="text"
+            app:txt_input_hint="请输入申领说明"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyEditLayout>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/myCb_confirm"
+            app:txt_confirm_content="提交"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+    </LinearLayout>
+</layout>

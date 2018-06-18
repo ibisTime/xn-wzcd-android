@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="客户姓名">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="业务编号">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="业务公司">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="贷款金额">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="贷款银行">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_date_time"
+            app:txt_normal_title="提交时间"
+            app:txt_normal_hint="请选择提交时间"
+            app:img_normal_right="@drawable/more_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyNormalLayout>
+
+        <com.cdkj.wzcd.view.MyEditLayout
+            android:id="@+id/myEl_remark"
+            app:txt_input_title="提交说明"
+            app:txt_input_hint="选填"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </com.cdkj.wzcd.view.MyEditLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/myCb_confirm"
+            app:txt_confirm_content="确认"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+
+    </LinearLayout>
+</layout>

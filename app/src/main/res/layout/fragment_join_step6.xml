@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_title="购房合同（多）" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_title="房屋照片（多）" />
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                app:txt_confirm_content="确定提交"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

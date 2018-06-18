@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyTitleBarLayout">
+        <attr name="txt_title" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MySquareRowLayout">
+        <attr name="txt_content" format="string"></attr>
+        <attr name="img_content" format="reference"></attr>
+        <attr name="isShowRedPoint" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MySelectLayout">
+        <attr name="txt_select_title" format="string"></attr>
+        <attr name="txt_select_content" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyNormalLayout">
+        <attr name="txt_normal_title" format="string"></attr>
+        <attr name="txt_normal_content" format="string"></attr>
+        <attr name="txt_normal_hint" format="string"></attr>
+        <attr name="img_normal_right" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyListItemTitleLayout">
+        <attr name="txt_list_item_left" format="string"></attr>
+        <attr name="txt_list_item_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyListItemLayout">
+        <attr name="txt_list_item_title" format="string"></attr>
+        <attr name="txt_list_item_content" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyConfirmBtn">
+        <attr name="txt_confirm_content" format="string"></attr>
+        <attr name="txt_confirm_content_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyEditLayout">
+        <attr name="txt_input_title" format="string"></attr>
+        <attr name="txt_input_title_right" format="string"></attr>
+        <attr name="txt_input_hint" format="string"></attr>
+        <attr name="inputType" format="string">
+
+            <enum name="phone" value="0"/> <!-- 电话 -->
+            <enum name="id" value="1"/> <!-- 身份证类型 -->
+            <enum name="text" value="2"/> <!-- 文本 -->
+            <enum name="money" value="3"/> <!-- 金钱类型 -->
+            <enum name="number" value="4"/> <!-- 数字类型 -->
+
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyImageLayout">
+        <attr name="txt_image_title" format="string"></attr>
+        <attr name="txt_image_hint" format="string"></attr>
+        <attr name="isSingle" format="boolean"></attr>
+
+        <attr name="txt_image_hint_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyItemRootLayout">
+        <attr name="background" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyItemNormalLayout">
+        <attr name="txt_item_normal_title" format="string"></attr>
+        <attr name="txt_item_normal_content" format="string"></attr>
+        <attr name="txt_item_normal_content_right" format="string"></attr>
+        <attr name="txt_item_normal_content_middle" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyItemDoubleLayout">
+        <attr name="txt_item_double_content" format="string"></attr>
+        <attr name="txt_item_double_content_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyListItemBtnLayout">
+        <attr name="txt_item_confirm_content_left" format="string"></attr>
+        <attr name="txt_item_confirm_content_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyItemChoiceLayout">
+        <attr name="txt_item_choice_title" format="string"></attr>
+        <attr name="txt_item_choice_img" format="reference"></attr>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cdkj.wzcd.view.MyTitleBarLayout
+                app:txt_title="贷款抵押"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyTitleBarLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdyCount"
+                app:txt_input_title="笔数"
+                app:txt_input_hint="请输入贷款抵押笔数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdyAmount"
+                app:txt_input_title="贷款余额"
+                app:txt_input_hint="请输入贷款余额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdy2yearOverTimes"
+                app:txt_input_title="近两年逾期次数"
+                app:txt_input_hint="请输入近两年逾期次数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdyMaxOverAmount"
+                app:txt_input_title="最高逾期金额"
+                app:txt_input_hint="请输入最高逾期金额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdyCurrentOverAmount"
+                app:txt_input_title="当前逾期金额"
+                app:txt_input_hint="请输入当前逾期金额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_dkdy6monthAvgAmount"
+                app:txt_input_title="近6个月平均月还款额"
+                app:txt_input_hint="请输入近6个月平均月还款额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyTitleBarLayout
+                app:txt_title="贷款信用"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyTitleBarLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxyUnsettleCount"
+                app:txt_input_title="未结清贷款笔数"
+                app:txt_input_hint="请输入未结清贷款笔数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxyUnsettleAmount"
+                app:txt_input_title="未结清贷款余额"
+                app:txt_input_hint="请输入未结清贷款余额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxy2yearOverTimes"
+                app:txt_input_title="近两年逾期次数"
+                app:txt_input_hint="请输入近两年逾期次数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxyMonthMaxOverAmount"
+                app:txt_input_title="单月最高逾期金额"
+                app:txt_input_hint="请输入单月最高逾期金额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxyCurrentOverAmount"
+                app:txt_input_title="当前逾期金额"
+                app:txt_input_hint="请输入当前逾期金额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_hkxy6monthAvgAmount"
+                app:txt_input_title="近6个月平均月还款额"
+                app:txt_input_hint="请输入近6个月平均月还款额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyTitleBarLayout
+                app:txt_title="信用卡"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyTitleBarLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xykCount"
+                app:txt_input_title="张数"
+                app:txt_input_hint="请输入张数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xykCreditAmount"
+                app:txt_input_title="授信总额"
+                app:txt_input_hint="请输入授信总额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xyk6monthUseAmount"
+                app:txt_input_title="近6个月使用额"
+                app:txt_input_hint="请输入近6个月使用额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xyk2yearOverTimes"
+                app:txt_input_title="近两年逾期次数"
+                app:txt_input_hint="请输入近两年逾期次数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xykMonthMaxOverAmount"
+                app:txt_input_title="单月最高逾期金额"
+                app:txt_input_hint="请输入单月最高逾期金额"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_xykCurrentOverAmount"
+                app:txt_input_title="当前逾期金额"
+                app:txt_input_hint="请输入当前逾期金额"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyTitleBarLayout
+                app:txt_title="对外担保"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyTitleBarLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_outGuaranteesCount"
+                app:txt_input_title="笔数"
+                app:txt_input_hint="请输入笔数"
+                app:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_outGuaranteesAmount"
+                app:txt_input_title="余额"
+                app:txt_input_hint="请输入余额"
+                app:inputType="money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_outGuaranteesRemark"
+                app:txt_input_title="备注"
+                app:txt_input_hint="请输入备注"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                app:txt_confirm_content="确认"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</layout>

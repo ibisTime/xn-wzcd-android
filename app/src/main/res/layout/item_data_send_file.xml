@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        style="@style/style_my_item_root"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_file"
+                android:textSize="12sp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/color_myItemNormal_title_txt"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+            <ImageView
+                android:id="@+id/iv_choice"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/pay_no"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="客户姓名">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="业务编号">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_bank"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="贷款银行">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:visibility="gone"
+                android:id="@+id/myNl_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="贷款金额">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_refFile"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="参考材料清单">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_refFile"
+                    android:paddingBottom="10dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_sendFile"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.cdkj.wzcd.view.MyNormalLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_normal_title="寄送材料清单">
+
+                </com.cdkj.wzcd.view.MyNormalLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_sendFile"
+                    android:paddingBottom="10dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_way"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="寄送方式">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_logistics"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.cdkj.wzcd.view.MySelectLayout
+                    android:id="@+id/mySl_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_select_title="快递公司">
+
+                </com.cdkj.wzcd.view.MySelectLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_input_hint="请填快递单号"
+                    app:txt_input_title="快递单号">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+            </LinearLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_date_time"
+                app:txt_normal_title="发货时间"
+                app:txt_normal_hint="请选择发货时间"
+                app:img_normal_right="@drawable/more_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="选填"
+                app:txt_input_title="备注">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                app:txt_confirm_content="发件"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

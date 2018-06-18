@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_root"
+        style="@style/style_my_item_root">
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_code"
+            app:txt_item_normal_title="设备号:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_position"
+            app:txt_item_normal_title="位\u3000置:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_date_time"
+            app:txt_item_normal_title="时\u3000间:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_user"
+            app:txt_item_normal_title="人\u3000员:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入流水开始日期"
+                app:txt_input_title="*流水开始日期" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入流水开始日期"
+                app:txt_input_title="*流水结束日期" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入收入"
+                app:txt_input_title="*收入" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入支出"
+                app:txt_input_title="*支出" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入账户余额"
+                app:txt_input_title="*账户余额" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入月均收入"
+                app:txt_input_title="*月均收入" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入月均支出"
+                app:txt_input_title="*月均支出" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入备注"
+                app:txt_input_title="备注" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

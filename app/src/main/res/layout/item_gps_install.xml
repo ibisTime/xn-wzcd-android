@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><!--面签 item-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            style="@style/style_split_line_horizontal_broad"/>
+
+        <com.cdkj.wzcd.view.list.MyListItemTitleLayout
+            android:id="@+id/myTl_idStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemTitleLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_name"
+            app:txt_list_item_title="客户姓名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_company"
+            app:txt_list_item_title="业务公司"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_code"
+            app:txt_list_item_title="品牌型号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemBtnLayout
+            android:id="@+id/myItemCbl_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemBtnLayout>
+
+
+    </LinearLayout>
+</layout>
