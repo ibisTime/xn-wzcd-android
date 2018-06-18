@@ -49,7 +49,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
     private String code;
 
-    private String mCarCode;
+
 
     /**
      * @param context
@@ -171,7 +171,6 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         call.enqueue(new BaseResponseModelCallBack<NodeListModel>(this) {
             @Override
             protected void onSuccess(NodeListModel data, String SucMessage) {
-                mCarCode = data.getCarModel();
                 setView(data);
 
             }
@@ -247,7 +246,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         Map<String, String> map = new HashMap<>();
 
 //        map.put("accountCode",);//返点账号编号
-        map.put("carDealerCode", "NB520");//汽车经销商编号
+        map.put("carDealerCode", "");//汽车经销商编号
 
         Call<BaseResponseModel<String>> call = RetrofitUtils.getBaseAPiService().stringRequest("632297", StringUtils.getJsonToString(map));
 
