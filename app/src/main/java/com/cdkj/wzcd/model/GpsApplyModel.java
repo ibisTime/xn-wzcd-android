@@ -27,6 +27,15 @@ public class GpsApplyModel {
     private int applyCount;
     private String status;
     private String applyUserName;
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public String getCode() {
         return code;

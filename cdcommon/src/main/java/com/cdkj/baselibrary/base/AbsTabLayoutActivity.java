@@ -46,6 +46,8 @@ public abstract class AbsTabLayoutActivity extends AbsBaseLoadActivity {
         mTabLayoutBinding.viewpager.setAdapter(tablayoutAdapter);
         mTabLayoutBinding.tablayout.setupWithViewPager(mTabLayoutBinding.viewpager);        //viewpager和tablayout关联
         mTabLayoutBinding.viewpager.setOffscreenPageLimit(tablayoutAdapter.getCount());
+
+
 //        mTabLayoutBinding.tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置滑动模式 /TabLayout.MODE_SCROLLABLE 可滑动 ，TabLayout.MODE_FIXED表示不可滑动
     }
 

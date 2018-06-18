@@ -74,6 +74,7 @@ public class CreditListActivity extends AbsTabLayoutActivity {
         mTabLayoutBinding.viewpager.setOffscreenPageLimit(2);
         mTabLayoutBinding.tablayout.setTabMode(TabLayout.MODE_FIXED);
 
+
 //        if (UserHelper.isZHRY()){
             mTabLayoutBinding.tablayout.setVisibility(View.GONE);
 //        }

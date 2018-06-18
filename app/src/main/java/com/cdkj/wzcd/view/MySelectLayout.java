@@ -178,12 +178,12 @@ public class MySelectLayout extends LinearLayout {
         mIsRequest = false;
     }
 
-    public void setData(List<DataDictionary> data){
+    public void setData(List<DataDictionary> data) {
         // 隐藏更多
         mBinding.ivMore.setVisibility(GONE);
         // 设置不可弹出下拉
         isOnClickEnable = false;
-        setData(data,null);
+        setData(data, null);
 
     }
 
@@ -207,9 +207,10 @@ public class MySelectLayout extends LinearLayout {
 
                 getRequest();
             } else {
-                if (mData == null)
+                if (mData == null) {
+                    ToastUtil.show(getContext(), "没有可选列表");
                     return;
-
+                }
                 showSelect();
             }
 
