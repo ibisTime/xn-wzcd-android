@@ -15,7 +15,7 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.DataFileAdapter;
+import com.cdkj.wzcd.adapter.DataFileAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivitySendAndExamineBinding;
 import com.cdkj.wzcd.model.DataFileModel;

@@ -13,7 +13,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.GpsAdapter;
+import com.cdkj.wzcd.adapter.GpsAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.GpsApplyModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;

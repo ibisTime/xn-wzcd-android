@@ -20,7 +20,7 @@ import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.CreditUserAdapter;
+import com.cdkj.wzcd.adapter.CreditUserAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityZxLaunchBinding;
 import com.cdkj.wzcd.model.CreditModel;

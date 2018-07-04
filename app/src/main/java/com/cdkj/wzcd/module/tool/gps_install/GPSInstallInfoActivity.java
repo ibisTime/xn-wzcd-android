@@ -17,7 +17,7 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.GpsInstallAdapter;
+import com.cdkj.wzcd.adapter.GpsInstallAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsInfoInputBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;

@@ -1,14 +1,13 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.databinding.ItemCllhListBinding;
+import com.cdkj.wzcd.databinding.ItemUserToVoidBinding;
 import com.cdkj.wzcd.model.NodeListModel;
-import com.cdkj.wzcd.util.BizTypeHelper;
+import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,13 +20,12 @@ import java.util.List;
  * @updateDts 2018/5/30
  */
 
-public class CllhListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHolder> {
+public class UserToVoidAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHolder> {
 
-    private ItemCllhListBinding mBinding;
+    private ItemUserToVoidBinding mBinding;
 
-    public CllhListAdapter(@Nullable List<NodeListModel> data) {
-        super(R.layout.item_cllh_list, data);
-
+    public UserToVoidAdapter(@Nullable List<NodeListModel> data) {
+        super(R.layout.item_user_to_void, data);
     }
 
     @Override
@@ -37,19 +35,10 @@ public class CllhListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
         mBinding.myIlName.setText(item.getCustomerName());
-        mBinding.myIlType.setText(BizTypeHelper.getNameOnTheKey(item.getShopWay()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getShopWay()));
         mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlBank.setText(item.getLoanBankName());
-        mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
-
-//        if (TextUtils.equals(item.getCurNodeCode(),"002_11")){ // 业务团队车辆落户
-//            mBinding.myItemCblConfirm.setRightTextAndListener("录入", view -> {
-//                CllhInputMessageActivity.open(mContext, item.getCode());
-//            });
-//        }else {
-//            mBinding.myItemCblConfirm.setContent("", "");
-//        }
 
     }
 }

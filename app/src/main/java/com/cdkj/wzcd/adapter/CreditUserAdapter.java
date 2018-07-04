@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -40,8 +40,8 @@ public class CreditUserAdapter extends BaseQuickAdapter<CreditUserModel, BaseVie
         mBinding.myItemNlPhone.setContent(item.getMobile());
         mBinding.myItemNlId.setContent(item.getIdNo());
 
-        mBinding.myItemNlRole.setContent(DataDictionaryHelper.getValueOnTheKey(item.getLoanRole(), mRole));
-        mBinding.myItemNlRelation.setContent(DataDictionaryHelper.getValueOnTheKey(item.getRelation(), mRelation));
+        mBinding.myItemNlRole.setContent(DataDictionaryHelper.getValueBuyList(item.getLoanRole(), mRole));
+        mBinding.myItemNlRelation.setContent(DataDictionaryHelper.getValueBuyList(item.getRelation(), mRelation));
 
 
 //

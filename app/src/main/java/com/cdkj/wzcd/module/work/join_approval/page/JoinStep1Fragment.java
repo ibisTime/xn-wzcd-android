@@ -18,7 +18,7 @@ import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.JoinApplyGpsAdapter;
+import com.cdkj.wzcd.adapter.JoinApplyGpsAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.FragmentJoinStep1Binding;
 import com.cdkj.wzcd.model.DealersModel;

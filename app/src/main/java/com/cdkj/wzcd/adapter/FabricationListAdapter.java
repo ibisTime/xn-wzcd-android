@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -11,7 +11,6 @@ import com.cdkj.wzcd.databinding.ItemFabricationListBinding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationApplyActivity;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationInputActivity;
-import com.cdkj.wzcd.util.BizTypeHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -39,12 +38,12 @@ public class FabricationListAdapter extends BaseQuickAdapter<NodeListModel, Base
     protected void convert(BaseViewHolder helper, NodeListModel item) {
         mBinding = DataBindingUtil.bind(helper.itemView);
 
-        mBinding.myTlIdStatus.setText(item.getCode(), DataDictionaryHelper.getValueOnTheKey(item.getMakeCardStatus(), mType));
+        mBinding.myTlIdStatus.setText(item.getCode(), DataDictionaryHelper.getValueBuyList(item.getMakeCardStatus(), mType));
 
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlName.setText(item.getCustomerName());
-        mBinding.myIlType.setText(BizTypeHelper.getNameOnTheKey(item.getShopWay()));
-        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getAdvanceFundAmount()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getShopWay()));
+        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 

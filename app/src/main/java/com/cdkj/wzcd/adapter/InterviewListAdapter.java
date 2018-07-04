@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -40,7 +40,7 @@ public class InterviewListAdapter extends BaseQuickAdapter<NodeListModel, BaseVi
 
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
-        mBinding.myIlType.setText(DataDictionaryHelper.getValueOnTheKey(item.getShopWay(), mType));
+        mBinding.myIlType.setText(DataDictionaryHelper.getValueBuyList(item.getShopWay(), mType));
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAmount.setText(MoneyUtils.MONEYSING + RequestUtil.formatAmountDiv(item.getLoanAmount()));

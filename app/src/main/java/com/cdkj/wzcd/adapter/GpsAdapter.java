@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -34,7 +34,7 @@ public class GpsAdapter extends BaseQuickAdapter<GpsApplyModel, BaseViewHolder> 
     protected void convert(BaseViewHolder helper, GpsApplyModel item) {
         mBinding = DataBindingUtil.bind(helper.itemView);
 
-        mBinding.myTlIdNode.setText(item.getApplyUserName(), DataDictionaryHelper.getValueOnTheKey(item.getStatus(), mList));
+        mBinding.myTlIdNode.setText(item.getApplyUserName(), DataDictionaryHelper.getValueBuyList(item.getStatus(), mList));
 
         mBinding.myIlCompany.setText(item.getCompanyName());
         mBinding.myIlNumber.setText(item.getApplyCount() + "");

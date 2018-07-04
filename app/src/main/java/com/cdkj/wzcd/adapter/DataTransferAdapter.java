@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -7,6 +7,8 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemDataTransferBinding;
 import com.cdkj.wzcd.model.DataTransferModel;
+import com.cdkj.wzcd.module.datatransfer.SendActivity;
+import com.cdkj.wzcd.module.datatransfer.SendAndExamineActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -41,7 +43,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
         mBinding.myIlTo.setText(NodeHelper.getNameOnTheCode(item.getToNodeCode()));
 
         mBinding.myIlName.setText(item.getUserName());
-        mBinding.myIlCompany.setText(DataDictionaryHelper.getValueOnTheKey(item.getLogisticsCompany(), mCompany));
+        mBinding.myIlCompany.setText(DataDictionaryHelper.getValueBuyList(item.getLogisticsCompany(), mCompany));
         mBinding.myIlExpress.setText(item.getLogisticsCode());
 
 
@@ -57,11 +59,9 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
         switch (item.getStatus()){
 
             case "0":
-
-
                 mBinding.myItemCblConfirm.setRightTextAndListener("发件", view -> {
                     //发件
-//                    SendActivity.open(mContext, item.getCode());
+                    SendActivity.open(mContext, item.getCode());
                 });
                 return "待发件";
 
@@ -69,7 +69,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
 
                 mBinding.myItemCblConfirm.setRightTextAndListener("收件并审核", view -> {
                     //收件并审核
-//                    SendAndExamineActivity.open(mContext, item.getCode());
+                    SendAndExamineActivity.open(mContext, item.getCode());
                 });
                 return "已发件待收件";
 

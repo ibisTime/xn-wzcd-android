@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -10,6 +10,7 @@ import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemCreditListBinding;
 import com.cdkj.wzcd.model.CreditModel;
+import com.cdkj.wzcd.module.work.credit.CreditDetailActivity;
 import com.cdkj.wzcd.module.work.credit.CreditInitiateActivity;
 import com.cdkj.wzcd.module.work.credit.audit.AuditCreditActivity;
 import com.cdkj.wzcd.util.BankHelper;
@@ -43,13 +44,14 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
 
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
-        mBinding.myIlType.setText(DataDictionaryHelper.getValueOnTheKey(item.getShopWay(), mType));
+        mBinding.myIlType.setText(DataDictionaryHelper.getValueBuyList(item.getShopWay(), mType));
+
         if (item.getCreditUser() != null)
             mBinding.myIlName.setText(item.getCreditUser().getUserName());
         mBinding.myIlAmount.setText(MoneyUtils.MONEYSING + RequestUtil.formatAmountDiv(item.getLoanAmount()));
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
-        new BankHelper(mContext).getValueOnTheKey(item.getLoanBankCode(), mBinding.myIlBank, null);
+        BankHelper.getValueOnTheKey(mContext, item.getLoanBankCode(), mBinding.myIlBank, null);
 
         mBinding.myItemCblConfirm.setContent("","");
 
@@ -61,6 +63,12 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
                 });
             }
         }else {
+
+            if (TextUtils.equals(item.getCurNodeCode(), "001_03")){ // 征信初审
+                mBinding.myItemCblConfirm.setRightTextAndListener("征信初审", view -> {
+                    CreditDetailActivity.open(mContext, item.getCode(), true);
+                });
+            }
 
             if (TextUtils.equals(item.getCurNodeCode(), "001_05")){ // 重新上传征信资料
                 mBinding.myItemCblConfirm.setRightTextAndListener("修改征信信息", view -> {

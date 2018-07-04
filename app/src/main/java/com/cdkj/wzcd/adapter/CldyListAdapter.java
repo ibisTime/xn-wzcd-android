@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemCllhListBinding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.work.cldy.CldyApplyActivity;
-import com.cdkj.wzcd.util.BizTypeHelper;
+import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.cdkj.wzcd.util.RequestUtil;
 import com.cdkj.wzcd.util.UserHelper;
@@ -39,8 +39,8 @@ public class CldyListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
         mBinding.myIlName.setText(item.getCustomerName());
-        mBinding.myIlType.setText(BizTypeHelper.getNameOnTheKey(item.getShopWay()));
-        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getAdvanceFundAmount()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getShopWay()));
+        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));

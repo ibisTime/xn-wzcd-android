@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.cdkj.baselibrary.activitys.ImageSelectActivity;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.MyMultipleAdapter;
+import com.cdkj.wzcd.adapter.MyMultipleAdapter;
 import com.cdkj.wzcd.databinding.LayoutMyMultipleBinding;
 import com.cdkj.wzcd.view.manager.FullyGridLayoutManager;
 

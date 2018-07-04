@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemZrdListBinding;
 import com.cdkj.wzcd.model.ZrdModel;
-import com.cdkj.wzcd.util.BizTypeHelper;
+import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -46,7 +46,7 @@ public class ZrdListAdapter extends BaseQuickAdapter<ZrdModel, BaseViewHolder> {
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
         mBinding.myIlName.setText(item.getApplyUserName());
-        mBinding.myIlType.setText(BizTypeHelper.getNameOnTheKey(item.getBizType()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getBizType()));
         mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");

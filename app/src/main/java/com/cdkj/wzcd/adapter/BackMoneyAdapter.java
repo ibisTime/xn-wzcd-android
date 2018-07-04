@@ -1,4 +1,4 @@
-package com.cdkj.wzcd.adpter.adapter;
+package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -6,9 +6,6 @@ import android.support.annotation.Nullable;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemBackMoneyBinding;
-import com.cdkj.wzcd.databinding.ItemCreditPersonBinding;
-import com.cdkj.wzcd.model.CreditUserModel;
-import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
