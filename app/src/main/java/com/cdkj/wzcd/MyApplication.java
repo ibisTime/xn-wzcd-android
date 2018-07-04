@@ -6,6 +6,8 @@ import android.support.multidex.MultiDex;
 
 import com.cdkj.baselibrary.CdApplication;
 
+import org.litepal.LitePal;
+
 
 /**
  * Created by cdkj on 2018/1/31.
@@ -21,11 +23,19 @@ public class MyApplication extends Application {
         instance = this;
 
         CdApplication.initialize(this, BuildConfig.LOG_DEBUG);
+
+        initLitePal();
     }
 
 
     public static Context getInstance() {
         return instance;
+    }
+
+
+    private void initLitePal() {
+        LitePal.initialize(this);
+        LitePal.aesKey("tha_wallet");
     }
 
     @Override

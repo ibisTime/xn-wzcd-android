@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -95,6 +96,9 @@ public class MyEditLayout extends LinearLayout {
                         return null;
                     }});
 
+//                    mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+//                    mBinding.tvTitleRight.setVisibility(VISIBLE);
+
                     break;
 
                 case "4": // 数字类型
@@ -117,15 +121,30 @@ public class MyEditLayout extends LinearLayout {
 
     }
 
-    public String check() {
+//    public String check() {
+//
+//        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
+//            ToastUtil.show(context, mBinding.edtInput.getHint().toString());
+//            return "";
+//        }
+//
+//        return mBinding.edtInput.getText().toString();
+//    }
+
+    public boolean check() {
 
         if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
             ToastUtil.show(context, mBinding.edtInput.getHint().toString());
-            return "";
+            return true;
         }
 
-        return mBinding.edtInput.getText().toString();
+        return false;
     }
+
+    public String getTitle(){
+        return mBinding.tvTitle.getText().toString().trim();
+    }
+
 
     public void setText(String content) {
         mBinding.edtInput.setText(content);
@@ -153,7 +172,7 @@ public class MyEditLayout extends LinearLayout {
     public String getMoneyText() {
 
         if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
-            return "";
+            return "0";
         }
 
         return RequestUtil.formatAmountMul(mBinding.edtInput.getText().toString().trim());
@@ -166,7 +185,10 @@ public class MyEditLayout extends LinearLayout {
      */
     public void setMoneyText(String moneyText) {
 
-        mBinding.edtInput.setText(RequestUtil.formatAmountDivSign(moneyText));
+        mBinding.edtInput.setText(RequestUtil.formatAmountDiv(moneyText));
+
+        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+        mBinding.tvTitleRight.setVisibility(VISIBLE);
     }
 
     /**
@@ -175,11 +197,18 @@ public class MyEditLayout extends LinearLayout {
      * @param moneyText
      */
     public void setMoneyTextByRequest(String moneyText) {
-        mBinding.edtInput.setText(RequestUtil.formatAmountDivSign(moneyText));
+        mBinding.edtInput.setText(RequestUtil.formatAmountDiv(moneyText));
         mBinding.edtInput.setFocusable(false);
+
+        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+        mBinding.tvTitleRight.setVisibility(VISIBLE);
     }
 
     public EditText getEditText() {
         return mBinding.edtInput;
+    }
+
+    public void setTextWatcher(TextWatcher watcher){
+        mBinding.edtInput.addTextChangedListener(watcher);
     }
 }

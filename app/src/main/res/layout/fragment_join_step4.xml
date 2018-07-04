@@ -13,101 +13,55 @@
             android:orientation="vertical">
 
             <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_"
+                android:id="@+id/myEl_applyBirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入姓名"
-                app:txt_input_title="*姓名" />
+                app:txt_input_hint="请输入申请人户籍地"
+                app:txt_input_title="*申请人户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_applyNowAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入手机号"
-                app:txt_input_title="*手机号" />
+                app:txt_input_hint="请输入现住地址"
+                app:txt_input_title="*现住地址" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_houseType"
+                app:txt_select_title="*现住房屋类型"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_ghBirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入身份证号码"
-                app:txt_input_title="*身份证号码" />
+                app:txt_input_hint="请输入共还人户籍地"
+                app:txt_input_title="*共还人户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_guarantor1BirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入固定电话"
-                app:txt_input_title="*固定电话" />
+                app:txt_input_hint="请输入担保人1户籍地"
+                app:txt_input_title="*担保人1户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_guarantor2BirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入工作单位名称"
-                app:txt_input_title="*工作单位名称" />
+                app:txt_input_hint="请输入担保人2户籍地"
+                app:txt_input_title="*担保人2户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_otherNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入工作单位地址"
-                app:txt_input_title="*工作单位名称地址" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入房产地址"
-                app:txt_input_title="*担保人房产地址" />
-
-            <TextView
-                android:background="#E6E6E6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="家庭紧急联系人1" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入紧急联系人姓名"
-                app:txt_input_title="*家庭紧急联系人姓名" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入关系"
-                app:txt_input_title="*与申请人关系" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入手机号码"
-                app:txt_input_title="*手机号码" />
-
-            <TextView
-                android:background="#E6E6E6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="家庭紧急联系人2" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入紧急联系人姓名"
-                app:txt_input_title="*家庭紧急联系人姓名" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入关系"
-                app:txt_input_title="*与申请人关系" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入手机号码"
-                app:txt_input_title="*手机号码" />
+                app:txt_input_hint="选填"
+                app:txt_input_title="其他情况说明" />
 
         </LinearLayout>
 

@@ -21,10 +21,8 @@ import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityMismatchingDetailBinding;
-import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.model.MismatchingRefresh;
 import com.cdkj.wzcd.model.NodeListModel;
-import com.cdkj.wzcd.module.work.credit.audit.BankCreditResultActivity;
 import com.cdkj.wzcd.util.RequestUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,7 +34,7 @@ import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
-import static com.cdkj.wzcd.util.DataDictionaryHelper.getValueOnTheKey;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeBuyKey;
 
 /**
  * 发票不匹配申请
@@ -189,7 +187,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlWay.setText(getValueOnTheKey(data.getShopWay()));
+        mBinding.myNlWay.setText(getBizTypeBuyKey(data.getShopWay()));
 
         mBinding.myNlBillPriceOriginal.setMoneyText(data.getInvoicePrice());
         mBinding.myNlBillPriceCurrent.setMoneyText(data.getCurrentInvoicePrice());

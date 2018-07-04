@@ -15,7 +15,7 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.DataFileAdapter;
+import com.cdkj.wzcd.adpter.DataFileAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivitySendAndExamineBinding;
 import com.cdkj.wzcd.model.DataFileModel;
@@ -32,6 +32,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.supplement_reason;
 
 public class SendAndExamineActivity extends AbsBaseLoadActivity {
 
@@ -69,10 +70,15 @@ public class SendAndExamineActivity extends AbsBaseLoadActivity {
 
         code = getIntent().getStringExtra(DATA_SIGN);
 
+        initView();
         initAdapter();
         initListener();
 
         getData();
+    }
+
+    private void initView() {
+        mBinding.myESlReason.setData(DataDictionaryHelper.getListByParentKey(supplement_reason));
     }
 
     private void initAdapter(){
@@ -91,8 +97,19 @@ public class SendAndExamineActivity extends AbsBaseLoadActivity {
         });
 
         mBinding.myCbConfirm.setOnConfirmRightListener(view -> {
-            pickUpAndReissueRequest();
+            if (check()){
+                pickUpAndReissueRequest();
+            }
         });
+    }
+
+    public boolean check(){
+
+        if (mBinding.myESlReason.check()){
+            return false;
+        }
+
+        return true;
     }
 
     public void getData(){
@@ -141,20 +158,16 @@ public class SendAndExamineActivity extends AbsBaseLoadActivity {
             mBinding.llSendFile.setVisibility(View.GONE);
         }
 
-        DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.send_type, data.getSendType(), data1 -> {
-            mBinding.myNlSendType.setText(data1.getDvalue());
 
-            if (TextUtils.equals(data1.getDvalue(), "快递")){
-                mBinding.llLogistics.setVisibility(View.VISIBLE);
+        String dValue = DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.send_type, data.getSendType());
+        mBinding.myNlSendType.setText(dValue);
 
-                DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.kd_company, data.getLogisticsCompany(), data2 -> {
-                    mBinding.myNlLogisticsCompany.setText(data2.getDvalue());
-                });
+        if (TextUtils.equals(dValue, "快递")){
+            mBinding.llLogistics.setVisibility(View.VISIBLE);
+            mBinding.myNlLogisticsCode.setText(data.getLogisticsCode());
+            mBinding.myNlLogisticsCompany.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.kd_company, data.getLogisticsCompany()));
+        }
 
-                mBinding.myNlLogisticsCode.setText(data.getLogisticsCode());
-            }
-
-        });
 
         mBinding.myNlSendDatetime.setText(DateUtil.formatStringData(data.getSendDatetime(), DateUtil.DEFAULT_DATE_FMT));
     }
@@ -240,6 +253,8 @@ public class SendAndExamineActivity extends AbsBaseLoadActivity {
 
         hashMap.put("code", code);
         hashMap.put("remark", mBinding.myElSendNote.getText());
+        hashMap.put("supplementReason", mBinding.myESlReason.getDataKey());
+        hashMap.put("supplementNote", mBinding.myElExplain.getText());
 
         Call call= RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(hashMap));
 

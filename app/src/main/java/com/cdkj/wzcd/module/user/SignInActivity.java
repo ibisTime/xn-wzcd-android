@@ -99,10 +99,6 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
             showToast(getString(R.string.user_mobile_hint));
             return false;
         }
-        if (mBinding.edtUsername.getText().toString().trim().length() != 11){
-            showToast(getString(R.string.user_mobile_format_hint));
-            return false;
-        }
         if (mBinding.edtPassword.getText().toString().trim().length() < 6){
             showToast(getString(R.string.user_password_format_hint));
             return false;
@@ -126,7 +122,7 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (mBinding.edtUsername.getText().toString().length() == 11){
+                if (!TextUtils.isEmpty(mBinding.edtUsername.getText().toString())){
                     if (mBinding.edtPassword.getText().toString().length() >= 6){
                         // 可以登录
                         mBinding.btnConfirm.setBackgroundResource(R.drawable.common_login_btn_light);

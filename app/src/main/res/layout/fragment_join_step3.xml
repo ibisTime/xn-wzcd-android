@@ -6,62 +6,82 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateName"
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_isHouseProperty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入配偶姓名"
-                app:txt_input_title="*姓名" />
+                app:txt_select_title="*房产证情况" />
 
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateMobile"
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_houseProperty"
+                app:title="房产证"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:inputType="phone"
-                app:txt_input_hint="请输入手机号"
-                app:txt_input_title="*手机号" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateIdNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:inputType="id"
-                app:txt_input_hint="请输入身份证号"
-                app:txt_input_title="*身份证号" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MySelectLayout
-                android:id="@+id/mySl_mateEducation"
+                android:id="@+id/mySl_isLicense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_select_title="*学历" />
+                app:txt_select_title="*营业执照" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_license"
+                app:title="营业执照"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_isDriveLicense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="有无驾照" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_driveLicense"
+                app:title="驾照"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_carType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="现有车辆" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_isSiteProve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="提供场地证明" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_siteProve"
+                app:title="场地证明"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateCompanyName"
+                android:id="@+id/myEl_siteArea"
+                app:txt_input_title="经营场地面积"
+                app:txt_input_hint="请输入经营场地面积"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入工作单位名称"
-                app:txt_input_title="*工作单位名称" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateCompanyAddress"
+                android:id="@+id/myEl_otherPropertyNote"
+                app:txt_input_title="其他资产说明"
+                app:txt_input_hint="请输入其他资产说明"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入工作单位地址"
-                app:txt_input_title="*工作单位名称地址" />
-
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_mateCompanyContactNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入工作单位联系电话"
-                app:txt_input_title="*工作单位联系电话" />
-
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

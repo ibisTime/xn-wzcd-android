@@ -57,6 +57,7 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_amount_up"
+                android:visibility="gone"
                 app:txt_normal_title="用款大写"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -73,6 +74,7 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_receipt"
+                android:visibility="gone"
                 app:txt_normal_title="收款单位名称"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -89,6 +91,7 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_bank_open"
+                android:visibility="gone"
                 app:txt_normal_title="开户银行"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

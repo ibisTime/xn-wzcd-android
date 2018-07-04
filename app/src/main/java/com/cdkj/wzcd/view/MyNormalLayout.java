@@ -86,10 +86,27 @@ public class MyNormalLayout extends LinearLayout {
     /**
      * 获取处理后的金额文本
      *
+     * @return 乘以1000的金额字符串
+     */
+    public String getMoneyText() {
+
+        if (TextUtils.isEmpty(mBinding.tvContent.getText().toString().trim())) {
+            return "0";
+        }
+
+        return RequestUtil.formatAmountMul(mBinding.tvContent.getText().toString().trim());
+    }
+
+    /**
+     * 获取处理后的金额文本
+     *
      * @return 除以1000的金额字符串
      */
     public void setMoneyText(String moneyText) {
-        mBinding.tvContent.setText(RequestUtil.formatAmountDivSign(moneyText));
+        mBinding.tvContent.setText(RequestUtil.formatAmountDiv(moneyText));
+
+        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+        mBinding.tvTitleRight.setVisibility(VISIBLE);
     }
 
     public String check() {

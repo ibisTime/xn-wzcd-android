@@ -13,7 +13,7 @@ import com.cdkj.baselibrary.base.AbsRefreshListFragment;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.CldyListAdapter;
+import com.cdkj.wzcd.adpter.CldyListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.util.UserHelper;

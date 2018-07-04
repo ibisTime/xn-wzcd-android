@@ -22,6 +22,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.gps_apply_status;
 
 /**
  * gps申领
@@ -84,10 +85,7 @@ public class GpsDetailsActivity extends AbsBaseLoadActivity {
     }
 
     private void setView(GpsApplyModel model) {
-        DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.gps_apply_status, model.getStatus(), data -> {
-            mBinding.myNlStatus.setText(data.getDvalue());
-        });
-
+        mBinding.myNlStatus.setText(DataDictionaryHelper.getValueBuyKey(gps_apply_status, model.getStatus()));
         mBinding.myNlNumber.setText(model.getApplyCount()+"个");
         mBinding.myNlReason.setText(model.getApplyReason());
 

@@ -11,7 +11,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.ZrdListAdapter;
+import com.cdkj.wzcd.adpter.ZrdListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.ZrdModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
@@ -62,36 +62,34 @@ public class ZrdListActivity extends AbsRefreshListActivity {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        DataDictionaryHelper.getDataDictionaryRequest(ZrdListActivity.this, DataDictionaryHelper.gps_apply_status, "", (List<DataDictionary> list) -> {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-            if (list == null || list.size()==0)
-                return;
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mList.addAll(list);
 
-            mList = list;
+        Map<String, String> map = RetrofitUtils.getRequestMap();
 
-            Map<String, String> map = RetrofitUtils.getRequestMap();
-
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
 //            map.put("saleUserId", SPUtilHelper.getUserId());　　
 
-            if (isShowDialog) showLoadingDialog();
+        if (isShowDialog) showLoadingDialog();
 
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getZrdList("632145", StringUtils.getJsonToString(map));
-            addCall(call);
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getZrdList("632145", StringUtils.getJsonToString(map));
+        addCall(call);
 
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<ZrdModel>>(this) {
-                @Override
-                protected void onSuccess(ResponseInListModel<ZrdModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无准入单记录", 0);
-                }
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<ZrdModel>>(this) {
+            @Override
+            protected void onSuccess(ResponseInListModel<ZrdModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无准入单记录", 0);
+            }
 
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
     }
 }

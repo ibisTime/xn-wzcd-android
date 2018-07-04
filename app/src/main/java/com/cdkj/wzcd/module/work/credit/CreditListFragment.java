@@ -15,10 +15,11 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.CreditListAdapter;
+import com.cdkj.wzcd.adpter.CreditListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
+import com.cdkj.wzcd.util.UserHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public class CreditListFragment extends AbsRefreshListFragment {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             CreditModel model = mAdapter.getItem(position);
 
-            CreditDetailActivity.open(mActivity, model.getCode());
+            CreditDetailActivity.open(mActivity, model.getCode(), false);
         });
 
         return mAdapter;
@@ -105,37 +106,39 @@ public class CreditListFragment extends AbsRefreshListFragment {
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
 
-        DataDictionaryHelper.getDataDictionaryRequest(mActivity, DataDictionaryHelper.budget_orde_biz_typer, "", data -> {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.budget_orde_biz_typer);
 
-            if (data == null || data.size() == 0){
-                return;
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mType.addAll(list);
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("roleCode", SPUtilHelper.getRoleCode());
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
+
+        if (UserHelper.isYWY())
+            map.put("saleUserId", SPUtilHelper.getUserId());
+
+
+
+        if (isShowDialog) showLoadingDialog();
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getCreditList("632115", StringUtils.getJsonToString(map));
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<CreditModel>>(mActivity) {
+            @Override
+            protected void onSuccess(ResponseInListModel<CreditModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无资信", 0);
             }
 
-            mType.addAll(data);
-
-            Map<String, String> map = new HashMap<>();
-
-            map.put("roleCode", SPUtilHelper.getRoleCode());
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
-
-            if (isShowDialog) showLoadingDialog();
-
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getCreditList("632115", StringUtils.getJsonToString(map));
-            addCall(call);
-
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<CreditModel>>(mActivity) {
-                @Override
-                protected void onSuccess(ResponseInListModel<CreditModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无资信", 0);
-                }
-
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
 
 

@@ -16,6 +16,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.CameraHelper;
+import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
@@ -33,7 +34,7 @@ import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
-import static com.cdkj.wzcd.util.DataDictionaryHelper.getValueOnTheKey;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeBuyKey;
 
 /**
  * 发保合详情
@@ -201,9 +202,13 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
+
+        LogUtil.E("LoanAmount="+data.getLoanAmount());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlWay.setText(getValueOnTheKey(data.getShopWay()));
+        mBinding.myNlWay.setText(getBizTypeBuyKey(data.getShopWay()));
+
+        LogUtil.E("InvoicePrice="+data.getInvoicePrice());
         mBinding.myNlBillPrice.setMoneyText(data.getInvoicePrice());
 
 
@@ -218,7 +223,7 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             return false;
         }
 
-        if (TextUtils.isEmpty(mBinding.myElCurrentBillPrice.check())) {
+        if (mBinding.myElCurrentBillPrice.check()) {
             return false;
         }
 

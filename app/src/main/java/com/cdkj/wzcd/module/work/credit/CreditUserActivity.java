@@ -7,26 +7,38 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
+import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.CameraHelper;
 import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.QiNiuHelper;
+import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
+import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityCreditPersonAddBinding;
 import com.cdkj.wzcd.model.CreditUserModel;
 import com.cdkj.wzcd.model.CreditUserReplaceModel;
+import com.cdkj.wzcd.model.event.IdCardModel;
+import com.cdkj.wzcd.module.work.credit.audit.BankCreditResultActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
-import com.cdkj.wzcd.view.MySelectLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.utils.StringUtils.isIDCard;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_loan_role;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_relation;
 
 /**
  * Created by cdkj on 2018/5/30.
@@ -36,7 +48,7 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
 
     private ActivityCreditPersonAddBinding mBinding;
 
-    private CreditUserModel model;
+    private CreditUserModel mUserModel;
 
     private boolean isCanEdit;
     // List的position
@@ -44,6 +56,9 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
 
     private List<DataDictionary> role;
     private List<DataDictionary> relation;
+
+    //当前用户户籍地
+    private String birthAddress;
 
     /**
      * @param context
@@ -90,7 +105,7 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
         initListener();
 
         if (getIntent() != null && getIntent().getExtras() != null){
-            model = (CreditUserModel) getIntent().getSerializableExtra(DATA_SIGN);
+            mUserModel = (CreditUserModel) getIntent().getSerializableExtra(DATA_SIGN);
             position = getIntent().getIntExtra("position", 0);
             isCanEdit = getIntent().getBooleanExtra("isCanEdit", false);
 
@@ -104,40 +119,44 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
 
     private void setView() {
         if (isCanEdit){
-            mBinding.myElName.setText(model.getUserName());
-            mBinding.myElPhone.setText(model.getMobile());
+            mBinding.myElName.setText(mUserModel.getUserName());
+            mBinding.myElPhone.setText(mUserModel.getMobile());
 
-            mBinding.mySlRole.setTextAndKey(model.getLoanRole(), DataDictionaryHelper.getValueOnTheKey(model.getLoanRole(), role));
-            mBinding.mySlRelation.setTextAndKey(model.getRelation(), DataDictionaryHelper.getValueOnTheKey(model.getRelation(), relation));
+            mBinding.mySlRole.setTextAndKey(mUserModel.getLoanRole(), DataDictionaryHelper.getValueBuyList(mUserModel.getLoanRole(), role));
+            mBinding.mySlRelation.setTextAndKey(mUserModel.getRelation(), DataDictionaryHelper.getValueBuyList(mUserModel.getRelation(), relation));
 
-            mBinding.myElId.setText(model.getIdNo());
-            mBinding.myIlIdCard.setFlImg(model.getIdNoFront());
-            mBinding.myIlIdCard.setFlImgRight(model.getIdNoReverse());
-            mBinding.myIlCredit.setFlImg(model.getAuthPdf());
-            mBinding.myIlInterview.setFlImg(model.getInterviewPic());
+            mBinding.myElId.setText(mUserModel.getIdNo());
+            mBinding.myIlIdCard.setFlImg(mUserModel.getIdNoFront());
+            mBinding.myIlIdCard.setFlImgRight(mUserModel.getIdNoReverse());
+            mBinding.myIlCredit.setFlImg(mUserModel.getAuthPdf());
+            mBinding.myIlInterview.setFlImg(mUserModel.getInterviewPic());
         }else {
-            mBinding.myElName.setTextByRequest(model.getUserName());
-            mBinding.myElPhone.setTextByRequest(model.getMobile());
+            mBinding.myElName.setTextByRequest(mUserModel.getUserName());
+            mBinding.myElPhone.setTextByRequest(mUserModel.getMobile());
 
-            mBinding.mySlRole.setTextByRequest(DataDictionaryHelper.getValueOnTheKey(model.getLoanRole(), role));
-            mBinding.mySlRelation.setTextByRequest(DataDictionaryHelper.getValueOnTheKey(model.getRelation(), relation));
+            mBinding.mySlRole.setTextByRequest(DataDictionaryHelper.getValueBuyList(mUserModel.getLoanRole(), role));
+            mBinding.mySlRelation.setTextByRequest(DataDictionaryHelper.getValueBuyList(mUserModel.getRelation(), relation));
 
-            mBinding.myElId.setTextByRequest(model.getIdNo());
-            mBinding.myIlIdCard.setFlImgByRequest(model.getIdNoFront());
-            mBinding.myIlIdCard.setFlImgRightByRequest(model.getIdNoReverse());
-            mBinding.myIlCredit.setFlImgByRequest(model.getAuthPdf());
-            mBinding.myIlInterview.setFlImgByRequest(model.getInterviewPic());
+            mBinding.myElId.setTextByRequest(mUserModel.getIdNo());
+            mBinding.myIlIdCard.setFlImgByRequest(mUserModel.getIdNoFront());
+            mBinding.myIlIdCard.setFlImgRightByRequest(mUserModel.getIdNoReverse());
+            mBinding.myIlCredit.setFlImgByRequest(mUserModel.getAuthPdf());
+            mBinding.myIlInterview.setFlImgByRequest(mUserModel.getInterviewPic());
 
             mBinding.myCbConfirm.setVisibility(View.GONE);
         }
 
+        mBaseBinding.titleView.setRightTitle("征信报告");
+        mBaseBinding.titleView.setRightFraClickListener(view -> {
+            BankCreditResultActivity.open(this, mUserModel.getBankCreditResult(), false);
+        });
 
     }
 
     private void initCustomView() {
 
-        mBinding.mySlRole.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.credit_user_loan_role,null);
-        mBinding.mySlRelation.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.credit_user_relation,null);
+        mBinding.mySlRole.setData(DataDictionaryHelper.getListByParentKey(credit_user_loan_role),null);
+        mBinding.mySlRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation),null);
 
         mBinding.myIlIdCard.setActivity(this,1,2);
         mBinding.myIlCredit.setActivity(this,3,0);
@@ -158,6 +177,7 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
                 model.setIdNoReverse(mBinding.myIlIdCard.getFlImgRightUrl());
                 model.setAuthPdf(mBinding.myIlCredit.getFlImgUrl());
                 model.setInterviewPic(mBinding.myIlInterview.getFlImgUrl());
+                model.setBirthAddress(birthAddress);
 
                 // 发送数据
                 if (getIntent() != null && getIntent().getExtras() != null){
@@ -178,11 +198,11 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
     private boolean check(){
 
         // 姓名
-        if (TextUtils.isEmpty(mBinding.myElName.check())){
+        if (mBinding.myElName.check()){
             return false;
         }
         // 手机号
-        if (TextUtils.isEmpty(mBinding.myElPhone.check())){
+        if (mBinding.myElPhone.check()){
             return false;
         }
         // 贷款角色
@@ -194,7 +214,7 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
             return false;
         }
         // 身份证号
-        if (TextUtils.isEmpty(mBinding.myElId.check())){
+        if (mBinding.myElId.check()){
             return false;
         }
 
@@ -208,7 +228,7 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
             return false;
         }
         // 身份证反面
-        if (TextUtils.isEmpty(mBinding.myIlIdCard.check())){
+        if (TextUtils.isEmpty(mBinding.myIlIdCard.checkRight())){
             return false;
         }
         // 征信查询授权书
@@ -239,23 +259,23 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
                 LogUtil.E("requestCode="+requestCode);
 
                 if (requestCode == mBinding.myIlIdCard.getRequestCode()){
-                    mBinding.myIlIdCard.setFlImg(key);
+                    analysisIdCard(key, "630092");
                 }
 
                 if (requestCode == mBinding.myIlIdCard.getRightRequestCode()){
                     mBinding.myIlIdCard.setFlImgRight(key);
+                    disMissLoading();
                 }
 
                 if (requestCode == mBinding.myIlCredit.getRequestCode()){
                     mBinding.myIlCredit.setFlImg(key);
+                    disMissLoading();
                 }
 
                 if (requestCode == mBinding.myIlInterview.getRequestCode()){
                     mBinding.myIlInterview.setFlImg(key);
+                    disMissLoading();
                 }
-
-
-                disMissLoading();
 
             }
 
@@ -264,5 +284,36 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
                 disMissLoading();
             }
         }, path);
+    }
+
+    private void analysisIdCard(String url, String code){
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("picUrl", MyCdConfig.QINIU_URL + url);
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).analysisIdCard(code, StringUtils.getJsonToString(map));
+
+        addCall(call);
+
+        showLoadingDialog();
+
+        call.enqueue(new BaseResponseModelCallBack<IdCardModel>(this) {
+
+            @Override
+            protected void onSuccess(IdCardModel data, String SucMessage) {
+                mBinding.myElName.setText(data.getRealName());
+                mBinding.myElId.setText(data.getIdNo());
+
+                birthAddress = data.getResidenceAddress();
+
+                mBinding.myIlIdCard.setFlImg(url);
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
     }
 }

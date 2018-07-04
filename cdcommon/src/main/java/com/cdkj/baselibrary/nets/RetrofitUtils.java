@@ -45,10 +45,6 @@ public class RetrofitUtils {
         return retrofitInstance;
     }
 
-    public static int getAppDevelopment(){
-        return DEBUG;
-    }
-
     /**
      * 创建Retrofit请求Api
      *

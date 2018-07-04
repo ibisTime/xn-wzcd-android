@@ -12,12 +12,12 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsInfoAddBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;
+import com.cdkj.wzcd.model.GpsInstallReplaceModel;
 import com.cdkj.wzcd.model.GpsModel;
 import com.cdkj.wzcd.util.DatePickerHelper;
 
@@ -102,8 +102,16 @@ public class GPSInfoAddActivity extends AbsBaseLoadActivity {
                     model.setRemark(mBinding.myElRemark.getText());
 
                     // 发送数据
-                    EventBus.getDefault().post(model);
-                    finish();
+                    if (getIntent() != null && getIntent().getExtras() != null){
+                        // 替换
+                        EventBus.getDefault().post(new GpsInstallReplaceModel().setLocation(position).setGpsInstallModel(model));
+                        finish();
+                    }else {
+                        // 发送数据
+                        EventBus.getDefault().post(model);
+                        finish();
+                    }
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -120,7 +128,7 @@ public class GPSInfoAddActivity extends AbsBaseLoadActivity {
         }
 
         // 安装位置
-        if (TextUtils.isEmpty(mBinding.myElLocation.check())){
+        if (mBinding.myElLocation.check()){
             return false;
         }
 
@@ -130,7 +138,7 @@ public class GPSInfoAddActivity extends AbsBaseLoadActivity {
         }
 
         // 安装人员
-        if (TextUtils.isEmpty(mBinding.myElUser.check())){
+        if (mBinding.myElUser.check()){
             return false;
         }
 
@@ -174,9 +182,6 @@ public class GPSInfoAddActivity extends AbsBaseLoadActivity {
         }
 
         mBinding.mySlCode.setData(dictionaryList, null);
-
-
-        LogUtil.E("(model != null)="+(model != null));
 
         if (model != null){
             setView(dictionaryList);

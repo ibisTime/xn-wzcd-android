@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.cdkj.wzcd">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -8,8 +9,9 @@
 
 
     <application
+        tools:replace="android:allowBackup"
         android:name="com.cdkj.wzcd.MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -83,6 +85,11 @@
         <activity android:name=".module.tool.jcdy.JcdyActivity" />
         <activity android:name=".module.tool.jcdy.JcdyListActivity" />
         <activity android:name=".module.tool.gps_install.GpsCancelActivity" />
+        <activity android:name=".module.work.join_approval.JoinApplyActivity" />
+        <activity android:name=".module.work.join_approval.JoinApplyListActivity" />
+        <activity android:name=".module.work.join_approval.GPSAddActivity" />
+        <activity android:name=".module.work.join_approval.RePointAddActivity" />
+        <activity android:name=".module.work.join_approval.AdvanceFundActivity" />
 
         <!--<activity android:name=".module.business.join_approval.JoinApplyListActivity" />-->
         <!--<activity android:name=".module.business.face_view.InterviewActivity" />-->

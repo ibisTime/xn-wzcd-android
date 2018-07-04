@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -100,7 +99,7 @@ public class BlankOutActivity extends AbsBaseLoadActivity {
             return false;
         }
 
-        if (TextUtils.isEmpty(mBinding.myElReason.check())){
+        if (mBinding.myElReason.check()){
             return false;
         }
 

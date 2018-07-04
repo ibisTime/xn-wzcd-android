@@ -10,7 +10,7 @@ import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.MismatchingListAdapter;
+import com.cdkj.wzcd.adpter.MismatchingListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.MismatchingRefresh;
 import com.cdkj.wzcd.model.NodeListModel;

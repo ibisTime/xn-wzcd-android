@@ -28,9 +28,11 @@ public class TopTitleLayout extends FrameLayout {
     private FrameLayout mLeftFra;
     private FrameLayout mRightFra;
     private LinearLayout mRightll;
+    private LinearLayout mLlMid;
     private ImageView mLeftImg;
     private TextView mLeftTv;
     private ImageView mRightImg;
+    private ImageView mIvMid;
     private TextView mRightTv;
 
     private Context mContext;
@@ -57,13 +59,16 @@ public class TopTitleLayout extends FrameLayout {
         mLeftFra = (FrameLayout) findViewById(R.id.fram_img_back);
         mRightFra = (FrameLayout) findViewById(R.id.fllayout_right);
         mLeftImg = (ImageView) findViewById(R.id.img_back);
+        mIvMid = (ImageView) findViewById(R.id.iv_mid);
         mRightImg = (ImageView) findViewById(R.id.img_right);
         mRightll = (LinearLayout) findViewById(R.id.ll_right);
+        mLlMid = (LinearLayout) findViewById(R.id.ll_mid);
     }
 
     public void setLeftTitle(String text) {
         mLeftTv.setText(text);
         mLeftTv.setVisibility(text != null ? VISIBLE : GONE);
+
         mLeftFra.setVisibility(text != null ? VISIBLE : GONE);
     }
 
@@ -119,5 +124,12 @@ public class TopTitleLayout extends FrameLayout {
         mRightFra.setOnClickListener(listener);
     }
 
+    public void setMidFraClickListener(View.OnClickListener listener) {
+        mLlMid.setOnClickListener(listener);
+    }
+
+    public void setMidImgVisible(boolean visible) {
+        mIvMid.setVisibility(visible ? VISIBLE : GONE);
+    }
 
 }

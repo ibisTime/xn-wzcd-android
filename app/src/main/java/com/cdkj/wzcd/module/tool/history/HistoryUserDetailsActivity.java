@@ -11,7 +11,7 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.RepayPlanAdapter;
+import com.cdkj.wzcd.adpter.RepayPlanAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityHistoryUserDetailsBinding;
 import com.cdkj.wzcd.model.RepaymentModel;
@@ -91,11 +91,8 @@ public class HistoryUserDetailsActivity extends AbsBaseLoadActivity {
 
     private void setView(RepaymentModel data) {
 
-        DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.status, data.getStatus(), data1 -> {
 
-            mBinding.myNlStatus.setText(data1.getDvalue());
-
-        });
+        mBinding.myNlStatus.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.status, data.getStatus()));
 
         mBinding.myNlName.setText(data.getBudgetOrder().getApplyUserName());
         mBinding.myNlCompanyName.setText(data.getBudgetOrder().getCompanyName());

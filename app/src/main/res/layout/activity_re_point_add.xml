@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_repointAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
+                    app:txt_input_hint="请输入金额"
+                    app:txt_input_title="金额">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_carDealerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_input_hint="请输入户名"
+                    app:txt_input_title="户名">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_accountNO"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="number"
+                    app:txt_input_hint="请输入账号"
+                    app:txt_input_title="账号">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_openBankName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_input_hint="请输入开户行"
+                    app:txt_input_title="开户行">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <com.cdkj.wzcd.view.MyConfirmBtn
+                    android:id="@+id/myCb_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_confirm_content="确定">
+
+
+                </com.cdkj.wzcd.view.MyConfirmBtn>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</layout>

@@ -10,9 +10,9 @@ import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.AdvanceFundListAdapter;
+import com.cdkj.wzcd.adpter.AdvanceFundListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
-import com.cdkj.wzcd.model.NodeListModel;
+import com.cdkj.wzcd.model.AdvanceFundModel;
 
 import java.util.List;
 import java.util.Map;
@@ -69,12 +69,12 @@ public class AdvanceFundListActivity extends AbsRefreshListActivity {
 
         if (isShowDialog) showLoadingDialog();
 
-        Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632185", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getAdvanceFundList("632185", StringUtils.getJsonToString(map));
         addCall(call);
 
-        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<AdvanceFundModel>>(this) {
             @Override
-            protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
+            protected void onSuccess(ResponseInListModel<AdvanceFundModel> data, String SucMessage) {
                 mRefreshHelper.setData(data.getList(), "暂无垫资记录", 0);
             }
 

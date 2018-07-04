@@ -10,7 +10,6 @@ import android.view.View;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
-import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
@@ -33,7 +32,7 @@ import com.cdkj.wzcd.module.work.advancefund.AdvanceFundListActivity;
 import com.cdkj.wzcd.module.work.bank_loan.BankLoanListActivity;
 import com.cdkj.wzcd.module.work.cldy.BssCldyListActivity;
 import com.cdkj.wzcd.module.work.credit.CreditListActivity;
-import com.cdkj.wzcd.util.BizTypeHelper;
+import com.cdkj.wzcd.module.work.join_approval.JoinApplyListActivity;
 import com.cdkj.wzcd.util.NodeHelper;
 
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ import java.util.Map;
 
 import retrofit2.Call;
 
-import static com.cdkj.wzcd.util.DataDictionaryHelper.budget_orde_biz_typer;
 import static com.cdkj.wzcd.util.UserHelper.NQZY;
 import static com.cdkj.wzcd.util.UserHelper.YWY;
 import static com.cdkj.wzcd.util.UserHelper.ZHRY;
@@ -52,8 +50,6 @@ public class MainActivity extends AbsBaseLoadActivity {
 
     // 节点列表
     public static List<NodeModel> BASE_NODE_LIST = new ArrayList<>();
-    // 购车途径
-    public static List<DataDictionary> BASE_BIZ_TYPE = new ArrayList<>();
 
     private UserModel mUserModel;
 
@@ -91,21 +87,7 @@ public class MainActivity extends AbsBaseLoadActivity {
                 BASE_NODE_LIST.addAll(list);
 
 
-                BizTypeHelper.getBizTypeBaseDataRequest(MainActivity.this, budget_orde_biz_typer, new BizTypeHelper.BizTypeInterface() {
-                    @Override
-                    public void onSuccess(List<DataDictionary> list) {
-
-                        BASE_BIZ_TYPE.clear();
-                        BASE_BIZ_TYPE.addAll(list);
-
-                        getUserInfoRequest(true);
-                    }
-
-                    @Override
-                    public void onReqFailure(String errorCode, String errorMessage) {
-
-                    }
-                });
+                getUserInfoRequest(true);
 
             }
 
@@ -215,6 +197,11 @@ public class MainActivity extends AbsBaseLoadActivity {
         //
         mBinding.mySrZxdc.setOnClickListener(view -> {
             CreditListActivity.open(this);
+        });
+
+        //准入申请
+        mBinding.mySrZrsq.setOnClickListener(v -> {
+            JoinApplyListActivity.open(this);
         });
 
         // 财务垫资

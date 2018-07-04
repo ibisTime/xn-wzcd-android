@@ -12,39 +12,64 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            style="@style/style_my_item_root">
+        <View
+            style="@style/style_split_line_horizontal_broad"/>
 
-            <com.cdkj.wzcd.view.item.MyItemDoubleLayout
-                android:id="@+id/myItemNl_code_and_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <com.cdkj.wzcd.view.list.MyListItemTitleLayout
+            android:id="@+id/myTl_idStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            </com.cdkj.wzcd.view.item.MyItemDoubleLayout>
-
-            <com.cdkj.wzcd.view.item.MyItemNormalLayout
-                android:id="@+id/myItemNl_name_and_type_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
-
-            <com.cdkj.wzcd.view.item.MyItemNormalLayout
-                android:id="@+id/myItemNl_bank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
-
-            <com.cdkj.wzcd.view.item.MyItemDoubleLayout
-                android:id="@+id/myItemNl_dz_and_dateTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.cdkj.wzcd.view.item.MyItemDoubleLayout>
+        </com.cdkj.wzcd.view.list.MyListItemTitleLayout>
 
 
-        </LinearLayout>
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_type"
+            app:txt_list_item_title="购车途径"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_name"
+            app:txt_list_item_title="客户姓名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_amount"
+            app:txt_list_item_title="贷款金额"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_bank"
+            app:txt_list_item_title="贷款银行"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_advanceFund"
+            app:txt_list_item_title="是否垫资"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_date_time"
+            app:txt_list_item_title="申请时间"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemBtnLayout
             android:id="@+id/myItemCbl_confirm"

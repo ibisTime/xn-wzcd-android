@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_companyNamePic"
+                app:title="企业名称照片"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_companyPlacePic"
+                app:title="办公场地照片"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_companyWorkshopPic"
+                app:title="生产车间照片"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_companySaleCustomerPic"
+                app:title="签约员与客户合影"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

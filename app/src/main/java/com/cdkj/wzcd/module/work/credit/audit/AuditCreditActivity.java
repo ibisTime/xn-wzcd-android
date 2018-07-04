@@ -17,7 +17,7 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.CreditUserAdapter;
+import com.cdkj.wzcd.adpter.CreditUserAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityZxLaunchBinding;
 import com.cdkj.wzcd.model.CreditModel;
@@ -38,6 +38,8 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_loan_role;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_relation;
 
 /**
  * 发起征信
@@ -83,12 +85,14 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
 
-        mBaseBinding.titleView.setMidTitle("发起征信");
+        mBaseBinding.titleView.setMidTitle("录入征信结果");
+
+        init();
 
         initListener();
         initListAdapter();
 
-        init();
+
     }
 
     private void init() {
@@ -112,7 +116,7 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
         for (CreditUserModel model : mList){
 
             if (model.getBankCreditResult() == null){
-                ToastUtil.show(this, "请完善"+DataDictionaryHelper.getValueOnTheKey(model.getLoanRole(), mRole)+"征信报告");
+                ToastUtil.show(this, "请完善"+DataDictionaryHelper.getDataByKey(credit_user_loan_role, model.getLoanRole()).getDvalue()+"征信报告");
                 return false;
             }
 
@@ -124,39 +128,36 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
 
     public void initListAdapter() {
 
-        DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.credit_user_loan_role, "",data -> {
 
-            if (data == null || data.size() == 0){
-                return;
-            }
 
-            mRole.addAll(data);
+        List<DataDictionary> listRole = DataDictionaryHelper.getListByParentKey(credit_user_loan_role);
 
-            DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.credit_user_relation, "",data1 -> {
+        if (listRole == null || listRole.size() == 0){
+            return;
+        }
+        mRole.addAll(listRole);
 
-                if (data1 == null || data1.size() == 0){
-                    return;
-                }
 
-                mRelation.addAll(data1);
+        List<DataDictionary> listRelation = DataDictionaryHelper.getListByParentKey(credit_user_relation);
 
-                mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
-                mAdapter.setOnItemClickListener((adapter, view, position) -> {
-                    CreditUserModel model = mAdapter.getItem(position);
+        if (listRelation == null || listRelation.size() == 0){
+            return;
+        }
+        mRelation.addAll(listRelation);
 
-                    AuditUserActivity.open(this, model, position);
 
-                });
+        mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            CreditUserModel model = mAdapter.getItem(position);
 
-                mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
-                mBinding.rvZxr.setAdapter(mAdapter);
-
-                getCredit();
-
-            });
+            AuditUserActivity.open(this, model, position);
 
         });
 
+        mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
+        mBinding.rvZxr.setAdapter(mAdapter);
+
+        getCredit();
 
     }
 
@@ -227,8 +228,6 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
      * 获取征信详情
      */
     private void getCredit() {
-        if (TextUtils.isEmpty(creditCode))
-            return;
 
         Map<String, String> map = new HashMap<>();
 
@@ -265,17 +264,15 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
     private void setView() {
 
 
-        new BankHelper(this).getValueOnTheKey(mData.getLoanBankCode(), null, data -> {
+        BankHelper.getValueOnTheKey(this, mData.getLoanBankCode(), null, data -> {
             mBinding.mySlBank.setTextByRequest(data.getBankName());
         });
 
-        DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.budget_orde_biz_typer, mData.getShopWay(), data -> {
-            mBinding.mySlWay.setTextByRequest(data.getDvalue());
-        });
+        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeBuyKey(mData.getShopWay()));
 
         mBinding.myElAmount.setTextByRequest(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
 
-        if (TextUtils.equals(mData.getShopWay(), "1")){ //二手车
+        if (TextUtils.equals(mData.getShopWay(), "2")){ //二手车
             // 新车则隐藏证件
             mBinding.myIlDocuments.setVisibility(View.VISIBLE);
 
@@ -283,8 +280,6 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
             mBinding.myIlDocuments.setFlImgRightByRequest(mData.getXszReverse());
 
         }
-
-        mBaseBinding.titleView.setMidTitle("录入征信结果");
 
         mBinding.llAdd.setVisibility(View.GONE);
         mBinding.myCbConfirm.setText("录入征信结果");

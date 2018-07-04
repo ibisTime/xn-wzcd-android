@@ -18,6 +18,17 @@
             <View
                 style="@style/style_split_line_horizontal_broad"/>
 
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_idCard"
+                app:txt_image_title="身份证"
+                app:txt_image_hint="身份证正面"
+                app:isSingle="false"
+                app:txt_image_hint_right="身份证反面"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
+
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_name"
                 app:txt_input_title="姓名"
@@ -63,16 +74,7 @@
 
             </com.cdkj.wzcd.view.MyEditLayout>
 
-            <com.cdkj.wzcd.view.MyImageLayout
-                android:id="@+id/myIl_idCard"
-                app:txt_image_title="身份证"
-                app:txt_image_hint="身份证正面"
-                app:isSingle="false"
-                app:txt_image_hint_right="身份证反面"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-            </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_credit"

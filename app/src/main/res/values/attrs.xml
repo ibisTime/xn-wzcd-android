@@ -16,6 +16,11 @@
         <attr name="txt_select_content" format="string"></attr>
     </declare-styleable>
 
+    <declare-styleable name="MyEditSelectLayout">
+        <attr name="txt_edit_select_title" format="string"></attr>
+        <attr name="txt_edit_select_content" format="string"></attr>
+    </declare-styleable>
+
     <declare-styleable name="MyNormalLayout">
         <attr name="txt_normal_title" format="string"></attr>
         <attr name="txt_normal_content" format="string"></attr>
@@ -59,6 +64,11 @@
         <attr name="isSingle" format="boolean"></attr>
 
         <attr name="txt_image_hint_right" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MyLayout">
+        <attr name="title" />
+
     </declare-styleable>
 
     <declare-styleable name="MyItemRootLayout">

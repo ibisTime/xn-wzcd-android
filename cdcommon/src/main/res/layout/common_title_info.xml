@@ -8,21 +8,37 @@
         android:layout_height="@dimen/title_height"
         >
 
-        <TextView
-            android:id="@+id/tv_top_title_abs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_mid"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="@color/title_mid_tv"
-            android:textSize="@dimen/top_center_title_size"
-            tools:text="title" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_top_title_abs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/title_mid_tv"
+                android:textSize="@dimen/top_center_title_size"
+                tools:text="title" />
+
+            <ImageView
+                android:id="@+id/iv_mid"
+                android:visibility="gone"
+                android:background="@drawable/pull"
+                android:layout_marginLeft="5dp"
+                android:layout_width="10dp"
+                android:layout_height="6dp" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fram_img_back"
             android:visibility="gone"
-            android:layout_width="55dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:paddingLeft="15dp">

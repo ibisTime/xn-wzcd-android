@@ -52,7 +52,7 @@ public class SendPhoneCodePresenter {
         hashMap.put("mobile", phone);
         hashMap.put("bizType", bizType);
 
-        call = RetrofitUtils.getBaseAPiService().successRequest("805950", StringUtils.getJsonToString(hashMap));
+        call = RetrofitUtils.getBaseAPiService().successRequest("630090", StringUtils.getJsonToString(hashMap));
 
         mListener.StartSend();
         call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(mContext) {

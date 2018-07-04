@@ -11,7 +11,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.FabricationListAdapter;
+import com.cdkj.wzcd.adpter.FabricationListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
@@ -66,38 +66,34 @@ public class FabricationListActivity extends AbsRefreshListActivity {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.make_card_status, "",data -> {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.make_card_status);
 
-            if (data == null || data.size() == 0){
-                return;
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mType.addAll(list);
+
+        Map<String, String> map = RetrofitUtils.getNodeListMap();
+
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
+
+        if (isShowDialog) showLoadingDialog();
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
+            @Override
+            protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无制卡记录", 0);
             }
 
-            mType.addAll(data);
-
-            Map<String, String> map = RetrofitUtils.getNodeListMap();
-
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
-
-            if (isShowDialog) showLoadingDialog();
-
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));
-            addCall(call);
-
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
-                @Override
-                protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无制卡记录", 0);
-                }
-
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
-
 
     }
 }

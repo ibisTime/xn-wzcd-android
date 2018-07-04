@@ -4,16 +4,21 @@ import com.cdkj.baselibrary.api.BaseResponseListModel;
 import com.cdkj.baselibrary.api.BaseResponseModel;
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.wzcd.model.AdvanceFundModel;
 import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.model.DataTransferModel;
+import com.cdkj.wzcd.model.DealersModel;
 import com.cdkj.wzcd.model.ExchangeBankModel;
 import com.cdkj.wzcd.model.GpsApplyModel;
 import com.cdkj.wzcd.model.GpsModel;
+import com.cdkj.wzcd.model.LoanProductModel;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.NodeModel;
 import com.cdkj.wzcd.model.RepaymentModel;
+import com.cdkj.wzcd.model.SystemParameterModel;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.model.ZrdModel;
+import com.cdkj.wzcd.model.event.IdCardModel;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -68,7 +73,18 @@ public interface MyApiServer {
      */
     @FormUrlEncoded
     @POST("api")
-    Call<BaseResponseListModel<ExchangeBankModel>> getExchangeBank(@Field("code") String code, @Field("json") String json);
+    Call<BaseResponseListModel<ExchangeBankModel>> getBankList(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取平台银行
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<ExchangeBankModel>> getBank(@Field("code") String code, @Field("json") String json);
 
     /**
      * 获取节列表
@@ -103,6 +119,16 @@ public interface MyApiServer {
     @POST("api")
     Call<BaseResponseModel<NodeListModel>> getNode(@Field("code") String code, @Field("json") String json);
 
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<SystemParameterModel>> getSystemParameter(@Field("code") String code, @Field("json") String json);
 
 
     //--------------------------------------------征信API--------------------------------------------
@@ -128,6 +154,17 @@ public interface MyApiServer {
     @FormUrlEncoded
     @POST("api")
     Call<BaseResponseModel<CreditModel>> getCredit(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获征信详情
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<IdCardModel>> analysisIdCard(@Field("code") String code, @Field("json") String json);
 
 
     //--------------------------------------------GPS申领API--------------------------------------------
@@ -217,16 +254,16 @@ public interface MyApiServer {
 
     //--------------------------------------------贷前准入--------------------------------------------
 
-//    /**
-//     * 获取平台银行
-//     *
-//     * @param code
-//     * @param json
-//     * @return
-//     */
-//    @FormUrlEncoded
-//    @POST("api")
-//    Call<BaseResponseListModel<LoanProductModel>> getLoanProduct(@Field("code") String code, @Field("json") String json);
+    /**
+     * 获取平台银行
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<LoanProductModel>> getLoanProduct(@Field("code") String code, @Field("json") String json);
 
     /**
      * 获取准入单列表
@@ -239,5 +276,41 @@ public interface MyApiServer {
     @POST("api")
     Call<BaseResponseModel<ResponseInListModel<ZrdModel>>> getZrdList(@Field("code") String code, @Field("json") String json);
 
+
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<DealersModel>> getDealersList(@Field("code") String code, @Field("json") String json);
+
+
+    //--------------------------------------------财务垫资--------------------------------------------
+
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<ResponseInListModel<AdvanceFundModel>>> getAdvanceFundList(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<AdvanceFundModel>> getAdvanceFund(@Field("code") String code, @Field("json") String json);
 
 }

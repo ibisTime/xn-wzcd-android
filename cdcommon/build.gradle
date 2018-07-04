@@ -84,4 +84,7 @@ android {
         api 'liji.library.dev:citypickerview:2.0.2'
         //图片裁剪
         api 'com.github.yalantis:ucrop:2.2.1'
+
+        // LitePal数据库框架
+        api 'org.litepal.android:core:1.6.1'
     }

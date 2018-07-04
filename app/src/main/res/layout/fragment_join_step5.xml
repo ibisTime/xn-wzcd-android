@@ -6,60 +6,91 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_oilSubsidyKil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入流水开始日期"
-                app:txt_input_title="*流水开始日期" />
+                app:inputType="number"
+                app:txt_input_hint="请输入油补公里数"
+                app:txt_input_title="*油补公里数" />
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_oilSubsidy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="油补" />
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_isPlatInsure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*我司续保"/>
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/mySl_lyAmount"
+                app:txt_input_title="履约保证金"
+                app:txt_input_hint="请输入履约保证金"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入流水开始日期"
-                app:txt_input_title="*流水结束日期" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/mySl_fxAmount"
+                app:txt_input_title="担保风险金"
+                app:txt_input_hint="请输入担保风险金"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入收入"
-                app:txt_input_title="*收入" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/mySl_otherFee"
+                app:txt_input_title="杂费"
+                app:txt_input_hint="请输入杂费"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入支出"
-                app:txt_input_title="*支出" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/mySl_gpsFee"
+                app:txt_input_title="GPS收费"
+                app:txt_input_hint="请输入GPS收费"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入账户余额"
-                app:txt_input_title="*账户余额" />
+                android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_gpsDeduct"
+                app:txt_input_title="GPS提成"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入月均收入"
-                app:txt_input_title="*月均收入" />
+                android:layout_height="wrap_content" />
 
-            <com.cdkj.wzcd.view.MyEditLayout
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_gpsFeeWay"
+                app:txt_select_title="GPS收费方式"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入月均支出"
-                app:txt_input_title="*月均支出" />
+                android:layout_height="wrap_content" />
 
-            <com.cdkj.wzcd.view.MyEditLayout
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_serviceChargeWay"
+                app:txt_select_title="收客户手续费收取方式"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_hint="请输入备注"
-                app:txt_input_title="备注" />
+                android:layout_height="wrap_content" />
 
+            <View
+                style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyRecyclerLayout
+                android:id="@+id/myRl_repointDetailList1"
+                app:title="*应退按揭款"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyRecyclerLayout
+                android:id="@+id/myRl_repointDetailList3"
+                app:title="协议外返点"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

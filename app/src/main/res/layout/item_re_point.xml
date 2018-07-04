@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_root"
+        style="@style/style_my_item_root">
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_useMoneyPurpose"
+            app:txt_item_normal_title="用\u3000途:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_repointAmount"
+            app:txt_item_normal_title="金\u3000额:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_carDealerName"
+            app:txt_item_normal_title="单\u3000位:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_accountNO"
+            app:txt_item_normal_title="账\u3000号:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        <com.cdkj.wzcd.view.item.MyItemNormalLayout
+            android:id="@+id/myItemNl_openBankName"
+            app:txt_item_normal_title="开户行:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+
+    </LinearLayout>
+
+</layout>

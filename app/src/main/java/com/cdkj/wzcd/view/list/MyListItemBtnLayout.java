@@ -124,4 +124,19 @@ public class MyListItemBtnLayout extends LinearLayout {
     }
 
 
+    public void setLeftTextAndListener(String contentLeft, MyConfirmInterface mConfirmInterface) {
+        if (!TextUtils.isEmpty(contentLeft)){
+            mBinding.llRoot.setVisibility(VISIBLE);
+            mBinding.btnLeft.setVisibility(VISIBLE);
+            mBinding.btnLeft.setText(contentLeft);
+        }
+
+        mBinding.btnLeft.setOnClickListener(view -> {
+            if (mConfirmInterface == null)
+                return;
+
+            mConfirmInterface.onClick(view);
+        });
+    }
+
 }

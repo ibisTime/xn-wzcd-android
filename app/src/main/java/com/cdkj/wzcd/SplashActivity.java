@@ -5,8 +5,14 @@ import android.os.Bundle;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseActivity;
+import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.module.user.SignInActivity;
+import com.cdkj.wzcd.util.DataDictionaryHelper;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -34,6 +40,40 @@ public class SplashActivity extends BaseActivity {
         }
         setContentView(R.layout.activity_splash);
 
+        DataDictionaryHelper.getAllDataDictionary(this, new DataDictionaryHelper.AllDataDictionaryInterface() {
+            @Override
+            public void onSuccess(List<DataDictionary> list) {
+                if (list == null)
+                    return;
+
+                // 如果数据库已有数据，清空重新加载
+                if (DataSupport.isExist(DataDictionary.class))
+                    DataSupport.deleteAll(DataDictionary.class);
+
+                DataSupport.saveAll(list);
+                open();
+            }
+
+            @Override
+            public void onReqFailure(String errorCode, String errorMessage) {
+                // 如果数据库已有数据，直接加载数据库
+                if (DataSupport.isExist(DataDictionary.class)) {
+                    open();
+                } else {
+                    ToastUtil.show(SplashActivity.this, "无法连接服务器，请检查网络");
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+
+    private void open() {
+
         mSubscription.add(Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,6 +88,5 @@ public class SplashActivity extends BaseActivity {
 
                 }, Throwable::printStackTrace));
     }
-
 
 }

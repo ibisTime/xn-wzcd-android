@@ -17,13 +17,16 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.GpsInstallAdapter;
+import com.cdkj.wzcd.adpter.GpsInstallAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsInfoInputBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;
+import com.cdkj.wzcd.model.GpsInstallReplaceModel;
 import com.cdkj.wzcd.model.GpsModel;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.util.DatePickerHelper;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,6 +164,20 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
 
     }
 
+    @Subscribe
+    public void doAddCreditPerson(GpsInstallModel model){
+        mList.add(model);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void doReplaceCreditPerson(GpsInstallReplaceModel model){
+
+        mList.set(model.getLocation(), model.getGpsInstallModel());
+        mAdapter.notifyDataSetChanged();
+
+    }
+
 
     public void getGpsRequest() {
 
@@ -211,7 +228,7 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
         }
 
         // 安装位置
-        if (TextUtils.isEmpty(mBinding.myElLocation.check())){
+        if (mBinding.myElLocation.check()){
             return false;
         }
 
@@ -221,7 +238,7 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
         }
 
         // 安装人员
-        if (TextUtils.isEmpty(mBinding.myElUser.check())){
+        if (mBinding.myElUser.check()){
             return false;
         }
         return true;

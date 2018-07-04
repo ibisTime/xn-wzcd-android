@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -104,7 +103,7 @@ public class FabricationInputActivity extends AbsBaseLoadActivity {
     }
 
     private boolean check(){
-        if (TextUtils.isEmpty(mBinding.myElNumber.check())){
+        if (mBinding.myElNumber.check()){
             return false;
         }
 

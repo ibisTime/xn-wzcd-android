@@ -12,7 +12,6 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.CodeModel;
 import com.cdkj.baselibrary.model.DataDictionary;
-import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.CameraHelper;
@@ -21,7 +20,7 @@ import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.CreditUserAdapter;
+import com.cdkj.wzcd.adpter.CreditUserAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityZxLaunchBinding;
 import com.cdkj.wzcd.model.CreditModel;
@@ -31,7 +30,6 @@ import com.cdkj.wzcd.model.ExchangeBankModel;
 import com.cdkj.wzcd.util.BankHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.RequestUtil;
-import com.cdkj.wzcd.view.MySelectLayout;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -43,6 +41,9 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.budget_orde_biz_typer;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_loan_role;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_relation;
 import static com.cdkj.wzcd.util.RequestUtil.formatAmountMul;
 
 /**
@@ -91,10 +92,10 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
 
         mBaseBinding.titleView.setMidTitle("发起征信");
 
+        init();
+
         initListener();
         initListAdapter();
-
-        init();
 
         getBank();
 
@@ -134,7 +135,7 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
             return false;
         }
         // 贷款金额
-        if (TextUtils.isEmpty(mBinding.myElAmount.check())){
+        if (mBinding.myElAmount.check()){
             return false;
         }
         if (mBinding.myIlDocuments.getVisibility() == View.VISIBLE){
@@ -163,51 +164,29 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
      * 获取银行卡渠道
      */
     private void getBank() {
-        Map<String, String> map = new HashMap<>();
 
-        map.put("token", SPUtilHelper.getUserToken());
-        map.put("bankCode", "");
-        map.put("bankName", "");
-        map.put("channelType", "");
-        map.put("status", "");
-        map.put("paybank", "");
+        BankHelper.getBankListRequest(this, data -> {
 
-        Call call = RetrofitUtils.createApi(MyApiServer.class).getExchangeBank("632037", StringUtils.getJsonToString(map));
+            if (data == null)
+                return;
 
-        addCall(call);
-
-        showLoadingDialog();
-
-        call.enqueue(new BaseResponseListCallBack<ExchangeBankModel>(this) {
-
-            @Override
-            protected void onSuccess(List<ExchangeBankModel> data, String SucMessage) {
-
-                if (data == null)
-                    return;
-
-                for (ExchangeBankModel model : data){
-                    mBank.add(new DataDictionary().setDkey(model.getCode()).setDvalue(model.getBankName()));
-                }
-
-                mBinding.mySlBank.setData(mBank, null);
-
-                initCustomView();
-                getCredit();
+            for (ExchangeBankModel model : data){
+                mBank.add(new DataDictionary().setDkey(model.getCode()).setDvalue(model.getBankName()+model.getAbbrName()));
             }
 
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
+            mBinding.mySlBank.setData(mBank, null);
+
+            initCustomView();
+            getCredit();
         });
+
 
     }
 
 
     private void initCustomView() {
 
-        mBinding.mySlWay.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.budget_orde_biz_typer, (dialog, which) -> {
+        mBinding.mySlWay.setData(DataDictionaryHelper.getListByParentKey(budget_orde_biz_typer), (dialog, which) -> {
             // 新车则隐藏证件
             mBinding.myIlDocuments.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
         });
@@ -217,36 +196,45 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
 
     public void initListAdapter() {
 
-        DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.credit_user_loan_role, "",data -> {
+        List<DataDictionary> listRole = DataDictionaryHelper.getListByParentKey(credit_user_loan_role);
 
-            if (data == null || data.size() == 0){
-                return;
-            }
+        if (listRole == null || listRole.size() == 0){
+            return;
+        }
+        mRole.addAll(listRole);
 
-            mRole.addAll(data);
 
-            DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.credit_user_relation, "",data1 -> {
+        List<DataDictionary> listRelation = DataDictionaryHelper.getListByParentKey(credit_user_relation);
 
-                if (data1 == null || data1.size() == 0){
-                    return;
-                }
+        if (listRelation == null || listRelation.size() == 0){
+            return;
+        }
+        mRelation.addAll(listRelation);
 
-                mRelation.addAll(data1);
+        mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            CreditUserModel model = mAdapter.getItem(position);
 
-                mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
-                mAdapter.setOnItemClickListener((adapter, view, position) -> {
-                    CreditUserModel model = mAdapter.getItem(position);
+            CreditUserActivity.open(this, model, position, false, mRole, mRelation);
 
-                    CreditUserActivity.open(this, model, position, true, mRole, mRelation);
-
-                });
-
-                mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
-                mBinding.rvZxr.setAdapter(mAdapter);
-
-            });
 
         });
+
+        mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
+        mBinding.rvZxr.setAdapter(mAdapter);
+
+        getCredit();
+
+        mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            CreditUserModel model = mAdapter.getItem(position);
+
+            CreditUserActivity.open(this, model, position, true, mRole, mRelation);
+
+        });
+
+        mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
+        mBinding.rvZxr.setAdapter(mAdapter);
 
 
     }
@@ -388,14 +376,11 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
     }
 
     private void setView() {
-        new BankHelper(this).getValueOnTheKey(mData.getLoanBankCode(), null, data -> {
-            mBinding.mySlBank.setTextAndKey(mData.getLoanBankCode(), data.getBankName());
+        BankHelper.getValueOnTheKey(this, mData.getLoanBankCode(), null, data -> {
+            mBinding.mySlBank.setTextAndKey(mData.getLoanBankCode(), data.getBankName() + data.getAbbrName());
         });
 
-        DataDictionaryHelper.getValueOnTheKeyRequest(this, DataDictionaryHelper.budget_orde_biz_typer, mData.getShopWay(), data -> {
-            mBinding.mySlWay.setTextAndKey(mData.getShopWay(), data.getDvalue());
-        });
-
+        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeBuyKey(mData.getShopWay()));
         mBinding.myElAmount.setText(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
 
         if (TextUtils.equals(mData.getShopWay(), "1")){ //二手车

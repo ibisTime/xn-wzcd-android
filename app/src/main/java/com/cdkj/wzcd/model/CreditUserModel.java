@@ -19,7 +19,16 @@ public class CreditUserModel implements Serializable {
     private String mobile;
     private String relation;
     private String userName;
+    private String birthAddress;
     private CreditResult bankCreditResult;
+
+    public String getBirthAddress() {
+        return birthAddress;
+    }
+
+    public void setBirthAddress(String birthAddress) {
+        this.birthAddress = birthAddress;
+    }
 
     public CreditResult getBankCreditResult() {
         return bankCreditResult;

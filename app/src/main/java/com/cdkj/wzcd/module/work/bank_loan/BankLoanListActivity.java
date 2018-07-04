@@ -10,7 +10,7 @@ import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.BankLoanListAdapter;
+import com.cdkj.wzcd.adpter.BankLoanListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.CllhListBean;
 import com.cdkj.wzcd.model.NodeListModel;
@@ -65,6 +65,7 @@ public class BankLoanListActivity extends AbsRefreshListActivity<CllhListBean> {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+
 
         if (isShowDialog) showLoadingDialog();
 

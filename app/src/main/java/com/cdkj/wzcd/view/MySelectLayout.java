@@ -1,6 +1,5 @@
 package com.cdkj.wzcd.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,22 +10,14 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
-import com.cdkj.baselibrary.dialog.LoadingDialog;
 import com.cdkj.baselibrary.model.DataDictionary;
-import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
-import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.LayoutMySelectHorizontalBinding;
 import com.cdkj.wzcd.view.interfaces.MySelectInterface;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
 
 /**
  * Created by cdkj on 2018/5/29.
@@ -34,16 +25,8 @@ import retrofit2.Call;
 
 public class MySelectLayout extends LinearLayout {
 
-    public static int DATA_DICTIONARY = 0;
-    public static int SYSTEM_PARAMETER = 1;
-
     private Context context;
     private LayoutMySelectHorizontalBinding mBinding;
-
-    private Activity mActivity;
-    private boolean mIsRequest;
-    private int mRequestType;
-    private String mParentKey;
 
     private List<DataDictionary> mData;
     private MySelectInterface mySelectInterface;
@@ -63,9 +46,9 @@ public class MySelectLayout extends LinearLayout {
 
     private boolean isOnClickEnable = true;
 
-    protected LoadingDialog loadingDialog;
-
-    private Call call;
+//    protected LoadingDialog loadingDialog;
+//
+//    private Call call;
 
     public MySelectLayout(Context context) {
         this(context, null);
@@ -102,7 +85,12 @@ public class MySelectLayout extends LinearLayout {
 
     }
 
-
+    /**
+     * 直接设置key和value，用于mKeyList为空或其size=0时，也就是未初始化Layout但需要添加数据时
+     *
+     * @param key
+     * @param value
+     */
     public void setTextAndKey(String key, String value) {
 
         mKey = key;
@@ -115,7 +103,7 @@ public class MySelectLayout extends LinearLayout {
     }
 
     /**
-     * 设置布局内容，内容来自于详情或其他请求，此时布局不应相应点击时间
+     * 设置布局内容，内容来自于详情或其他请求，此时布局不应相应点击事件
      *
      * @param text
      */
@@ -142,40 +130,69 @@ public class MySelectLayout extends LinearLayout {
 
         int i = 0;
 
-        for (String str : mKeyList) {
-            if (TextUtils.equals(str, key)) {
+        for (DataDictionary data : mData) {
+            if (TextUtils.equals(data.getDkey(), key)) {
+                mKey = data.getDkey();
+                mValue = data.getDvalue();
                 selectIndex = i;
                 break;
             }
             i++;
         }
 
-        mBinding.tvContent.setText(mValueList[selectIndex]);
+        mBinding.tvContent.setText(mValue);
+    }
+
+
+    /**
+     * 设置"是否／01"相同类型数据
+     *
+     * @param key1
+     * @param value1
+     * @param key2
+     * @param value2
+     * @param selectInterface
+     */
+    public void setData(String key1, String value1, String key2, String value2, MySelectInterface selectInterface) {
+
+        if (TextUtils.isEmpty(key1) || TextUtils.isEmpty(value1) || TextUtils.isEmpty(key2) || TextUtils.isEmpty(value2))
+            return;
+
+        List<DataDictionary> data = new ArrayList<>();
+        data.add(new DataDictionary().setDkey(key1).setDvalue(value1));
+        data.add(new DataDictionary().setDkey(key2).setDvalue(value2));
+
+        mData = data;
+        mySelectInterface = selectInterface;
+
     }
 
     /**
-     * 设置通过请求获取数据
+     * 设置0否，1是 数据
      *
-     * @param activity        上下文
-     * @param requestType     请求类型（数据字典，系统参数）
-     * @param parentKey       请求数据key
-     * @param selectInterface 下拉框选择回调
+     * @param selectInterface
      */
-    public void setData(Activity activity, int requestType, String parentKey, MySelectInterface selectInterface) {
-        mActivity = activity;
-        mParentKey = parentKey;
-        mRequestType = requestType;
+    public void setDataIs(MySelectInterface selectInterface) {
 
+        List<DataDictionary> data = new ArrayList<>();
+        data.add(new DataDictionary().setDkey("1").setDvalue("是"));
+        data.add(new DataDictionary().setDkey("0").setDvalue("否"));
+
+        mData = data;
         mySelectInterface = selectInterface;
 
-        mIsRequest = true;
     }
 
+    /**
+     * 直接设置List数据
+     *
+     * @param data
+     * @param selectInterface
+     */
     public void setData(List<DataDictionary> data, MySelectInterface selectInterface) {
         mData = data;
         mySelectInterface = selectInterface;
 
-        mIsRequest = false;
     }
 
     public void setData(List<DataDictionary> data) {
@@ -201,66 +218,19 @@ public class MySelectLayout extends LinearLayout {
             if (!isOnClickEnable)
                 return;
 
-            if (mIsRequest) {
-                if (mActivity == null)
-                    return;
-
-                getRequest();
-            } else {
-                if (mData == null || mData.size() == 0) {
-                    ToastUtil.show(getContext(), "没有可选列表");
-                    return;
-                }
-                showSelect();
+            if (mData == null || mData.size() == 0) {
+                ToastUtil.show(getContext(), "没有可选列表");
+                return;
             }
+            showSelect();
 
         });
     }
 
 
-    public void getRequest() {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("dkey", "");
-        map.put("orderColumn", "");
-        map.put("orderDir", "");
-        map.put("parentKey", mParentKey);
-        map.put("type", "");
-        map.put("updater", "");
-
-        call = RetrofitUtils.createApi(MyApiServer.class).getDataDictionary("630036", StringUtils.getJsonToString(map));
-
-        showLoadingDialog();
-
-        call.enqueue(new BaseResponseListCallBack<DataDictionary>(mActivity) {
-
-            @Override
-            protected void onSuccess(List<DataDictionary> data, String SucMessage) {
-                if (data == null)
-                    return;
-
-                mData = data;
-                showSelect();
-            }
-
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
-        });
-    }
 
     private void showSelect() {
-        mKeyList = new String[mData.size()];
-        mValueList = new String[mData.size()];
-
-
-        int index = 0;
-        for (DataDictionary model : mData) {
-            mKeyList[index] = model.getDkey();
-            mValueList[index] = model.getDvalue();
-            index++;
-        }
+        int index = initList();
 
         if (index == 0)
             return;
@@ -280,6 +250,19 @@ public class MySelectLayout extends LinearLayout {
 
                     dialog.dismiss();
                 }).setNegativeButton("取消", null).show();
+    }
+
+    private int initList() {
+        mKeyList = new String[mData.size()];
+        mValueList = new String[mData.size()];
+
+        int index = 0;
+        for (DataDictionary model : mData) {
+            mKeyList[index] = model.getDkey();
+            mValueList[index] = model.getDvalue();
+            index++;
+        }
+        return index;
     }
 
     public boolean check() {
@@ -305,46 +288,44 @@ public class MySelectLayout extends LinearLayout {
         return mValue;
     }
 
-    public String getDataId() {
+    public String getTitle(){
+        return mBinding.tvTitle.getText().toString().trim();
+    }
 
-        if (selectIndex == -1) {
-            ToastUtil.show(context, "请选择" + mBinding.tvTitle.getText());
-            return null;
-        }
-
-        return mData.get(selectIndex).getId();
+    public int getSelectIndex(){
+        return selectIndex;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        clearCall();
+//        clearCall();
     }
 
-    /**
-     * 隐藏Dialog
-     */
-    public void disMissLoading() {
-        if (null != loadingDialog) {
-            loadingDialog.closeDialog();
-        }
-    }
-
-    /**
-     * 显示dialog
-     */
-    public void showLoadingDialog() {
-        if (null == loadingDialog) {
-            loadingDialog = new LoadingDialog(mActivity);
-        }
-        if (null != loadingDialog) {
-            loadingDialog.showDialog();
-        }
-    }
-
-    private void clearCall() {
-        if (call != null)
-            call.cancel();
-    }
+//    /**
+//     * 隐藏Dialog
+//     */
+//    public void disMissLoading() {
+//        if (null != loadingDialog) {
+//            loadingDialog.closeDialog();
+//        }
+//    }
+//
+//    /**
+//     * 显示dialog
+//     */
+//    public void showLoadingDialog() {
+//        if (null == loadingDialog) {
+//            loadingDialog = new LoadingDialog(mActivity);
+//        }
+//        if (null != loadingDialog) {
+//            loadingDialog.showDialog();
+//        }
+//    }
+//
+//    private void clearCall() {
+//        if (call != null)
+//            call.cancel();
+//    }
 
 }

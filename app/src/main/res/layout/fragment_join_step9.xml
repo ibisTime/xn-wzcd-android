@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondHgz"
+                app:title="合格证"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondOdometer"
+                app:title="里程表"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondCarFrontPic"
+                app:title="车前正面照"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondConsolePic"
+                app:title="中控台"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_second300Pdf"
+                app:title="车300评估页"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondQxbPic"
+                app:title="汽修宝截图"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondCarInPic"
+                app:title="车内饰"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_secondNumber"
+                app:title="铭牌"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

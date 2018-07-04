@@ -187,7 +187,6 @@
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_zrsq"
-                                android:visibility="gone"
                                 app:txt_content="准入申请"
                                 app:img_content="@mipmap/main_dqzr"
                                 android:layout_weight="1"
@@ -418,10 +417,6 @@
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
-
-                            <View
-                                style="@style/style_split_line_vertical"/>
-
 
                         </LinearLayout>
 

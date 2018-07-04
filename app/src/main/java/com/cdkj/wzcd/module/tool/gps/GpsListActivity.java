@@ -13,7 +13,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.GpsAdapter;
+import com.cdkj.wzcd.adpter.GpsAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.GpsApplyModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
@@ -74,38 +74,36 @@ public class GpsListActivity extends AbsRefreshListActivity<GpsApplyModel> {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-        DataDictionaryHelper.getDataDictionaryRequest(GpsListActivity.this, DataDictionaryHelper.gps_apply_status, "", (List<DataDictionary> list) -> {
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mList.addAll(list);
 
-            if (list == null || list.size()==0)
-                return;
+        Map<String, String> map = new HashMap<>();
 
-            mList.addAll(list);
+        map.put("applyUser", SPUtilHelper.getUserId());
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
 
-            Map<String, String> map = new HashMap<>();
+        if (isShowDialog) showLoadingDialog();
 
-            map.put("applyUser", SPUtilHelper.getUserId());
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getGPSApplyList("632715", StringUtils.getJsonToString(map));
+        addCall(call);
 
-            if (isShowDialog) showLoadingDialog();
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<GpsApplyModel>>(this) {
+            @Override
+            protected void onSuccess(ResponseInListModel<GpsApplyModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无申领记录", 0);
+            }
 
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getGPSApplyList("632715", StringUtils.getJsonToString(map));
-            addCall(call);
-
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<GpsApplyModel>>(this) {
-                @Override
-                protected void onSuccess(ResponseInListModel<GpsApplyModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无申领记录", 0);
-                }
-
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
+
 
 
     }

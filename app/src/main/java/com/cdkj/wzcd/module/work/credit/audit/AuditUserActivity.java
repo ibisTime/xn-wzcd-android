@@ -15,7 +15,6 @@ import com.cdkj.wzcd.model.CreditResult;
 import com.cdkj.wzcd.model.CreditUserModel;
 import com.cdkj.wzcd.model.CreditUserReplaceModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
-import com.cdkj.wzcd.view.MySelectLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -23,6 +22,8 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_loan_role;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_relation;
 
 /**
  * Created by cdkj on 2018/5/30.
@@ -105,8 +106,8 @@ public class AuditUserActivity extends AbsBaseLoadActivity {
 
     private void initCustomView() {
 
-        mBinding.mySlRole.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.credit_user_loan_role,null);
-        mBinding.mySlRelation.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.credit_user_relation,null);
+        mBinding.mySlRole.setData(DataDictionaryHelper.getListByParentKey(credit_user_loan_role),null);
+        mBinding.mySlRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation),null);
 
         mBinding.myIlIdCard.setActivity(this,1,2);
         mBinding.myIlCredit.setActivity(this,3,0);
@@ -116,6 +117,9 @@ public class AuditUserActivity extends AbsBaseLoadActivity {
     private void initListener() {
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
             if (check()){
+
+                // 添加征信人员编号
+                model.getBankCreditResult().setCode(model.getCode());
 
                 // 发送数据
                 EventBus.getDefault().post(new CreditUserReplaceModel().setLocation(position).setCreditUserModel(model));

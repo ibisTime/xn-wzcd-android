@@ -12,7 +12,7 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.GpsInstallListAdapter;
+import com.cdkj.wzcd.adpter.GpsInstallListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
@@ -64,36 +64,36 @@ public class GPSInstallListActivity extends AbsRefreshListActivity {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        DataDictionaryHelper.getDataDictionaryRequest(GPSInstallListActivity.this, DataDictionaryHelper.gps_apply_status, "", (List<DataDictionary> list) -> {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-            if (list == null || list.size()==0)
-                return;
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mList = list;
 
-            mList = list;
+        Map<String, String> map = RetrofitUtils.getNodeListMap();
 
-            Map<String, String> map = RetrofitUtils.getNodeListMap();
-
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
 //            map.put("saleUserId", SPUtilHelper.getUserId());
 
-            if (isShowDialog) showLoadingDialog();
+        if (isShowDialog) showLoadingDialog();
 
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));
-            addCall(call);
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));
+        addCall(call);
 
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
-                @Override
-                protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无安装记录", 0);
-                }
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
+            @Override
+            protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无安装记录", 0);
+            }
 
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
+
+
     }
 }

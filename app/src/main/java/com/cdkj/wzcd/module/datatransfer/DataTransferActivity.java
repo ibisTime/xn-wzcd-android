@@ -12,7 +12,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.DataTransferAdapter;
+import com.cdkj.wzcd.adpter.DataTransferAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.CllhListBean;
 import com.cdkj.wzcd.model.DataTransferModel;
@@ -62,38 +62,36 @@ public class DataTransferActivity extends AbsRefreshListActivity<CllhListBean> {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.kd_company, "", data -> {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.kd_company);
 
-            if (data == null || data.size() == 0)
-                return;
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mCompany.addAll(list);
 
-            mCompany.addAll(data);
+        Map<String, String> map = new HashMap<>();
 
-            Map<String, String> map = new HashMap<>();
+        map.put("start", pageIndex + "");
+        map.put("limit", limit + "");
+        map.put("userId", SPUtilHelper.getUserId());
 
-            map.put("start", pageIndex + "");
-            map.put("limit", limit + "");
-            map.put("userId", SPUtilHelper.getUserId());
+        if (isShowDialog)
+            showLoadingDialog();
 
-            if (isShowDialog) showLoadingDialog();
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getDataTransfer("632155", StringUtils.getJsonToString(map));
+        addCall(call);
 
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getDataTransfer("632155", StringUtils.getJsonToString(map));
-            addCall(call);
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<DataTransferModel>>(this) {
+            @Override
+            protected void onSuccess(ResponseInListModel<DataTransferModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无资料", 0);
+            }
 
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<DataTransferModel>>(this) {
-                @Override
-                protected void onSuccess(ResponseInListModel<DataTransferModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无资料", 0);
-                }
-
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-                }
-            });
-
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
         });
-
 
     }
 

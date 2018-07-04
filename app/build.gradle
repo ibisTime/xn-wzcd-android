@@ -88,6 +88,10 @@ dependencies {
 
     api project(':cdcommon')
 
+    // multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
     annotationProcessor rootProject.ext.arouterCompiler
     implementation rootProject.ext.arouterApi
+
 }

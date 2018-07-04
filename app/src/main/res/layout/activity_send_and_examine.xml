@@ -172,6 +172,19 @@
                 app:txt_input_hint="选填"
                 app:txt_input_title="备注" />
 
+            <com.cdkj.wzcd.view.MyEditSelectLayout
+                android:id="@+id/myESl_reason"
+                app:txt_edit_select_title="补件原因"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_explain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="选填"
+                app:txt_input_title="补件说明" />
+
             <com.cdkj.wzcd.view.MyConfirmBtn
                 android:id="@+id/myCb_confirm"
                 app:txt_confirm_content="收件并审核通过"
@@ -182,40 +195,6 @@
 
             </com.cdkj.wzcd.view.MyConfirmBtn>
 
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
-
-
-                <Button
-
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_check_bg"
-                    android:text="收件并审核通过"
-                    android:textColor="@color/white" />
-
-                <Button
-
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_check_bg"
-                    android:text="收件待补件"
-                    android:textColor="@color/white" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

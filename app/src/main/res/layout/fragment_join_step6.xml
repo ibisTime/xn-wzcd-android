@@ -9,28 +9,98 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.cdkj.wzcd.view.MyEditLayout
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_marryDivorce"
+                app:title="结婚证(离婚证)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_title="购房合同（多）" />
+                android:layout_height="wrap_content" />
 
-            <com.cdkj.wzcd.view.MyEditLayout
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_applyUserHkb"
+                app:title="户口本(主贷本人页)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_input_title="房屋照片（多）" />
+                android:layout_height="wrap_content" />
 
-            <com.cdkj.wzcd.view.MyConfirmBtn
-                android:id="@+id/myCb_confirm"
-                app:txt_confirm_content="确定提交"
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_bankBillPdf"
+                app:title="银行流水"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" />
 
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_singleProvePdf"
+                app:title="单身证明"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            </com.cdkj.wzcd.view.MyConfirmBtn>
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_incomeProvePdf"
+                app:title="收入证明"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_liveProvePdf"
+                app:title="居住证明"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_houseInvoice"
+                app:title="购房发票"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_buildProvePdf"
+                app:title="自建房证明"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_hkbFirstPage"
+                app:title="户口本（首页）"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_hkbMainPage"
+                app:title="户口本（户主页)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_guarantor1IdNo"
+                app:title="担保人1身份证"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_guarantor1Hkb"
+                app:title="担保人1户口本"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_guarantor2IdNo"
+                app:title="担保人2身份证"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_guarantor2Hkb"
+                app:title="担保人2户口本"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_ghHkb"
+                app:title="共还人户口本"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

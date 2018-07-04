@@ -16,15 +16,14 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.DataFileAdapter;
-import com.cdkj.wzcd.adpter.adapter.DataFileChoiceAdapter;
+import com.cdkj.wzcd.adpter.DataFileAdapter;
+import com.cdkj.wzcd.adpter.DataFileChoiceAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivitySendBinding;
 import com.cdkj.wzcd.model.DataFileModel;
 import com.cdkj.wzcd.model.DataTransferModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.DatePickerHelper;
-import com.cdkj.wzcd.view.MySelectLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +33,8 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.kd_company;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.send_type;
 
 public class SendActivity extends AbsBaseLoadActivity {
 
@@ -154,12 +155,12 @@ public class SendActivity extends AbsBaseLoadActivity {
             mBinding.llSendFile.setVisibility(View.GONE);
         }
 
-        mBinding.mySlWay.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.send_type, (dialog, which) -> {
+        mBinding.mySlWay.setData(DataDictionaryHelper.getListByParentKey(send_type), (dialog, which) -> {
             // 如果寄送方式为快递则显示快递
             mBinding.llLogistics.setVisibility(TextUtils.equals(mBinding.mySlWay.getDataValue(), "快递") ? View.VISIBLE : View.GONE);
         });
 
-        mBinding.mySlCompany.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.kd_company, null);
+        mBinding.mySlCompany.setData(DataDictionaryHelper.getListByParentKey(kd_company), null);
 
     }
 
@@ -256,7 +257,7 @@ public class SendActivity extends AbsBaseLoadActivity {
             }
 
             // 快递单号
-            if (TextUtils.isEmpty(mBinding.myElNumber.check())){
+            if (mBinding.myElNumber.check()){
                 return false;
             }
 

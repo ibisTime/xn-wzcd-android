@@ -136,7 +136,7 @@ public class BankLoanInputActivity extends AbsBaseLoadActivity {
 
     public boolean check(){
         // 卡号
-        if (TextUtils.isEmpty(mBinding.myElNumber.check())){
+        if (mBinding.myElNumber.check()){
             return false;
         }
         // 账单还款日
@@ -156,11 +156,11 @@ public class BankLoanInputActivity extends AbsBaseLoadActivity {
             return false;
         }
         // 首期月供金额
-        if (TextUtils.isEmpty(mBinding.myElRepayFirstMonthAmount.check())){
+        if (mBinding.myElRepayFirstMonthAmount.check()){
             return false;
         }
         // 每期月供金额
-        if (TextUtils.isEmpty(mBinding.myElRepayMonthAmount.check())){
+        if (mBinding.myElRepayMonthAmount.check()){
             return false;
         }
         // 首期放款日期

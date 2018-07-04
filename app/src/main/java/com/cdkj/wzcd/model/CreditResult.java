@@ -9,49 +9,23 @@ import java.io.Serializable;
 public class CreditResult implements Serializable {
 
 
-    /**
-     * code : CU201806151529175229716
-     * dkdyCount : 1
-     * dkdyAmount : 1000
-     * dkdy2yearOverTimes : 1
-     * dkdyMaxOverAmount : 1000
-     * dkdyCurrentOverAmount : 1000
-     * dkdy6monthAvgAmount : 1000
-     * hkxyUnsettleCount : 1
-     * hkxyUnsettleAmount : 1000
-     * hkxy2yearOverTimes : 1
-     * hkxyMonthMaxOverAmount : 1000
-     * hkxyCurrentOverAmount : 1000
-     * hkxy6monthAvgAmount : 1000
-     * xykCount : 1
-     * xykCreditAmount : 1000
-     * xyk6monthUseAmount : 1000
-     * xyk2yearOverTimes : 1
-     * xykMonthMaxOverAmount : 1000
-     * xykCurrentOverAmount : 1000
-     * outGuaranteesCount : 1
-     * outGuaranteesAmount : 1000
-     * outGuaranteesRemark : 1
-     * updater : U201806061657251384655
-     */
-
     private String code;
     private String dkdyCount;
     private String dkdyAmount;
-    private String dkdy2yearOverTimes;
+    private String dkdy2YearOverTimes;
     private String dkdyMaxOverAmount;
     private String dkdyCurrentOverAmount;
-    private String dkdy6monthAvgAmount;
+    private String dkdy6MonthAvgAmount;
     private String hkxyUnsettleCount;
     private String hkxyUnsettleAmount;
-    private String hkxy2yearOverTimes;
+    private String hkxy2YearOverTimes;
     private String hkxyMonthMaxOverAmount;
     private String hkxyCurrentOverAmount;
-    private String hkxy6monthAvgAmount;
+    private String hkxy6MonthAvgAmount;
     private String xykCount;
     private String xykCreditAmount;
-    private String xyk6monthUseAmount;
-    private String xyk2yearOverTimes;
+    private String xyk6MonthUseAmount;
+    private String xyk2YearOverTimes;
     private String xykMonthMaxOverAmount;
     private String xykCurrentOverAmount;
     private String outGuaranteesCount;
@@ -83,12 +57,12 @@ public class CreditResult implements Serializable {
         this.dkdyAmount = dkdyAmount;
     }
 
-    public String getDkdy2yearOverTimes() {
-        return dkdy2yearOverTimes;
+    public String getDkdy2YearOverTimes() {
+        return dkdy2YearOverTimes;
     }
 
-    public void setDkdy2yearOverTimes(String dkdy2yearOverTimes) {
-        this.dkdy2yearOverTimes = dkdy2yearOverTimes;
+    public void setDkdy2YearOverTimes(String dkdy2YearOverTimes) {
+        this.dkdy2YearOverTimes = dkdy2YearOverTimes;
     }
 
     public String getDkdyMaxOverAmount() {
@@ -107,12 +81,12 @@ public class CreditResult implements Serializable {
         this.dkdyCurrentOverAmount = dkdyCurrentOverAmount;
     }
 
-    public String getDkdy6monthAvgAmount() {
-        return dkdy6monthAvgAmount;
+    public String getDkdy6MonthAvgAmount() {
+        return dkdy6MonthAvgAmount;
     }
 
-    public void setDkdy6monthAvgAmount(String dkdy6monthAvgAmount) {
-        this.dkdy6monthAvgAmount = dkdy6monthAvgAmount;
+    public void setDkdy6MonthAvgAmount(String dkdy6MonthAvgAmount) {
+        this.dkdy6MonthAvgAmount = dkdy6MonthAvgAmount;
     }
 
     public String getHkxyUnsettleCount() {
@@ -131,12 +105,12 @@ public class CreditResult implements Serializable {
         this.hkxyUnsettleAmount = hkxyUnsettleAmount;
     }
 
-    public String getHkxy2yearOverTimes() {
-        return hkxy2yearOverTimes;
+    public String getHkxy2YearOverTimes() {
+        return hkxy2YearOverTimes;
     }
 
-    public void setHkxy2yearOverTimes(String hkxy2yearOverTimes) {
-        this.hkxy2yearOverTimes = hkxy2yearOverTimes;
+    public void setHkxy2YearOverTimes(String hkxy2YearOverTimes) {
+        this.hkxy2YearOverTimes = hkxy2YearOverTimes;
     }
 
     public String getHkxyMonthMaxOverAmount() {
@@ -155,12 +129,12 @@ public class CreditResult implements Serializable {
         this.hkxyCurrentOverAmount = hkxyCurrentOverAmount;
     }
 
-    public String getHkxy6monthAvgAmount() {
-        return hkxy6monthAvgAmount;
+    public String getHkxy6MonthAvgAmount() {
+        return hkxy6MonthAvgAmount;
     }
 
-    public void setHkxy6monthAvgAmount(String hkxy6monthAvgAmount) {
-        this.hkxy6monthAvgAmount = hkxy6monthAvgAmount;
+    public void setHkxy6MonthAvgAmount(String hkxy6MonthAvgAmount) {
+        this.hkxy6MonthAvgAmount = hkxy6MonthAvgAmount;
     }
 
     public String getXykCount() {
@@ -179,20 +153,20 @@ public class CreditResult implements Serializable {
         this.xykCreditAmount = xykCreditAmount;
     }
 
-    public String getXyk6monthUseAmount() {
-        return xyk6monthUseAmount;
+    public String getXyk6MonthUseAmount() {
+        return xyk6MonthUseAmount;
     }
 
-    public void setXyk6monthUseAmount(String xyk6monthUseAmount) {
-        this.xyk6monthUseAmount = xyk6monthUseAmount;
+    public void setXyk6MonthUseAmount(String xyk6MonthUseAmount) {
+        this.xyk6MonthUseAmount = xyk6MonthUseAmount;
     }
 
-    public String getXyk2yearOverTimes() {
-        return xyk2yearOverTimes;
+    public String getXyk2YearOverTimes() {
+        return xyk2YearOverTimes;
     }
 
-    public void setXyk2yearOverTimes(String xyk2yearOverTimes) {
-        this.xyk2yearOverTimes = xyk2yearOverTimes;
+    public void setXyk2YearOverTimes(String xyk2YearOverTimes) {
+        this.xyk2YearOverTimes = xyk2YearOverTimes;
     }
 
     public String getXykMonthMaxOverAmount() {

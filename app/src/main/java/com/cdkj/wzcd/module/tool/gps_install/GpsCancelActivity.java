@@ -17,7 +17,7 @@ import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.adpter.adapter.GpsInstallAdapter;
+import com.cdkj.wzcd.adpter.GpsInstallAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsCancelBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;

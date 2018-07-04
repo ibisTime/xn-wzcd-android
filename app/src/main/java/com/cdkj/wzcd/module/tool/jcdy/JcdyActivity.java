@@ -21,7 +21,6 @@ import com.cdkj.wzcd.model.RepaymentModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.DatePickerHelper;
 import com.cdkj.wzcd.util.RequestUtil;
-import com.cdkj.wzcd.view.MySelectLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +28,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.template_id;
 
 /**
  * Created by cdkj on 2018/6/18.
@@ -70,7 +70,7 @@ public class JcdyActivity extends AbsBaseLoadActivity {
     }
 
     private void initCustomView() {
-        mBinding.mySlTemplateId.setData(this, MySelectLayout.DATA_DICTIONARY, DataDictionaryHelper.template_id,null);
+        mBinding.mySlTemplateId.setData(DataDictionaryHelper.getListByParentKey(template_id),null);
     }
 
     private void initListener() {

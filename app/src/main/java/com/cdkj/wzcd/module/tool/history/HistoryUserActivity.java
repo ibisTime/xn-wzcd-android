@@ -12,7 +12,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.adpter.adapter.HistoryUserAdapter;
+import com.cdkj.wzcd.adpter.HistoryUserAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.HistoryBean;
 import com.cdkj.wzcd.model.RepaymentModel;
@@ -62,39 +62,36 @@ public class HistoryUserActivity extends AbsRefreshListActivity<HistoryBean> {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.status);
 
-        DataDictionaryHelper.getDataDictionaryRequest(this, DataDictionaryHelper.status, "", (List<DataDictionary> list) -> {
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mList.addAll(list);
 
-            if (list == null || list.size() == 0)
-                return;
+        Map<String, String> map = RetrofitUtils.getRequestMap();
 
-            mList.addAll(list);
+        map.put("limit", limit + "");
+        map.put("start", pageIndex + "");
+        map.put("userId", SPUtilHelper.getUserId());
 
-            Map<String, String> map = RetrofitUtils.getRequestMap();
+        if (isShowDialog) {
+            showLoadingDialog();
+        }
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getRepaymentList("630520", StringUtils.getJsonToString(map));
+        addCall(call);
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<RepaymentModel>>(this) {
 
-            map.put("limit", limit + "");
-            map.put("start", pageIndex + "");
-            map.put("userId", SPUtilHelper.getUserId());
-
-            if (isShowDialog) {
-                showLoadingDialog();
+            @Override
+            protected void onSuccess(ResponseInListModel<RepaymentModel> data, String SucMessage) {
+                mRefreshHelper.setData(data.getList(), "暂无历史用户", 0);
             }
-            Call call = RetrofitUtils.createApi(MyApiServer.class).getRepaymentList("630520", StringUtils.getJsonToString(map));
-            addCall(call);
-            call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<RepaymentModel>>(this) {
 
-                @Override
-                protected void onSuccess(ResponseInListModel<RepaymentModel> data, String SucMessage) {
-                    mRefreshHelper.setData(data.getList(), "暂无历史用户", 0);
-                }
+            @Override
+            protected void onFinish() {
+                disMissLoading();
 
-                @Override
-                protected void onFinish() {
-                    disMissLoading();
-
-                }
-            });
-
+            }
         });
 
 

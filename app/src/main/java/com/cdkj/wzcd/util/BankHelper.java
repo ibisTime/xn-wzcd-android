@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
+import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.api.MyApiServer;
@@ -22,39 +23,30 @@ import retrofit2.Call;
 
 public class BankHelper {
 
-    private Call call;
-    private Context mContext;
+    private static Call call;
 
-    public BankHelper(Context context){
-        mContext = context;
-    }
-
-    public void getValueOnTheKey(String code, MyListItemLayout myListItemLayout, BankInterface bankInterface){
+    public static void getValueOnTheKey(Context context, String code, MyListItemLayout myListItemLayout, BankInterface bankInterface){
 
         Map<String, String> map = new HashMap<>();
 
         map.put("token", SPUtilHelper.getUserToken());
         map.put("code", code);
 //        map.put("bankCode", bankCode);
-        map.put("bankName", "");
-        map.put("channelType", "");
-        map.put("status", "");
-        map.put("paybank", "");
 
-        call = RetrofitUtils.createApi(MyApiServer.class).getExchangeBank("632037", StringUtils.getJsonToString(map));
+        call = RetrofitUtils.createApi(MyApiServer.class).getBank("632056", StringUtils.getJsonToString(map));
 
-        call.enqueue(new BaseResponseListCallBack<ExchangeBankModel>(mContext) {
+        call.enqueue(new BaseResponseModelCallBack<ExchangeBankModel>(context) {
 
             @Override
-            protected void onSuccess(List<ExchangeBankModel> data, String SucMessage) {
-                if (data == null || data.size() == 0)
+            protected void onSuccess(ExchangeBankModel data, String SucMessage) {
+                if (data == null)
                     return;
 
                 if (myListItemLayout != null)
-                    myListItemLayout.setText(data.get(0).getBankName());
+                    myListItemLayout.setText(data.getBankName());
 
                 if (bankInterface != null)
-                    bankInterface.onSuccess(data.get(0));
+                    bankInterface.onSuccess(data);
             }
 
             @Override
@@ -70,7 +62,37 @@ public class BankHelper {
 
     }
 
-    private void clearCall(){
+
+    public static void getBankListRequest(Context context, BankListInterface listInterface){
+        Map<String, String> map = new HashMap<>();
+
+        call = RetrofitUtils.createApi(MyApiServer.class).getBankList("632057", StringUtils.getJsonToString(map));
+
+        call.enqueue(new BaseResponseListCallBack<ExchangeBankModel>(context) {
+
+            @Override
+            protected void onSuccess(List<ExchangeBankModel> data, String SucMessage) {
+                if (data == null || data.size() == 0)
+                    return;
+
+                if (listInterface != null)
+                    listInterface.onSuccess(data);
+            }
+
+            @Override
+            protected void onFinish() {
+                clearCall();
+            }
+        });
+    }
+
+    public interface BankListInterface{
+
+        void onSuccess(List<ExchangeBankModel> list);
+
+    }
+
+    private static void clearCall(){
         if (call != null)
             call.cancel();
     }
