@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         tools:replace="android:allowBackup"
         android:name="com.cdkj.wzcd.MyApplication"
@@ -64,9 +63,8 @@
         <activity android:name=".module.tool.mismatching.MismatchingListActivity" />
         <activity android:name=".module.tool.mismatching.MismatchingDetailActivity" />
 
-        <activity android:name=".module.datatransfer.DataTransferActivity" />
-        <activity android:name=".module.datatransfer.SendActivity" />
-        <activity android:name=".module.datatransfer.SendAndExamineActivity" />
+        <activity android:name=".module.datatransfer.GpsSendActivity" />
+        <activity android:name=".module.datatransfer.DataReceiveActivity" />
 
         <activity android:name=".module.tool.gps_install.GPSInstallListActivity" />
         <activity android:name=".module.tool.gps_install.GPSInstallInfoActivity" />
@@ -90,6 +88,12 @@
         <activity android:name=".module.work.join_approval.GPSAddActivity" />
         <activity android:name=".module.work.join_approval.RePointAddActivity" />
         <activity android:name=".module.work.join_approval.AdvanceFundActivity" />
+        <activity android:name=".module.datatransfer.DataAddReasonActivity" />
+        <activity android:name=".module.datatransfer.TransferActivity" />
+        <activity android:name=".module.datatransfer.DataSupplementActivity" />
+        <activity android:name=".widget.PictureVideoPlayActivity" />
+        <activity android:name=".module.datatransfer.GpsReceiveActivity" />
+        <activity android:name=".module.datatransfer.DataSendActivity" />
 
         <!--<activity android:name=".module.business.join_approval.JoinApplyListActivity" />-->
         <!--<activity android:name=".module.business.face_view.InterviewActivity" />-->

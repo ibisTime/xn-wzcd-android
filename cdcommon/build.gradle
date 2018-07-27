@@ -40,9 +40,9 @@ android {
     dependencies {
         api  fileTree(dir: 'libs', include: ['*.jar'])
 
-        api 'com.android.support:design:26.1.0'
-        api 'com.android.support:appcompat-v7:26.1.0'
-        api 'com.android.support:cardview-v7:26.1.0'
+        api 'com.android.support:design:27.1.0'
+        api 'com.android.support:appcompat-v7:27.1.0'
+        api 'com.android.support:cardview-v7:27.1.0'
 
         //路由
         //arouter
@@ -66,7 +66,9 @@ android {
 //        api 'io.reactivex.rxjava2:rxandroid:2.0.1'
         api 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
         /*glide*/
-        api 'com.github.bumptech.glide:glide:3.8.0'
+        api 'com.github.bumptech.glide:glide:4.5.0'
+        annotationProcessor "com.github.bumptech.glide:compiler:4.5.0"
+
         api 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
 
         // 七牛
@@ -87,4 +89,6 @@ android {
 
         // LitePal数据库框架
         api 'org.litepal.android:core:1.6.1'
+
+
     }

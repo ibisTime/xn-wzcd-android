@@ -46,7 +46,7 @@ public class ZrdListAdapter extends BaseQuickAdapter<ZrdModel, BaseViewHolder> {
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
         mBinding.myIlName.setText(item.getApplyUserName());
-        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getBizType()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getBizType()));
         mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");

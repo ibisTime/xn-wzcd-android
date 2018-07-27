@@ -81,7 +81,7 @@ public class JoinApplyListActivity extends AbsRefreshListActivity {
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {
             @Override
             protected void onSuccess(ResponseInListModel<NodeListModel> data, String SucMessage) {
-                mRefreshHelper.setData(data.getList(), "暂无抵押记录", 0);
+                mRefreshHelper.setData(data.getList(), "暂无准入记录", 0);
             }
 
             @Override

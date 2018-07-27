@@ -29,6 +29,7 @@ public class MyEditLayout extends LinearLayout {
 
     private String txtHint;
     private String txtTitle;
+    private String txtContent;
     private String txtTitleRight;
     private String inputType;
 
@@ -46,6 +47,7 @@ public class MyEditLayout extends LinearLayout {
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyEditLayout, 0, 0);
         txtHint = typedArray.getString(R.styleable.MyEditLayout_txt_input_hint);
         txtTitle = typedArray.getString(R.styleable.MyEditLayout_txt_input_title);
+        txtContent = typedArray.getString(R.styleable.MyEditLayout_txt_input_content);
         txtTitleRight = typedArray.getString(R.styleable.MyEditLayout_txt_input_title_right);
         inputType = typedArray.getString(R.styleable.MyEditLayout_inputType);
 
@@ -58,6 +60,7 @@ public class MyEditLayout extends LinearLayout {
     private void setData() {
         mBinding.tvTitle.setText(txtTitle);
         mBinding.tvTitleRight.setText(txtTitleRight);
+        mBinding.edtInput.setText(txtContent);
         mBinding.tvTitleRight.setVisibility(!TextUtils.isEmpty(txtTitleRight) ? VISIBLE : GONE);
 
 

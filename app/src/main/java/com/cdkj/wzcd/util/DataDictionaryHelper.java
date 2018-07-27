@@ -51,6 +51,8 @@ public class DataDictionaryHelper {
     public static String fee_way = "fee_way";
     // 补件原因
     public static String supplement_reason = "supplement_reason";
+    // 物流单类型
+    public static String logistics_type = "logistics_type";
 
     private static Call call;
 
@@ -62,7 +64,8 @@ public class DataDictionaryHelper {
     }
 
     public static List<DataDictionary> getListByParentKey(String parentKey){
-        initBaseCoinList();
+        if (BASE_DATA_LIST.size() == 0)
+            initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
@@ -79,7 +82,8 @@ public class DataDictionaryHelper {
     }
 
     public static DataDictionary getDataByKey(String parentKey, String dKey){
-        initBaseCoinList();
+        if (BASE_DATA_LIST.size() == 0)
+            initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
@@ -104,7 +108,8 @@ public class DataDictionaryHelper {
     }
 
     public static String getValueBuyKey(String parentKey, String dKey){
-        initBaseCoinList();
+        if (BASE_DATA_LIST.size() == 0)
+            initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
@@ -127,14 +132,16 @@ public class DataDictionaryHelper {
         return "";
     }
 
-    public static String getBizTypeBuyKey(String dKey){
-        initBaseCoinList();
+    public static String getBizTypeByKey(String dKey){
+        if (BASE_DATA_LIST.size() == 0)
+            initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
         for (DataDictionary dataDictionary : BASE_DATA_LIST){
 
             if (TextUtils.equals(dataDictionary.getParentKey(), budget_orde_biz_typer)){
+
                 list.add(dataDictionary);
             }
 

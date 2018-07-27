@@ -25,14 +25,6 @@
         </com.cdkj.wzcd.view.list.MyListItemTitleLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
-            android:id="@+id/myIl_type"
-            app:txt_list_item_title="资料类型"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </com.cdkj.wzcd.view.list.MyListItemLayout>
-
-        <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_name"
             app:txt_list_item_title="客户姓名"
             android:layout_width="match_parent"
@@ -66,6 +58,7 @@
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_from"
+            android:visibility="gone"
             app:txt_list_item_title="发件节点"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -74,7 +67,24 @@
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_to"
+            android:visibility="gone"
             app:txt_list_item_title="收件节点"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_sendNote"
+            app:txt_list_item_title="发货说明"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.list.MyListItemLayout>
+
+        <com.cdkj.wzcd.view.list.MyListItemLayout
+            android:id="@+id/myIl_supplementReason"
+            app:txt_list_item_title="补件原因"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

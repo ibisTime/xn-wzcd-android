@@ -9,11 +9,11 @@ import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
+import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.CameraHelper;
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.baselibrary.utils.ToastUtil;
@@ -29,6 +29,9 @@ import com.cdkj.wzcd.util.DataDictionaryHelper;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +39,7 @@ import java.util.Map;
 import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.baselibrary.utils.DateUtil.format;
 import static com.cdkj.baselibrary.utils.StringUtils.isIDCard;
 import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_loan_role;
 import static com.cdkj.wzcd.util.DataDictionaryHelper.credit_user_relation;
@@ -256,15 +260,12 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
             @Override
             public void onSuccess(String key) {
 
-                LogUtil.E("requestCode="+requestCode);
-
                 if (requestCode == mBinding.myIlIdCard.getRequestCode()){
                     analysisIdCard(key, "630092");
                 }
 
                 if (requestCode == mBinding.myIlIdCard.getRightRequestCode()){
-                    mBinding.myIlIdCard.setFlImgRight(key);
-                    disMissLoading();
+                    analysisIdCard(key, "630093");
                 }
 
                 if (requestCode == mBinding.myIlCredit.getRequestCode()){
@@ -302,12 +303,48 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
 
             @Override
             protected void onSuccess(IdCardModel data, String SucMessage) {
-                mBinding.myElName.setText(data.getRealName());
-                mBinding.myElId.setText(data.getIdNo());
 
-                birthAddress = data.getResidenceAddress();
+                if (TextUtils.equals(code, "630092")){
 
-                mBinding.myIlIdCard.setFlImg(url);
+                    if (TextUtils.isEmpty(data.getRealName())){
+                        UITipDialog.showInfo(CreditUserActivity.this, "请上传有效的身份证正面!");
+                        return;
+                    }
+
+                    try {
+                        if (checkGrownUp(data.getBirth())){
+                            mBinding.myElName.setText(data.getRealName());
+                            mBinding.myElId.setText(data.getIdNo());
+
+                            birthAddress = data.getResidenceAddress();
+
+                            mBinding.myIlIdCard.setFlImg(url);
+                        }else {
+                            UITipDialog.showInfo(CreditUserActivity.this, "未满18周岁不可提交征信");
+                        }
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }else {
+
+                    if (TextUtils.isEmpty(data.getEndDate())){
+                        UITipDialog.showInfo(CreditUserActivity.this, "请上传有效的身份证反面!");
+                        return;
+                    }
+
+                    checkEndDate(data.getEndDate());
+                    mBinding.myIlIdCard.setFlImgRight(url);
+
+                }
+
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+//                +"请上传有效的身份证证件!"
+                UITipDialog.showInfo(CreditUserActivity.this, errorMessage);
             }
 
             @Override
@@ -315,5 +352,28 @@ public class CreditUserActivity extends AbsBaseLoadActivity {
                 disMissLoading();
             }
         });
+    }
+
+    public static boolean checkGrownUp(String num) throws ParseException {
+        int year = Integer.parseInt(num.substring(0, 4));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Date update = sdf.parse(String.valueOf(year + 18) + num.substring(4, num.length()));
+        Date today = new Date();
+        return today.after(update);
+    }
+
+    private void checkEndDate(String ed){
+
+        int endDate = Integer.parseInt(ed);
+        int nowDate = Integer.parseInt(format(new Date(), "yyyyMMdd"));
+
+        if ((endDate - nowDate) < 90){
+
+            ToastUtil.show(this, "你身份证还有不到90天到期");
+
+        }else {
+//            ToastUtil.show(this, "ojbk");
+        }
+
     }
 }

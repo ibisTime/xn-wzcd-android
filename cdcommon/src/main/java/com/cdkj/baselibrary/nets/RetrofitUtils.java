@@ -82,7 +82,7 @@ public class RetrofitUtils {
      * @return
      */
     public static Map getRequestMap() {
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap();
         map.put("token", SPUtilHelper.getUserToken());
         return map;
     }
@@ -93,7 +93,7 @@ public class RetrofitUtils {
      * @return
      */
     public static Map getNodeListMap() {
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap();
         map.put("token", SPUtilHelper.getUserToken());
         map.put("roleCode", SPUtilHelper.getRoleCode());
         return map;

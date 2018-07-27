@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdkj.baselibrary.base.BaseLazyFragment;
-import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.FragmentJoinStep2Binding;
 import com.cdkj.wzcd.model.NodeListModel;
@@ -19,9 +18,7 @@ import com.cdkj.wzcd.util.DataDictionaryHelper;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
@@ -83,9 +80,8 @@ public class JoinStep2Fragment extends BaseLazyFragment {
         mBinding.mySlApplyUserJourShowIncome.setDataIs(null);
 
         // 申请人一定打件
-        List<DataDictionary> data = new ArrayList<>();
-        data.add(new DataDictionary().setDkey("1").setDvalue("是"));
-        mBinding.mySlApplyUserIsPrint.setData(data, null);
+        mBinding.mySlApplyUserIsPrint.setTextAndKey("1", "是");
+        mBinding.mySlApplyUserIsPrint.setOnClickEnable(false);
 
         mBinding.mySlGhJourShowIncome.setDataIs(null);
         mBinding.mySlGhIsPrint.setDataIs(null);
@@ -100,6 +96,7 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
     private void setView() {
 
+        mBinding.myNlApplyUserName.setText(data.getApplyUserCompany());
         mBinding.myElApplyUserCompany.setText(data.getApplyUserCompany());
         mBinding.myElApplyUserDuty.setText(data.getApplyUserDuty());
         mBinding.mySlApplyUserGhrRelation.setContentByKey(data.getApplyUserGhrRelation());
@@ -111,18 +108,21 @@ public class JoinStep2Fragment extends BaseLazyFragment {
         mBinding.mySlApplyUserJourShowIncome.setContentByKey(data.getApplyUserJourShowIncome());
         mBinding.mySlApplyUserIsPrint.setContentByKey(data.getApplyUserIsPrint());
 
+        mBinding.myNlGhUserName.setText(data.getApplyUserCompany());
         mBinding.myElGhMonthIncome.setMoneyText(data.getGhMonthIncome());
         mBinding.myElGhSettleInterest.setMoneyText(data.getGhSettleInterest());
         mBinding.myElGhBalance.setMoneyText(data.getGhBalance());
         mBinding.mySlGhJourShowIncome.setContentByKey(data.getGhJourShowIncome());
         mBinding.mySlGhIsPrint.setContentByKey(data.getGhIsPrint());
 
+        mBinding.myNlGuarantor1UserName.setText(data.getApplyUserCompany());
         mBinding.myElGuarantor1MonthIncome.setMoneyText(data.getGuarantor1MonthIncome());
         mBinding.myElGuarantor1SettleInterest.setMoneyText(data.getGuarantor1SettleInterest());
         mBinding.myElGuarantor1Balance.setMoneyText(data.getGuarantor1Balance());
         mBinding.mySlGuarantor1JourShowIncome.setContentByKey(data.getGuarantor1JourShowIncome());
         mBinding.mySlGuarantor1IsPrint.setContentByKey(data.getGuarantor1IsPrint());
 
+        mBinding.myNlGuarantor2UserName.setText(data.getApplyUserCompany());
         mBinding.myElGuarantor2MonthIncome.setMoneyText(data.getGuarantor2MonthIncome());
         mBinding.myElGuarantor2SettleInterest.setMoneyText(data.getGuarantor2SettleInterest());
         mBinding.myElGuarantor2Balance.setMoneyText(data.getGuarantor2Balance());
@@ -157,26 +157,6 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
         if (mBinding.myElApplyUserMonthIncome.check()){
             checkFail = mBinding.myElApplyUserMonthIncome.getTitle();
-            return false;
-        }
-
-        if (mBinding.myElApplyUserSettleInterest.check()){
-            checkFail = mBinding.myElApplyUserSettleInterest.getTitle();
-            return false;
-        }
-
-        if (mBinding.myElApplyUserBalance.check()){
-            checkFail = mBinding.myElApplyUserBalance.getTitle();
-            return false;
-        }
-
-        if (mBinding.mySlApplyUserJourShowIncome.check()){
-            checkFail = mBinding.mySlApplyUserJourShowIncome.getTitle();
-            return false;
-        }
-
-        if (mBinding.mySlApplyUserIsPrint.check()){
-            checkFail = mBinding.mySlApplyUserIsPrint.getTitle();
             return false;
         }
 

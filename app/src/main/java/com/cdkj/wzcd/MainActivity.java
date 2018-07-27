@@ -18,7 +18,7 @@ import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityMainBinding;
 import com.cdkj.wzcd.model.NodeModel;
 import com.cdkj.wzcd.model.UserModel;
-import com.cdkj.wzcd.module.datatransfer.DataTransferActivity;
+import com.cdkj.wzcd.module.datatransfer.TransferActivity;
 import com.cdkj.wzcd.module.tool.fabaohe.FbhListActivity;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationListActivity;
 import com.cdkj.wzcd.module.tool.gps.GpsListActivity;
@@ -86,8 +86,7 @@ public class MainActivity extends AbsBaseLoadActivity {
                 BASE_NODE_LIST.clear();
                 BASE_NODE_LIST.addAll(list);
 
-
-                getUserInfoRequest(true);
+                getUserInfoRequest();
 
             }
 
@@ -101,7 +100,7 @@ public class MainActivity extends AbsBaseLoadActivity {
     /**
      * 获取用户信息
      */
-    public void getUserInfoRequest(boolean isShowDialog) {
+    public void getUserInfoRequest() {
 
         if (!SPUtilHelper.isLoginNoStart()) {  //没有登录不用请求
             return;
@@ -116,7 +115,7 @@ public class MainActivity extends AbsBaseLoadActivity {
 
         addCall(call);
 
-        if (isShowDialog) showLoadingDialog();
+        showLoadingDialog();
 
         call.enqueue(new BaseResponseModelCallBack<UserModel>(this) {
             @Override
@@ -134,7 +133,7 @@ public class MainActivity extends AbsBaseLoadActivity {
 
             @Override
             protected void onFinish() {
-                if (isShowDialog) disMissLoading();
+                disMissLoading();
             }
         });
     }
@@ -262,7 +261,7 @@ public class MainActivity extends AbsBaseLoadActivity {
 
         //资料上传
         mBinding.mySrZlcd.setOnClickListener(view -> {
-            DataTransferActivity.open(this);
+            TransferActivity.open(this);
         });
     }
 

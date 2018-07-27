@@ -34,7 +34,7 @@ import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
-import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeBuyKey;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeByKey;
 
 /**
  * 发保合详情
@@ -206,7 +206,7 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
         LogUtil.E("LoanAmount="+data.getLoanAmount());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlWay.setText(getBizTypeBuyKey(data.getShopWay()));
+        mBinding.myNlWay.setText(getBizTypeByKey(data.getShopWay()));
 
         LogUtil.E("InvoicePrice="+data.getInvoicePrice());
         mBinding.myNlBillPrice.setMoneyText(data.getInvoicePrice());

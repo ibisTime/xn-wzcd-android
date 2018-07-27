@@ -380,7 +380,7 @@ public class CreditInitiateActivity extends AbsBaseLoadActivity {
             mBinding.mySlBank.setTextAndKey(mData.getLoanBankCode(), data.getBankName() + data.getAbbrName());
         });
 
-        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeBuyKey(mData.getShopWay()));
+        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeByKey(mData.getShopWay()));
         mBinding.myElAmount.setText(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
 
         if (TextUtils.equals(mData.getShopWay(), "1")){ //二手车

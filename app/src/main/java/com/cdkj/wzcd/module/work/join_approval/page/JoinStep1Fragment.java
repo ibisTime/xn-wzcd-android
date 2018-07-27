@@ -14,7 +14,6 @@ import com.cdkj.baselibrary.base.BaseLazyFragment;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
@@ -252,9 +251,14 @@ public class JoinStep1Fragment extends BaseLazyFragment {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlType.setText(DataDictionaryHelper.getBizTypeBuyKey(data.getShopWay()));
+
+         mBinding.myNlType.setText(DataDictionaryHelper.getBizTypeByKey(data.getShopWay()));
         mBinding.myNlBankLoanCs.setText(MoneyUtils.doubleFormatMoney(data.getBankLoanCs()));
         mBinding.myNlCompanyLoanCs.setText(MoneyUtils.doubleFormatMoney(data.getCompanyLoanCs()));
+
+        if (TextUtils.equals(data.getShopWay(), "2")) { // 二手车车架号必填
+            mBinding.myNlType.setTitle("*车架号");
+        }
 
         // setContentByKey 需要现设置SlLayout的数据List
         mBinding.mySlUserType.setContentByKey(data.getCustomerType());
@@ -337,7 +341,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             return false;
         }
 
-        if (isOutside){
+        if (isOutside){ // 外单
 
             if (mBinding.myElDealers.check()){
                 checkFail = mBinding.myElDealers.getTitle();
@@ -363,9 +367,13 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             return false;
         }
 
-        if (mBinding.myElFrameNo.check()){
-            checkFail = mBinding.myElFrameNo.getTitle();
-            return false;
+        if (TextUtils.equals(data.getShopWay(), "2")){ // 二手车车架号必填
+
+            if (mBinding.myElFrameNo.check()){
+                checkFail = mBinding.myElFrameNo.getTitle();
+                return false;
+            }
+
         }
 
         if (mBinding.myElBillPrice.check()){
@@ -511,9 +519,6 @@ public class JoinStep1Fragment extends BaseLazyFragment {
 
                             try {
                                 String str = RequestUtil.div(mBinding.myElServicePrice.getText(), editable.toString(), 2);
-
-                                LogUtil.E("str = " + str);
-                                LogUtil.E("BankRate = " + mBinding.myESlBankRate.getDataKey());
 
                                 mBinding.myNlGlobalRate.setText(RequestUtil.add(str, mBinding.myESlBankRate.getDataKey()));
                             } catch (IllegalAccessException e) {

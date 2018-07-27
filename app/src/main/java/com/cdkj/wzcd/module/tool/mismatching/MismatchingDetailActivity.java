@@ -34,7 +34,7 @@ import retrofit2.Call;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
-import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeBuyKey;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.getBizTypeByKey;
 
 /**
  * 发票不匹配申请
@@ -187,7 +187,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlWay.setText(getBizTypeBuyKey(data.getShopWay()));
+        mBinding.myNlWay.setText(getBizTypeByKey(data.getShopWay()));
 
         mBinding.myNlBillPriceOriginal.setMoneyText(data.getInvoicePrice());
         mBinding.myNlBillPriceCurrent.setMoneyText(data.getCurrentInvoicePrice());

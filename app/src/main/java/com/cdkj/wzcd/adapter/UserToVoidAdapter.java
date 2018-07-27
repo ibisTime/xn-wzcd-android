@@ -35,7 +35,7 @@ public class UserToVoidAdapter extends BaseQuickAdapter<NodeListModel, BaseViewH
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
         mBinding.myIlName.setText(item.getCustomerName());
-        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeBuyKey(item.getShopWay()));
+        mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getShopWay()));
         mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));

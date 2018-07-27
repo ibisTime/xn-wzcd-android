@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_input_hint="请输入车架号"
-                app:txt_input_title="*车架号" />
+                app:txt_input_title="车架号" />
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_loan_period"

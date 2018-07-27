@@ -39,7 +39,6 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_node_send"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_normal_title="发件节点">
@@ -48,24 +47,16 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_node_re"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_normal_title="收件节点">
+                app:txt_normal_title="发件收件">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
+
+
 
             <View
                 style="@style/style_split_line_horizontal_broad"/>
-
-            <com.cdkj.wzcd.view.MyNormalLayout
-                android:id="@+id/myNl_supplementReason"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_normal_title="补件原因">
-
-            </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_way"
@@ -109,21 +100,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                app:txt_normal_title="补件原因"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
-            <com.cdkj.wzcd.view.MyEditLayout
-                android:id="@+id/myEl_note"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="发货说明"
-                app:txt_input_title="发货说明">
+                android:descendantFocusability="blocksDescendants">
 
-            </com.cdkj.wzcd.view.MyEditLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_reason"
+                    android:paddingTop="15dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </RelativeLayout>
+
 
             <com.cdkj.wzcd.view.MyConfirmBtn
                 android:id="@+id/myCb_confirm"
-                app:txt_confirm_content="发件"
+                app:txt_confirm_content="补件"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

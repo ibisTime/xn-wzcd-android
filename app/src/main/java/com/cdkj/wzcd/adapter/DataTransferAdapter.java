@@ -2,19 +2,25 @@ package com.cdkj.wzcd.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.view.View;
 
-import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemDataTransferBinding;
 import com.cdkj.wzcd.model.DataTransferModel;
-import com.cdkj.wzcd.module.datatransfer.SendActivity;
-import com.cdkj.wzcd.module.datatransfer.SendAndExamineActivity;
+import com.cdkj.wzcd.module.datatransfer.DataReceiveActivity;
+import com.cdkj.wzcd.module.datatransfer.DataSendActivity;
+import com.cdkj.wzcd.module.datatransfer.DataSupplementActivity;
+import com.cdkj.wzcd.module.datatransfer.TransferListFragment;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
+
+import static com.cdkj.wzcd.util.DataDictionaryHelper.logistics_type;
+import static com.cdkj.wzcd.util.DataDictionaryHelper.send_type;
 
 /**
  * @author cdkj
@@ -23,13 +29,12 @@ import java.util.List;
 
 public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, BaseViewHolder> {
 
+    private TransferListFragment mFragment;
     private ItemDataTransferBinding mBinding;
-    private List<DataDictionary> mCompany;
 
-    public DataTransferAdapter(@Nullable List<DataTransferModel> data, List<DataDictionary> company) {
+    public DataTransferAdapter(@Nullable List<DataTransferModel> data, TransferListFragment fragment) {
         super(R.layout.item_data_transfer, data);
-
-        mCompany = company;
+        mFragment = fragment;
     }
 
     @Override
@@ -37,51 +42,76 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
 
         mBinding  = DataBindingUtil.bind(helper.itemView);
 
-        mBinding.myTlIdStatus.setText(item.getBizCode(), "");
+        mBinding.myItemCblConfirm.setContent("", "");
+
+        mBinding.myTlIdStatus.setText(item.getBizCode(), getStatus(helper, item));
+
+        mBinding.myIlType.setText(DataDictionaryHelper.getValueBuyKey(logistics_type, item.getType()));
+        mBinding.myIlName.setText(item.getUserName());
+        mBinding.myIlSendType.setText(DataDictionaryHelper.getValueBuyKey(send_type, item.getSendType()));
+
+        if (TextUtils.equals(item.getSendType(), "1")){
+            mBinding.myIlCompany.setVisibility(View.GONE);
+            mBinding.myIlExpress.setVisibility(View.GONE);
+        }
+
+        mBinding.myIlCompany.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.kd_company, item.getLogisticsCompany()));
+        mBinding.myIlExpress.setText(item.getLogisticsCode());
 
         mBinding.myIlFrom.setText(NodeHelper.getNameOnTheCode(item.getFromNodeCode()));
         mBinding.myIlTo.setText(NodeHelper.getNameOnTheCode(item.getToNodeCode()));
-
-        mBinding.myIlName.setText(item.getUserName());
-        mBinding.myIlCompany.setText(DataDictionaryHelper.getValueBuyList(item.getLogisticsCompany(), mCompany));
-        mBinding.myIlExpress.setText(item.getLogisticsCode());
-
-
-        mBinding.myItemCblConfirm.setContent("", "");
-        mBinding.myIlStatus.setText(getStatus(item));
-
-
     }
 
-    private String getStatus(DataTransferModel item){
-        // 状态(0 待发件 1已发件待收件 2已收件审核 3已收件待补件)
+    private String getStatus(BaseViewHolder helper, DataTransferModel item){
 
         switch (item.getStatus()){
 
             case "0":
                 mBinding.myItemCblConfirm.setRightTextAndListener("发件", view -> {
                     //发件
-                    SendActivity.open(mContext, item.getCode());
+                    DataSendActivity.open(mContext, item.getCode());
                 });
                 return "待发件";
 
             case "1":
-
-                mBinding.myItemCblConfirm.setRightTextAndListener("收件并审核", view -> {
+                mBinding.myItemCblConfirm.setRightTextAndListener("收件", view -> {
                     //收件并审核
-                    SendAndExamineActivity.open(mContext, item.getCode());
+                    mFragment.pickUpRequest(item.getCode());
                 });
                 return "已发件待收件";
 
             case "2":
-                return "已收件审核";
+                mBinding.myItemCblConfirm.setRightTextAndListener("审核", view -> {
+                    //收件并审核
+                    DataReceiveActivity.open(mContext, item.getCode());
+                });
+                return "待审核";
 
             case "3":
-                return "已收件待补件";
+
+                return "审核通过";
+
+            case "4":
+                mBinding.myItemCblConfirm.setRightTextAndListener("补件", view -> {
+                    //补件
+                    DataSupplementActivity.open(mContext, item.getCode());
+                });
+
+                return "待补件";
+
+            case "5":
+
+                return "退件";
+
+            case "6":
+
+                return "已收件";
 
             default:
                 return "";
 
         }
     }
+
+
 }

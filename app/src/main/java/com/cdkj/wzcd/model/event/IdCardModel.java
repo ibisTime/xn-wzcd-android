@@ -25,6 +25,36 @@ public class IdCardModel {
     private String gender;
     private String success;
 
+    // 反面信息
+    private String endDate;
+    private String startDate;
+    private String issue;
+
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getIssue() {
+        return issue;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
     public String getResidenceAddress() {
         return residenceAddress;
     }

@@ -30,18 +30,8 @@
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
-                android:id="@+id/myNl_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_normal_title="资料类型">
-
-            </com.cdkj.wzcd.view.MyNormalLayout>
-
-            <View
-                style="@style/style_split_line_horizontal_broad"/>
-
-            <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_node_send"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_normal_title="发件节点">
@@ -50,6 +40,7 @@
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_node_re"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_normal_title="发件收件">
@@ -157,112 +148,25 @@
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
-            <com.cdkj.wzcd.view.MyNormalLayout
-                android:id="@+id/myNl_sendNote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:txt_normal_title="发货说明">
-
-            </com.cdkj.wzcd.view.MyNormalLayout>
-
             <View
                 style="@style/style_split_line_horizontal_broad"/>
 
-            <com.cdkj.wzcd.view.MyNormalLayout
-                app:txt_normal_title="补件原因"
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_reason"
+                app:txt_input_title="补件原因"
+                app:txt_input_hint="请填写补件原因"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                app:txt_confirm_content="收件并审核通过"
+                app:txt_confirm_content_right="收件待补件"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </com.cdkj.wzcd.view.MyNormalLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_reason"
-                    android:paddingTop="15dp"
-                    android:background="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </android.support.v7.widget.RecyclerView>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_add_root"
-                android:paddingTop="10dp"
-                android:paddingBottom="15dp"
-                android:paddingLeft="@dimen/layout_left_interval"
-                android:paddingRight="@dimen/layout_right_interval"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/ll_add"
-                    android:background="@drawable/common_my_image_bg"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp">
-
-                    <ImageView
-                        android:src="@mipmap/add"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/btn_confirm"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/layout_left_interval"
-                    android:layout_marginRight="@dimen/layout_right_interval"
-                    android:textColor="@color/white"
-                    android:background="@drawable/common_my_confirm_btn"
-                    android:text="补件"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp" />
-
-                <Button
-                    android:id="@+id/btn_confirm_center"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/layout_left_interval"
-                    android:layout_marginRight="@dimen/layout_right_interval"
-                    android:textColor="@color/white"
-                    android:background="@drawable/common_my_confirm_btn"
-                    android:text="退件"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp" />
-
-                <Button
-                    android:id="@+id/btn_confirm_right"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/layout_left_interval"
-                    android:layout_marginRight="@dimen/layout_right_interval"
-                    android:textColor="@color/white"
-                    android:background="@drawable/common_my_confirm_btn"
-                    android:text="通过"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp" />
-
-            </LinearLayout>
+            </com.cdkj.wzcd.view.MyConfirmBtn>
 
         </LinearLayout>
     </ScrollView>

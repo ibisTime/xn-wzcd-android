@@ -29,6 +29,7 @@ public class DataFileChoiceAdapter extends BaseQuickAdapter<DataFileModel, BaseV
         }
 
         helper.setText(R.id.tv_file, item.getFile());
+        helper.addOnClickListener(R.id.iv_choice);
 
     }
 }

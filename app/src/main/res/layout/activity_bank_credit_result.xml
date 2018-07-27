@@ -26,6 +26,7 @@
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_dkdyCount"
                 app:txt_input_title="笔数"
+                app:txt_input_content="0"
                 app:txt_input_hint="请输入贷款抵押笔数"
                 app:inputType="number"
                 android:layout_width="match_parent"
@@ -39,6 +40,7 @@
                 app:txt_input_title="贷款余额"
                 app:txt_input_hint="请输入贷款余额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -50,6 +52,7 @@
                 app:txt_input_title="近两年逾期次数"
                 app:txt_input_hint="请输入近两年逾期次数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -61,6 +64,7 @@
                 app:txt_input_title="最高逾期金额"
                 app:txt_input_hint="请输入最高逾期金额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -72,6 +76,7 @@
                 app:txt_input_title="当前逾期金额"
                 app:txt_input_hint="请输入当前逾期金额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -83,6 +88,7 @@
                 app:txt_input_title="近6个月平均月还款额"
                 app:txt_input_hint="请输入近6个月平均月还款额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -105,6 +111,7 @@
                 app:txt_input_title="未结清贷款笔数"
                 app:txt_input_hint="请输入未结清贷款笔数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -116,6 +123,7 @@
                 app:txt_input_title="未结清贷款余额"
                 app:txt_input_hint="请输入未结清贷款余额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -127,6 +135,7 @@
                 app:txt_input_title="近两年逾期次数"
                 app:txt_input_hint="请输入近两年逾期次数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -138,6 +147,7 @@
                 app:txt_input_title="单月最高逾期金额"
                 app:txt_input_hint="请输入单月最高逾期金额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -149,6 +159,7 @@
                 app:txt_input_title="当前逾期金额"
                 app:txt_input_hint="请输入当前逾期金额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -160,6 +171,7 @@
                 app:txt_input_title="近6个月平均月还款额"
                 app:txt_input_hint="请输入近6个月平均月还款额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -181,6 +193,7 @@
                 app:txt_input_title="张数"
                 app:txt_input_hint="请输入张数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -192,6 +205,7 @@
                 app:txt_input_title="授信总额"
                 app:txt_input_hint="请输入授信总额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -203,6 +217,7 @@
                 app:txt_input_title="近6个月使用额"
                 app:txt_input_hint="请输入近6个月使用额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -214,6 +229,7 @@
                 app:txt_input_title="近两年逾期次数"
                 app:txt_input_hint="请输入近两年逾期次数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -225,6 +241,7 @@
                 app:txt_input_title="单月最高逾期金额"
                 app:txt_input_hint="请输入单月最高逾期金额"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -236,6 +253,7 @@
                 app:txt_input_title="当前逾期金额"
                 app:txt_input_hint="请输入当前逾期金额"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -257,6 +275,7 @@
                 app:txt_input_title="笔数"
                 app:txt_input_hint="请输入笔数"
                 app:inputType="number"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -268,6 +287,7 @@
                 app:txt_input_title="余额"
                 app:txt_input_hint="请输入余额"
                 app:inputType="money"
+                app:txt_input_content="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

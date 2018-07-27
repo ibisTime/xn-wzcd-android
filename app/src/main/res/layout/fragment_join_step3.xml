@@ -41,7 +41,7 @@
                 android:id="@+id/mySl_isDriveLicense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_select_title="有无驾照" />
+                app:txt_select_title="*有无驾照" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_driveLicense"

@@ -12,6 +12,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_applyUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="申请人姓名" />
+
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_applyUserCompany"
                 android:layout_width="match_parent"
@@ -52,7 +58,7 @@
                 android:layout_height="wrap_content"
                 app:inputType="money"
                 app:txt_input_hint="请输入申请人结息"
-                app:txt_input_title="*申请人结息" />
+                app:txt_input_title="申请人结息" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_applyUserBalance"
@@ -60,22 +66,28 @@
                 android:layout_height="wrap_content"
                 app:inputType="money"
                 app:txt_input_hint="请输入申请人余额"
-                app:txt_input_title="*申请人余额" />
+                app:txt_input_title="申请人余额" />
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_applyUserJourShowIncome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_select_title="*申请人流水是否体现月收入" />
+                app:txt_select_title="申请人流水是否体现月收入" />
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_applyUserIsPrint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_select_title="*申请人是否打件 " />
+                app:txt_select_title="申请人是否打件 " />
 
             <View
                 style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_ghUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="共还人姓名" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_ghMonthIncome"
@@ -116,6 +128,12 @@
             <View
                 style="@style/style_split_line_horizontal_broad"/>
 
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_guarantor1UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="担保人1姓名" />
+
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_guarantor1MonthIncome"
                 android:layout_width="match_parent"
@@ -154,6 +172,12 @@
 
             <View
                 style="@style/style_split_line_horizontal_broad"/>
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_guarantor2UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="担保人2姓名" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_guarantor2MonthIncome"

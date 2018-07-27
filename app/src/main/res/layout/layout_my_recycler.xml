@@ -25,6 +25,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -39,7 +40,6 @@
 
                 <LinearLayout
                     android:id="@+id/ll_add_root"
-                    android:visibility="gone"
                     android:paddingTop="10dp"
                     android:paddingLeft="@dimen/layout_left_interval"
                     android:paddingRight="@dimen/layout_right_interval"

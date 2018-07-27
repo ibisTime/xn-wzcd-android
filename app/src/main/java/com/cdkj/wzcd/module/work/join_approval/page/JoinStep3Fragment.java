@@ -190,6 +190,12 @@ public class JoinStep3Fragment extends BaseLazyFragment {
             return false;
         }
 
+        if (mBinding.mySlIsDriveLicense.check()){
+            checkFail = mBinding.mySlIsDriveLicense.getTitle();
+            return false;
+        }
+
+
         return true;
     }
 

@@ -268,7 +268,7 @@ public class AuditCreditActivity extends AbsBaseLoadActivity {
             mBinding.mySlBank.setTextByRequest(data.getBankName());
         });
 
-        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeBuyKey(mData.getShopWay()));
+        mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeByKey(mData.getShopWay()));
 
         mBinding.myElAmount.setTextByRequest(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
 
