@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import com.cdkj.wzcd.R;
 
 /**
+ * 首页正方形行Layout
  * Created by cdkj on 2018/5/28.
  */
 
@@ -23,11 +23,10 @@ public class MySquareRowLayout extends LinearLayout {
 
     private TextView tvContent;
     private ImageView ivContent;
-    private View vRedPoint;
+    private TextView tvRedPoint;
 
     private int imgContentId;
     private String txtContent;
-    private boolean isShowRedPoint;
 
     public MySquareRowLayout(Context context) {
         this(context, null);
@@ -42,7 +41,6 @@ public class MySquareRowLayout extends LinearLayout {
 
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MySquareRowLayout, 0, 0);
         txtContent = typedArray.getString(R.styleable.MySquareRowLayout_txt_content);
-        isShowRedPoint = typedArray.getBoolean(R.styleable.MySquareRowLayout_isShowRedPoint, false);
         imgContentId = typedArray.getResourceId(R.styleable.MySquareRowLayout_img_content, R.drawable.default_pic);
 
         typedArray.recycle();
@@ -52,19 +50,34 @@ public class MySquareRowLayout extends LinearLayout {
         setData();
     }
 
-    private void setData() {
-        tvContent.setText(txtContent);
-        ivContent.setImageResource(imgContentId);
-        vRedPoint.setVisibility(isShowRedPoint ? VISIBLE : GONE);
-    }
-
-
     private void init(Context context) {
         this.context = context;
         LayoutInflater.from(context).inflate(R.layout.layout_my_square_row, this, true);
 
         tvContent = findViewById(R.id.tv_content);
         ivContent = findViewById(R.id.iv_content);
-        vRedPoint = findViewById(R.id.v_red_point);
+        tvRedPoint = findViewById(R.id.tv_red_point);
     }
+
+    private void setData() {
+        tvContent.setText(txtContent);
+        ivContent.setImageResource(imgContentId);
+    }
+
+    /**
+     * 设置红点数量并显示
+     * @param count
+     */
+    public void setPointCount(int count){
+
+        tvRedPoint.setText(count+"");
+        if (count == 0){
+            tvRedPoint.setVisibility(GONE);
+        }else {
+            tvRedPoint.setVisibility(VISIBLE);
+        }
+    }
+
+
+
 }

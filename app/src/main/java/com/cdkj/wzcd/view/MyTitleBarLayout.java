@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.wzcd.R;
 
 /**
@@ -44,6 +43,13 @@ public class MyTitleBarLayout extends LinearLayout {
         setData();
     }
 
+    private void init(Context context) {
+        this.context = context;
+        LayoutInflater.from(context).inflate(R.layout.layout_my_title_bar, this, true);
+
+        tvTitle = findViewById(R.id.tv_title);
+    }
+
     private void setData() {
         tvTitle.setText(txtTitle);
     }
@@ -53,11 +59,6 @@ public class MyTitleBarLayout extends LinearLayout {
     }
 
 
-    private void init(Context context) {
-        this.context = context;
-        LayoutInflater.from(context).inflate(R.layout.layout_my_title_bar, this, true);
 
-        tvTitle = findViewById(R.id.tv_title);
-    }
 
 }

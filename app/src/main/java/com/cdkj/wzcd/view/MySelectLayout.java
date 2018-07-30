@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 下拉框Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -69,6 +70,13 @@ public class MySelectLayout extends LinearLayout {
 
         init(context);
         setData();
+    }
+
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_select_horizontal, this, true);
+
+        initListener();
     }
 
     private void setData() {
@@ -204,13 +212,6 @@ public class MySelectLayout extends LinearLayout {
 
     }
 
-
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_select_horizontal, this, true);
-
-        initListener();
-    }
 
     private void initListener() {
         mBinding.llRoot.setOnClickListener(view -> {

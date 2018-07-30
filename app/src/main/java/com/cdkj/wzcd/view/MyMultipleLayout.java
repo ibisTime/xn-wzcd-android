@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 多选Layout
  * Created by cdkj on 2018/6/26.
  */
 
@@ -75,7 +76,12 @@ public class MyMultipleLayout extends LinearLayout {
 
     }
 
-    public void build(Activity activity, int maxSelectNum, int requestCode){
+    /**
+     * MyMultipleLayout 初始化方法
+     * @param activity Activity上下文，用于启动ImageSelectActivity和传入FullyGridLayoutManager
+     * @param requestCode 多选Layout图片requestCode，用于相册或相机回调时判断图片显示Layout
+     */
+    public void build(Activity activity ,int requestCode){
         mActivity = activity;
         mRequestCode = requestCode;
 
@@ -112,11 +118,19 @@ public class MyMultipleLayout extends LinearLayout {
 //        });
     }
 
+    /**
+     * 相册或相机回调后向mList添加图片
+     * @param url
+     */
     public void addList(String url){
         mList.add(url);
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 获取图片List数据
+     * @return
+     */
     public String getListData(){
 
         if (mList.size() > 0){
@@ -124,12 +138,16 @@ public class MyMultipleLayout extends LinearLayout {
         }
 
         return StringUtils.listToString(mList, "||");
-
     }
 
+    /**
+     * 图片多选Layout requestCode
+     * @return
+     */
     public int getRequestCode(){
         return mRequestCode;
     }
+
 
     private MyMultipleAdapter.OnAddPicClickListener listener = new MyMultipleAdapter.OnAddPicClickListener() {
         @Override

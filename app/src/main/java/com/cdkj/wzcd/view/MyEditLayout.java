@@ -19,6 +19,7 @@ import com.cdkj.wzcd.databinding.LayoutMyInputHorizontalBinding;
 import com.cdkj.wzcd.util.RequestUtil;
 
 /**
+ * 编辑框Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -55,6 +56,12 @@ public class MyEditLayout extends LinearLayout {
 
         init(context);
         setData();
+    }
+
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_input_horizontal, this, true);
+
     }
 
     private void setData() {
@@ -99,9 +106,6 @@ public class MyEditLayout extends LinearLayout {
                         return null;
                     }});
 
-//                    mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
-//                    mBinding.tvTitleRight.setVisibility(VISIBLE);
-
                     break;
 
                 case "4": // 数字类型
@@ -117,22 +121,6 @@ public class MyEditLayout extends LinearLayout {
         }
     }
 
-
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_input_horizontal, this, true);
-
-    }
-
-//    public String check() {
-//
-//        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
-//            ToastUtil.show(context, mBinding.edtInput.getHint().toString());
-//            return "";
-//        }
-//
-//        return mBinding.edtInput.getText().toString();
-//    }
 
     public boolean check() {
 

@@ -185,9 +185,7 @@ public class DataSendActivity extends AbsBaseLoadActivity {
 
             @Override
             protected void onSuccess(CodeModel data, String SucMessage) {
-                UITipDialog.showSuccess(DataSendActivity.this, "操作成功", dialogInterface -> {
-                    finish();
-                });
+                UITipDialog.showSuccess(DataSendActivity.this, "操作成功", dialogInterface -> finish());
             }
 
             @Override

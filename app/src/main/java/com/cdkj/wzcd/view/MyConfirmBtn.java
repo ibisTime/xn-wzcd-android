@@ -14,6 +14,7 @@ import com.cdkj.wzcd.databinding.LayoutMyConfirmBtnBinding;
 import com.cdkj.wzcd.view.interfaces.MyConfirmInterface;
 
 /**
+ * 按钮Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -49,6 +50,13 @@ public class MyConfirmBtn extends LinearLayout {
         setData();
     }
 
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_confirm_btn, this, true);
+
+        initListener();
+    }
+
     private void setData() {
         mBinding.btnConfirm.setText(txtContent);
 
@@ -58,23 +66,25 @@ public class MyConfirmBtn extends LinearLayout {
         }
     }
 
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_confirm_btn, this, true);
-
-        initListener();
-    }
-
+    /**
+     * 设置左部按钮点击事件回调
+     * @param confirmInterface 点击事件回调
+     */
     public void setOnConfirmListener(MyConfirmInterface confirmInterface){
         mConfirmInterface = confirmInterface;
     }
 
+    /**
+     * 设置右部按钮点击事件回调
+     * @param confirmInterface 点击事件回调
+     */
     public void setOnConfirmRightListener(MyConfirmInterface confirmInterface){
         mConfirmInterfaceRight = confirmInterface;
     }
 
-
-
+    /**
+     * 设置按钮点击事件
+     */
     private void initListener() {
         mBinding.btnConfirm.setOnClickListener(view -> {
             if (mConfirmInterface == null)
@@ -91,7 +101,17 @@ public class MyConfirmBtn extends LinearLayout {
         });
     }
 
+    /**
+     * 设置左部按钮内容文本
+     */
     public void setText(String content) {
         mBinding.btnConfirm.setText(content);
+    }
+
+    /**
+     * 设置右部按钮内容文本
+     */
+    public void setRightText(String content) {
+        mBinding.btnConfirmRight.setText(content);
     }
 }

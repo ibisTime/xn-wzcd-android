@@ -17,6 +17,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyRecyclerBinding;
 
 /**
+ * 带Title的列表Layout
  * Created by cdkj on 2018/6/26.
  */
 
@@ -55,23 +56,22 @@ public class MyRecyclerLayout extends LinearLayout {
         this.context = context;
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_recycler, this, true);
 
-        initListener();
-    }
-
-    private void initListener() {
-
     }
 
     private void setData() {
         mBinding.tvTitle.setText(tvTitle);
-
     }
 
     public void setTitle(String title) {
         mBinding.tvTitle.setText(title);
-
     }
 
+    /**
+     * MyRecyclerLayout 初始化方法
+     * @param mAdapter Recycler的Adapter
+     * @param isShowAdd 是否显示 添加 按钮
+     * @param listener 添加 按钮的点击监听回调
+     */
     public void build(RecyclerView.Adapter mAdapter, boolean isShowAdd, OnAddClickListener listener){
         if (mAdapter != null) {
 

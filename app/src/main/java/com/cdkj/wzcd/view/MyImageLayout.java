@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.cdkj.baselibrary.activitys.ImageSelectActivity;
@@ -19,6 +18,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyImageBinding;
 
 /**
+ * 图片选择Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -64,6 +64,13 @@ public class MyImageLayout extends LinearLayout {
         setData();
     }
 
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_image, this, true);
+
+        initListener();
+    }
+
     private void setData() {
         mBinding.tvTitle.setText(txtTitle);
         mBinding.tvHint.setHint(txtHint);
@@ -74,14 +81,12 @@ public class MyImageLayout extends LinearLayout {
             mBinding.tvHintRight.setHint(txtHintRight);
     }
 
-
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_image, this, true);
-
-        initListener();
-    }
-
+    /**
+     * MyImageLayout 初始化方法
+     * @param activity Activity上下文，用于启动ImageSelectActivity
+     * @param requestCode 左部图片requestCode，用于相册或相机回调时判断图片显示位置
+     * @param rightRequestCode 右部图片requestCode，用于相册或相机回调时判断图片显示位置
+     */
     public void setActivity(Activity activity, int requestCode, int rightRequestCode){
         mActivity = activity;
         mRequestCode = requestCode;
@@ -91,31 +96,62 @@ public class MyImageLayout extends LinearLayout {
     private void initListener() {
         mBinding.flImg.setOnClickListener(view -> {
 
-            if (mActivity == null)
-                ToastUtil.show(context, "请先setActivity");
+            if (TextUtils.isEmpty(FlImgUrl)){
 
-            ImageSelectActivity.launch(mActivity, mRequestCode, false);
+                if (mActivity == null)
+                    return;
+//                    ToastUtil.show(context, "请先setActivity");
+
+                ImageSelectActivity.launch(mActivity, mRequestCode, false);
+
+            }else {
+
+                // 此处可添加图片预览
+
+            }
 
         });
 
         mBinding.flImgRight.setOnClickListener(view -> {
 
-            if (mActivity == null)
-                ToastUtil.show(context, "请先setActivity");
+            if (TextUtils.isEmpty(FlImgRightUrl)){
 
-            ImageSelectActivity.launch(mActivity, mRightRequestCode, false);
+                if (mActivity == null)
+                    return;
+//                    ToastUtil.show(context, "请先setActivity");
+
+                ImageSelectActivity.launch(mActivity, mRightRequestCode, false);
+
+            }else {
+
+                // 此处可添加图片预览
+
+            }
+
 
         });
     }
 
+    /**
+     * 左部图片requestCode
+     * @return
+     */
     public int getRequestCode(){
         return mRequestCode;
     }
 
+    /**
+     * 左部图片requestCode
+     * @return
+     */
     public int getRightRequestCode(){
         return mRightRequestCode;
     }
 
+    /**
+     * 检查左部图片选择结果
+     * @return
+     */
     public String check(){
         if (TextUtils.isEmpty(FlImgUrl)){
             ToastUtil.show(context, mBinding.tvHint.getHint().toString());
@@ -125,11 +161,19 @@ public class MyImageLayout extends LinearLayout {
         return FlImgUrl;
     }
 
+    /**
+     * 获取左部图片url
+     * @return
+     */
     public String getFlImgUrl(){
 
         return FlImgUrl;
     }
 
+    /**
+     * 检查右部图片选择结果
+     * @return
+     */
     public String checkRight(){
         if (TextUtils.isEmpty(FlImgRightUrl)){
             ToastUtil.show(context, "请上传"+mBinding.tvHintRight.getHint().toString());
@@ -139,11 +183,19 @@ public class MyImageLayout extends LinearLayout {
         return FlImgRightUrl;
     }
 
+    /**
+     * 获取右部图片url
+     * @return
+     */
     public String getFlImgRightUrl(){
 
         return FlImgRightUrl;
     }
 
+    /**
+     * 根据url加载左部图片
+     * @param url
+     */
     public void setFlImg(String url){
         if (TextUtils.isEmpty(url))
             return;
@@ -156,11 +208,10 @@ public class MyImageLayout extends LinearLayout {
         mBinding.tvHint.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
     }
 
-    public ImageView getFlImgImageView(){
-        return mBinding.ivImg;
-    }
-
-
+    /**
+     * 根据url加载右部图片
+     * @param url
+     */
     public void setFlImgRight(String url){
         if (TextUtils.isEmpty(url))
             return;
@@ -171,10 +222,6 @@ public class MyImageLayout extends LinearLayout {
         mBinding.ivHintRight.setImageResource(R.mipmap.modifi);
         mBinding.tvHintRight.setText("点击修改");
         mBinding.tvHintRight.setTextColor(ContextCompat.getColor(mActivity, R.color.white));
-    }
-
-    public ImageView getFlImgRightImageView(){
-        return mBinding.ivImgRight;
     }
 
 

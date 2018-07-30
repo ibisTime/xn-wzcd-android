@@ -15,6 +15,7 @@ import com.cdkj.wzcd.databinding.LayoutMyNormalBinding;
 import com.cdkj.wzcd.util.RequestUtil;
 
 /**
+ * 普通的横条Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -51,6 +52,12 @@ public class MyNormalLayout extends LinearLayout {
         setData();
     }
 
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_normal, this, true);
+
+    }
+
     private void setData() {
         mBinding.tvTitle.setText(txtTitle);
         mBinding.tvContent.setHint(txtHint);
@@ -64,13 +71,6 @@ public class MyNormalLayout extends LinearLayout {
 
     public void setTextByRequest(String content) {
         mBinding.tvContent.setText(content);
-    }
-
-
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_normal, this, true);
-
     }
 
     public void setText(String content) {

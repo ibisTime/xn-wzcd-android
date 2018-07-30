@@ -8,49 +8,53 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="95dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="95dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/main_zlcd"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"/>
 
-                    <ImageView
-                        android:id="@+id/iv_content"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"/>
-
-                    <View
-                        android:id="@+id/v_red_point"
-                        android:visibility="gone"
-                        android:layout_gravity="right"
-                        android:background="@drawable/common_square_row_red_point"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"/>
-
-                </FrameLayout>
+                <!--<View-->
+                <!--android:id="@+id/v_"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:background="@drawable/common_square_row_red_point"-->
+                <!--android:layout_width="8dp"-->
+                <!--android:layout_height="8dp"/>-->
 
                 <TextView
-                    android:id="@+id/tv_content"
-                    android:layout_marginTop="10dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/color_mySquareRow_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/tv_red_point"
+                    android:visibility="gone"
+                    android:text="0"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/common_list_count"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"/>
 
-            </LinearLayout>
+            </FrameLayout>
 
-            <View
-                style="@style/style_split_line_vertical"/>
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:text="hahahha"
+                android:textColor="@color/color_mySquareRow_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 可编辑的下拉框Layout
  * Created by cdkj on 2018/5/29.
  */
 
@@ -71,6 +72,13 @@ public class MyEditSelectLayout extends LinearLayout {
         setData();
     }
 
+    private void init(Context context) {
+        this.context = context;
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_edit_select, this, true);
+
+        initListener();
+    }
+
     private void setData() {
         mBinding.tvTitle.setText(txtTitle);
         if (!TextUtils.isEmpty(txtContent))
@@ -102,10 +110,18 @@ public class MyEditSelectLayout extends LinearLayout {
         selectIndex = -2;
     }
 
-    public void setOnClickEnable(boolean onClickEnable) {
+    /**
+     * 设置不可下拉
+     * @param onClickEnable
+     */
+    public void setOnDropEnable(boolean onClickEnable) {
         isOnClickEnable = onClickEnable;
     }
 
+    /**
+     * 根据key自动获取对应value填入
+     * @param key
+     */
     public void setContentByKey(String key) {
 
         if (TextUtils.isEmpty(key)) {
@@ -129,7 +145,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
 
     /**
-     * 设置"是否／01"相同类型数据
+     * 设置"是否／01"类型数据
      *
      * @param key1
      * @param value1
@@ -152,7 +168,7 @@ public class MyEditSelectLayout extends LinearLayout {
     }
 
     /**
-     * 设置0否，1是 数据
+     * 设置0否，1是 类型数据
      *
      * @param selectInterface
      */
@@ -179,7 +195,11 @@ public class MyEditSelectLayout extends LinearLayout {
 
     }
 
-    public void setData(List<DataDictionary> data) {
+    /**
+     * 直接设置List数据,但不可下拉
+     * @param data
+     */
+    public void setDataNoDrop(List<DataDictionary> data) {
         // 隐藏更多
         mBinding.llSelect.setVisibility(GONE);
         // 设置不可弹出下拉
@@ -189,12 +209,6 @@ public class MyEditSelectLayout extends LinearLayout {
     }
 
 
-    private void init(Context context) {
-        this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_edit_select, this, true);
-
-        initListener();
-    }
 
     private void initListener() {
         mBinding.llRoot.setOnClickListener(view -> {
@@ -206,17 +220,35 @@ public class MyEditSelectLayout extends LinearLayout {
                 ToastUtil.show(getContext(), "没有可选列表");
                 return;
             }
-            showSelect();
+            showDrop();
 
         });
     }
 
+    /**
+     * 初始下拉数据mKeyList和mValueList
+     * @return 数据Size
+     */
+    private int initList() {
+        mKeyList = new String[mData.size()];
+        mValueList = new String[mData.size()];
 
+        int size = 0;
+        for (DataDictionary model : mData) {
+            mKeyList[size] = model.getDkey();
+            mValueList[size] = model.getDvalue();
+            size++;
+        }
+        return size;
+    }
 
-    private void showSelect() {
-        int index = initList();
+    /**
+     * 显示下拉框
+     */
+    private void showDrop() {
+        int size = initList();
 
-        if (index == 0)
+        if (size == 0)
             return;
 
         new AlertDialog.Builder(context).setTitle("请选择").setSingleChoiceItems(
@@ -236,19 +268,10 @@ public class MyEditSelectLayout extends LinearLayout {
                 }).setNegativeButton("取消", null).show();
     }
 
-    private int initList() {
-        mKeyList = new String[mData.size()];
-        mValueList = new String[mData.size()];
-
-        int index = 0;
-        for (DataDictionary model : mData) {
-            mKeyList[index] = model.getDkey();
-            mValueList[index] = model.getDvalue();
-            index++;
-        }
-        return index;
-    }
-
+    /**
+     * 检查下拉框选择值
+     * @return
+     */
     public boolean check() {
         if (selectIndex == -1) {
             ToastUtil.show(context, "请选择" + mBinding.tvTitle.getText());
