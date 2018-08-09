@@ -5,20 +5,27 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
+import com.cdkj.baselibrary.dialog.CommonDialog;
+import com.cdkj.baselibrary.dialog.InputDialog;
 import com.cdkj.baselibrary.dialog.UITipDialog;
+import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityMainBinding;
+import com.cdkj.wzcd.model.CollectionBean;
 import com.cdkj.wzcd.model.NodeModel;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.module.datatransfer.TransferActivity;
+import com.cdkj.wzcd.module.tool.calculator.CalculautorActivity;
 import com.cdkj.wzcd.module.tool.fabaohe.FbhListActivity;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationListActivity;
 import com.cdkj.wzcd.module.tool.gps.GpsListActivity;
@@ -34,6 +41,9 @@ import com.cdkj.wzcd.module.work.cldy.BssCldyListActivity;
 import com.cdkj.wzcd.module.work.credit.CreditListActivity;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyListActivity;
 import com.cdkj.wzcd.util.NodeHelper;
+import com.google.gson.Gson;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,12 +58,15 @@ import static com.cdkj.wzcd.util.UserHelper.ZHRY;
 
 public class MainActivity extends AbsBaseLoadActivity {
 
+    private static final String TAG = "ppppppMainActivity";
     // 节点列表
     public static List<NodeModel> BASE_NODE_LIST = new ArrayList<>();
 
     private UserModel mUserModel;
 
     private ActivityMainBinding mBinding;
+
+    private final int REQUEST_CODE = 200;
 
 
     public static void open(Context context) {
@@ -159,7 +172,7 @@ public class MainActivity extends AbsBaseLoadActivity {
         mBinding.tvNick.setText(TextUtils.isEmpty(data.getLoginName()) ? "暂无" : data.getLoginName());
         mBinding.tvCompany.setText(data.getCompanyName());
 
-        if (TextUtils.equals(data.getRoleCode(), ZHRY)){ // 驻行人员
+        if (TextUtils.equals(data.getRoleCode(), ZHRY)) { // 驻行人员
             mBinding.tvRole.setText("[驻行人员]");
 
             mBinding.mySrAdvanceFund.setVisibility(View.GONE);
@@ -175,13 +188,13 @@ public class MainActivity extends AbsBaseLoadActivity {
 
             mBinding.llZlcd.setVisibility(View.GONE);
 
-        }else if (TextUtils.equals(data.getRoleCode(), YWY)){// 业务员
+        } else if (TextUtils.equals(data.getRoleCode(), YWY)) {// 业务员
             mBinding.tvRole.setText("[业务员]");
 
-        }else if (TextUtils.equals(data.getRoleCode(), NQZY)){// 内勤专员
+        } else if (TextUtils.equals(data.getRoleCode(), NQZY)) {// 内勤专员
             mBinding.tvRole.setText("[内勤专员]");
 
-        }else {
+        } else {
             mBinding.tvRole.setText("[其他]");
         }
 
@@ -258,10 +271,19 @@ public class MainActivity extends AbsBaseLoadActivity {
         mBinding.mySrJcdy.setOnClickListener(view -> {
             JcdyListActivity.open(this);
         });
+        // 月供计算器
+        mBinding.mySrCalculautor.setOnClickListener(view -> {
+            CalculautorActivity.open(this);
+        });
 
         //资料上传
         mBinding.mySrZlcd.setOnClickListener(view -> {
             TransferActivity.open(this);
+        });
+        //扫码收件
+        mBinding.mySrZxing.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
         });
     }
 
@@ -272,12 +294,176 @@ public class MainActivity extends AbsBaseLoadActivity {
     private void logOut() {
         showDoubleWarnListen("你确定要退出当前账号吗?", view -> {
             SPUtilHelper.logOutClear();
-            UITipDialog.showSuccess(this, "退出成功",dialogInterface -> {
+            UITipDialog.showSuccess(this, "退出成功", dialogInterface -> {
                 finish();
 
-                SignInActivity.open(this,false);
+                SignInActivity.open(this, false);
             });
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Log.i("pppppp", "onActivityResult: 返回的数据为:" + result);
+                    CollectionBean bean;
+                    try {
+                        bean = new Gson().fromJson(result, CollectionBean.class);
+                    } catch (Exception e) {
+                        UITipDialog.showInfo(this, "二维码解析失败");
+                        return;
+                    }
+
+                    if (TextUtils.isEmpty(bean.getType()) || bean.getCodeList() == null || bean.getCodeList().size() == 0) {
+                        UITipDialog.showInfo(this, "请扫描完整的二维码");
+                        return;
+                    }
+                    //解析成功去进行  自动收件
+                    if ("2".equals(bean.getType())) {
+                        //判断是不是gps收件
+                        //gps收件右两种情况   1.收件并审核通过   2.补件
+                        new CommonDialog(this)
+                                .builder()
+                                .setTitle("资料收件")
+                                .setNegativeBtn("收件待补件", view -> {
+
+                                    shouReissueRequest(bean.getCodeList());
+
+                                })
+                                .setPositiveBtn("收件并审核", view -> {
+                                    pickUpRequest(bean.getCodeList());
+                                })
+                                .show();
+                    } else {
+                        pickUpRequest(bean.getCodeList());
+                    }
+
+
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * 收件
+     * 如果是资料收件  请传true  收件完成后跳转到审核界面
+     */
+    public void pickUpRequest(List<String> codeList) {
+        if (codeList == null || codeList.size() == 0) {
+            return;
+        }
+//        List<String> codeList = new ArrayList<>();
+//        codeList.add(code);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("codeList", codeList);
+        hashMap.put("operator", SPUtilHelper.getUserId());
+
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(hashMap));
+
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(this) {
+            @Override
+            protected void onSuccess(IsSuccessModes data, String SucMessage) {
+                if (data.isSuccess()) {
+                    UITipDialog.showSuccess(MainActivity.this, "收件成功", dialogInterface -> {
+
+                    });
+                } else {
+                    UITipDialog.showFail(MainActivity.this, "收件失败");
+                }
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+                super.onReqFailure(errorCode, errorMessage);
+                Log.i(TAG, "onReqFailure: " + errorMessage);
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+    }
+
+
+    /**
+     * 弹出补件说明框
+     */
+    private void shouReissueRequest(List<String> codeList) {
+        new InputDialog(MainActivity.this)
+                .builder()
+                .setTitle("请输入补件原因(必填)")
+                .setContentHintText("")
+                .setNegativeBtn("取消", null)
+                .setPositiveBtn("确定", (view, inputMsg) -> {
+                    if (TextUtils.isEmpty(inputMsg)) {
+                        UITipDialog.showInfo(MainActivity.this, "操作失败请输入补件原因");
+                        return;
+                    }
+                    reissueRequest(codeList, inputMsg);
+                })
+                .show();
+    }
+
+    /**
+     * 补件
+     */
+    private void reissueRequest(List<String> codeList, String mesg) {
+
+        if (codeList == null || codeList.size() == 0) {
+            return;
+        }
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("codeList", codeList);
+//        hashMap.put("code", code);
+        hashMap.put("operator", SPUtilHelper.getUserId());
+        hashMap.put("supplementReason", mesg);
+
+
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(hashMap));
+
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(this) {
+            @Override
+            protected void onSuccess(IsSuccessModes data, String SucMessage) {
+                if (data.isSuccess()) {
+                    UITipDialog.showSuccess(MainActivity.this, "操作成功");
+                } else {
+                    UITipDialog.showFail(MainActivity.this, "操作失败");
+                }
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+                super.onReqFailure(errorCode, errorMessage);
+                Log.i(TAG, "onReqFailure: " + errorMessage);
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+
+    }
 }

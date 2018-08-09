@@ -7,26 +7,33 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- 二维码扫描需要使用的权限↓↓↓↓↓↓↓↓↓ -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 二维码扫描上面↑↑↑↑↑↑ -->
     <application
-        tools:replace="android:allowBackup"
-        android:name="com.cdkj.wzcd.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <activity android:name="com.cdkj.wzcd.SplashActivity">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".module.user.SignInActivity" />
         <activity android:name=".module.work.credit.CreditListActivity" />
         <activity android:name=".module.work.credit.CreditUserActivity" />
@@ -35,12 +42,10 @@
         <activity android:name=".module.work.credit.AuditResultInputActivity" />
         <activity android:name=".module.work.credit.audit.AuditCreditActivity" />
         <activity android:name=".module.work.credit.audit.AuditUserActivity" />
-
         <activity android:name=".module.tool.uservoid.ZrdListActivity" />
         <activity android:name=".module.tool.uservoid.BlankOutActivity" />
         <activity android:name=".module.tool.uservoid.UserToVoidActivity" />
         <activity android:name=".module.tool.uservoid.UserToVoidDetailsActivity" />
-
         <activity android:name=".module.tool.gps.GpsListActivity" />
         <activity android:name=".module.tool.gps.GpsApplyActivity" />
         <activity android:name=".module.tool.gps.GpsDetailsActivity" />
@@ -48,34 +53,27 @@
         <activity android:name=".module.tool.history.HistoryUserDetailsActivity" />
         <activity android:name=".module.tool.history.RepaymentListActivity" />
         <activity android:name=".module.tool.gps_install.GpsDetailActivity" />
-
         <activity android:name=".module.work.advancefund.AdvanceFundListActivity" />
         <activity android:name=".module.work.advancefund.AdvanceFundApplyActivity" />
         <activity android:name=".module.work.advancefund.AdvanceFundDetailActivity" />
-
         <activity android:name=".module.tool.fabaohe.FbhListActivity" />
         <activity android:name=".module.tool.fabaohe.FbhDetailActivity" />
-
         <activity android:name=".module.tool.fabrication.FabricationInputActivity" />
         <activity android:name=".module.tool.fabrication.FabricationApplyActivity" />
         <activity android:name=".module.tool.fabrication.FabricationListActivity" />
-
         <activity android:name=".module.tool.mismatching.MismatchingListActivity" />
         <activity android:name=".module.tool.mismatching.MismatchingDetailActivity" />
-
         <activity android:name=".module.datatransfer.GpsSendActivity" />
         <activity android:name=".module.datatransfer.DataReceiveActivity" />
-
         <activity android:name=".module.tool.gps_install.GPSInstallListActivity" />
         <activity android:name=".module.tool.gps_install.GPSInstallInfoActivity" />
         <activity android:name=".module.tool.gps_install.GPSInfoAddActivity" />
         <activity android:name=".module.work.credit.audit.BankCreditResultActivity" />
 
-        <!--数据请求-->
+        <!-- 数据请求 -->
 
         <activity android:name=".module.work.cldy.BssCldyListActivity" />
         <activity android:name=".module.work.cldy.CldyInputMessageActivity" />
-
         <activity android:name=".module.work.bank_loan.BankLoanListActivity" />
         <activity android:name=".module.work.bank_loan.BankLoanCommitActivity" />
         <activity android:name=".module.work.bank_loan.BankLoanInputActivity" />
@@ -95,22 +93,25 @@
         <activity android:name=".module.datatransfer.GpsReceiveActivity" />
         <activity android:name=".module.datatransfer.DataSendActivity" />
 
-        <!--<activity android:name=".module.business.join_approval.JoinApplyListActivity" />-->
-        <!--<activity android:name=".module.business.face_view.InterviewActivity" />-->
-        <!--<activity android:name=".module.business.face_view.InterviewStartActivity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep1Activity" />-->
+        <!-- <activity android:name=".module.business.join_approval.JoinApplyListActivity" /> -->
+        <!-- <activity android:name=".module.business.face_view.InterviewActivity" /> -->
+        <!-- <activity android:name=".module.business.face_view.InterviewStartActivity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep1Activity" /> -->
 
-        <!--<activity android:name=".module.user.UserInfoActivity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep2Activity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep3Activity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep4Activity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep5Activity" />-->
-        <!--<activity android:name=".module.business.join_approval.edit.JoinStep6Activity" />-->
-        <!--<activity android:name=".module.business.join_approval.JoinApplyActivity" />-->
 
-        <!--<activity android:name=".module.business.face_view.RoomActivity" />-->
-        <!--<activity android:name=".module.business.face_view.MainActivity" />-->
+        <!-- <activity android:name=".module.user.UserInfoActivity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep2Activity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep3Activity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep4Activity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep5Activity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.edit.JoinStep6Activity" /> -->
+        <!-- <activity android:name=".module.business.join_approval.JoinApplyActivity" /> -->
 
+
+        <!-- <activity android:name=".module.business.face_view.RoomActivity" /> -->
+        <!-- <activity android:name=".module.business.face_view.MainActivity" /> -->
+
+        <activity android:name=".module.tool.calculator.CalculautorActivity"></activity>
     </application>
 
 </manifest>

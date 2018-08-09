@@ -68,4 +68,6 @@ public class TransferActivity extends AbsTabLayoutActivity {
         mTabLayoutBinding.tablayout.setTabMode(TabLayout.MODE_FIXED);
 
     }
+
+
 }

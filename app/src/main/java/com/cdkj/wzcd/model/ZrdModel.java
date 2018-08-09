@@ -47,7 +47,7 @@ public class ZrdModel {
      * companyCode : DP201800000000000000001
      * applyDatetime : Jun 10, 2018 8:58:17 PM
      * curNodeCode : 002_03
-     * remark : 审核说明
+     * remark : 审核说明  审核意见
      * companyName : 乌鲁木齐华途威通汽车销售有限公司
      * saleUserName : ha
      * loanBankName : 招商银行

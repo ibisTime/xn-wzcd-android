@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.cdkj.baselibrary.CdApplication;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import org.litepal.LitePal;
 
@@ -25,6 +26,9 @@ public class MyApplication extends Application {
         CdApplication.initialize(this, BuildConfig.LOG_DEBUG);
 
         initLitePal();
+
+        //二维码初始化
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
 

@@ -14,6 +14,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMySelectHorizontalBinding;
+import com.cdkj.wzcd.view.interfaces.MyFrontSelectInterface;
 import com.cdkj.wzcd.view.interfaces.MySelectInterface;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class MySelectLayout extends LinearLayout {
 
     private List<DataDictionary> mData;
     private MySelectInterface mySelectInterface;
+    private MyFrontSelectInterface myFrontSelectInterface;
 
     private String txtTitle;
     private String txtContent;
@@ -202,6 +204,18 @@ public class MySelectLayout extends LinearLayout {
         mySelectInterface = selectInterface;
 
     }
+    /**
+     * 直接设置List数据  弹窗之前会有一个回调可做判断.返回true 则不在弹窗
+     *
+     * @param data
+     * @param selectInterface
+     */
+    public void setData(List<DataDictionary> data, MyFrontSelectInterface frontSelectInterface,MySelectInterface selectInterface) {
+        mData = data;
+        mySelectInterface = selectInterface;
+        myFrontSelectInterface=frontSelectInterface;
+
+    }
 
     public void setData(List<DataDictionary> data) {
         // 隐藏更多
@@ -235,6 +249,13 @@ public class MySelectLayout extends LinearLayout {
 
         if (index == 0)
             return;
+
+        if (myFrontSelectInterface!=null) {
+            if (myFrontSelectInterface.onClick()) {
+                //返回True  就不在继续弹窗了
+                return;
+            }
+        }
 
         new AlertDialog.Builder(context).setTitle("请选择").setSingleChoiceItems(
                 mValueList, selectIndex, (dialog, which) -> {

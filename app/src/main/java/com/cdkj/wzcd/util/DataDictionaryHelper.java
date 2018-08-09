@@ -3,6 +3,8 @@ package com.cdkj.wzcd.util;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.cdkj.baselibrary.api.BaseResponseListModel;
+import com.cdkj.baselibrary.base.BaseActivity;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -57,21 +59,20 @@ public class DataDictionaryHelper {
     private static Call call;
 
 
-
     private static void initBaseCoinList() {
         BASE_DATA_LIST.clear();
         BASE_DATA_LIST.addAll(DataSupport.findAll(DataDictionary.class));
     }
 
-    public static List<DataDictionary> getListByParentKey(String parentKey){
+    public static List<DataDictionary> getListByParentKey(String parentKey) {
         if (BASE_DATA_LIST.size() == 0)
             initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
-        for (DataDictionary dataDictionary : BASE_DATA_LIST){
+        for (DataDictionary dataDictionary : BASE_DATA_LIST) {
 
-            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)){
+            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)) {
                 list.add(dataDictionary);
             }
 
@@ -81,23 +82,23 @@ public class DataDictionaryHelper {
 
     }
 
-    public static DataDictionary getDataByKey(String parentKey, String dKey){
+    public static DataDictionary getDataByKey(String parentKey, String dKey) {
         if (BASE_DATA_LIST.size() == 0)
             initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
-        for (DataDictionary dataDictionary : BASE_DATA_LIST){
+        for (DataDictionary dataDictionary : BASE_DATA_LIST) {
 
-            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)){
+            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)) {
                 list.add(dataDictionary);
             }
 
         }
 
-        for (DataDictionary dataDictionary : list){
+        for (DataDictionary dataDictionary : list) {
 
-            if (TextUtils.equals(dataDictionary.getDkey(), dKey)){
+            if (TextUtils.equals(dataDictionary.getDkey(), dKey)) {
                 return dataDictionary;
             }
 
@@ -107,23 +108,23 @@ public class DataDictionaryHelper {
 
     }
 
-    public static String getValueBuyKey(String parentKey, String dKey){
+    public static String getValueBuyKey(String parentKey, String dKey) {
         if (BASE_DATA_LIST.size() == 0)
             initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
-        for (DataDictionary dataDictionary : BASE_DATA_LIST){
+        for (DataDictionary dataDictionary : BASE_DATA_LIST) {
 
-            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)){
+            if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)) {
                 list.add(dataDictionary);
             }
 
         }
 
-        for (DataDictionary dataDictionary : list){
+        for (DataDictionary dataDictionary : list) {
 
-            if (TextUtils.equals(dataDictionary.getDkey(), dKey)){
+            if (TextUtils.equals(dataDictionary.getDkey(), dKey)) {
                 return dataDictionary.getDvalue();
             }
 
@@ -132,24 +133,24 @@ public class DataDictionaryHelper {
         return "";
     }
 
-    public static String getBizTypeByKey(String dKey){
+    public static String getBizTypeByKey(String dKey) {
         if (BASE_DATA_LIST.size() == 0)
             initBaseCoinList();
 
         List<DataDictionary> list = new ArrayList<>();
 
-        for (DataDictionary dataDictionary : BASE_DATA_LIST){
+        for (DataDictionary dataDictionary : BASE_DATA_LIST) {
 
-            if (TextUtils.equals(dataDictionary.getParentKey(), budget_orde_biz_typer)){
+            if (TextUtils.equals(dataDictionary.getParentKey(), budget_orde_biz_typer)) {
 
                 list.add(dataDictionary);
             }
 
         }
 
-        for (DataDictionary dataDictionary : list){
+        for (DataDictionary dataDictionary : list) {
 
-            if (TextUtils.equals(dataDictionary.getDkey(), dKey)){
+            if (TextUtils.equals(dataDictionary.getDkey(), dKey)) {
                 return dataDictionary.getDvalue();
             }
 
@@ -159,9 +160,9 @@ public class DataDictionaryHelper {
     }
 
 
-    public static String getValueBuyList(String key, List<DataDictionary> data){
+    public static String getValueBuyList(String key, List<DataDictionary> data) {
 
-        for (DataDictionary dataDictionary : data){
+        for (DataDictionary dataDictionary : data) {
             if (TextUtils.equals(key, dataDictionary.getDkey()))
                 return dataDictionary.getDvalue();
         }
@@ -170,8 +171,7 @@ public class DataDictionaryHelper {
     }
 
 
-
-    public static void getAllDataDictionary(Context context, AllDataDictionaryInterface listInterface){
+    public static void getAllDataDictionary(Context context, AllDataDictionaryInterface listInterface) {
         Map<String, String> map = new HashMap<>();
         map.put("dkey", "");
         map.put("orderColumn", "");
@@ -211,7 +211,39 @@ public class DataDictionaryHelper {
         });
     }
 
-    public interface AllDataDictionaryInterface{
+    /**
+     * @param mActivity               BaseActivity  主要用于联网请求和弹窗
+     * @param parentKey               数据字典入参对应的   parentKey
+     * @param onDataDictionarySuccess 请求成功的数据回传
+     */
+    public static void getDataDictionaryList(BaseActivity mActivity, String parentKey, OnDataDictionarySuccess onDataDictionarySuccess) {
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("parentKey", parentKey);
+        Call<BaseResponseListModel<DataDictionary>> call = RetrofitUtils.createApi(MyApiServer.class).getDataDictionary("630036", StringUtils.getJsonToString(map));
+        mActivity.showLoadingDialog();
+        call.enqueue(new BaseResponseListCallBack<DataDictionary>(mActivity) {
+
+            @Override
+            protected void onSuccess(List<DataDictionary> data, String SucMessage) {
+                if (onDataDictionarySuccess != null) {
+                    onDataDictionarySuccess.onSuccess(data, SucMessage);
+                }
+            }
+
+            @Override
+            protected void onFinish() {
+                mActivity.disMissLoading();
+            }
+        });
+    }
+
+    public interface OnDataDictionarySuccess {
+        void onSuccess(List<DataDictionary> data, String SucMessage);
+
+    }
+
+    public interface AllDataDictionaryInterface {
 
         void onSuccess(List<DataDictionary> list);
 
@@ -221,7 +253,7 @@ public class DataDictionaryHelper {
 
     }
 
-    private static void clearCall(){
+    private static void clearCall() {
         if (call != null)
             call.cancel();
     }

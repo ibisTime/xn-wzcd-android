@@ -67,7 +67,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
     public void afterCreate(Bundle savedInstanceState) {
         mBaseBinding.titleView.setMidTitle("收件");
 
-        if (getIntent()==null)
+        if (getIntent() == null)
             return;
 
         code = getIntent().getStringExtra(DATA_SIGN);
@@ -79,7 +79,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
     }
 
 
-    private void initAdapter(){
+    private void initAdapter() {
 
         reasonAdapter = new SupplementReasonAdapter(reasonList);
         reasonAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -98,7 +98,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
     }
 
     @Subscribe
-    public void doAddCreditPerson(ReasonModel model){
+    public void doAddCreditPerson(ReasonModel model) {
 
         reasonList.add(model);
         reasonAdapter.notifyDataSetChanged();
@@ -106,7 +106,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
     }
 
     @Subscribe
-    public void doReplaceCreditPerson(ReasonReplaceModel model){
+    public void doReplaceCreditPerson(ReasonReplaceModel model) {
 
         reasonList.set(model.getLocation(), model.getReasonModel());
         reasonAdapter.notifyDataSetChanged();
@@ -119,7 +119,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         });
 
         mBinding.btnConfirm.setOnClickListener(view -> {
-            if (check()){
+            if (check()) {
                 reissueRequest();
             }
         });
@@ -136,20 +136,20 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         });
     }
 
-    public boolean check(){
+    public boolean check() {
 
         int i = 0;
 
-        for (ReasonModel model : reasonList){
+        for (ReasonModel model : reasonList) {
 
-            if (model.isChoice()){
+            if (model.isChoice()) {
                 i++;
             }
 
         }
 
-        if (i == 0){
-            ToastUtil.show(this,"请勾选补件原因");
+        if (i == 0) {
+            ToastUtil.show(this, "请勾选补件原因");
             return false;
         }
 
@@ -160,13 +160,13 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         return true;
     }
 
-    private List<ReasonModel> getSelectedReasonList(){
+    private List<ReasonModel> getSelectedReasonList() {
 
         List<ReasonModel> list = new ArrayList<>();
 
-        for (ReasonModel model : reasonList){
+        for (ReasonModel model : reasonList) {
 
-            if (model.isChoice()){
+            if (model.isChoice()) {
                 list.add(model);
             }
 
@@ -176,7 +176,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
     }
 
 
-    public void getData(){
+    public void getData() {
         Map<String, String> map = new HashMap<>();
 
         map.put("code", code);
@@ -212,21 +212,21 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         String dValue = DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.send_type, data.getSendType());
         mBinding.myNlSendType.setText(dValue);
 
-        if (TextUtils.equals(dValue, "快递")){
+        if (TextUtils.equals(dValue, "快递")) {
             mBinding.llLogistics.setVisibility(View.VISIBLE);
             mBinding.myNlLogisticsCode.setText(data.getLogisticsCode());
             mBinding.myNlLogisticsCompany.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.kd_company, data.getLogisticsCompany()));
         }
 
 
-        if (data.getSupplementReasonList() != null){
-           for (DataTransferModel.SupplementReasonListBean bean : data.getSupplementReasonList()){
+        if (data.getSupplementReasonList() != null) {
+            for (DataTransferModel.SupplementReasonListBean bean : data.getSupplementReasonList()) {
 
-               ReasonModel reasonModel  = new ReasonModel();
-               reasonModel.setReason(bean.getReason());
-               reasonList.add(reasonModel);
+                ReasonModel reasonModel = new ReasonModel();
+                reasonModel.setReason(bean.getReason());
+                reasonList.add(reasonModel);
 
-           }
+            }
             reasonAdapter.notifyDataSetChanged();
         }
 
@@ -246,7 +246,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         hashMap.put("operator", SPUtilHelper.getUserId());
 //        hashMap.put("remark", mBinding.myElSendNote.getText());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632158", StringUtils.getJsonToString(hashMap));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632158", StringUtils.getJsonToString(hashMap));
 
         addCall(call);
 
@@ -286,7 +286,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         map.put("operator", SPUtilHelper.getUserId());
 //        hashMap.put("remark", mBinding.myElSendNote.getText());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(map));
 
         addCall(call);
 
@@ -318,14 +318,16 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
             return;
 
         HashMap<String, Object> hashMap = new HashMap<>();
-
-        hashMap.put("code", code);
+        ArrayList<String> codeList = new ArrayList();
+        codeList.add(code);
+        hashMap.put("codeList", codeList);
+//        hashMap.put("code", code);
         hashMap.put("updater", SPUtilHelper.getUserId());
         hashMap.put("operator", SPUtilHelper.getUserId());
 
         hashMap.put("supplementReasonList", getSelectedReasonList());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(hashMap));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(hashMap));
 
         addCall(call);
 

@@ -36,12 +36,14 @@ import static com.cdkj.baselibrary.appmanager.CdRouteHelper.IS_FIRST_REQUEST;
 public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
 
     public static final String DATA_SEND = "data_send";
+
     public static final String DATA_RECEIVE = "data_receive";
     public static final String GPS_SEND = "gps_send";
     public static final String GPS_RECEIVE = "gps_receive";
-
     private String dataType;
     private boolean isFirstRequest;
+
+    private static final String TAG = "pppppp";
 
     /**
      * @param
@@ -59,17 +61,16 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
     @Override
     public void onResume() {
         super.onResume();
-        if (getUserVisibleHint()){
+        if (getUserVisibleHint()) {
             mRefreshHelper.onDefaultMRefresh(true);
         }
     }
 
     @Override
     protected void lazyLoad() {
-        if (mRefreshBinding != null){
+        if (mRefreshBinding != null) {
             mRefreshHelper.onDefaultMRefresh(true);
         }
-
     }
 
     @Override
@@ -85,7 +86,7 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
 
             initRefreshHelper(MyCdConfig.LIST_LIMIT);
 
-            if (isFirstRequest){
+            if (isFirstRequest) {
                 mRefreshHelper.onDefaultMRefresh(true);
             }
 
@@ -96,17 +97,17 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
     public RecyclerView.Adapter getListAdapter(List listData) {
 
 
-        if (TextUtils.equals(dataType, DATA_SEND) || TextUtils.equals(dataType, DATA_RECEIVE)){
-            DataTransferAdapter mAdapter = new DataTransferAdapter(listData, this);
+        if (TextUtils.equals(dataType, DATA_SEND) || TextUtils.equals(dataType, DATA_RECEIVE)) {
+
+            DataTransferAdapter mAdapter =  mAdapter = new DataTransferAdapter(listData, this);;
 
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                DataTransferModel model = mAdapter.getItem(position);
+                DataTransferModel model = (DataTransferModel) adapter.getItem(position);
 
                 pickUpRequest(model.getCode());
             });
-
             return mAdapter;
-        }else {
+        } else {
             GPSTransferAdapter mAdapter = new GPSTransferAdapter(listData);
 
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -119,7 +120,6 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
 
     }
 
-
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
 
@@ -127,12 +127,12 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
 
         List<String> statusList = new ArrayList<>();
 
-        if (TextUtils.equals(dataType, DATA_SEND)){
+        if (TextUtils.equals(dataType, DATA_SEND)) {
             map.put("type", "1");
             statusList.add("0");
             statusList.add("4");
 
-        }else if (TextUtils.equals(dataType, DATA_RECEIVE)){
+        } else if (TextUtils.equals(dataType, DATA_RECEIVE)) {
             map.put("type", "1");
             statusList.add("1");
             statusList.add("2");
@@ -140,12 +140,12 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
             statusList.add("5");
             statusList.add("6");
 
-        }else if (TextUtils.equals(dataType, GPS_SEND)){
+        } else if (TextUtils.equals(dataType, GPS_SEND)) {
             map.put("type", "2");
             statusList.add("0");
             statusList.add("4");
 
-        }else {
+        } else {
             map.put("type", "2");
             statusList.add("1");
             statusList.add("6");
@@ -193,7 +193,7 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
         hashMap.put("operator", SPUtilHelper.getUserId());
 //        hashMap.put("remark", mBinding.myElSendNote.getText());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(hashMap));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(hashMap));
 
         addCall(call);
 

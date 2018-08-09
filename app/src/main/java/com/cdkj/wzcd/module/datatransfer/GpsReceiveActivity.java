@@ -64,7 +64,7 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
     public void afterCreate(Bundle savedInstanceState) {
         mBaseBinding.titleView.setMidTitle("收件");
 
-        if (getIntent()==null)
+        if (getIntent() == null)
             return;
 
         code = getIntent().getStringExtra(DATA_SIGN);
@@ -80,7 +80,7 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
 //        mBinding.myESlReason.setData(DataDictionaryHelper.getListByParentKey(supplement_reason));
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         refFileAdapter = new DataFileAdapter(refFileList);
         mBinding.rvRefFile.setLayoutManager(getLinearLayoutManager(false));
         mBinding.rvRefFile.setAdapter(refFileAdapter);
@@ -96,22 +96,22 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
         });
 
         mBinding.myCbConfirm.setOnConfirmRightListener(view -> {
-            if (check()){
+            if (check()) {
                 pickUpAndReissueRequest();
             }
         });
     }
 
-    public boolean check(){
+    public boolean check() {
 
-        if (mBinding.myElReason.check()){
+        if (mBinding.myElReason.check()) {
             return false;
         }
 
         return true;
     }
 
-    public void getData(){
+    public void getData() {
         Map<String, String> map = new HashMap<>();
 
         map.put("code", code);
@@ -145,7 +145,7 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
         String dValue = DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.send_type, data.getSendType());
         mBinding.myNlSendType.setText(dValue);
 
-        if (TextUtils.equals(dValue, "快递")){
+        if (TextUtils.equals(dValue, "快递")) {
             mBinding.llLogistics.setVisibility(View.VISIBLE);
             mBinding.myNlLogisticsCode.setText(data.getLogisticsCode());
             mBinding.myNlLogisticsCompany.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.kd_company, data.getLogisticsCompany()));
@@ -169,7 +169,7 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
         map.put("codeList", codeList);
         map.put("operator", SPUtilHelper.getUserId());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(map));
 
         addCall(call);
 
@@ -201,11 +201,14 @@ public class GpsReceiveActivity extends AbsBaseLoadActivity {
             return;
 
         Map<String, Object> map = new HashMap<>();
-        map.put("code", code);
+        ArrayList<String> codeList = new ArrayList();
+        codeList.add(code);
+        map.put("codeList", codeList);
+//        map.put("code", code);
         map.put("operator", SPUtilHelper.getUserId());
         map.put("supplementReason", mBinding.myElReason.getText());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632152", StringUtils.getJsonToString(map));
 
         addCall(call);
 

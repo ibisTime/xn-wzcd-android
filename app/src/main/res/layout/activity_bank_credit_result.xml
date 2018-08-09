@@ -263,8 +263,9 @@
             <View
                 style="@style/style_split_line_horizontal_broad"/>
 
+                <!--app:txt_title="对外担保"-->
             <com.cdkj.wzcd.view.MyTitleBarLayout
-                app:txt_title="对外担保"
+                app:txt_title="备注"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

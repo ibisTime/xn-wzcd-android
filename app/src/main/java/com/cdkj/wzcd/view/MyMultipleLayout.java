@@ -81,7 +81,7 @@ public class MyMultipleLayout extends LinearLayout {
      * @param activity Activity上下文，用于启动ImageSelectActivity和传入FullyGridLayoutManager
      * @param requestCode 多选Layout图片requestCode，用于相册或相机回调时判断图片显示Layout
      */
-    public void build(Activity activity ,int requestCode){
+    public void build(Activity activity,int maxSize, int requestCode){
         mActivity = activity;
         mRequestCode = requestCode;
 

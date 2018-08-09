@@ -40,21 +40,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_input_hint="请输入共还人户籍地"
-                app:txt_input_title="*共还人户籍地" />
+                app:txt_input_title="共还人户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_guarantor1BirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_input_hint="请输入担保人1户籍地"
-                app:txt_input_title="*担保人1户籍地" />
+                app:txt_input_title="担保人1户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_guarantor2BirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_input_hint="请输入担保人2户籍地"
-                app:txt_input_title="*担保人2户籍地" />
+                app:txt_input_title="担保人2户籍地" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_otherNote"

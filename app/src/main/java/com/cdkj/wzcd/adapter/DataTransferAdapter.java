@@ -35,12 +35,13 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
     public DataTransferAdapter(@Nullable List<DataTransferModel> data, TransferListFragment fragment) {
         super(R.layout.item_data_transfer, data);
         mFragment = fragment;
+
     }
 
     @Override
     protected void convert(BaseViewHolder helper, DataTransferModel item) {
 
-        mBinding  = DataBindingUtil.bind(helper.itemView);
+        mBinding = DataBindingUtil.bind(helper.itemView);
 
         mBinding.myItemCblConfirm.setContent("", "");
 
@@ -50,7 +51,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
         mBinding.myIlName.setText(item.getUserName());
         mBinding.myIlSendType.setText(DataDictionaryHelper.getValueBuyKey(send_type, item.getSendType()));
 
-        if (TextUtils.equals(item.getSendType(), "1")){
+        if (TextUtils.equals(item.getSendType(), "1")) {
             mBinding.myIlCompany.setVisibility(View.GONE);
             mBinding.myIlExpress.setVisibility(View.GONE);
         }
@@ -60,11 +61,12 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
 
         mBinding.myIlFrom.setText(NodeHelper.getNameOnTheCode(item.getFromNodeCode()));
         mBinding.myIlTo.setText(NodeHelper.getNameOnTheCode(item.getToNodeCode()));
+
     }
 
-    private String getStatus(BaseViewHolder helper, DataTransferModel item){
+    private String getStatus(BaseViewHolder helper, DataTransferModel item) {
 
-        switch (item.getStatus()){
+        switch (item.getStatus()) {
 
             case "0":
                 mBinding.myItemCblConfirm.setRightTextAndListener("发件", view -> {
@@ -78,6 +80,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
                     //收件并审核
                     mFragment.pickUpRequest(item.getCode());
                 });
+
                 return "已发件待收件";
 
             case "2":
@@ -109,9 +112,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
 
             default:
                 return "";
-
         }
     }
-
 
 }

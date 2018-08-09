@@ -14,6 +14,7 @@ import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.event.BudgetCheckModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
+import com.cdkj.wzcd.view.interfaces.MyFrontSelectInterface;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -73,8 +74,8 @@ public class JoinStep2Fragment extends BaseLazyFragment {
     }
 
     private void initView() {
-
-        mBinding.mySlApplyUserGhrRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation),null);
+        //贷款人与共还人的关系不可更改
+        mBinding.mySlApplyUserGhrRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation), (MyFrontSelectInterface) () -> true  ,null);
         mBinding.mySlMarryState.setData(DataDictionaryHelper.getListByParentKey(marry_state),null);
 
         mBinding.mySlApplyUserJourShowIncome.setDataIs(null);

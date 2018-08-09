@@ -7,22 +7,22 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <FrameLayout
-            android:background="@color/title_bg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/title_height">
+            android:layout_height="@dimen/title_height"
+            android:background="@color/title_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="车贷"
                 android:textColor="@color/title_mid_tv"
-                android:textSize="@dimen/top_center_title_size"
-                android:text="车贷" />
+                android:textSize="@dimen/top_center_title_size" />
 
             <FrameLayout
                 android:id="@+id/fl_right"
@@ -37,9 +37,9 @@
                     android:layout_gravity="right|center_vertical"
                     android:layout_marginRight="15dp"
                     android:gravity="center"
+                    android:text="切换账号"
                     android:textColor="@color/title_right_tv"
-                    android:textSize="16sp"
-                    android:text="切换账号" />
+                    android:textSize="16sp" />
 
             </FrameLayout>
 
@@ -50,61 +50,61 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:background="@mipmap/main_title_bg"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="110dp">
+                    android:layout_height="110dp"
+                    android:background="@mipmap/main_title_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:id="@+id/rl_photo"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="15dp"
                         android:layout_width="58dp"
-                        android:layout_height="58dp">
+                        android:layout_height="58dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dp">
 
                         <View
-                            android:background="@drawable/common_user_photo_bg"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:background="@drawable/common_user_photo_bg" />
 
                         <FrameLayout
-                            android:layout_centerInParent="true"
                             android:layout_width="55dp"
-                            android:layout_height="55dp">
+                            android:layout_height="55dp"
+                            android:layout_centerInParent="true">
 
                             <TextView
                                 android:id="@+id/tv_avatar"
-                                android:gravity="center"
-                                android:visibility="gone"
-                                android:textSize="22sp"
-                                android:textColor="@color/colorPrimary"
-                                android:background="@drawable/corner_user_photo"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:background="@drawable/corner_user_photo"
+                                android:gravity="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="22sp"
+                                android:visibility="gone" />
 
                             <ImageView
                                 android:id="@+id/im_avatar"
-                                android:background="@drawable/photo_default"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:background="@drawable/photo_default" />
 
                         </FrameLayout>
 
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:orientation="vertical"
-                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -119,9 +119,9 @@
 
                             <TextView
                                 android:id="@+id/tv_role"
-                                android:layout_marginLeft="2dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
                                 android:textColor="@color/white"
                                 android:textSize="12sp" />
 
@@ -129,57 +129,56 @@
 
                         <TextView
                             android:id="@+id/tv_company"
-                            android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <ImageView
-                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="15dp"
                         android:background="@mipmap/more_white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:visibility="gone" />
 
 
                 </LinearLayout>
 
-                <View
-                    style="@style/style_split_line_horizontal_broad"/>
+                <View style="@style/style_split_line_horizontal_broad" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <com.cdkj.wzcd.view.MyTitleBarLayout
-                            app:txt_title="车贷业务"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:txt_title="车贷业务">
 
                         </com.cdkj.wzcd.view.MyTitleBarLayout>
 
                         <LinearLayout
-                            android:weightSum="3"
-                            android:background="@color/white"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:weightSum="3">
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_zxdc"
-                                app:txt_content="资信调查"
-                                app:img_content="@mipmap/main_zxdc"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_zxdc"
+                                app:txt_content="资信调查">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -187,11 +186,11 @@
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_zrsq"
-                                app:txt_content="准入申请"
-                                app:img_content="@mipmap/main_dqzr"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_dqzr"
+                                app:txt_content="准入申请">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -199,11 +198,11 @@
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_advance_fund"
-                                app:txt_content="财务垫资"
-                                app:img_content="@mipmap/main_cwdz"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_cwdz"
+                                app:txt_content="财务垫资">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -211,24 +210,24 @@
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_loan"
-                                android:visibility="gone"
-                                app:txt_content="银行放款"
-                                app:img_content="@mipmap/main_fbh"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:visibility="gone"
+                                app:img_content="@mipmap/main_fbh"
+                                app:txt_content="银行放款">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_cldy"
-                                android:visibility="gone"
-                                app:txt_content="车辆抵押"
-                                app:img_content="@mipmap/main_cwdz"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:visibility="gone"
+                                app:img_content="@mipmap/main_cwdz"
+                                app:txt_content="车辆抵押">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -239,65 +238,64 @@
 
                     </LinearLayout>
 
-                    <View
-                        style="@style/style_split_line_horizontal_broad"/>
+                    <View style="@style/style_split_line_horizontal_broad" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:background="@color/white"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical">
 
                         <com.cdkj.wzcd.view.MyTitleBarLayout
-                            app:txt_title="车贷工具"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:txt_title="车贷工具">
 
                         </com.cdkj.wzcd.view.MyTitleBarLayout>
 
                         <LinearLayout
                             android:id="@+id/ll_tool1"
-                            android:weightSum="3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="3">
 
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_fabrication"
-                                app:txt_content="制卡"
-                                app:img_content="@mipmap/main_zk"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_zk"
+                                app:txt_content="制卡">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_fbh"
-                                app:txt_content="发保合"
-                                app:img_content="@mipmap/main_fbh"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_fbh"
+                                app:txt_content="发保合">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_mismatching"
-                                app:txt_content="发票不匹配"
-                                app:img_content="@mipmap/main_fpbpp"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_fpbpp"
+                                app:txt_content="发票不匹配">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -306,39 +304,39 @@
 
                         <LinearLayout
                             android:id="@+id/ll_tool2"
-                            android:weightSum="3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="3">
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_khzf"
-                                app:txt_content="客户作废"
-                                app:img_content="@mipmap/main_khzf"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_khzf"
+                                app:txt_content="客户作废">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_gpssl"
-                                app:txt_content="GPS申领"
-                                app:img_content="@mipmap/main_gpssl"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_gpssl"
+                                app:txt_content="GPS申领">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_gpsaz"
-                                app:txt_content="GPS安装"
-                                app:img_content="@mipmap/main_gpsaz"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_gpsaz"
+                                app:txt_content="GPS安装">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -347,29 +345,40 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:weightSum="3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="3">
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_lskh"
-                                app:txt_content="历史客户"
-                                app:img_content="@mipmap/main_lskh"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_lskh"
+                                app:txt_content="历史客户">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_jcdy"
-                                android:visibility="gone"
-                                app:txt_content="解除抵押"
-                                app:img_content="@mipmap/main_lskh"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:visibility="gone"
+                                app:img_content="@mipmap/main_lskh"
+                                app:txt_content="解除抵押">
+
+
+                            </com.cdkj.wzcd.view.MySquareRowLayout>
+
+                            <com.cdkj.wzcd.view.MySquareRowLayout
+                                android:id="@+id/mySr_calculautor"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_lskh"
+                                app:txt_content="月供计算器">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
@@ -378,53 +387,58 @@
 
                     </LinearLayout>
 
-                    <View
-                        style="@style/style_split_line_horizontal_broad"/>
+                    <View style="@style/style_split_line_horizontal_broad" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_zlcd"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:background="@color/white"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical">
 
                         <com.cdkj.wzcd.view.MyTitleBarLayout
-                            app:txt_title="资料传递"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:txt_title="资料传递">
 
                         </com.cdkj.wzcd.view.MyTitleBarLayout>
 
                         <LinearLayout
-                            android:weightSum="3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:weightSum="3">
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
                                 android:id="@+id/mySr_zlcd"
-                                app:txt_content="资料传递"
-                                app:img_content="@mipmap/main_zlcd"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_zlcd"
+                                app:txt_content="资料传递">
 
 
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
+                            <com.cdkj.wzcd.view.MySquareRowLayout
+                                android:id="@+id/mySr_zxing"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:img_content="@mipmap/main_zlcd"
+                                app:txt_content="扫码收件"></com.cdkj.wzcd.view.MySquareRowLayout>
                         </LinearLayout>
 
 
                     </LinearLayout>
 
-                    <View
-                        style="@style/style_split_line_horizontal_broad"/>
+                    <View style="@style/style_split_line_horizontal_broad" />
 
                 </LinearLayout>
 

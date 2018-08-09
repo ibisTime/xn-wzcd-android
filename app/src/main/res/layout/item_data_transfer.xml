@@ -6,16 +6,14 @@
     <data>
 
 
-
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <View
-            style="@style/style_split_line_horizontal_broad"/>
+        <View style="@style/style_split_line_horizontal_broad" />
 
         <com.cdkj.wzcd.view.list.MyListItemTitleLayout
             android:id="@+id/myTl_idStatus"
@@ -26,57 +24,57 @@
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_type"
-            app:txt_list_item_title="资料类型"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="资料类型">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_name"
-            app:txt_list_item_title="客户姓名"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="客户姓名">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_send_type"
-            app:txt_list_item_title="传递方式"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="传递方式">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_company"
-            app:txt_list_item_title="快递公司"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="快递公司">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_express"
-            app:txt_list_item_title="快递单号"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="快递单号">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_from"
-            app:txt_list_item_title="发件节点"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="发件节点">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 
         <com.cdkj.wzcd.view.list.MyListItemLayout
             android:id="@+id/myIl_to"
-            app:txt_list_item_title="收件节点"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_list_item_title="收件节点">
 
         </com.cdkj.wzcd.view.list.MyListItemLayout>
 

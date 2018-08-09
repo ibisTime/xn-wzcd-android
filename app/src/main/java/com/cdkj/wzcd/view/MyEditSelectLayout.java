@@ -93,6 +93,14 @@ public class MyEditSelectLayout extends LinearLayout {
 
     }
 
+    public String getText() {
+        if (TextUtils.isEmpty(mBinding.edtInput.getText().toString().trim())) {
+            return "";
+        }
+        return mBinding.edtInput.getText().toString().trim();
+
+    }
+
 
     /**
      * 设置布局内容，内容来自于详情或其他请求，此时布局不应相应点击事件
@@ -112,6 +120,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
     /**
      * 设置不可下拉
+     *
      * @param onClickEnable
      */
     public void setOnDropEnable(boolean onClickEnable) {
@@ -120,6 +129,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
     /**
      * 根据key自动获取对应value填入
+     *
      * @param key
      */
     public void setContentByKey(String key) {
@@ -197,6 +207,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
     /**
      * 直接设置List数据,但不可下拉
+     *
      * @param data
      */
     public void setDataNoDrop(List<DataDictionary> data) {
@@ -207,7 +218,6 @@ public class MyEditSelectLayout extends LinearLayout {
         setData(data, null);
 
     }
-
 
 
     private void initListener() {
@@ -227,6 +237,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
     /**
      * 初始下拉数据mKeyList和mValueList
+     *
      * @return 数据Size
      */
     private int initList() {
@@ -270,6 +281,7 @@ public class MyEditSelectLayout extends LinearLayout {
 
     /**
      * 检查下拉框选择值
+     *
      * @return
      */
     public boolean check() {
@@ -295,7 +307,7 @@ public class MyEditSelectLayout extends LinearLayout {
         return mValue;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return mBinding.tvTitle.getText().toString().trim();
     }
 

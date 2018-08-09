@@ -9,6 +9,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -69,7 +70,6 @@ public class MyEditLayout extends LinearLayout {
         mBinding.tvTitleRight.setText(txtTitleRight);
         mBinding.edtInput.setText(txtContent);
         mBinding.tvTitleRight.setVisibility(!TextUtils.isEmpty(txtTitleRight) ? VISIBLE : GONE);
-
 
         if (!TextUtils.isEmpty(txtHint))
             mBinding.edtInput.setHint(txtHint);
@@ -132,7 +132,7 @@ public class MyEditLayout extends LinearLayout {
         return false;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return mBinding.tvTitle.getText().toString().trim();
     }
 
@@ -199,7 +199,15 @@ public class MyEditLayout extends LinearLayout {
         return mBinding.edtInput;
     }
 
-    public void setTextWatcher(TextWatcher watcher){
+    public void setTextWatcher(TextWatcher watcher) {
         mBinding.edtInput.addTextChangedListener(watcher);
     }
+
+    /**
+     * 输入的内容为  靠左垂直居中  默认是  靠右垂直居中
+     */
+    public void setInputCountenLeft() {
+        mBinding.edtInput.setGravity(Gravity.CENTER_VERTICAL);
+    }
+
 }

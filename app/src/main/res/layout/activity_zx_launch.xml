@@ -127,7 +127,7 @@
 
                 <com.cdkj.wzcd.view.MyEditLayout
                     android:id="@+id/myEl_approveNote"
-                    app:txt_input_title="审核说明"
+                    app:txt_input_title="审核意见"
                     app:txt_input_hint="选填"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

@@ -106,20 +106,20 @@ public class JoinStep4Fragment extends BaseLazyFragment {
             return false;
         }
 
-        if (mBinding.myElGhBirthAddress.check()){
-            checkFail = mBinding.myElGhBirthAddress.getTitle();
-            return false;
-        }
+//        if (mBinding.myElGhBirthAddress.check()){
+//            checkFail = mBinding.myElGhBirthAddress.getTitle();
+//            return false;
+//        }
 
-        if (mBinding.myElGuarantor1BirthAddress.check()){
-            checkFail = mBinding.myElGuarantor1BirthAddress.getTitle();
-            return false;
-        }
+//        if (mBinding.myElGuarantor1BirthAddress.check()){
+//            checkFail = mBinding.myElGuarantor1BirthAddress.getTitle();
+//            return false;
+//        }
 
-        if (mBinding.myElGuarantor2BirthAddress.check()){
-            checkFail = mBinding.myElGuarantor2BirthAddress.getTitle();
-            return false;
-        }
+//        if (mBinding.myElGuarantor2BirthAddress.check()){
+//            checkFail = mBinding.myElGuarantor2BirthAddress.getTitle();
+//            return false;
+//        }
 
         return true;
     }

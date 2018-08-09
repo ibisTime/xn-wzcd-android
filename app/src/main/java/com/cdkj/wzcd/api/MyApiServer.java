@@ -5,6 +5,8 @@ import com.cdkj.baselibrary.api.BaseResponseModel;
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.wzcd.model.AdvanceFundModel;
+import com.cdkj.wzcd.model.BanksModel;
+import com.cdkj.wzcd.model.CalculautorModel;
 import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.model.DataTransferModel;
 import com.cdkj.wzcd.model.DealersModel;
@@ -287,6 +289,32 @@ public interface MyApiServer {
     @FormUrlEncoded
     @POST("api")
     Call<BaseResponseListModel<DealersModel>> getDealersList(@Field("code") String code, @Field("json") String json);
+
+    //--------------------------------------------月供计算器↓↓↓↓↓↓--------------------------------------------
+
+    /**
+     * 获取银行
+     * 632037
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<BanksModel>> getBanksList(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 计算月供
+     *
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<CalculautorModel>> calculautor(@Field("code") String code, @Field("json") String json);
 
 
     //--------------------------------------------财务垫资--------------------------------------------
