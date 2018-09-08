@@ -108,7 +108,7 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
 
             mBinding.myElApplyUserDuty.setTextByRequest(data.getApplyUserDuty());
-            mBinding.mySlApplyUserGhrRelation.setTextByRequest(data.getApplyUserGhrRelation());
+            mBinding.mySlApplyUserGhrRelation.setTextByRequestByKey(data.getApplyUserGhrRelation());
             mBinding.mySlMarryState.setTextByRequestByKey(data.getMarryState());
 
             mBinding.myElApplyUserMonthIncome.setMoneyTextRequest(data.getApplyUserMonthIncome());

@@ -26,7 +26,6 @@ import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.model.CreditUserModel;
 import com.cdkj.wzcd.util.BankHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
@@ -202,7 +201,7 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
         });
 
         mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeByKey(mData.getShopWay()));
-        mBinding.myElAmount.setTextByRequest(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
+        mBinding.myElAmount.setMoneyTextRequest(mData.getLoanAmount());
 
         if (TextUtils.equals(mData.getShopWay(), "2")) { //二手车
             // 新车则隐藏证件

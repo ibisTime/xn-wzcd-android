@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.utils.DateUtil;
-import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemCreditListBinding;
 import com.cdkj.wzcd.model.CreditModel;
@@ -17,7 +16,6 @@ import com.cdkj.wzcd.module.work.credit.audit.AuditOneActivity;
 import com.cdkj.wzcd.util.BankHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.cdkj.wzcd.util.UserHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -50,7 +48,7 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
 
         if (item.getCreditUser() != null)
             mBinding.myIlName.setText(item.getCreditUser().getUserName());
-        mBinding.myIlAmount.setText(MoneyUtils.MONEYSING + RequestUtil.formatAmountDiv(item.getLoanAmount()));
+        mBinding.myIlAmount.setMoneyText(item.getLoanAmount());
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
         BankHelper.getValueOnTheKey(mContext, item.getLoanBankCode(), mBinding.myIlBank, null);

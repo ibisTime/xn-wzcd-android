@@ -17,7 +17,6 @@ import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityAdvanceFundDetailBinding;
 import com.cdkj.wzcd.model.AdvanceFundModel;
 import com.cdkj.wzcd.module.work.credit.CreditDetailActivity;
-import com.cdkj.wzcd.util.RequestUtil;
 
 import java.util.Map;
 
@@ -104,7 +103,7 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlCompanyName.setText(data.getBizCompanyName());
         mBinding.myNlDealers.setText(data.getCarDealerName());
-        mBinding.myNlAmount.setText(RequestUtil.formatAmountDivSign(data.getBudgetOrder().getLoanAmount()));
+        mBinding.myNlAmount.setMoneyText(data.getBudgetOrder().getLoanAmount());
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlNumber.setText(data.getCollectionAccountNo());
         mBinding.myNlIsAdvanceFund.setText(TextUtils.equals(data.getIsAdvanceFund(), "1") ? "是" : "否");

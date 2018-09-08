@@ -113,7 +113,8 @@
 
         <activity android:name=".module.tool.calculator.CalculautorActivity" />
         <activity android:name=".module.work.credit.audit.AuditOneActivity" />
-        <activity android:name=".module.work.credit.audit.AuditCourtNetwork"></activity>
+        <activity android:name=".module.work.credit.audit.AuditCourtNetwork" />
+        <activity android:name=".module.work.bank_loan.SendingLoanListActivity"></activity>
     </application>
 
 </manifest>

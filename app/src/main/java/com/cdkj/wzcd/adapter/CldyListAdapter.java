@@ -40,7 +40,7 @@ public class CldyListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
 
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getShopWay()));
-        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
+        mBinding.myIlAmount.setMoneyText(item.getLoanAmount());
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));

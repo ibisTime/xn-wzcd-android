@@ -10,6 +10,9 @@ import android.widget.LinearLayout;
 
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyListItemBinding;
+import com.cdkj.wzcd.util.RequestUtil;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by cdkj on 2018/5/29.
@@ -53,12 +56,26 @@ public class MyListItemLayout extends LinearLayout {
 
     private void init(Context context) {
         this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_list_item, this, true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_list_item, this, true);
 
     }
 
-    public void setText(String content){
+    public void setText(String content) {
         mBinding.tvContent.setText(content);
+    }
+
+    public void setMoneyText(String moneyText) {
+
+        String yuan = RequestUtil.formatAmountDiv(moneyText);
+
+        if (Double.parseDouble(yuan) > 10000) {
+            double v = Double.parseDouble(yuan) / 10000;
+            DecimalFormat df = new DecimalFormat("#.00");
+            mBinding.tvContent.setText(df.format(v)+"万");
+        } else {
+            mBinding.tvContent.setText(yuan + context.getString(R.string.money_sing));
+        }
+
     }
 
 

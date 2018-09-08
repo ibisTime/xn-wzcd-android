@@ -332,7 +332,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             } else if (TextUtils.equals("2", data.getCustomerType())) {
                 mBinding.mySlUserType.setTextByRequest("企业");
             }
-            int LoanPeriods = (int) Double.parseDouble(data.getLoanPeriods()==null?"0":data.getLoanPeriods());
+            int LoanPeriods = (int) Double.parseDouble(data.getLoanPeriods() == null ? "0" : data.getLoanPeriods());
             mBinding.mySlLoanPeriod.setTextByRequestByKey(LoanPeriods + "");
             mBinding.mySlRateType.setTextByRequestByKey(data.getRateType());
 //            mBinding.mySlIsNeedCheck.setTextByRequestByKey(data.getIsSurvey());//是否需要贷前调查
@@ -341,15 +341,15 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             mBinding.myElFrameNo.setTextByRequest(data.getFrameNo());
 
 //            mBinding.myElDealers.setTextByRequest(data.getCarDealerName());
-            mBinding.myElOriginalPrice.setTextByRequest(MoneyUtils.showPrice(data.getOriginalPrice()));
+            mBinding.myElOriginalPrice.setMoneyTextRequest(data.getOriginalPrice());
             mBinding.myElCarNumber.setTextByRequest(data.getCarModel());
-            mBinding.myElBillPrice.setTextByRequest(MoneyUtils.showPrice(data.getInvoicePrice()));
-            mBinding.myElLoanAmount.setTextByRequest(MoneyUtils.showPrice(data.getLoanAmount()));
+            mBinding.myElBillPrice.setMoneyTextRequest(data.getInvoicePrice());
+            mBinding.myElLoanAmount.setMoneyTextRequest(data.getLoanAmount());
             if (TextUtils.equals(data.getLoanBankCode(), "BS201807171350293781303")) {
                 //工商银行才有服务费  其他银行没有
 
 //            mBinding.myElServicePrice.setMoneyText(data.getFee());
-                mBinding.myElServicePrice.setTextByRequest(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
+                mBinding.myElServicePrice.setMoneyTextRequest(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
                 mBinding.myElServicePrice.setVisibility(View.VISIBLE);
             } else {
                 mBinding.myElServicePrice.setVisibility(View.GONE);
@@ -412,7 +412,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
                 //工商银行才有服务费  其他银行没有
 
 //            mBinding.myElServicePrice.setMoneyText(data.getFee());
-                mBinding.myElServicePrice.setText(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
+                mBinding.myElServicePrice.setMoneyText(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
                 mBinding.myElServicePrice.setVisibility(View.VISIBLE);
             } else {
                 mBinding.myElServicePrice.setVisibility(View.GONE);

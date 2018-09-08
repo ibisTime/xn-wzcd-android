@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
-import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -69,8 +68,8 @@ public class UserToVoidActivity extends AbsRefreshListActivity<UserToVoidBean> {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
-        map.put("saleUserId", SPUtilHelper.getUserId());
-        map.put("roleCode", SPUtilHelper.getRoleCode());
+//        map.put("saleUserId", SPUtilHelper.getUserId());
+//        map.put("roleCode", SPUtilHelper.getRoleCode());
         ArrayList<String> curNodeCodeList = new ArrayList<>();
         curNodeCodeList.add("012_01");
         curNodeCodeList.add("012_02");
@@ -83,8 +82,8 @@ public class UserToVoidActivity extends AbsRefreshListActivity<UserToVoidBean> {
 //        json:{"token":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVMjAxODA5MDQxMDQ4MTgxNzY5Mzc3IiwiaXNzIjoiYWRtaW4iLCJhdWQiOiIiLCJpYXQiOjE1MzYzMjgxMjksIm5iZiI6MTUzNjMyODEyOSwiZXhwIjoxNTM2OTMyOTI5LCJqdGkiOiIifQ.bojuwQwiBrp9NAWQ6PLNBh8xqxoliPCE-Zmrj2O8Iyxqu_VJmsDMRbwoIoAdBPQ-3Ie_xbrtgL4TCRyCrl5-uQ","start":1,"limit":10,"roleCode":"SR201800000000000000YWY","curNodeCodeList":["012_01","012_02","012_03","012_04"]}
 
         if (isShowDialog) showLoadingDialog();
-
-        Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632195", StringUtils.getJsonToString(map));
+//        632195  错误
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));
         addCall(call);
 
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<NodeListModel>>(this) {

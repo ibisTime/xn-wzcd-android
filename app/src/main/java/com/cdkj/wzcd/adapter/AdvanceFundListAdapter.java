@@ -11,7 +11,6 @@ import com.cdkj.wzcd.model.AdvanceFundModel;
 import com.cdkj.wzcd.module.work.advancefund.AdvanceFundApplyActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -40,7 +39,7 @@ public class AdvanceFundListAdapter extends BaseQuickAdapter<AdvanceFundModel, B
         mBinding.myIlName.setText(item.getBudgetOrder().getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getBudgetOrder().getShopWay()));
 
-        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getBudgetOrder().getLoanAmount()));
+        mBinding.myIlAmount.setMoneyText(item.getBudgetOrder().getLoanAmount());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(), "1") ? "是" : "否");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getBudgetOrder().getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
@@ -52,14 +51,14 @@ public class AdvanceFundListAdapter extends BaseQuickAdapter<AdvanceFundModel, B
             });
         }
 
-        if (TextUtils.equals(item.getCode(), "003_01") || TextUtils.equals(item.getCode(), "004_01")) {
+//        if (TextUtils.equals(item.getCode(), "003_01") || TextUtils.equals(item.getCode(), "004_01")) {
 
             if (TextUtils.equals(item.getBudgetOrder().getCurNodeCode(), "002_06")) { // 确认用款单
                 mBinding.myItemCblConfirm.setRightTextAndListener("确认申请", view -> {
                     AdvanceFundApplyActivity.open(mContext, item.getCode());
                 });
             }
-        }
+//        }
 
     }
 }

@@ -11,7 +11,6 @@ import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.tool.mismatching.MismatchingDetailActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -39,7 +38,7 @@ public class MismatchingListAdapter extends BaseQuickAdapter<NodeListModel, Base
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getShopWay()));
-        mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
+        mBinding.myIlAmount.setMoneyText(item.getLoanAmount());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(), "1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 

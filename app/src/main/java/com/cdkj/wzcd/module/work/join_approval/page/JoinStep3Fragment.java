@@ -92,9 +92,9 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
         mBinding.mySlCarType.setData(getCarType(), null);
 
-        mBinding.myMlDriveLicense.build(mActivity, 10, 2);
+        mBinding.myMlDriceLicense.build(mActivity, 10, 2);
         mBinding.mySlIsDriceLicense.setData(getDataDictionaries(), (dialog, which) -> {
-            mBinding.myMlDriveLicense.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
+            mBinding.myMlDriceLicense.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
         });
 
         mBinding.myMlSiteProve.build(mActivity, 10, 3);
@@ -127,8 +127,8 @@ public class JoinStep3Fragment extends BaseLazyFragment {
             //有无驾照  isDriceLicense
             mBinding.mySlIsDriceLicense.setTextByRequestByKey(data.getIsDriceLicense());
 
-            mBinding.myMlDriveLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlDriveLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
+            mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlDriceLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
 
 
             mBinding.mySlIsSiteProve.setTextByRequestByKey(data.getIsSiteProve());
@@ -151,8 +151,8 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
 
             mBinding.mySlIsDriceLicense.setContentByKey(data.getIsDriceLicense());
-            mBinding.myMlDriveLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlDriveLicense.addList(StringUtils.splitPIC(data.getLicense()));
+            mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlDriceLicense.addList(StringUtils.splitPIC(data.getLicense()));
 
             mBinding.mySlIsSiteProve.setContentByKey(data.getIsSiteProve());
 
@@ -196,8 +196,8 @@ public class JoinStep3Fragment extends BaseLazyFragment {
                     mBinding.myMlLicense.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlDriveLicense.getRequestCode()) {
-                    mBinding.myMlDriveLicense.addList(key);
+                if (requestCode == mBinding.myMlDriceLicense.getRequestCode()) {
+                    mBinding.myMlDriceLicense.addList(key);
                 }
 
                 if (requestCode == mBinding.myMlSiteProve.getRequestCode()) {
@@ -235,7 +235,7 @@ public class JoinStep3Fragment extends BaseLazyFragment {
             if (TextUtils.equals(data.getShopWay(), "2")) {
                 //二手车  必填
 
-                if (TextUtils.isEmpty(mBinding.myMlDriveLicense.getListData())) {
+                if (TextUtils.isEmpty(mBinding.myMlDriceLicense.getListData())) {
                     checkFail = mBinding.mySlIsDriceLicense.getTitle();
                     return false;
                 }
@@ -289,7 +289,7 @@ public class JoinStep3Fragment extends BaseLazyFragment {
         map.put("carType", mBinding.mySlCarType.getDataKey());
         map.put("isDriceLicense", mBinding.mySlIsDriceLicense.getDataKey());
 
-        map.put("driveLicense", mBinding.myMlDriveLicense.getListData());
+        map.put("driceLicense", mBinding.myMlDriceLicense.getListData());
         map.put("isSiteProve", mBinding.mySlIsSiteProve.getDataKey());
         map.put("siteProve", mBinding.myMlSiteProve.getListData());
         map.put("siteArea", mBinding.myElSiteArea.getText());

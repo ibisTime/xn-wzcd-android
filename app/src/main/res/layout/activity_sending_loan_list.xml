@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.cdkj.wzcd.module.work.bank_loan.SendingLoanListActivity">
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_name"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                app:txt_normal_title="姓名">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_check_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="number"
+                app:txt_input_hint="请输入对账单日期"
+                app:txt_input_title="*对账单日">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_bank_repayment_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="number"
+                app:txt_input_hint="请输入银行还款日期"
+                app:txt_input_title="*银行还款日">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_image_hint="点击上传图片"
+                app:txt_image_title="*已放款名单图片"></com.cdkj.wzcd.view.MyImageLayout>
+
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:txt_normal_title="已放款名单"></com.cdkj.wzcd.view.MyNormalLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_loan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></android.support.v7.widget.RecyclerView>
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_confirm_content="确定"></com.cdkj.wzcd.view.MyConfirmBtn>
+        </LinearLayout>
+    </ScrollView>
+</layout>

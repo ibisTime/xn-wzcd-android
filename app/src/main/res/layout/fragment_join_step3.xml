@@ -44,7 +44,7 @@
                 app:txt_select_title="*有无驾照" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
-                android:id="@+id/myMl_driveLicense"
+                android:id="@+id/myMl_driceLicense"
                 app:title="驾照"
                 android:visibility="gone"
                 android:layout_width="match_parent"

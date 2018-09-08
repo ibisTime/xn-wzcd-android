@@ -89,8 +89,8 @@ public class AuditUserActivity extends AbsBaseLoadActivity {
 
         mBinding.myElName.setTextByRequest(model.getUserName());
         mBinding.myElPhone.setTextByRequest(model.getMobile());
-        mBinding.mySlRole.setTextByRequest(model.getLoanRole());
-        mBinding.mySlRelation.setTextByRequest(model.getRelation());
+        mBinding.mySlRole.setTextByRequestByKey(model.getLoanRole());
+        mBinding.mySlRelation.setTextByRequestByKey(model.getRelation());
         mBinding.myElId.setTextByRequest(model.getIdNo());
         mBinding.myIlIdCard.setFlImgByRequest(model.getIdNoFront());
         mBinding.myIlIdCard.setFlImgRightByRequest(model.getIdNoReverse());

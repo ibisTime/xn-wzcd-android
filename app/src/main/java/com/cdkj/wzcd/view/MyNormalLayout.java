@@ -14,6 +14,8 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyNormalBinding;
 import com.cdkj.wzcd.util.RequestUtil;
 
+import java.text.DecimalFormat;
+
 /**
  * 普通的横条Layout
  * Created by cdkj on 2018/5/29.
@@ -103,10 +105,20 @@ public class MyNormalLayout extends LinearLayout {
      * @return 除以1000的金额字符串
      */
     public void setMoneyText(String moneyText) {
-
         mBinding.tvContent.setText(RequestUtil.formatAmountDiv(moneyText));
-        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
-        mBinding.tvTitleRight.setVisibility(VISIBLE);
+        String yuan = RequestUtil.formatAmountDiv(moneyText);
+
+        if (Double.parseDouble(yuan) > 10000) {
+            double v = Double.parseDouble(yuan) / 10000;
+            DecimalFormat df = new DecimalFormat("#.00");
+            mBinding.tvContent.setText(df.format(v));
+            mBinding.tvTitleRight.setText("万");
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        } else {
+            mBinding.tvContent.setText(yuan);
+            mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        }
     }
 
     public String check() {

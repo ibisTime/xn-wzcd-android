@@ -20,6 +20,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyInputHorizontalBinding;
 import com.cdkj.wzcd.util.RequestUtil;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -258,11 +259,22 @@ public class MyEditLayout extends LinearLayout {
      */
     public void setMoneyTextRequest(String moneyText) {
 
-        mBinding.edtInput.setText(RequestUtil.formatAmountDiv(moneyText));
-
-        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
-        mBinding.tvTitleRight.setVisibility(VISIBLE);
         mBinding.edtInput.setFocusable(false);
+        String yuan = RequestUtil.formatAmountDiv(moneyText);
+
+        if (Double.parseDouble(yuan) > 10000) {
+            double v = Double.parseDouble(yuan) / 10000;
+            DecimalFormat df = new DecimalFormat("#.00");
+            mBinding.edtInput.setText(df.format(v));
+            mBinding.tvTitleRight.setText("万");
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        } else {
+            mBinding.edtInput.setText(yuan);
+            mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        }
+
+
     }
 
     /**
@@ -271,11 +283,20 @@ public class MyEditLayout extends LinearLayout {
      * @param moneyText
      */
     public void setMoneyTextByRequest(String moneyText) {
-        mBinding.edtInput.setText(RequestUtil.formatAmountDiv(moneyText));
-        mBinding.edtInput.setFocusable(false);
+        String yuan = RequestUtil.formatAmountDiv(moneyText);
 
-        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
-        mBinding.tvTitleRight.setVisibility(VISIBLE);
+        mBinding.edtInput.setFocusable(false);
+        if (Double.parseDouble(yuan) > 10000) {
+            double v = Double.parseDouble(yuan) / 10000;
+            DecimalFormat df = new DecimalFormat("#.00");
+            mBinding.edtInput.setText(df.format(v));
+            mBinding.tvTitleRight.setText("万");
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        } else {
+            mBinding.edtInput.setText(yuan);
+            mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+            mBinding.tvTitleRight.setVisibility(VISIBLE);
+        }
     }
 
     public EditText getEditText() {
