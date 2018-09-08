@@ -19,7 +19,6 @@ import com.cdkj.wzcd.adapter.CreditListAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
-import com.cdkj.wzcd.util.UserHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,14 +57,14 @@ public class CreditListFragment extends AbsRefreshListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (getUserVisibleHint()){
+        if (getUserVisibleHint()) {
             mRefreshHelper.onDefaultMRefresh(true);
         }
     }
 
     @Override
     protected void lazyLoad() {
-        if (mRefreshBinding != null){
+        if (mRefreshBinding != null) {
             mRefreshHelper.onDefaultMRefresh(true);
         }
 
@@ -83,7 +82,7 @@ public class CreditListFragment extends AbsRefreshListFragment {
 
             initRefreshHelper(MyCdConfig.LIST_LIMIT);
 
-            if (isFirstRequest){
+            if (isFirstRequest) {
                 mRefreshHelper.onDefaultMRefresh(true);
             }
 
@@ -108,7 +107,7 @@ public class CreditListFragment extends AbsRefreshListFragment {
 
         List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.budget_orde_biz_typer);
 
-        if (list == null || list.size() == 0){
+        if (list == null || list.size() == 0) {
             return;
         }
         mType.addAll(list);
@@ -118,10 +117,10 @@ public class CreditListFragment extends AbsRefreshListFragment {
         map.put("roleCode", SPUtilHelper.getRoleCode());
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("companyCode", SPUtilHelper.getUserCompanyCode());
 
-        if (UserHelper.isYWY())
-            map.put("saleUserId", SPUtilHelper.getUserId());
-
+//        if (UserHelper.isYWY())
+//            map.put("saleUserId", SPUtilHelper.getUserId());
 
 
         if (isShowDialog) showLoadingDialog();
@@ -140,7 +139,5 @@ public class CreditListFragment extends AbsRefreshListFragment {
                 disMissLoading();
             }
         });
-
-
     }
 }

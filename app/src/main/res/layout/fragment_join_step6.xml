@@ -97,6 +97,12 @@
                 android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
+                android:id="@+id/myMl_ghID"
+                app:title="共还人身份证"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_ghHkb"
                 app:title="共还人户口本"
                 android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -18,6 +19,9 @@ import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutMyInputHorizontalBinding;
 import com.cdkj.wzcd.util.RequestUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 编辑框Layout
@@ -81,6 +85,41 @@ public class MyEditLayout extends LinearLayout {
                     mBinding.edtInput.setInputType(InputType.TYPE_CLASS_PHONE);
                     InputFilter[] filtersPhone = {new InputFilter.LengthFilter(11)};
                     mBinding.edtInput.setFilters(filtersPhone);
+
+
+                    mBinding.edtInput.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+                            String phone = editable.toString();
+                            if (phone.length() >= 2) {
+                                //判断第一位
+                                if (!TextUtils.equals("1", phone.substring(0, 1))) {
+                                    ToastUtil.show(context, "格式错误");
+                                    mBinding.edtInput.setText("");
+                                    return;
+                                }
+                                //判断第二位
+                                String two = "345678";
+                                if (!two.contains(phone.substring(1, 2))) {
+                                    ToastUtil.show(context, "格式错误");
+                                    mBinding.edtInput.setText(phone.substring(0, 1));
+                                    return;
+                                }
+                                //判断第三位
+//                                不用判断  因为  第三位是0-9  并且只能输入数字
+                            }
+                        }
+                    });
                     break;
 
                 case "1": // 身份证类型
@@ -129,6 +168,23 @@ public class MyEditLayout extends LinearLayout {
             return true;
         }
 
+        if (TextUtils.equals(inputType, "0")) {
+            //验证手机号
+            String regex = "^1[3|4|5|7|8][0-9]\\d{4,8}$";
+            String phone = mBinding.edtInput.getText().toString().trim();
+            if (phone.length() != 11) {
+                ToastUtil.show(context, "请输入正确的手机号");
+                return true;
+            } else {
+                Pattern p = Pattern.compile(regex);
+                Matcher m = p.matcher(phone);
+                boolean isMatch = m.matches();
+                if (!isMatch) {
+                    ToastUtil.show(context, "请输入正确的手机号");
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -149,6 +205,19 @@ public class MyEditLayout extends LinearLayout {
     public void setTextByRequest(String content) {
         mBinding.edtInput.setText(content);
         mBinding.edtInput.setFocusable(false);
+    }
+
+    /**
+     * 设置布局内容hint，内容来自于详情或其他请求，此时布局不可输入
+     *
+     * @param hint 提示内容
+     */
+    public void setTextHint(String hint) {
+        if (TextUtils.isEmpty(hint)) {
+            mBinding.edtInput.setHint("");
+            return;
+        }
+        mBinding.edtInput.setHint(hint);
     }
 
     public String getText() {
@@ -180,6 +249,20 @@ public class MyEditLayout extends LinearLayout {
 
         mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
         mBinding.tvTitleRight.setVisibility(VISIBLE);
+    }
+
+    /**
+     * 获取处理后的金额文本
+     *
+     * @return 除以1000的金额字符串
+     */
+    public void setMoneyTextRequest(String moneyText) {
+
+        mBinding.edtInput.setText(RequestUtil.formatAmountDiv(moneyText));
+
+        mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
+        mBinding.tvTitleRight.setVisibility(VISIBLE);
+        mBinding.edtInput.setFocusable(false);
     }
 
     /**

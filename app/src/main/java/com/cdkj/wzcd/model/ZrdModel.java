@@ -73,6 +73,7 @@ public class ZrdModel {
     private String carHgzNo;
     private String carFrameNo;
     private String carEngineNo;
+    private String customerName;
     private int originalPrice;
     private int invoicePrice;
     private String carColor;
@@ -96,6 +97,23 @@ public class ZrdModel {
     private String companyName;
     private String saleUserName;
     private String loanBankName;
+    private String shopWay;
+
+    public String getShopWay() {
+        return shopWay;
+    }
+
+    public void setShopWay(String shopWay) {
+        this.shopWay = shopWay;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
     public String getCode() {
         return code;

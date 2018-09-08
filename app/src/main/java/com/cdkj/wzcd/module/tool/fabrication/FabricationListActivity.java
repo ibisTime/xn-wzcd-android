@@ -41,6 +41,11 @@ public class FabricationListActivity extends AbsRefreshListActivity {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         mBaseBinding.titleView.setMidTitle("制卡");
+        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.make_card_status);
+
+        if (list != null && list.size() != 0) {
+            mType.addAll(list);
+        }
 
         initRefreshHelper(10);
 
@@ -66,12 +71,7 @@ public class FabricationListActivity extends AbsRefreshListActivity {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.make_card_status);
 
-        if (list == null || list.size() == 0){
-            return;
-        }
-        mType.addAll(list);
 
         Map<String, String> map = RetrofitUtils.getNodeListMap();
 

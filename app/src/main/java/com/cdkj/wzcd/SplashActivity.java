@@ -60,6 +60,7 @@ public class SplashActivity extends BaseActivity {
                 if (DataSupport.isExist(DataDictionary.class)) {
                     open();
                 } else {
+                    open();
                     ToastUtil.show(SplashActivity.this, "无法连接服务器，请检查网络");
                 }
             }

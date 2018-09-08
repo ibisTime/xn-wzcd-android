@@ -21,6 +21,8 @@ import retrofit2.http.POST;
  */
 
 public interface BaseApiServer {
+
+
     /**
      * 登录
      * @param code

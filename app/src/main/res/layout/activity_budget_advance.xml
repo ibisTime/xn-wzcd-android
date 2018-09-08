@@ -31,7 +31,6 @@
                     android:id="@+id/myEl_accountNO"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:inputType="number"
                     app:txt_input_hint="请输入账号"
                     app:txt_input_title="账号">
 

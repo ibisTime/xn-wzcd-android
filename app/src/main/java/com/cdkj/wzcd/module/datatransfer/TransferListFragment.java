@@ -99,7 +99,8 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
 
         if (TextUtils.equals(dataType, DATA_SEND) || TextUtils.equals(dataType, DATA_RECEIVE)) {
 
-            DataTransferAdapter mAdapter =  mAdapter = new DataTransferAdapter(listData, this);;
+            DataTransferAdapter mAdapter = mAdapter = new DataTransferAdapter(listData, this);
+            ;
 
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 DataTransferModel model = (DataTransferModel) adapter.getItem(position);
@@ -155,6 +156,8 @@ public class TransferListFragment extends AbsRefreshListFragment<CllhListBean> {
         map.put("statusList", statusList);
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("userId", SPUtilHelper.getUserId());
+
 
         if (isShowDialog) showLoadingDialog();
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
@@ -11,6 +12,7 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
+import com.cdkj.wzcd.adapter.GpsDetailsAdapter;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityGpsDetailsBinding;
 import com.cdkj.wzcd.model.GpsApplyModel;
@@ -32,10 +34,10 @@ public class GpsDetailsActivity extends AbsBaseLoadActivity {
     private String code;
     private ActivityGpsDetailsBinding mBinding;
 
-    public static void open(Context context,String code) {
+    public static void open(Context context, String code) {
         if (context != null) {
             Intent intent = new Intent(context, GpsDetailsActivity.class);
-            intent.putExtra(DATA_SIGN,code);
+            intent.putExtra(DATA_SIGN, code);
             context.startActivity(intent);
         }
 
@@ -59,7 +61,7 @@ public class GpsDetailsActivity extends AbsBaseLoadActivity {
         getGPS();
     }
 
-    private void getGPS(){
+    private void getGPS() {
 
         Map<String, String> map = new HashMap<>();
 
@@ -86,8 +88,12 @@ public class GpsDetailsActivity extends AbsBaseLoadActivity {
 
     private void setView(GpsApplyModel model) {
         mBinding.myNlStatus.setText(DataDictionaryHelper.getValueBuyKey(gps_apply_status, model.getStatus()));
-        mBinding.myNlNumber.setText(model.getApplyCount()+"个");
+        mBinding.myNlNumber.setText(model.getApplyCount() + "个");
         mBinding.myNlReason.setText(model.getApplyReason());
+
+        GpsDetailsAdapter mAdapter = new GpsDetailsAdapter(model.getGpsList());
+        mBinding.recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mBinding.recycler.setAdapter(mAdapter);
 
     }
 }

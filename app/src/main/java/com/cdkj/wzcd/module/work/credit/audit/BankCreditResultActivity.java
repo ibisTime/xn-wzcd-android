@@ -10,6 +10,7 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ActivityBankCreditResultBinding;
 import com.cdkj.wzcd.model.CreditResult;
+import com.cdkj.wzcd.model.CreditUserModel;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,10 +24,26 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
 
     private ActivityBankCreditResultBinding mBinding;
 
-    private CreditResult mResult;
+    private CreditUserModel mResult;
     private boolean isCanEdit;
 
-    public static void open(Context context, CreditResult result, boolean isCanEdit) {
+//    public static void open(Context context, CreditResult result, boolean isCanEdit) {
+//        if (context == null) {
+//            return;
+//        }
+//        Intent intent = new Intent(context, BankCreditResultActivity.class);
+//        intent.putExtra(DATA_SIGN, result);
+//        intent.putExtra("isCanEdit", isCanEdit);
+//        context.startActivity(intent);
+//    }
+
+    /**
+     * 新加的
+     * @param context
+     * @param result
+     * @param isCanEdit
+     */
+    public static void open(Context context, CreditUserModel result, boolean isCanEdit) {
         if (context == null) {
             return;
         }
@@ -53,18 +70,23 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
             return;
 
         isCanEdit = getIntent().getBooleanExtra("isCanEdit", false);
-        mResult = (CreditResult) getIntent().getSerializableExtra(DATA_SIGN);
+        mResult = (CreditUserModel) getIntent().getSerializableExtra(DATA_SIGN);
+
 
         setView();
     }
 
     private void setView() {
 
-        if (mResult == null)
-            return;
 
-        if (isCanEdit){
-            mBinding.myElDkdyCount.setText(mResult.getDkdyCount());
+
+        if (isCanEdit) {
+            if (mResult == null) {
+                //没有数据  不进行数据设置了
+//                mBinding.myCbConfirm.setVisibility(View.GONE);
+                return;
+            }
+            mBinding.myElDkdyCount.setText(mResult.getDkdyCount()+"");
             mBinding.myElDkdyAmount.setMoneyText(mResult.getDkdyAmount());
             mBinding.myElDkdy2yearOverTimes.setText(mResult.getDkdy2YearOverTimes());
             mBinding.myElDkdyMaxOverAmount.setMoneyText(mResult.getDkdyMaxOverAmount());
@@ -72,25 +94,25 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
             mBinding.myElDkdy6monthAvgAmount.setMoneyText(mResult.getDkdy6MonthAvgAmount());
 
 
-            mBinding.myElHkxyUnsettleCount.setText(mResult.getHkxyUnsettleCount());
+            mBinding.myElHkxyUnsettleCount.setText(mResult.getHkxyUnsettleCount()+"");
             mBinding.myElHkxyUnsettleAmount.setMoneyText(mResult.getHkxyUnsettleAmount());
             mBinding.myElHkxy2yearOverTimes.setText(mResult.getHkxy2YearOverTimes());
             mBinding.myElHkxyMonthMaxOverAmount.setMoneyText(mResult.getHkxyMonthMaxOverAmount());
             mBinding.myElHkxyCurrentOverAmount.setMoneyText(mResult.getHkxyCurrentOverAmount());
             mBinding.myElHkxy6monthAvgAmount.setMoneyText(mResult.getHkxy6MonthAvgAmount());
 
-            mBinding.myElXykCount.setText(mResult.getXykCount());
+            mBinding.myElXykCount.setText(mResult.getXykCount()+"");
             mBinding.myElXykCreditAmount.setMoneyText(mResult.getXykCreditAmount());
             mBinding.myElXyk6monthUseAmount.setMoneyText(mResult.getXyk6MonthUseAmount());
             mBinding.myElXyk2yearOverTimes.setText(mResult.getXyk2YearOverTimes());
             mBinding.myElXykMonthMaxOverAmount.setMoneyText(mResult.getXykMonthMaxOverAmount());
             mBinding.myElXykCurrentOverAmount.setMoneyText(mResult.getXykCurrentOverAmount());
 
-            mBinding.myElOutGuaranteesCount.setText(mResult.getOutGuaranteesCount());
+            mBinding.myElOutGuaranteesCount.setText(mResult.getOutGuaranteesCount()+"");
             mBinding.myElOutGuaranteesAmount.setMoneyText(mResult.getOutGuaranteesAmount());
             mBinding.myElOutGuaranteesRemark.setText(mResult.getOutGuaranteesRemark());
-        }else {
-            mBinding.myElDkdyCount.setTextByRequest(mResult.getDkdyCount());
+        } else {
+            mBinding.myElDkdyCount.setTextByRequest(mResult.getDkdyCount()+"");
             mBinding.myElDkdyAmount.setMoneyTextByRequest(mResult.getDkdyAmount());
             mBinding.myElDkdy2yearOverTimes.setTextByRequest(mResult.getDkdy2YearOverTimes());
             mBinding.myElDkdyMaxOverAmount.setMoneyTextByRequest(mResult.getDkdyMaxOverAmount());
@@ -98,21 +120,21 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
             mBinding.myElDkdy6monthAvgAmount.setMoneyTextByRequest(mResult.getDkdy6MonthAvgAmount());
 
 
-            mBinding.myElHkxyUnsettleCount.setTextByRequest(mResult.getHkxyUnsettleCount());
+            mBinding.myElHkxyUnsettleCount.setTextByRequest(mResult.getHkxyUnsettleCount()+"");
             mBinding.myElHkxyUnsettleAmount.setMoneyTextByRequest(mResult.getHkxyUnsettleAmount());
             mBinding.myElHkxy2yearOverTimes.setTextByRequest(mResult.getHkxy2YearOverTimes());
             mBinding.myElHkxyMonthMaxOverAmount.setMoneyTextByRequest(mResult.getHkxyMonthMaxOverAmount());
             mBinding.myElHkxyCurrentOverAmount.setMoneyTextByRequest(mResult.getHkxyCurrentOverAmount());
             mBinding.myElHkxy6monthAvgAmount.setMoneyTextByRequest(mResult.getHkxy6MonthAvgAmount());
 
-            mBinding.myElXykCount.setTextByRequest(mResult.getXykCount());
+            mBinding.myElXykCount.setTextByRequest(mResult.getXykCount()+"");
             mBinding.myElXykCreditAmount.setMoneyTextByRequest(mResult.getXykCreditAmount());
             mBinding.myElXyk6monthUseAmount.setMoneyTextByRequest(mResult.getXyk6MonthUseAmount());
             mBinding.myElXyk2yearOverTimes.setTextByRequest(mResult.getXyk2YearOverTimes());
             mBinding.myElXykMonthMaxOverAmount.setMoneyTextByRequest(mResult.getXykMonthMaxOverAmount());
             mBinding.myElXykCurrentOverAmount.setMoneyTextByRequest(mResult.getXykCurrentOverAmount());
 
-            mBinding.myElOutGuaranteesCount.setTextByRequest(mResult.getOutGuaranteesCount());
+            mBinding.myElOutGuaranteesCount.setTextByRequest(mResult.getOutGuaranteesCount()+"");
             mBinding.myElOutGuaranteesAmount.setMoneyTextByRequest(mResult.getOutGuaranteesAmount());
             mBinding.myElOutGuaranteesRemark.setTextByRequest(mResult.getOutGuaranteesRemark());
 
@@ -120,12 +142,11 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
         }
 
 
-
     }
 
     private void initListener() {
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
-            if (check()){
+            if (check()) {
 
                 returnData();
 
@@ -135,99 +156,101 @@ public class BankCreditResultActivity extends AbsBaseLoadActivity {
 
     private boolean check() {
 
-        if (mBinding.myElDkdyCount.check()){
+        if (mBinding.myElDkdyCount.check()) {
+//        笔数
             return false;
         }
 
-        if (mBinding.myElDkdyAmount.check()){
+        if (mBinding.myElDkdyAmount.check()) {
+//        贷款余额
             return false;
         }
 
-        if (mBinding.myElDkdy2yearOverTimes.check()){
+        if (mBinding.myElDkdy2yearOverTimes.check()) {
             return false;
         }
 
-        if (mBinding.myElDkdyMaxOverAmount.check()){
+        if (mBinding.myElDkdyMaxOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElDkdyCurrentOverAmount.check()){
+        if (mBinding.myElDkdyCurrentOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElDkdy6monthAvgAmount.check()){
+        if (mBinding.myElDkdy6monthAvgAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxyUnsettleCount.check()){
+        if (mBinding.myElHkxyUnsettleCount.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxyUnsettleAmount.check()){
+        if (mBinding.myElHkxyUnsettleAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxy2yearOverTimes.check()){
+        if (mBinding.myElHkxy2yearOverTimes.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxyMonthMaxOverAmount.check()){
+        if (mBinding.myElHkxyMonthMaxOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxyCurrentOverAmount.check()){
+        if (mBinding.myElHkxyCurrentOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElHkxy6monthAvgAmount.check()){
+        if (mBinding.myElHkxy6monthAvgAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElXykCount.check()){
+        if (mBinding.myElXykCount.check()) {
             return false;
         }
 
-        if (mBinding.myElXykCreditAmount.check()){
+        if (mBinding.myElXykCreditAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElXyk6monthUseAmount.check()){
+        if (mBinding.myElXyk6monthUseAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElXyk2yearOverTimes.check()){
+        if (mBinding.myElXyk2yearOverTimes.check()) {
             return false;
         }
 
-        if (mBinding.myElXykMonthMaxOverAmount.check()){
+        if (mBinding.myElXykMonthMaxOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElXykCurrentOverAmount.check()){
+        if (mBinding.myElXykCurrentOverAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElOutGuaranteesCount.check()){
+        if (mBinding.myElOutGuaranteesCount.check()) {
             return false;
         }
 
-        if (mBinding.myElOutGuaranteesAmount.check()){
+        if (mBinding.myElOutGuaranteesAmount.check()) {
             return false;
         }
 
-        if (mBinding.myElOutGuaranteesRemark.check()){
+        if (mBinding.myElOutGuaranteesRemark.check()) {
             return false;
         }
 
         return true;
     }
 
-    private void returnData(){
+    private void returnData() {
 
         CreditResult result = new CreditResult();
 
-        result.setDkdyCount(mBinding.myElDkdyCount.getText());
-        result.setDkdyAmount(mBinding.myElDkdyAmount.getMoneyText());
+//        result.setDkdyCount(mBinding.myElDkdyCount.getText());
+//        result.setDkdyAmount(mBinding.myElDkdyAmount.getMoneyText());
         result.setDkdy2YearOverTimes(mBinding.myElDkdy2yearOverTimes.getText());
         result.setDkdyMaxOverAmount(mBinding.myElDkdyMaxOverAmount.getMoneyText());
         result.setDkdyCurrentOverAmount(mBinding.myElDkdyCurrentOverAmount.getMoneyText());

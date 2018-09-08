@@ -66,7 +66,7 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
     public void afterCreate(Bundle savedInstanceState) {
         mBaseBinding.titleView.setMidTitle("补件");
 
-        if (getIntent()==null)
+        if (getIntent() == null)
             return;
 
         code = getIntent().getStringExtra(DATA_SIGN);
@@ -79,17 +79,17 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
 
     private void initListener() {
         mBinding.myNlDateTime.setOnClickListener(view -> {
-            new DatePickerHelper().build(this).getDate(mBinding.myNlDateTime, true, true,  true, false, false, false);
+            new DatePickerHelper().build(this).getDate(mBinding.myNlDateTime, true, true, true, false, false, false);
         });
 
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
-            if (check()){
+            if (check()) {
                 sendRequest();
             }
         });
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         reasonAdapter = new DataFileChoiceAdapter(reasonList);
         reasonAdapter.setOnItemChildClickListener((adapter, view, position) -> {
 
@@ -102,7 +102,7 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
         mBinding.rvReason.setAdapter(reasonAdapter);
     }
 
-    public void getData(){
+    public void getData() {
         Map<String, String> map = new HashMap<>();
 
         map.put("code", code);
@@ -128,11 +128,11 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
     }
 
     private void setView(DataTransferModel data) {
-        mBinding.myNlName.setText(data.getUserName());
-        mBinding.myNlCode.setText(data.getCode());
+        mBinding.myNlName.setText(data.getCustomerName());
+        mBinding.myNlCode.setText(data.getBizCode());
         mBinding.myNlType.setText(DataDictionaryHelper.getValueBuyKey(logistics_type, data.getType()));
-        mBinding.myNlNodeSend.setText(NodeHelper.getNameOnTheCode(data.getToNodeCode()));
-        mBinding.myNlNodeRe.setText(NodeHelper.getNameOnTheCode(data.getFromNodeCode()));
+        mBinding.myNlNodeSend.setText(NodeHelper.getNameOnTheCode(data.getFromNodeCode()));
+        mBinding.myNlNodeRe.setText(NodeHelper.getNameOnTheCode(data.getToNodeCode()));
 
         setReasonList(data);
 
@@ -145,15 +145,15 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
 
     }
 
-    private void setReasonList(DataTransferModel data){
+    private void setReasonList(DataTransferModel data) {
 
         if (data == null)
             return;
 
         if (data.getSupplementReasonList() == null)
 
-        reasonList.clear();
-        for (DataTransferModel.SupplementReasonListBean file : data.getSupplementReasonList()){
+            reasonList.clear();
+        for (DataTransferModel.SupplementReasonListBean file : data.getSupplementReasonList()) {
             DataFileModel model = new DataFileModel();
             model.setFile(file.getReason());
             model.setChoice(false);
@@ -164,13 +164,13 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
 
     }
 
-    private List<DataFileModel> getSelectedReasonList(){
+    private List<DataFileModel> getSelectedReasonList() {
 
         List<DataFileModel> list = new ArrayList<>();
 
-        for (DataFileModel model : reasonList){
+        for (DataFileModel model : reasonList) {
 
-            if (model.isChoice()){
+            if (model.isChoice()) {
                 list.add(model);
             }
 
@@ -180,8 +180,7 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
     }
 
 
-
-    private boolean check(){
+    private boolean check() {
         // 补件原因
 //        int i = 0;
 //        for (DataFileModel model : reasonList){
@@ -197,26 +196,26 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
 //        }
 
         // 寄送方式
-        if (mBinding.mySlWay.check()){
+        if (mBinding.mySlWay.check()) {
             return false;
         }
 
-        if (mBinding.llLogistics.getVisibility() == View.VISIBLE){
+        if (mBinding.llLogistics.getVisibility() == View.VISIBLE) {
 
             // 快递公司
-            if (mBinding.mySlCompany.check()){
+            if (mBinding.mySlCompany.check()) {
                 return false;
             }
 
             // 快递单号
-            if (mBinding.myElNumber.check()){
+            if (mBinding.myElNumber.check()) {
                 return false;
             }
 
         }
 
         // 发货时间
-        if (TextUtils.isEmpty(mBinding.myNlDateTime.check())){
+        if (TextUtils.isEmpty(mBinding.myNlDateTime.check())) {
             return false;
         }
 
@@ -224,16 +223,16 @@ public class DataSupplementActivity extends AbsBaseLoadActivity {
         return true;
     }
 
-    private void sendRequest(){
+    private void sendRequest() {
         Map<String, Object> map = new HashMap<>();
         map.put("code", code);
         map.put("sendType", mBinding.mySlWay.getDataKey());
         map.put("operator", SPUtilHelper.getUserId());
-        map.put("sendDatetime", mBinding.myNlDateTime.getText());
+        map.put("sendDatetime", mBinding.myNlDateTime.getTag());
         map.put("supplementReasonList", reasonList);
 //        map.put("supplementReasonList", getSelectedReasonList());
 
-        if (mBinding.llLogistics.getVisibility() == View.VISIBLE){
+        if (mBinding.llLogistics.getVisibility() == View.VISIBLE) {
             map.put("logisticsCode", mBinding.myElNumber.getText());
             map.put("logisticsCompany", mBinding.mySlCompany.getDataKey());
         }

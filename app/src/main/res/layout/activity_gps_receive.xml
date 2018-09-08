@@ -43,7 +43,7 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_normal_title="发件收件">
+                app:txt_normal_title="发件节点">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 

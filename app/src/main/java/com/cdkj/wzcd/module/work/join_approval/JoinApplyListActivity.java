@@ -59,9 +59,9 @@ public class JoinApplyListActivity extends AbsRefreshListActivity {
     @Override
     public RecyclerView.Adapter getListAdapter(List listData) {
         MyApplyListAdapter myApplyListAdapter = new MyApplyListAdapter(listData);
-//        myApplyListAdapter.setOnItemClickListener((adapter, view, position) -> {
-//            JoinApplyActivity.open(this, myApplyListAdapter.getItem(position).getCode());
-//        });
+        myApplyListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            JoinApplyActivity.open(true,this, myApplyListAdapter.getItem(position).getCode());
+        });
         return myApplyListAdapter;
     }
 

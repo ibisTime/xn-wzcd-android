@@ -15,7 +15,6 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
@@ -61,10 +60,19 @@ public class GpsApplyActivity extends AbsBaseLoadActivity {
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
 //            applyRequest();
 
-            if (TextUtils.isEmpty(mSelectGPSCode)) {
-                showToast("请选择GPS");
+            String text = mBinding.myElNumber.getText();
+            try {
+                int i = Integer.parseInt(text);
+            } catch (Exception ex) {
+                UITipDialog.showInfo(this, "请输入正确的数量");
                 return;
             }
+
+
+//            if (TextUtils.isEmpty(mSelectGPSCode)) {
+//                showToast("请选择GPS");
+//                return;
+//            }
             applyRequest2();
         });
     }
@@ -84,7 +92,7 @@ public class GpsApplyActivity extends AbsBaseLoadActivity {
         map.put("applyStatus", "0");
 //        map.put("useStatus", "0");
         map.put("companyApplyStatus", "1");
-        map.put("companyCode ", SPUtilHelper.getUserCompanyCode());
+        map.put("companyCode", SPUtilHelper.getUserCompanyCode());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class).getGpsList("632707", StringUtils.getJsonToString(map));
 
@@ -170,7 +178,8 @@ public class GpsApplyActivity extends AbsBaseLoadActivity {
 
         map.put("applyReason", mBinding.myElExplain.getText());
         map.put("applyUser", SPUtilHelper.getUserId());
-        map.put("gpsList", getGpsCodeList());
+//        map.put("gpsList", getGpsCodeList());
+        map.put("applyCount", mBinding.myElNumber.getText());
 
         Call call = RetrofitUtils.getBaseAPiService().codeRequest("632711", StringUtils.getJsonToString(map));
 

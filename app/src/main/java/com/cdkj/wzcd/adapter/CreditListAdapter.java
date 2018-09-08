@@ -13,6 +13,7 @@ import com.cdkj.wzcd.model.CreditModel;
 import com.cdkj.wzcd.module.work.credit.CreditDetailActivity;
 import com.cdkj.wzcd.module.work.credit.CreditInitiateActivity;
 import com.cdkj.wzcd.module.work.credit.audit.AuditCreditActivity;
+import com.cdkj.wzcd.module.work.credit.audit.AuditOneActivity;
 import com.cdkj.wzcd.util.BankHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
@@ -44,6 +45,7 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
 
         mBinding.myTlIdStatus.setText(item.getCode(), NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
 
+
         mBinding.myIlType.setText(DataDictionaryHelper.getValueBuyList(item.getShopWay(), mType));
 
         if (item.getCreditUser() != null)
@@ -53,29 +55,42 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
 
         BankHelper.getValueOnTheKey(mContext, item.getLoanBankCode(), mBinding.myIlBank, null);
 
-        mBinding.myItemCblConfirm.setContent("","");
+        mBinding.myItemCblConfirm.setContent("", "");
 
-        if (UserHelper.isZHRY()){
+        if (UserHelper.isZHRY()) {
 
-            if (TextUtils.equals(item.getCurNodeCode(), "001_02")){ // 录入征信结果
+            if (TextUtils.equals(item.getCurNodeCode(), "001_02")) { // 录入征信结果
                 mBinding.myItemCblConfirm.setRightTextAndListener("录入银行征信结果", view -> {
                     AuditCreditActivity.open(mContext, item.getCode());
                 });
             }
-        }else {
 
-            if (TextUtils.equals(item.getCurNodeCode(), "001_03")){ // 征信初审
+
+        } else {
+
+            if (TextUtils.equals(item.getCurNodeCode(), "001_03")) { // 征信初审
                 mBinding.myItemCblConfirm.setRightTextAndListener("征信初审", view -> {
                     CreditDetailActivity.open(mContext, item.getCode(), true);
                 });
             }
 
-            if (TextUtils.equals(item.getCurNodeCode(), "001_05")){ // 重新上传征信资料
+            if (TextUtils.equals(item.getCurNodeCode(), "001_05")) { // 重新上传征信资料
                 mBinding.myItemCblConfirm.setRightTextAndListener("修改征信信息", view -> {
                     CreditInitiateActivity.open(mContext, item.getCode());
                 });
             }
         }
+
+
+        if (UserHelper.isYWY()) {
+            if (TextUtils.equals("征信一审", NodeHelper.getNameOnTheCode(item.getCurNodeCode()))) {
+                //录入法院征信网结果
+                mBinding.myItemCblConfirm.setRightTextAndListener("一审", view -> {
+                    AuditOneActivity.open(mContext, item.getCode());
+                });
+            }
+        }
+
 
     }
 }

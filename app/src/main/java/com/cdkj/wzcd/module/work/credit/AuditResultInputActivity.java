@@ -99,13 +99,15 @@ public class AuditResultInputActivity extends AbsBaseLoadActivity {
         if (TextUtils.equals(nodeCode, "001_02")){
             mBaseBinding.titleView.setRightTitle("录入");
             mBaseBinding.titleView.setRightFraClickListener(view -> {
-                BankCreditResultActivity.open(this, model.getBankCreditResult(), true);
+//                BankCreditResultActivity.open(this, model.getBankCreditResult(), true);
+                BankCreditResultActivity.open(this, model, true);
             });
         }else {
 
             mBaseBinding.titleView.setRightTitle("征信报告");
             mBaseBinding.titleView.setRightFraClickListener(view -> {
-                BankCreditResultActivity.open(this, model.getBankCreditResult(), false);
+                BankCreditResultActivity.open(this, model, false);
+//                BankCreditResultActivity.open(this, model.getBankCreditResult(), false);
             });
         }
 

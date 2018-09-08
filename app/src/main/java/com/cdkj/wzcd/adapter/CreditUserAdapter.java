@@ -36,6 +36,13 @@ public class CreditUserAdapter extends BaseQuickAdapter<CreditUserModel, BaseVie
     protected void convert(BaseViewHolder helper, CreditUserModel item) {
         mBinding = DataBindingUtil.bind(helper.itemView);
 
+        if (item.isChoice()) {
+            helper.setBackgroundRes(R.id.iv_choice, R.mipmap.pay_choose);
+        } else {
+            helper.setBackgroundRes(R.id.iv_choice, R.mipmap.pay_no);
+        }
+        helper.addOnClickListener(R.id.iv_choice);
+
         mBinding.myItemNlName.setContent(item.getUserName());
         mBinding.myItemNlPhone.setContent(item.getMobile());
         mBinding.myItemNlId.setContent(item.getIdNo());

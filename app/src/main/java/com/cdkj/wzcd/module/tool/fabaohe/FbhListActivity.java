@@ -66,6 +66,7 @@ public class FbhListActivity extends AbsRefreshListActivity {
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
 
+
         if (isShowDialog) showLoadingDialog();
 
         Call call = RetrofitUtils.createApi(MyApiServer.class).getNodeList("632148", StringUtils.getJsonToString(map));

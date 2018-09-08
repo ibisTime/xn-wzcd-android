@@ -16,6 +16,15 @@ public class GpsInstallModel implements Serializable {
     private String gpsType;
     private String status;
     private String remark;
+    private String azLocationRemark;//手动输入的  gps安装位置  不是手动输入的  这个字段为null
+
+    public String getAzLocationRemark() {
+        return azLocationRemark;
+    }
+
+    public void setAzLocationRemark(String azLocationRemark) {
+        this.azLocationRemark = azLocationRemark;
+    }
 
     public String getGpsType() {
         return gpsType;

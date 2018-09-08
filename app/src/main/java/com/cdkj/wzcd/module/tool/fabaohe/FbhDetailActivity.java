@@ -16,6 +16,7 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.CameraHelper;
+import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
@@ -99,6 +100,12 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
     private void initCustomView() {
 
+        mBinding.myIlBill.setActivity(this, 0, -1);
+        mBinding.myIlCertification.setActivity(this, 1, -1);
+        mBinding.myIlJqx.setActivity(this, 2, -1);
+        mBinding.myIlSyx.setActivity(this, 3, -1);
+        mBinding.myIlCarRegister.setActivity(this, 4, -1);
+        mBinding.myIlEndorsement.setActivity(this, 5, -1);
 
         if (isViweDetails) {
             mBinding.mySlIsRight.setData(getDataDictionaries());
@@ -113,12 +120,7 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             new DatePickerHelper().build(this).getDate(mBinding.myNlBuyCarDateTime, true, true, true, false, false, false);
         });
 
-        mBinding.myIlBill.setActivity(this, 0, -1);
-        mBinding.myIlCertification.setActivity(this, 1, -1);
-        mBinding.myIlJqx.setActivity(this, 2, -1);
-        mBinding.myIlSyx.setActivity(this, 3, -1);
-        mBinding.myIlCarRegister.setActivity(this, 4, -1);
-        mBinding.myIlEndorsement.setActivity(this, 5, -1);
+
     }
 
     @NonNull
@@ -182,7 +184,8 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             mBinding.myIlSyx.setFlImgByRequest(data.getBusinessInsurance());
             mBinding.myIlCarRegister.setFlImgByRequest(data.getMotorRegCertification());
             mBinding.myIlEndorsement.setFlImgByRequest(data.getPdPdf());
-
+            mBinding.myElBuyCarColor.setTextByRequest(data.getCarColor());//颜色
+            mBinding.myElBuyCarFrameNo.setTextByRequest(data.getFrameNo());//车架号
 
         } else {
             mBinding.myCbConfirm.setVisibility(View.VISIBLE);
@@ -194,21 +197,26 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             mBinding.myIlSyx.setFlImg(data.getBusinessInsurance());
             mBinding.myIlCarRegister.setFlImg(data.getMotorRegCertification());
             mBinding.myIlEndorsement.setFlImg(data.getPdPdf());
+            if (!TextUtils.isEmpty(data.getFrameNo())) {
+                mBinding.myElBuyCarFrameNo.setTextByRequest(data.getFrameNo());
+            }
+            mBinding.myElBuyCarColor.setText(data.getCarColor());
+
         }
 
         mBinding.mySlIsRight.setContentByKey(data.getIsRightInvoice());
 
-        mBinding.myNlBuyCarDateTime.setText(data.getDeliveryDatetime());
+        mBinding.myNlBuyCarDateTime.setText(DateUtil.formatStringData(data.getDeliveryDatetime(), DateUtil.DATE_YMD));
 
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
 
-        LogUtil.E("LoanAmount="+data.getLoanAmount());
+        LogUtil.E("LoanAmount=" + data.getLoanAmount());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlWay.setText(getBizTypeByKey(data.getShopWay()));
 
-        LogUtil.E("InvoicePrice="+data.getInvoicePrice());
+        LogUtil.E("InvoicePrice=" + data.getInvoicePrice());
         mBinding.myNlBillPrice.setMoneyText(data.getInvoicePrice());
 
 
@@ -216,6 +224,13 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
     private boolean check() {
         if (TextUtils.isEmpty(mBinding.myNlBuyCarDateTime.check())) {
+            return false;
+        }
+
+        if (mBinding.myElBuyCarColor.check()) {
+            return false;
+        }
+        if (mBinding.myElBuyCarFrameNo.check()) {
             return false;
         }
 
@@ -265,6 +280,8 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
         map.put("businessInsurance", mBinding.myIlSyx.getFlImgUrl());
         map.put("motorRegCertification", mBinding.myIlCarRegister.getFlImgUrl());
         map.put("pdPdf", mBinding.myIlEndorsement.getFlImgUrl());
+        map.put("carColor", mBinding.myElBuyCarColor.getText());
+        map.put("frameNo", mBinding.myElBuyCarFrameNo.getText());
 
         showLoadingDialog();
 

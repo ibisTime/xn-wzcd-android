@@ -4,6 +4,7 @@ import com.cdkj.baselibrary.api.BaseResponseListModel;
 import com.cdkj.baselibrary.api.BaseResponseModel;
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.wzcd.model.AdvanceFundModel;
 import com.cdkj.wzcd.model.BanksModel;
 import com.cdkj.wzcd.model.CalculautorModel;
@@ -18,6 +19,7 @@ import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.NodeModel;
 import com.cdkj.wzcd.model.RepaymentModel;
 import com.cdkj.wzcd.model.SystemParameterModel;
+import com.cdkj.wzcd.model.TodoBean;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.model.ZrdModel;
 import com.cdkj.wzcd.model.event.IdCardModel;
@@ -32,6 +34,19 @@ import retrofit2.http.POST;
  */
 
 public interface MyApiServer {
+
+
+    /**
+     * 待办事项小红点
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<TodoBean>> getTodoData(@Field("code") String code, @Field("json") String  json);
+
+
 
 //    /**
 //     * 获取腾讯用户签名
@@ -340,5 +355,18 @@ public interface MyApiServer {
     @FormUrlEncoded
     @POST("api")
     Call<BaseResponseModel<AdvanceFundModel>> getAdvanceFund(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 一审不通过
+     *632114
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<IsSuccessModes>> firstInstanceNo(@Field("code") String code, @Field("json") String json);
+
+
 
 }

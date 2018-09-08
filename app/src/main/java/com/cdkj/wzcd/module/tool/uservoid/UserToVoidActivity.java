@@ -16,6 +16,7 @@ import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.UserToVoidBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,11 +65,22 @@ public class UserToVoidActivity extends AbsRefreshListActivity<UserToVoidBean> {
 
     @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
-        Map<String, String> map = RetrofitUtils.getNodeListMap();
+        Map<String, Object> map = RetrofitUtils.getNodeListMap();
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
         map.put("saleUserId", SPUtilHelper.getUserId());
+        map.put("roleCode", SPUtilHelper.getRoleCode());
+        ArrayList<String> curNodeCodeList = new ArrayList<>();
+        curNodeCodeList.add("012_01");
+        curNodeCodeList.add("012_02");
+        curNodeCodeList.add("012_03");
+        curNodeCodeList.add("012_04");
+        map.put("curNodeCodeList", curNodeCodeList);
+
+
+//        code:632148
+//        json:{"token":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVMjAxODA5MDQxMDQ4MTgxNzY5Mzc3IiwiaXNzIjoiYWRtaW4iLCJhdWQiOiIiLCJpYXQiOjE1MzYzMjgxMjksIm5iZiI6MTUzNjMyODEyOSwiZXhwIjoxNTM2OTMyOTI5LCJqdGkiOiIifQ.bojuwQwiBrp9NAWQ6PLNBh8xqxoliPCE-Zmrj2O8Iyxqu_VJmsDMRbwoIoAdBPQ-3Ie_xbrtgL4TCRyCrl5-uQ","start":1,"limit":10,"roleCode":"SR201800000000000000YWY","curNodeCodeList":["012_01","012_02","012_03","012_04"]}
 
         if (isShowDialog) showLoadingDialog();
 

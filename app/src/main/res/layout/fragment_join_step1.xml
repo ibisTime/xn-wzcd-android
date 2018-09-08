@@ -100,6 +100,13 @@
                 android:layout_height="wrap_content"
                 app:txt_select_title="*利率类型" />
 
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_handType"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="*手续费收取方式" />
+
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_loanAmount"
                 android:layout_width="match_parent"
@@ -113,6 +120,7 @@
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_is_need_check"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 app:txt_select_title="*是否需要贷前调查" />
 

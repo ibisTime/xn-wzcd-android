@@ -18,6 +18,7 @@
                 android:id="@+id/mSl_dealer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:txt_select_title="*经销商">
 
             </com.cdkj.wzcd.view.MySelectLayout>

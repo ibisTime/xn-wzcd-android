@@ -54,7 +54,7 @@ public class UserToVoidDetailsActivity extends AbsBaseLoadActivity {
 
     }
 
-    public void getNode(){
+    public void getNode() {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);
@@ -84,7 +84,7 @@ public class UserToVoidDetailsActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(data.getLoanAmount()));
-
-        mBinding.tvReason.setText("作废原因:"+data.getRemark());
+        String zfReason = data.getZfReason() == null ? "暂无" : data.getZfReason();
+        mBinding.tvReason.setText("作废原因:" + zfReason);
     }
 }

@@ -14,16 +14,25 @@
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myEl_otherFilePdf"
-                app:title="附件"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="附件" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_otherApplyNote"
-                app:txt_input_title="备注事项"
-                app:txt_input_hint="选填"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:txt_input_hint="选填"
+                app:txt_input_title="备注事项" />
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/btn_confirm"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_confirm_content="保存">
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
 
         </LinearLayout>
 

@@ -12,6 +12,7 @@ import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationApplyActivity;
 import com.cdkj.wzcd.module.tool.fabrication.FabricationInputActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
+import com.cdkj.wzcd.util.NodeHelper;
 import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -40,6 +41,7 @@ public class FabricationListAdapter extends BaseQuickAdapter<NodeListModel, Base
 
         mBinding.myTlIdStatus.setText(item.getCode(), DataDictionaryHelper.getValueBuyList(item.getMakeCardStatus(), mType));
 
+//        NodeHelper.getNameOnTheCode(item.getCurNodeCode())
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getShopWay()));

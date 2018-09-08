@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content" />
 
             <com.cdkj.wzcd.view.MySelectLayout
-                android:id="@+id/mySl_isDriveLicense"
+                android:id="@+id/mySl_isDriceLicense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_select_title="*有无驾照" />

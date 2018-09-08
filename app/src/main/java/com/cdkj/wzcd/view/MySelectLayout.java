@@ -128,16 +128,48 @@ public class MySelectLayout extends LinearLayout {
         selectIndex = -2;
     }
 
+    public void setTextByRequestByKey(String key) {
+        // 隐藏更多
+        mBinding.ivMore.setVisibility(GONE);
+        // 设置不可弹出下拉
+        isOnClickEnable = false;
+
+        if (TextUtils.isEmpty(key)) {
+            return;
+        }
+
+        if (mData == null)
+            return;
+        int i = 0;
+
+        for (DataDictionary data : mData) {
+            if (TextUtils.equals(data.getDkey(), key)) {
+                mKey = data.getDkey();
+                mValue = data.getDvalue();
+                selectIndex = i;
+                break;
+            }
+            i++;
+        }
+
+        mBinding.tvContent.setText(mValue);
+
+        selectIndex = -2;
+    }
+
     public void setOnClickEnable(boolean onClickEnable) {
         isOnClickEnable = onClickEnable;
     }
 
     public void setContentByKey(String key) {
 
-        if (TextUtils.isEmpty(key)) {
+        if (TextUtils.isEmpty(key)||key==null) {
             return;
         }
 
+        if (mData==null||mData.size()==0){
+            return;
+        }
         int i = 0;
 
         for (DataDictionary data : mData) {
@@ -204,16 +236,17 @@ public class MySelectLayout extends LinearLayout {
         mySelectInterface = selectInterface;
 
     }
+
     /**
      * 直接设置List数据  弹窗之前会有一个回调可做判断.返回true 则不在弹窗
      *
      * @param data
      * @param selectInterface
      */
-    public void setData(List<DataDictionary> data, MyFrontSelectInterface frontSelectInterface,MySelectInterface selectInterface) {
+    public void setData(List<DataDictionary> data, MyFrontSelectInterface frontSelectInterface, MySelectInterface selectInterface) {
         mData = data;
         mySelectInterface = selectInterface;
-        myFrontSelectInterface=frontSelectInterface;
+        myFrontSelectInterface = frontSelectInterface;
 
     }
 
@@ -243,14 +276,13 @@ public class MySelectLayout extends LinearLayout {
     }
 
 
-
     private void showSelect() {
         int index = initList();
 
         if (index == 0)
             return;
 
-        if (myFrontSelectInterface!=null) {
+        if (myFrontSelectInterface != null) {
             if (myFrontSelectInterface.onClick()) {
                 //返回True  就不在继续弹窗了
                 return;
@@ -310,11 +342,11 @@ public class MySelectLayout extends LinearLayout {
         return mValue;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return mBinding.tvTitle.getText().toString().trim();
     }
 
-    public int getSelectIndex(){
+    public int getSelectIndex() {
         return selectIndex;
     }
 

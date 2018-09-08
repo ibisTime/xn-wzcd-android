@@ -99,7 +99,8 @@ public class AuditUserActivity extends AbsBaseLoadActivity {
 
         mBaseBinding.titleView.setRightTitle("录入");
         mBaseBinding.titleView.setRightFraClickListener(view -> {
-            BankCreditResultActivity.open(this, model.getBankCreditResult(), true);
+//            BankCreditResultActivity.open(this, model.getBankCreditResult(), true);
+            BankCreditResultActivity.open(this, model, true);
         });
 
     }
@@ -115,6 +116,7 @@ public class AuditUserActivity extends AbsBaseLoadActivity {
     }
 
     private void initListener() {
+
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
             if (check()){
 

@@ -15,6 +15,9 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.FragmentJoinStep10Binding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
+import com.cdkj.wzcd.util.StringUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,9 +75,29 @@ public class JoinStep10Fragment extends BaseLazyFragment {
 
     private void initView() {
         mBinding.myElOtherFilePdf.build(mActivity, 10, 0);
+
+
+        if (!((JoinApplyActivity) mActivity).isDetails) {
+            mBinding.btnConfirm.setVisibility(View.VISIBLE);
+            mBinding.btnConfirm.setOnConfirmListener(view -> {
+                //保存
+                EventBus.getDefault()
+                        .post(JoinApplyActivity.SAVEALL);
+            });
+        }
+
     }
 
     private void setView() {
+        if (((JoinApplyActivity) mActivity).isDetails) {
+            //附件
+            mBinding.myElOtherFilePdf.addListRequest(StringUtils.splitPIC(data.getOtherFilePdf()));
+            mBinding.myElOtherApplyNote.setTextByRequest(data.getOtherApplyNote());
+        } else {
+            //附件
+            mBinding.myElOtherFilePdf.addList(StringUtils.splitPIC(data.getOtherFilePdf()));
+            mBinding.myElOtherApplyNote.setText(data.getOtherApplyNote());
+        }
 
     }
 
@@ -90,7 +113,7 @@ public class JoinStep10Fragment extends BaseLazyFragment {
             @Override
             public void onSuccess(String key) {
 
-                if (requestCode == mBinding.myElOtherFilePdf.getRequestCode()){
+                if (requestCode == mBinding.myElOtherFilePdf.getRequestCode()) {
                     mBinding.myElOtherFilePdf.addList(key);
                 }
 
@@ -105,12 +128,12 @@ public class JoinStep10Fragment extends BaseLazyFragment {
         }, path);
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("otherFilePdf",mBinding.myElOtherFilePdf.getListData());
-        map.put("otherApplyNote",mBinding.myElOtherApplyNote.getText());
+        map.put("otherFilePdf", mBinding.myElOtherFilePdf.getListData());
+        map.put("otherApplyNote", mBinding.myElOtherApplyNote.getText());
 
         return map;
     }

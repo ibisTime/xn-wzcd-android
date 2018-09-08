@@ -54,10 +54,6 @@ public class CldyListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
                     CldyApplyActivity.open(mContext, item.getCode());
                 });
             }
-
         }
-
-
-
     }
 }

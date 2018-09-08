@@ -4,9 +4,11 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ItemGpsInstallAddBinding;
 import com.cdkj.wzcd.model.GpsInstallModel;
+import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -29,10 +31,15 @@ public class GpsInstallAdapter extends BaseQuickAdapter<GpsInstallModel, BaseVie
         mBinding = DataBindingUtil.bind(helper.itemView);
 
         mBinding.myItemNlCode.setContent(item.getGpsDevNo());
-        mBinding.myItemNlStatus.setContent(TextUtils.equals(item.getStatus(), "0") ? "已作废" : "使用中");
+        mBinding.myItemNlStatus.setContent(TextUtils.equals(item.getStatus(), "0") ? "未使用" : "使用中");
         mBinding.myItemNlType.setContent(TextUtils.equals(item.getGpsType(), "0") ? "无线" : "有线");
         mBinding.myItemNlUser.setContent(item.getAzUser());
-        mBinding.myItemNlPosition.setContent(item.getAzLocation());
-        mBinding.myItemNlDateTime.setContent(item.getAzDatetime());
+
+        if (TextUtils.equals("9", item.getAzLocation())) {
+            mBinding.myItemNlPosition.setContent(item.getAzLocationRemark());
+        } else {
+            mBinding.myItemNlPosition.setContent(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.az_location, item.getAzLocation()));
+        }
+        mBinding.myItemNlDateTime.setContent(DateUtil.formatStringData(item.getAzDatetime(), DateUtil.DATE_YYMMddHHmm));
     }
 }

@@ -66,7 +66,7 @@ public class GPSInstallListActivity extends AbsRefreshListActivity {
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
         List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-        if (list == null || list.size() == 0){
+        if (list == null || list.size() == 0) {
             return;
         }
         mList = list;
@@ -75,7 +75,7 @@ public class GPSInstallListActivity extends AbsRefreshListActivity {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
-//            map.put("saleUserId", SPUtilHelper.getUserId());
+//        map.put("saleUserId", SPUtilHelper.getUserId());
 
         if (isShowDialog) showLoadingDialog();
 

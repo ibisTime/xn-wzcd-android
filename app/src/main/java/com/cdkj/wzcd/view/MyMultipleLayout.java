@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -41,6 +42,7 @@ public class MyMultipleLayout extends LinearLayout {
     private List<String> mList = new ArrayList<>();
 
     private MyMultipleAdapter adapter;
+    private boolean isadd = true;//是否有添加功能
 
     public MyMultipleLayout(Context context) {
         this(context, null);
@@ -62,7 +64,7 @@ public class MyMultipleLayout extends LinearLayout {
 
     private void init(Context context) {
         this.context = context;
-        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.layout_my_multiple, this, true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.layout_my_multiple, this, true);
     }
 
 
@@ -78,10 +80,11 @@ public class MyMultipleLayout extends LinearLayout {
 
     /**
      * MyMultipleLayout 初始化方法
-     * @param activity Activity上下文，用于启动ImageSelectActivity和传入FullyGridLayoutManager
+     *
+     * @param activity    Activity上下文，用于启动ImageSelectActivity和传入FullyGridLayoutManager
      * @param requestCode 多选Layout图片requestCode，用于相册或相机回调时判断图片显示Layout
      */
-    public void build(Activity activity,int maxSize, int requestCode){
+    public void build(Activity activity, int maxSize, int requestCode) {
         mActivity = activity;
         mRequestCode = requestCode;
 
@@ -95,6 +98,26 @@ public class MyMultipleLayout extends LinearLayout {
         adapter = new MyMultipleAdapter(mList, listener);
 //        adapter.setList(selectList);
         mBinding.rvMultiple.setAdapter(adapter);
+
+
+//        adapter.setOnItemClickListener((adapter, view, position) -> {
+//            if (isadd) {
+//                if (position != 0) {
+//                    BGAPhotoPreviewActivity.IntentBuilder photoPreviewIntentBuilder = new BGAPhotoPreviewActivity.IntentBuilder(mActivity)
+//                            .saveImgDir(null); // 保存图片的目录，如果传 null，则没有保存图片功能
+//                    photoPreviewIntentBuilder.previewPhoto("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1536235318&di=40753b5008a15bdf31dd8daf6681f59e&src=http://img0.pconline.com.cn/pconline/1703/30/9027001_53_thumb.jpg");
+//                    mActivity.startActivity(photoPreviewIntentBuilder.build());
+//
+//                }
+//            } else {
+//                BGAPhotoPreviewActivity.IntentBuilder photoPreviewIntentBuilder = new BGAPhotoPreviewActivity.IntentBuilder(mActivity)
+//                        .saveImgDir(null); // 保存图片的目录，如果传 null，则没有保存图片功能
+//                photoPreviewIntentBuilder.previewPhoto("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1536235318&di=40753b5008a15bdf31dd8daf6681f59e&src=http://img0.pconline.com.cn/pconline/1703/30/9027001_53_thumb.jpg");
+//                mActivity.startActivity(photoPreviewIntentBuilder.build());
+//
+//            }
+//        });
+
 //        adapter.setOnItemClickListener((position, v) -> {
 //            if (selectList.size() > 0) {
 //                LocalMedia media = selectList.get(position);
@@ -120,21 +143,59 @@ public class MyMultipleLayout extends LinearLayout {
 
     /**
      * 相册或相机回调后向mList添加图片
+     *
      * @param url
      */
-    public void addList(String url){
+    public void addList(String url) {
         mList.add(url);
         adapter.notifyDataSetChanged();
     }
 
     /**
+     * 相册或相机回调后向mList添加图片
+     *
+     * @param urls
+     */
+    public void addList(List urls) {
+        if (urls == null || urls.size() == 0)
+            return;
+        mList.addAll(urls);
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 相册或相机回调后向mList添加图片
+     *
+     * @param urls
+     */
+    public void addListRequest(List urls) {
+
+        isadd = false;
+        adapter = new MyMultipleAdapter(mList, true, listener);
+        mBinding.rvMultiple.setAdapter(adapter);
+        if (mList != null && mList.size() > 0) {
+            if (TextUtils.equals(mList.get(0), ADD)) {
+                mList.remove(0);
+            }
+        }
+        if (urls == null || urls.size() == 0) {
+            adapter.notifyDataSetChanged();
+            return;
+        }
+        mList.addAll(urls);
+        adapter.notifyDataSetChanged();
+    }
+
+    /**
      * 获取图片List数据
+     *
      * @return
      */
-    public String getListData(){
-
-        if (mList.size() > 0){
-            mList.remove(0);
+    public String getListData() {
+        if (isadd) {
+            if (mList.size() > 0) {
+                mList.remove(0);
+            }
         }
 
         return StringUtils.listToString(mList, "||");
@@ -142,9 +203,10 @@ public class MyMultipleLayout extends LinearLayout {
 
     /**
      * 图片多选Layout requestCode
+     *
      * @return
      */
-    public int getRequestCode(){
+    public int getRequestCode() {
         return mRequestCode;
     }
 

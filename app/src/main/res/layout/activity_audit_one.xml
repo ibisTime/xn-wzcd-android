@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="银行">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MySelectLayout
+                android:id="@+id/mySl_way"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_select_title="购车途径">
+
+            </com.cdkj.wzcd.view.MySelectLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_title="贷款金额"
+                app:txt_input_title_right="@string/money_sing">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myIl_documents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:isSingle="false"
+                app:txt_image_hint="行驶证正面"
+                app:txt_image_hint_right="行驶证反面"
+                app:txt_image_title="上传证件信息">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
+
+            <View style="@style/style_split_line_horizontal_broad" />
+
+            <View style="@style/style_split_line_horizontal_broad" />
+
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="征信人">
+
+            </com.cdkj.wzcd.view.MyNormalLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_zxr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingTop="15dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_approveNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="必填"
+                app:txt_input_title="审核意见" />
+
+            <com.cdkj.wzcd.view.MyConfirmBtn
+                android:id="@+id/myCb_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:txt_confirm_content="通过"
+                app:txt_confirm_content_right="不通过">
+
+            </com.cdkj.wzcd.view.MyConfirmBtn>
+        </LinearLayout>
+    </ScrollView>
+</layout>

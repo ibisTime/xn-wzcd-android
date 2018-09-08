@@ -10,6 +10,7 @@ import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.api.MyApiServer;
+import com.cdkj.wzcd.model.DealersModel;
 
 import org.litepal.crud.DataSupport;
 
@@ -210,6 +211,54 @@ public class DataDictionaryHelper {
             }
         });
     }
+
+
+    public static List<DealersModel> getDealers() {
+        List<DealersModel> allDealers = DataSupport.findAll(DealersModel.class);
+        return allDealers;
+    }
+
+//    /**
+//     * 获取汽车经销商数据
+//     *
+//     * @param mActivity
+//     */
+//    public static void getNetDealers(BaseActivity mActivity) {
+//
+//
+//        Map<String, String> map = RetrofitUtils.getNodeListMap();
+////            map.put("curNodeCode", "006_02");//006_02  是待审核的 汽车经销商
+//        map.put("curNodeCode", "006_03");//006_03  是正常的汽车经销商
+//        Call call = RetrofitUtils.createApi(MyApiServer.class).getDealersList("632067", StringUtils.getJsonToString(map));
+//        mActivity.showLoadingDialog();
+//
+//        call.enqueue(new BaseResponseListCallBack<DealersModel>(mActivity) {
+//            @Override
+//            protected void onSuccess(List<DealersModel> data, String SucMessage) {
+//
+//                if (data == null || data.size() == 0)
+//                    return;
+//
+////                List<DataDealers> list = new ArrayList<>();
+////                for (DealersModel model : data) {
+////                    list.add(new DataDealers().setDkey(model.getCode()).setDvalue(model.getParentGroup() + "-" + model.getAbbrName()));
+////                }
+//
+//                // 如果数据库已有数据，清空重新加载
+//                if (DataSupport.isExist(DealersModel.class))
+//                    DataSupport.deleteAll(DealersModel.class);
+//                DataSupport.saveAll(data);
+//
+//            }
+//
+//            @Override
+//            protected void onFinish() {
+//                mActivity.disMissLoading();
+//            }
+//        });
+//
+//    }
+
 
     /**
      * @param mActivity               BaseActivity  主要用于联网请求和弹窗

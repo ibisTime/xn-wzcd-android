@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--面签 item-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.cdkj.wzcd.view.MyNormalLayout
+            android:id="@+id/myNl_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_normal_title="设备号"></com.cdkj.wzcd.view.MyNormalLayout>
+
+    </LinearLayout>
+</layout>

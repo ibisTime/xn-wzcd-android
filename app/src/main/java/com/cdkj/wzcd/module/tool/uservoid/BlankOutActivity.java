@@ -51,7 +51,7 @@ public class BlankOutActivity extends AbsBaseLoadActivity {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mBaseBinding.titleView.setMidTitle("申请");
+        mBaseBinding.titleView.setMidTitle("申请作废");
 //        mBaseBinding.titleView.setRightTitle("选择准入单");
 //        mBaseBinding.titleView.setRightFraClickListener(view -> {
 //
@@ -66,8 +66,8 @@ public class BlankOutActivity extends AbsBaseLoadActivity {
         });
 
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
-            if (check()){
-                showDoubleWarnListen("您确定要申请作废此准入单吗?",view1 -> {
+            if (check()) {
+                showDoubleWarnListen("您确定要申请作废此准入单吗?", view1 -> {
                     cancel();
                 });
             }
@@ -75,7 +75,7 @@ public class BlankOutActivity extends AbsBaseLoadActivity {
     }
 
     @Subscribe
-    public void getZrdModel(ZrdModel zrdModel){
+    public void getZrdModel(ZrdModel zrdModel) {
 
         if (zrdModel == null)
             return;
@@ -85,35 +85,35 @@ public class BlankOutActivity extends AbsBaseLoadActivity {
     }
 
     private void setView() {
-        mBinding.myNlName.setText(mZrdModel.getApplyUserName());
+        mBinding.myNlName.setText(mZrdModel.getCustomerName());
         mBinding.myNlCode.setText(mZrdModel.getCode());
         mBinding.myNlBank.setText(mZrdModel.getLoanBankName());
         mBinding.myNlLoanAmount.setText(RequestUtil.formatAmountDivSign(mZrdModel.getLoanAmount()));
 
     }
 
-    private boolean check(){
+    private boolean check() {
 
-        if (mZrdModel == null){
+        if (mZrdModel == null) {
             ToastUtil.show(this, "请选择需作废的预约单");
             return false;
         }
 
-        if (mBinding.myElReason.check()){
+        if (mBinding.myElReason.check()) {
             return false;
         }
 
         return true;
     }
 
-    public void cancel(){
+    public void cancel() {
         Map<String, Object> map = new HashMap<>();
 
         map.put("code", mZrdModel.getCode());
-        map.put("remark", mBinding.myElReason.getText());
+        map.put("zfReason", mBinding.myElReason.getText());
         map.put("operator", SPUtilHelper.getUserId());
 
-        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632190", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632270", StringUtils.getJsonToString(map));
 
         addCall(call);
 

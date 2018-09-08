@@ -23,6 +23,7 @@ import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityMismatchingDetailBinding;
 import com.cdkj.wzcd.model.MismatchingRefresh;
 import com.cdkj.wzcd.model.NodeListModel;
+import com.cdkj.wzcd.module.work.credit.CreditDetailActivity;
 import com.cdkj.wzcd.util.RequestUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,7 +47,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
     private ActivityMismatchingDetailBinding mBinding;
 
     private String code;
-
+    private NodeListModel mData;
 
 
     /**
@@ -129,7 +130,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
      */
     private void initClickListener() {
         mBinding.myNlResult.setOnClickListener(view -> {
-
+            CreditDetailActivity.open(this, mData.getCreditCode(), false);
         });
 
         mBinding.myCbConfirm.setOnConfirmListener(view -> {
@@ -169,6 +170,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         call.enqueue(new BaseResponseModelCallBack<NodeListModel>(this) {
             @Override
             protected void onSuccess(NodeListModel data, String SucMessage) {
+                mData = data;
                 setView(data);
 
             }

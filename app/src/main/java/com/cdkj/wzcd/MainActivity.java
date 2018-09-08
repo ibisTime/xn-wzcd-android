@@ -1,5 +1,6 @@
 package com.cdkj.wzcd;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -14,14 +15,16 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.CommonDialog;
 import com.cdkj.baselibrary.dialog.InputDialog;
 import com.cdkj.baselibrary.dialog.UITipDialog;
+import com.cdkj.baselibrary.interfaces.CameraPhotoListener;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
+import com.cdkj.baselibrary.utils.PermissionHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
+import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityMainBinding;
-import com.cdkj.wzcd.model.CollectionBean;
 import com.cdkj.wzcd.model.NodeModel;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.module.datatransfer.TransferActivity;
@@ -41,7 +44,6 @@ import com.cdkj.wzcd.module.work.cldy.BssCldyListActivity;
 import com.cdkj.wzcd.module.work.credit.CreditListActivity;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyListActivity;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.google.gson.Gson;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -68,6 +70,15 @@ public class MainActivity extends AbsBaseLoadActivity {
 
     private final int REQUEST_CODE = 200;
 
+    private PermissionHelper mPreHelper;//权限请求
+    private CameraPhotoListener mCameraPhotoListener;
+
+    //需要的权限
+    private String[] needLocationPermissions = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
 
     public static void open(Context context) {
         if (context == null) {
@@ -92,6 +103,8 @@ public class MainActivity extends AbsBaseLoadActivity {
     public void afterCreate(Bundle savedInstanceState) {
 
         initListener();
+
+        mPreHelper = new PermissionHelper(this);
 
         NodeHelper.getNodeBaseDataRequest(this, "", "", new NodeHelper.NodeInterface() {
             @Override
@@ -163,13 +176,16 @@ public class MainActivity extends AbsBaseLoadActivity {
         SPUtilHelper.saveUserNickName(data.getNickname());
         SPUtilHelper.saveUserPhoto(data.getPhoto());
         SPUtilHelper.saveRoleCode(data.getRoleCode());
-        SPUtilHelper.saveUserCompanyCode(data.getRoleCode());
+        SPUtilHelper.saveUserCompanyCode(data.getCompanyCode());
+
+
     }
 
     private void setView(UserModel data) {
 
         ImgUtils.loadQiNiuBorderLogo(this, data.getPhoto(), mBinding.imAvatar, R.color.white);
-        mBinding.tvNick.setText(TextUtils.isEmpty(data.getLoginName()) ? "暂无" : data.getLoginName());
+//        mBinding.tvNick.setText(TextUtils.isEmpty(data.getLoginName()) ? "暂无" : data.getLoginName());
+        mBinding.tvNick.setText(TextUtils.isEmpty(data.getLoginName()) ? "暂无" : data.getRealName());
         mBinding.tvCompany.setText(data.getCompanyName());
 
         if (TextUtils.equals(data.getRoleCode(), ZHRY)) { // 驻行人员
@@ -206,7 +222,7 @@ public class MainActivity extends AbsBaseLoadActivity {
             logOut();
         });
 
-        //
+        //资信调查
         mBinding.mySrZxdc.setOnClickListener(view -> {
             CreditListActivity.open(this);
         });
@@ -241,7 +257,7 @@ public class MainActivity extends AbsBaseLoadActivity {
             FbhListActivity.open(this);
         });
 
-        // 发保合
+        // 发票不匹配
         mBinding.mySrMismatching.setOnClickListener(view -> {
             MismatchingListActivity.open(this);
         });
@@ -282,11 +298,27 @@ public class MainActivity extends AbsBaseLoadActivity {
         });
         //扫码收件
         mBinding.mySrZxing.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
+            mPreHelper.requestPermissions(new PermissionHelper.PermissionListener() {
+                @Override
+                public void doAfterGrand(String... permission) {
+                    Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
+
+                @Override
+                public void doAfterDenied(String... permission) {
+                    ToastUtil.show(MainActivity.this, "扫码收件需打开相机权限,否则无法使用");
+                }
+            }, needLocationPermissions);
+
         });
     }
 
+    //权限申请回调函数
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        mPreHelper.handleRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     /**
      * 退出登录
@@ -316,37 +348,9 @@ public class MainActivity extends AbsBaseLoadActivity {
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     Log.i("pppppp", "onActivityResult: 返回的数据为:" + result);
-                    CollectionBean bean;
-                    try {
-                        bean = new Gson().fromJson(result, CollectionBean.class);
-                    } catch (Exception e) {
-                        UITipDialog.showInfo(this, "二维码解析失败");
-                        return;
-                    }
 
-                    if (TextUtils.isEmpty(bean.getType()) || bean.getCodeList() == null || bean.getCodeList().size() == 0) {
-                        UITipDialog.showInfo(this, "请扫描完整的二维码");
-                        return;
-                    }
-                    //解析成功去进行  自动收件
-                    if ("2".equals(bean.getType())) {
-                        //判断是不是gps收件
-                        //gps收件右两种情况   1.收件并审核通过   2.补件
-                        new CommonDialog(this)
-                                .builder()
-                                .setTitle("资料收件")
-                                .setNegativeBtn("收件待补件", view -> {
-
-                                    shouReissueRequest(bean.getCodeList());
-
-                                })
-                                .setPositiveBtn("收件并审核", view -> {
-                                    pickUpRequest(bean.getCodeList());
-                                })
-                                .show();
-                    } else {
-                        pickUpRequest(bean.getCodeList());
-                    }
+                    setBarCode(result);
+                    setQRCode(result);
 
 
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
@@ -356,10 +360,90 @@ public class MainActivity extends AbsBaseLoadActivity {
         }
     }
 
+    /**
+     * 二维码的处理逻辑
+     *
+     * @param result
+     */
+    private void setQRCode(String result) {
+        ///================下面是  二维码收件的 逻辑(已不用   改成条形码的了 暂时先不删除代码)================================
+//                    CollectionBean bean;
+//                    try {
+//                        bean = new Gson().fromJson(result, CollectionBean.class);
+//                    } catch (Exception e) {
+//                        //解析失败  按照条形码的逻辑处理(二维码的功能去掉了)
+//                        UITipDialog.showInfo(this, "二维码解析失败");
+//                        return;
+//                    }
+//
+//                    if (TextUtils.isEmpty(bean.getType()) || bean.getCodeList() == null || bean.getCodeList().size() == 0) {
+//                        UITipDialog.showInfo(this, "请扫描完整的二维码");
+//                        return;
+//                    }
+        //解析成功去进行  自动收件
+//                    if ("2".equals(bean.getType())) {
+//                        //判断是不是gps收件
+//                        //gps收件右两种情况   1.收件并审核通过   2.补件(需要填写备注)
+//                        new CommonDialog(this)
+//                                .builder()
+//                                .setTitle("GPS收件")
+//                                .setNegativeBtn("收件待补件", view -> {
+//
+//                                    shouReissueRequest(bean.getCodeList());
+//
+//                                })
+//                                .setPositiveBtn("收件并审核", view -> {
+//                                    pickUpRequest(bean.getCodeList());
+//                                })
+//                                .show();
+//                    } else {
+//                        pickUpRequest(bean.getCodeList());
+//                    }
+    }
+
+
+    /**
+     * 条码的处理逻辑
+     *
+     * @param result
+     */
+    private void setBarCode(String result) {
+
+        if (TextUtils.isEmpty(result) || result.length() < 1) {
+            UITipDialog.showInfo(this, "解析失败,请扫描正确的条形码");
+            return;
+        }
+//        GA20180
+        String type = result.substring(0, 1);
+        String code = result.substring(1, result.length());//从指定位置起截取到最后
+//        Log.i(TAG, "setBarCode: 单参截取" + result.substring(1));//从指定位置起截取到最后
+//        Log.i(TAG, "setBarCode: result.length()的长度截取" + code);
+//        Log.i(TAG, "setBarCode: result.length()-1的长度截取" + result.substring(1, result.length()-1));
+        ArrayList<String> codeList = new ArrayList<>();
+        codeList.add(code);
+        if ("2".equals(type)) {
+            //判断是不是gps收件
+            //gps收件右两种情况   1.收件并审核通过   2.补件(需要填写备注)
+            new CommonDialog(this)
+                    .builder()
+                    .setTitle("GPS收件")
+                    .setNegativeBtn("收件待补件", view -> {
+
+                        shouReissueRequest(codeList);
+
+                    })
+                    .setPositiveBtn("收件并审核", view -> {
+                        pickUpRequest(codeList);
+                    })
+                    .show();
+        } else {
+            pickUpRequest(codeList);
+        }
+    }
+
 
     /**
      * 收件
-     * 如果是资料收件  请传true  收件完成后跳转到审核界面
      */
     public void pickUpRequest(List<String> codeList) {
         if (codeList == null || codeList.size() == 0) {
@@ -377,6 +461,7 @@ public class MainActivity extends AbsBaseLoadActivity {
 
         addCall(call);
 
+        showLoadingDialog();
         call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(this) {
             @Override
             protected void onSuccess(IsSuccessModes data, String SucMessage) {
@@ -465,5 +550,40 @@ public class MainActivity extends AbsBaseLoadActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Map map = RetrofitUtils.getNodeListMap();
+//
+//        Call<BaseResponseModel<TodoBean>> todoData = RetrofitUtils.createApi(MyApiServer.class).getTodoData("630172", StringUtils.getJsonToString(map));
+//        addCall(todoData);
+//        showLoadingDialog();
+//        todoData.enqueue(new BaseResponseModelCallBack<TodoBean>(this) {
+//            @Override
+//            protected void onSuccess(TodoBean data, String SucMessage) {
+//                //资信调查
+//                mBinding.mySrZxdc.setPointCount(0);
+//                //准入申请
+//                mBinding.mySrZrsq.setPointCount(0);
+//                // 财务垫资
+//                mBinding.mySrAdvanceFund.setPointCount(0);
+//                // 银行放款
+//                mBinding.mySrLoan.setPointCount(0);
+//                //车辆抵押
+//                mBinding.mySrCldy.setPointCount(0);
+//                // 解除抵押
+//                mBinding.mySrJcdy.setPointCount(0);
+//                //资料上传
+//                mBinding.mySrZlcd.setPointCount(0);
+//
+//            }
+//
+//            @Override
+//            protected void onFinish() {
+//                disMissLoading();
+//            }
+//        });
     }
 }

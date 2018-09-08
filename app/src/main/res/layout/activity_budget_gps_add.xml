@@ -35,6 +35,15 @@
 
                 </com.cdkj.wzcd.view.MySelectLayout>
 
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_azLocation"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:txt_input_hint="请输入安装位置"
+                    app:txt_input_title="安装位置">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
 
                 <com.cdkj.wzcd.view.MyConfirmBtn
                     android:id="@+id/myCb_confirm"

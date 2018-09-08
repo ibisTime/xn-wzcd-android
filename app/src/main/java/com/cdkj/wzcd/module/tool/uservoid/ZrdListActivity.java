@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
@@ -18,6 +19,7 @@ import com.cdkj.wzcd.util.DataDictionaryHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +32,7 @@ import retrofit2.Call;
 
 public class ZrdListActivity extends AbsRefreshListActivity {
 
-    private List<DataDictionary> mList;
+    private List<DataDictionary> mList = new ArrayList<>();
 
     public static void open(Context context) {
         if (context == null) {
@@ -64,7 +66,7 @@ public class ZrdListActivity extends AbsRefreshListActivity {
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
         List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-        if (list == null || list.size() == 0){
+        if (list == null || list.size() == 0) {
             return;
         }
         mList.addAll(list);
@@ -73,7 +75,7 @@ public class ZrdListActivity extends AbsRefreshListActivity {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
-//            map.put("saleUserId", SPUtilHelper.getUserId());　　
+        map.put("saleUserId", SPUtilHelper.getUserId());
 
         if (isShowDialog) showLoadingDialog();
 

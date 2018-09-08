@@ -28,6 +28,8 @@ allprojects {
         google()
         jcenter()
 
+        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+
         maven { url "https://jitpack.io" }
         maven {
             url 'https://maven.google.com/'

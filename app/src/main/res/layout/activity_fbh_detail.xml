@@ -11,133 +11,149 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_name"
-                app:txt_normal_title="客户姓名"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="客户姓名">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_code"
-                app:txt_normal_title="业务编号"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="业务编号">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_loan_amount"
-                app:txt_normal_title="贷款金额"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="贷款金额">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_bank"
-                app:txt_normal_title="贷款银行"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="贷款银行">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_way"
-                app:txt_normal_title="购车途径"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="购车途径">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_bill_price"
-                app:txt_normal_title="发票价"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_title="发票价">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
-            <View
-                style="@style/style_split_line_horizontal_broad"/>
+            <View style="@style/style_split_line_horizontal_broad" />
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_buyCar_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入颜色"
+                app:txt_input_title="*颜色">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_buyCar_frameNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_input_hint="请输入车架号"
+                app:txt_input_title="*车架号">
+
+            </com.cdkj.wzcd.view.MyEditLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
                 android:id="@+id/myNl_buyCar_dateTime"
-                app:txt_normal_title="购车日期"
-                app:txt_normal_hint="请选择提车日期"
-                app:img_normal_right="@drawable/more_right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:img_normal_right="@drawable/more_right"
+                app:txt_normal_hint="请选择提车日期"
+                app:txt_normal_title="购车日期">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_isRight"
-                app:txt_select_title="发票是否正确"
-                app:img_normal_right="@drawable/more_right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:img_normal_right="@drawable/more_right"
+                app:txt_select_title="发票是否正确">
 
             </com.cdkj.wzcd.view.MySelectLayout>
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_current_bill_price"
-                app:inputType="money"
-                app:txt_input_title="现发票价"
-                app:txt_input_hint="请输入现发票价"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_hint="请输入现发票价"
+                app:txt_input_title="现发票价">
 
             </com.cdkj.wzcd.view.MyEditLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
-                app:txt_normal_title="准入贷款成数标准"
-                app:txt_normal_content="60% - 90%"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_content="60% - 90%"
+                app:txt_normal_title="准入贷款成数标准">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
             <com.cdkj.wzcd.view.MyNormalLayout
-                app:txt_normal_title="新贷款成数"
-                app:txt_normal_content="80%"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_normal_content="80%"
+                app:txt_normal_title="新贷款成数">
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
-            <View
-                style="@style/style_split_line_horizontal_broad"/>
+            <View style="@style/style_split_line_horizontal_broad" />
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_bill"
-                app:txt_image_title="发票"
-                app:txt_image_hint="请上传发票"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_image_hint="请上传发票"
+                app:txt_image_title="发票">
 
             </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_certification"
-                app:txt_image_title="合格证"
-                app:txt_image_hint="请上传合格证"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_image_hint="请上传合格证"
+                app:txt_image_title="合格证">
 
             </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_jqx"
-                app:txt_image_title="交强险"
-                app:txt_image_hint="请上传交强险"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_image_hint="请上传交强险"
+                app:txt_image_title="交强险">
 
             </com.cdkj.wzcd.view.MyImageLayout>
 
@@ -152,28 +168,28 @@
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_car_register"
-                app:txt_image_title="机动车登记证书"
-                app:txt_image_hint="请上传机动车登记证书"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_image_hint="请上传机动车登记证书"
+                app:txt_image_title="机动车登记证书">
 
             </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyImageLayout
                 android:id="@+id/myIl_endorsement"
-                app:txt_image_title="批单"
-                app:txt_image_hint="请上传批单"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:txt_image_hint="请上传批单"
+                app:txt_image_title="批单">
 
             </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyConfirmBtn
-                android:visibility="gone"
                 android:id="@+id/myCb_confirm"
-                app:txt_confirm_content="录入"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:txt_confirm_content="录入">
 
             </com.cdkj.wzcd.view.MyConfirmBtn>
 

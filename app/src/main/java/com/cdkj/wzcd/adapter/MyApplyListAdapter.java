@@ -40,10 +40,13 @@ public class MyApplyListAdapter extends BaseQuickAdapter<NodeListModel, BaseView
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getShopWay()));
         mBinding.myIlAmount.setText(RequestUtil.formatAmountDivSign(item.getLoanAmount()));
-        mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
+        mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(), "1") ? "是" : "否");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
-        if (TextUtils.equals(item.getCurNodeCode(),"002_01") || TextUtils.equals(item.getCurNodeCode(),"002_04")){ // 填写准入申请单 / 重新填写准入申请单
+
+        //只有填写预算单的时候才  显示  申请和外单申请
+//            if (TextUtils.equals(item.getCurNodeCode(), "002_01") || TextUtils.equals(item.getCurNodeCode(), "002_04")) { // 填写准入申请单 / 重新填写准入申请单
+        if (TextUtils.equals(item.getCurNodeCode(), "002_01")) { // 填写准入申请单 / 重新填写准入申请单
             mBinding.myItemCblConfirm.setRightTextAndListener("申请", view -> {
                 JoinApplyActivity.open(mContext, item.getCode(), false);
             });
@@ -51,9 +54,9 @@ public class MyApplyListAdapter extends BaseQuickAdapter<NodeListModel, BaseView
             mBinding.myItemCblConfirm.setLeftTextAndListener("外单申请", view -> {
                 JoinApplyActivity.open(mContext, item.getCode(), true);
             });
-        }else {
-            mBinding.myItemCblConfirm.setContent("","");
+        } else {
+            mBinding.myItemCblConfirm.setContent("", "");
         }
-
     }
 }
+

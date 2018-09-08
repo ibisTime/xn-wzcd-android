@@ -77,31 +77,46 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
     private void setView() {
 
-        mBinding.myElApplyBirthAddress.setText(data.getApplyBirthAddress());
-        mBinding.myElApplyNowAddress.setText(data.getApplyNowAddress());
+        if (((JoinApplyActivity) mActivity).isDetails) {
+            mBinding.myElApplyBirthAddress.setTextByRequest(data.getApplyBirthAddress());
+            mBinding.myElApplyNowAddress.setTextByRequest(data.getApplyNowAddress());
 
-        mBinding.mySlHouseType.setContentByKey(data.getHouseType());
+            mBinding.mySlHouseType.setTextByRequestByKey(data.getHouseType());
 
-        mBinding.myElGhBirthAddress.setText(data.getGhBirthAddress());
-        mBinding.myElGuarantor1BirthAddress.setText(data.getGuarantor1BirthAddress());
-        mBinding.myElGuarantor2BirthAddress.setText(data.getGuarantor2BirthAddress());
-        mBinding.myElOtherNote.setText(data.getOtherNote());
+            mBinding.myElGhBirthAddress.setTextByRequest(data.getGhBirthAddress());
+            mBinding.myElGuarantor1BirthAddress.setTextByRequest(data.getGuarantor1BirthAddress());
+            mBinding.myElGuarantor2BirthAddress.setTextByRequest(data.getGuarantor2BirthAddress());
+            mBinding.myElOtherNote.setTextByRequest(data.getOtherNote());
+
+        } else {
+
+
+            mBinding.myElApplyBirthAddress.setText(data.getApplyBirthAddress());
+            mBinding.myElApplyNowAddress.setText(data.getApplyNowAddress());
+
+            mBinding.mySlHouseType.setContentByKey(data.getHouseType());
+
+            mBinding.myElGhBirthAddress.setText(data.getGhBirthAddress());
+            mBinding.myElGuarantor1BirthAddress.setText(data.getGuarantor1BirthAddress());
+            mBinding.myElGuarantor2BirthAddress.setText(data.getGuarantor2BirthAddress());
+            mBinding.myElOtherNote.setText(data.getOtherNote());
+        }
     }
 
     private String checkFail;
 
-    public boolean check(){
-        if (mBinding.myElApplyBirthAddress.check()){
+    public boolean check() {
+        if (mBinding.myElApplyBirthAddress.check()) {
             checkFail = mBinding.myElApplyBirthAddress.getTitle();
             return false;
         }
 
-        if (mBinding.myElApplyNowAddress.check()){
+        if (mBinding.myElApplyNowAddress.check()) {
             checkFail = mBinding.myElApplyNowAddress.getTitle();
             return false;
         }
 
-        if (mBinding.mySlHouseType.check()){
+        if (mBinding.mySlHouseType.check()) {
             checkFail = mBinding.mySlHouseType.getTitle();
             return false;
         }
@@ -125,25 +140,25 @@ public class JoinStep4Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doCheck(BudgetCheckModel model){
+    public void doCheck(BudgetCheckModel model) {
 
         if (model == null)
             return;
 
         // 检查未通过，由Activity提示，不往下check
-        if (!model.isCheckResult()){
+        if (!model.isCheckResult()) {
             return;
         }
 
-        if (model.getCheckIndex() == 3){
-            if (check()){
+        if (model.getCheckIndex() == 4) {
+            if (check()) {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
-                        .setCheckIndex(model.getCheckIndex()+1)
+                        .setCheckIndex(model.getCheckIndex() + 1)
                         .setCheckResult(true)
                         .setCheckFail(null));
 
-            }else {
+            } else {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
                         .setCheckIndex(model.getCheckIndex())
@@ -154,18 +169,18 @@ public class JoinStep4Fragment extends BaseLazyFragment {
         }
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("applyBirthAddress",mBinding.myElApplyBirthAddress.getText());
-        map.put("applyNowAddress",mBinding.myElApplyNowAddress.getText());
-        map.put("houseType",mBinding.mySlHouseType.getDataKey());
-        map.put("ghBirthAddress",mBinding.myElGhBirthAddress.getText());
-        map.put("guarantor1BirthAddress",mBinding.myElGuarantor1BirthAddress.getText());
-        map.put("guarantor2BirthAddress",mBinding.myElGuarantor2BirthAddress.getText());
+        map.put("applyBirthAddress", mBinding.myElApplyBirthAddress.getText());
+        map.put("applyNowAddress", mBinding.myElApplyNowAddress.getText());
+        map.put("houseType", mBinding.mySlHouseType.getDataKey());
+        map.put("ghBirthAddress", mBinding.myElGhBirthAddress.getText());
+        map.put("guarantor1BirthAddress", mBinding.myElGuarantor1BirthAddress.getText());
+        map.put("guarantor2BirthAddress", mBinding.myElGuarantor2BirthAddress.getText());
 
-        map.put("otherNote",mBinding.myElOtherNote.getText());
+        map.put("otherNote", mBinding.myElOtherNote.getText());
 
         return map;
     }

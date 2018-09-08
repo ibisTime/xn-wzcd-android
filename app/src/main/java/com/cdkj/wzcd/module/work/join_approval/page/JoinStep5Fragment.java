@@ -71,7 +71,6 @@ public class JoinStep5Fragment extends BaseLazyFragment {
     private List<NodeListModel.RepointDetailListBean> mList3 = new ArrayList<>();
 
 
-
     public static JoinStep5Fragment getInstance(String code) {
         JoinStep5Fragment fragment = new JoinStep5Fragment();
         Bundle bundle = new Bundle();
@@ -116,13 +115,14 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
     private void initAdapter() {
         mList1.add(new NodeListModel.RepointDetailListBean());
+
         mAdapter1 = new RePointAdapter(mList1);
         mAdapter1.setOnItemClickListener((adapter, view, position) -> {
-            if (!isOutside){// 正常单
+            if (!isOutside) {// 正常单
 
-                LogUtil.E("isAdvanceFund = "+isAdvanceFund);
+                LogUtil.E("isAdvanceFund = " + isAdvanceFund);
 
-                if (isAdvanceFund){ // 已垫资
+                if (isAdvanceFund) { // 已垫资
                     // 不能修改应退垫资款
                     return;
                 }
@@ -140,7 +140,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
     private void initView() {
 
-        if (!isOutside){
+        if (!isOutside) {
 
             mBinding.mySlGpsFee.setVisibility(View.GONE);
             mBinding.mySlLyAmount.setVisibility(View.GONE);
@@ -169,34 +169,84 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
     private void setView() {
 
-        mBinding.myElOilSubsidyKil.setText(data.getOilSubsidyKil()+"");
-        mBinding.mySlIsPlatInsure.setContentByKey(data.getIsPlatInsure());
 
-        mBinding.mySlGpsFeeWay.setContentByKey(data.getGpsFeeWay());
-        mBinding.mySlServiceChargeWay.setContentByKey(data.getFeeWay());
+        if (((JoinApplyActivity) mActivity).isDetails) {
 
-        if (data.getRepointDetailList1() != null ){
-            for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList1()){
-                mList1.set(0 , bean);
+            if (isOutside) {
+
+                mBinding.mySlOtherFee.setMoneyTextRequest(data.getOtherFee());
+                mBinding.mySlFxAmount.setMoneyTextRequest(data.getFxAmount());
+                mBinding.mySlLyAmount.setMoneyTextRequest(data.getLyAmount());
+                mBinding.mySlGpsFee.setMoneyTextRequest(data.getGpsFee());
+
             }
-            mAdapter1.notifyDataSetChanged();
-        }
 
 
-        if (data.getRepointDetailList3() != null ){
-            mList3.clear();
-            for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList3()){
-                mList3.add(bean);
+            mBinding.myElOilSubsidyKil.setTextByRequest(data.getOilSubsidyKil() + "");
+            mBinding.myNlOilSubsidy.setMoneyText(data.getOilSubsidy());
+            mBinding.mySlIsPlatInsure.setTextByRequestByKey(data.getIsPlatInsure());
+            mBinding.myElGpsDeduct.setMoneyTextRequest(data.getGpsDeduct());
+
+            mBinding.mySlGpsFeeWay.setTextByRequestByKey(data.getGpsFeeWay());
+            mBinding.mySlServiceChargeWay.setTextByRequestByKey(data.getServiceChargeWay());
+
+            mBinding.myRlRepointDetailList3.build(mAdapter3, false, null);
+
+            if (data.getRepointDetailList1() != null) {
+                for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList1()) {
+                    mList1.set(0, bean);
+                }
+                mAdapter1.notifyDataSetChanged();
             }
-            mAdapter3.notifyDataSetChanged();
+
+
+            if (data.getRepointDetailList3() != null) {
+                mList3.clear();
+                for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList3()) {
+                    mList3.add(bean);
+                }
+                mAdapter3.notifyDataSetChanged();
+            }
+        } else {
+
+            if (isOutside) {
+
+                mBinding.mySlOtherFee.setMoneyText(data.getOtherFee());
+                mBinding.mySlFxAmount.setMoneyText(data.getFxAmount());
+                mBinding.mySlLyAmount.setMoneyText(data.getLyAmount());
+                mBinding.mySlGpsFee.setMoneyText(data.getGpsFee());
+
+            }
+
+            mBinding.myElOilSubsidyKil.setText(data.getOilSubsidyKil() + "");
+            mBinding.mySlIsPlatInsure.setContentByKey(data.getIsPlatInsure());
+            mBinding.myElGpsDeduct.setMoneyText(data.getGpsDeduct());
+
+            mBinding.mySlGpsFeeWay.setContentByKey(data.getGpsFeeWay());
+            mBinding.mySlServiceChargeWay.setContentByKey(data.getServiceChargeWay());
+
+            if (data.getRepointDetailList1() != null) {
+                for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList1()) {
+                    mList1.set(0, bean);
+                }
+                mAdapter1.notifyDataSetChanged();
+            }
+
+
+            if (data.getRepointDetailList3() != null) {
+                mList3.clear();
+                for (NodeListModel.RepointDetailListBean bean : data.getRepointDetailList3()) {
+                    mList3.add(bean);
+                }
+                mAdapter3.notifyDataSetChanged();
+            }
         }
 
     }
 
 
-
     @Subscribe
-    public void carDealerSubsidyChangeRepointlList(ChangeRePointList1Model model){
+    public void carDealerSubsidyChangeRepointlList(ChangeRePointList1Model model) {
         if (model == null)
             return;
 
@@ -205,35 +255,33 @@ public class JoinStep5Fragment extends BaseLazyFragment {
     }
 
 
-
-
-    private void setRepointDetailList1(){
+    private void setRepointDetailList1() {
 
         DealersModel model = ((JoinApplyActivity) mActivity).getDealers();
-        if (model != null){
+        if (model != null) {
 
-            for (DealersModel.CarDealerProtocolListBean bean : model.getCarDealerProtocolList()){
-                if (TextUtils.equals(bean.getBankCode(), data.getBankSubbranch().getBank().getBankCode())){
+            for (DealersModel.CarDealerProtocolListBean bean : model.getCarDealerProtocolList()) {
+                if (TextUtils.equals(bean.getBankCode(), data.getBankSubbranch().getBank().getBankCode())) {
 
-                    mBinding.mySlGpsFee.setMoneyText(!TextUtils.isEmpty(bean.getGpsFee()) ? bean.getGpsFee() : RequestUtil.mul(bean.getGpsRate()+"", data.getLoanAmount()));
-                    mBinding.mySlLyAmount.setMoneyText(!TextUtils.isEmpty(bean.getLyAmountFee()) ? bean.getLyAmountFee() : RequestUtil.mul(bean.getLyAmountRate()+"", data.getLoanAmount()));
-                    mBinding.mySlFxAmount.setMoneyText(!TextUtils.isEmpty(bean.getAssureFee()) ? bean.getAssureFee() : RequestUtil.mul(bean.getAssureRate()+"", data.getLoanAmount()));
-                    mBinding.mySlOtherFee.setMoneyText(!TextUtils.isEmpty(bean.getOtherFee()) ? bean.getOtherFee() : RequestUtil.mul(bean.getOtherRate()+"", data.getLoanAmount()));
+                    mBinding.mySlGpsFee.setMoneyText(!TextUtils.isEmpty(bean.getGpsFee()) ? bean.getGpsFee() : RequestUtil.mul(bean.getGpsRate() + "", data.getLoanAmount()));
+                    mBinding.mySlLyAmount.setMoneyText(!TextUtils.isEmpty(bean.getLyAmountFee()) ? bean.getLyAmountFee() : RequestUtil.mul(bean.getLyAmountRate() + "", data.getLoanAmount()));
+                    mBinding.mySlFxAmount.setMoneyText(!TextUtils.isEmpty(bean.getAssureFee()) ? bean.getAssureFee() : RequestUtil.mul(bean.getAssureRate() + "", data.getLoanAmount()));
+                    mBinding.mySlOtherFee.setMoneyText(!TextUtils.isEmpty(bean.getOtherFee()) ? bean.getOtherFee() : RequestUtil.mul(bean.getOtherRate() + "", data.getLoanAmount()));
 
                     isAdvanceFund = ((JoinApplyActivity) mActivity).getIsAdvanceFund();
 
-                    LogUtil.E("getIsAdvanceFund = "+isAdvanceFund);
+                    LogUtil.E("getIsAdvanceFund = " + isAdvanceFund);
 
                     // 如果不垫资，则需要手动输入用途和金额以外的其他信息， 垫资则自动填入
-                    if (isAdvanceFund){
+                    if (isAdvanceFund) {
 
-                        for (DealersModel.JxsCollectBankcardListBean jxsCollectBankcardListBean : model.getJxsCollectBankcardList()){
+                        for (DealersModel.JxsCollectBankcardListBean jxsCollectBankcardListBean : model.getJxsCollectBankcardList()) {
 
-                            if (TextUtils.equals(jxsCollectBankcardListBean.getBankCode(), data.getBankSubbranch().getBank().getBankCode())){
-                                mList1.get(0).setCarDealerName(model.getParentGroup()+"-"+model.getAbbrName());
-                                mList1.get(0).setAccountNO(jxsCollectBankcardListBean.getBankcardNumber());
-                                mList1.get(0).setOpenBankName(jxsCollectBankcardListBean.getSubbranch());
-                            }
+//                            if (TextUtils.equals(jxsCollectBankcardListBean.getBankCode(), data.getBankSubbranch().getBank().getBankCode())){
+                            mList1.get(0).setCarDealerName(model.getParentGroup() + "-" + model.getAbbrName());
+                            mList1.get(0).setAccountNO(jxsCollectBankcardListBean.getBankcardNumber());
+                            mList1.get(0).setOpenBankName(jxsCollectBankcardListBean.getSubbranch());
+//                            }
                         }
 
                         mAdapter1.notifyDataSetChanged();
@@ -246,16 +294,15 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         }
 
 
-
         if (TextUtils.isEmpty(mBinding.mySlServiceChargeWay.getDataKey()))
             return;
 
-        if (TextUtils.equals(mBinding.mySlServiceChargeWay.getDataKey(), "2")){ // 按揭款
+        if (TextUtils.equals(mBinding.mySlServiceChargeWay.getDataKey(), "2")) { // 按揭款
             skhsxf = Double.parseDouble(mBinding.mySlGpsFee.getMoneyText())
                     + Double.parseDouble(mBinding.mySlLyAmount.getMoneyText())
                     + Double.parseDouble(mBinding.mySlFxAmount.getMoneyText())
                     + Double.parseDouble(mBinding.mySlOtherFee.getMoneyText());
-        }else {
+        } else {
             skhsxf = 0;
         }
 
@@ -263,9 +310,9 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         if (TextUtils.isEmpty(mBinding.mySlGpsFeeWay.getDataKey()))
             return;
 
-        if (TextUtils.equals(mBinding.mySlGpsFeeWay.getDataKey(), "2")){ // 按揭款
+        if (TextUtils.equals(mBinding.mySlGpsFeeWay.getDataKey(), "2")) { // 按揭款
             gpsf = Double.parseDouble(mBinding.mySlGpsFee.getMoneyText());
-        }else {
+        } else {
             gpsf = 0;
         }
 
@@ -280,18 +327,18 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
     private String checkFail;
 
-    public boolean check(){
+    public boolean check() {
 //        if (mBinding.myElOilSubsidy.check()){
 //            checkFail = mBinding.myElOilSubsidy.getTitle();
 //            return false;
 //        }
 
-        if (mBinding.myElOilSubsidyKil.check()){
+        if (mBinding.myElOilSubsidyKil.check()) {
             checkFail = mBinding.myElOilSubsidyKil.getTitle();
             return false;
         }
 
-        if (mBinding.mySlIsPlatInsure.check()){
+        if (mBinding.mySlIsPlatInsure.check()) {
             checkFail = mBinding.mySlIsPlatInsure.getTitle();
             return false;
         }
@@ -301,25 +348,25 @@ public class JoinStep5Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doCheck(BudgetCheckModel model){
+    public void doCheck(BudgetCheckModel model) {
 
         if (model == null)
             return;
 
         // 检查未通过，由Activity提示，不往下check
-        if (!model.isCheckResult()){
+        if (!model.isCheckResult()) {
             return;
         }
 
-        if (model.getCheckIndex() == 4){
-            if (check()){
+        if (model.getCheckIndex() == 5) {
+            if (check()) {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
-                        .setCheckIndex(model.getCheckIndex()+1)
+                        .setCheckIndex(model.getCheckIndex() + 1)
                         .setCheckResult(true)
                         .setCheckFail(null));
 
-            }else {
+            } else {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
                         .setCheckIndex(model.getCheckIndex())
@@ -330,21 +377,21 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         }
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("oilSubsidy",mBinding.myNlOilSubsidy.getMoneyText());
-        map.put("oilSubsidyKil",mBinding.myElOilSubsidyKil.getText());
-        map.put("isPlatInsure",mBinding.mySlIsPlatInsure.getDataKey());
-        map.put("gpsDeduct",mBinding.myElGpsDeduct.getText());
-        map.put("gpsFeeWay",mBinding.mySlGpsFeeWay.getDataKey());
-        map.put("serviceChargeWay",mBinding.mySlServiceChargeWay.getDataKey());
+        map.put("oilSubsidy", mBinding.myNlOilSubsidy.getMoneyText());
+        map.put("oilSubsidyKil", mBinding.myElOilSubsidyKil.getText());
+        map.put("isPlatInsure", mBinding.mySlIsPlatInsure.getDataKey());
+        map.put("gpsDeduct", mBinding.myElGpsDeduct.getText());
+        map.put("gpsFeeWay", mBinding.mySlGpsFeeWay.getDataKey());
+        map.put("serviceChargeWay", mBinding.mySlServiceChargeWay.getDataKey());
 
-        map.put("gpsFee",mBinding.mySlGpsFee.getMoneyText());
-        map.put("lyAmount",mBinding.mySlLyAmount.getMoneyText());
-        map.put("fxAmount",mBinding.mySlFxAmount.getMoneyText());
-        map.put("otherFee",mBinding.mySlOtherFee.getMoneyText());
+        map.put("gpsFee", mBinding.mySlGpsFee.getMoneyText());
+        map.put("lyAmount", mBinding.mySlLyAmount.getMoneyText());
+        map.put("fxAmount", mBinding.mySlFxAmount.getMoneyText());
+        map.put("otherFee", mBinding.mySlOtherFee.getMoneyText());
 
 
         List<NodeListModel.RepointDetailListBean> list = new ArrayList<>();
@@ -355,7 +402,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         return map;
     }
 
-    public void getGpsDeductRate(){
+    public void getGpsDeductRate() {
         if (TextUtils.isEmpty(code))
             return;
 
@@ -381,7 +428,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         });
     }
 
-    public void getOilDeductRate(){
+    public void getOilDeductRate() {
         if (TextUtils.isEmpty(code))
             return;
 
@@ -408,13 +455,13 @@ public class JoinStep5Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doAddCreditPerson(NodeListModel.RepointDetailListBean model){
+    public void doAddCreditPerson(NodeListModel.RepointDetailListBean model) {
         mList3.add(model);
         mAdapter3.notifyDataSetChanged();
     }
 
     @Subscribe
-    public void doReplaceCreditPerson(RePointReplaceModel model){
+    public void doReplaceCreditPerson(RePointReplaceModel model) {
 
         mList3.set(model.getPosition(), model.getRePointModel());
         mAdapter3.notifyDataSetChanged();
@@ -422,7 +469,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doReplaceCreditPerson(AdvanceReplaceModel model){
+    public void doReplaceCreditPerson(AdvanceReplaceModel model) {
 
         mList1.get(0).setCarDealerName(model.getRePointModel().getCarDealerName());
         mList1.get(0).setAccountNO(model.getRePointModel().getAccountNO());

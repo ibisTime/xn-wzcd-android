@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -49,7 +50,7 @@ public class AdvanceFundApplyActivity extends AbsBaseLoadActivity {
 
     @Override
     public View addMainView() {
-        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_advance_fund_apply, null , false);
+        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_advance_fund_apply, null, false);
         return mBinding.getRoot();
     }
 
@@ -82,7 +83,7 @@ public class AdvanceFundApplyActivity extends AbsBaseLoadActivity {
 
     }
 
-    public void getAdvanceFund(){
+    public void getAdvanceFund() {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);
@@ -109,23 +110,26 @@ public class AdvanceFundApplyActivity extends AbsBaseLoadActivity {
 
     private void setView(AdvanceFundModel data) {
         mBinding.myNlName.setText(data.getCustomerName());
-        mBinding.myNlCode.setText(data.getCode());
+        mBinding.myNlCode.setText(data.getBudgetCode());
         mBinding.myNlCompanyName.setText(data.getBizCompanyName());
         mBinding.myNlDealers.setText(data.getCarDealerName());
         mBinding.myNlAmount.setText(RequestUtil.formatAmountDivSign(data.getBudgetOrder().getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlNumber.setText(data.getCollectionAccountNo());
+        mBinding.myNlReceiptBank.setText(data.getCollectBankName());//收款银行
+
+        mBinding.mySlIsAdvanceFund.setTextAndKey(data.getIsAdvanceFund(), TextUtils.equals(data.getIsAdvanceFund(), "1") ? "是" : "否");
     }
 
-    private boolean check(){
-        if (mBinding.mySlIsAdvanceFund.check()){
+    private boolean check() {
+        if (mBinding.mySlIsAdvanceFund.check()) {
             return false;
         }
 
         return true;
     }
 
-    public void apply(){
+    public void apply() {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);

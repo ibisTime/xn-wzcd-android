@@ -3,6 +3,7 @@ package com.cdkj.wzcd.module.work.join_approval.page;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,8 +76,8 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
     private void initView() {
         //贷款人与共还人的关系不可更改
-        mBinding.mySlApplyUserGhrRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation), (MyFrontSelectInterface) () -> true  ,null);
-        mBinding.mySlMarryState.setData(DataDictionaryHelper.getListByParentKey(marry_state),null);
+        mBinding.mySlApplyUserGhrRelation.setData(DataDictionaryHelper.getListByParentKey(credit_user_relation), (MyFrontSelectInterface) () -> true, null);
+        mBinding.mySlMarryState.setData(DataDictionaryHelper.getListByParentKey(marry_state), null);
 
         mBinding.mySlApplyUserJourShowIncome.setDataIs(null);
 
@@ -97,66 +98,114 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
     private void setView() {
 
-        mBinding.myNlApplyUserName.setText(data.getApplyUserCompany());
-        mBinding.myElApplyUserCompany.setText(data.getApplyUserCompany());
-        mBinding.myElApplyUserDuty.setText(data.getApplyUserDuty());
-        mBinding.mySlApplyUserGhrRelation.setContentByKey(data.getApplyUserGhrRelation());
-        mBinding.mySlMarryState.setContentByKey(data.getMarryState());
 
-        mBinding.myElApplyUserMonthIncome.setMoneyText(data.getApplyUserMonthIncome());
-        mBinding.myElApplyUserSettleInterest.setMoneyText(data.getApplyUserSettleInterest());
-        mBinding.myElApplyUserBalance.setMoneyText(data.getApplyUserBalance());
-        mBinding.mySlApplyUserJourShowIncome.setContentByKey(data.getApplyUserJourShowIncome());
-        mBinding.mySlApplyUserIsPrint.setContentByKey(data.getApplyUserIsPrint());
+        if (((JoinApplyActivity) mActivity).isDetails) {
 
-        mBinding.myNlGhUserName.setText(data.getApplyUserCompany());
-        mBinding.myElGhMonthIncome.setMoneyText(data.getGhMonthIncome());
-        mBinding.myElGhSettleInterest.setMoneyText(data.getGhSettleInterest());
-        mBinding.myElGhBalance.setMoneyText(data.getGhBalance());
-        mBinding.mySlGhJourShowIncome.setContentByKey(data.getGhJourShowIncome());
-        mBinding.mySlGhIsPrint.setContentByKey(data.getGhIsPrint());
+            mBinding.myNlApplyUserName.setText(data.getCustomerName());//贷款人
+            mBinding.myNlGhUserName.setText(TextUtils.isEmpty(data.getGhRealName()) ? "暂无共换人" : data.getGhRealName());//共换人
+            mBinding.myNlDanbaoName.setText(TextUtils.isEmpty(data.getGuarantor1Name()) ? "暂无担保人" : data.getGuarantor1Name());//担保人  可能有多个  可能没有  只取一个
+            mBinding.myElApplyUserCompany.setTextByRequest(data.getApplyUserCompany());
 
-        mBinding.myNlGuarantor1UserName.setText(data.getApplyUserCompany());
-        mBinding.myElGuarantor1MonthIncome.setMoneyText(data.getGuarantor1MonthIncome());
-        mBinding.myElGuarantor1SettleInterest.setMoneyText(data.getGuarantor1SettleInterest());
-        mBinding.myElGuarantor1Balance.setMoneyText(data.getGuarantor1Balance());
-        mBinding.mySlGuarantor1JourShowIncome.setContentByKey(data.getGuarantor1JourShowIncome());
-        mBinding.mySlGuarantor1IsPrint.setContentByKey(data.getGuarantor1IsPrint());
 
-        mBinding.myNlGuarantor2UserName.setText(data.getApplyUserCompany());
-        mBinding.myElGuarantor2MonthIncome.setMoneyText(data.getGuarantor2MonthIncome());
-        mBinding.myElGuarantor2SettleInterest.setMoneyText(data.getGuarantor2SettleInterest());
-        mBinding.myElGuarantor2Balance.setMoneyText(data.getGuarantor2Balance());
-        mBinding.mySlGuarantor2JourShowIncome.setContentByKey(data.getGuarantor2JourShowIncome());
-        mBinding.mySlGuarantor2IsPrint.setContentByKey(data.getGuarantor2IsPrint());
+            mBinding.myElApplyUserDuty.setTextByRequest(data.getApplyUserDuty());
+            mBinding.mySlApplyUserGhrRelation.setTextByRequest(data.getApplyUserGhrRelation());
+            mBinding.mySlMarryState.setTextByRequestByKey(data.getMarryState());
 
-        mBinding.myElOtherIncomeNote.setText(data.getOtherIncomeNote());
+            mBinding.myElApplyUserMonthIncome.setMoneyTextRequest(data.getApplyUserMonthIncome());
+            mBinding.myElApplyUserSettleInterest.setMoneyTextRequest(data.getApplyUserSettleInterest());
+            mBinding.myElApplyUserBalance.setMoneyTextRequest(data.getApplyUserBalance());
+            mBinding.mySlApplyUserJourShowIncome.setTextByRequestByKey(data.getApplyUserJourShowIncome());
+            mBinding.mySlApplyUserIsPrint.setTextByRequestByKey(data.getApplyUserIsPrint());
+
+            mBinding.myElGhMonthIncome.setMoneyTextRequest(data.getGhMonthIncome());
+            mBinding.myElGhSettleInterest.setMoneyTextRequest(data.getGhSettleInterest());
+            mBinding.myElGhBalance.setMoneyTextRequest(data.getGhBalance());
+            mBinding.mySlGhJourShowIncome.setTextByRequestByKey(data.getGhJourShowIncome());
+            mBinding.mySlGhIsPrint.setTextByRequestByKey(data.getGhIsPrint());
+
+            mBinding.myNlGuarantor1UserName.setText(data.getApplyUserCompany());
+            mBinding.myElGuarantor1MonthIncome.setMoneyTextRequest(data.getGuarantor1MonthIncome());
+            mBinding.myElGuarantor1SettleInterest.setMoneyTextRequest(data.getGuarantor1SettleInterest());
+            mBinding.myElGuarantor1Balance.setMoneyTextRequest(data.getGuarantor1Balance());
+            mBinding.mySlGuarantor1JourShowIncome.setTextByRequestByKey(data.getGuarantor1JourShowIncome());
+            mBinding.mySlGuarantor1IsPrint.setTextByRequestByKey(data.getGuarantor1IsPrint());
+
+            mBinding.myNlGuarantor2UserName.setText(data.getApplyUserCompany());
+            mBinding.myElGuarantor2MonthIncome.setMoneyTextRequest(data.getGuarantor2MonthIncome());
+            mBinding.myElGuarantor2SettleInterest.setMoneyTextRequest(data.getGuarantor2SettleInterest());
+            mBinding.myElGuarantor2Balance.setMoneyTextRequest(data.getGuarantor2Balance());
+            mBinding.mySlGuarantor2JourShowIncome.setTextByRequestByKey(data.getGuarantor2JourShowIncome());
+            mBinding.mySlGuarantor2IsPrint.setTextByRequestByKey(data.getGuarantor2IsPrint());
+
+            mBinding.myElOtherIncomeNote.setTextByRequest(data.getOtherIncomeNote());
+            mBinding.myElOtherIncomeNote.setTextHint("");
+
+        } else {
+            mBinding.myNlApplyUserName.setText(data.getCustomerName());//贷款人
+            mBinding.myNlGhUserName.setText(data.getGhRealName());//共换人
+            mBinding.myNlDanbaoName.setText(TextUtils.isEmpty(data.getGuarantor1Name()) ? "暂无担保人" : data.getGuarantor1Name());//担保人  可能有多个  可能没有  只取一个
+            mBinding.myElApplyUserCompany.setText(data.getApplyUserCompany());
+
+
+            mBinding.myElApplyUserDuty.setText(data.getApplyUserDuty());
+            mBinding.mySlApplyUserGhrRelation.setContentByKey(data.getApplyUserGhrRelation());
+            mBinding.mySlMarryState.setContentByKey(data.getMarryState());
+
+            mBinding.myElApplyUserMonthIncome.setMoneyText(data.getApplyUserMonthIncome());
+            mBinding.myElApplyUserSettleInterest.setMoneyText(data.getApplyUserSettleInterest());
+            mBinding.myElApplyUserBalance.setMoneyText(data.getApplyUserBalance());
+            mBinding.mySlApplyUserJourShowIncome.setContentByKey(data.getApplyUserJourShowIncome());
+            mBinding.mySlApplyUserIsPrint.setContentByKey(data.getApplyUserIsPrint());
+
+            mBinding.myElGhMonthIncome.setMoneyText(data.getGhMonthIncome());
+            mBinding.myElGhSettleInterest.setMoneyText(data.getGhSettleInterest());
+            mBinding.myElGhBalance.setMoneyText(data.getGhBalance());
+            mBinding.mySlGhJourShowIncome.setContentByKey(data.getGhJourShowIncome());
+            mBinding.mySlGhIsPrint.setContentByKey(data.getGhIsPrint());
+
+            mBinding.myNlGuarantor1UserName.setText(data.getApplyUserCompany());
+            mBinding.myElGuarantor1MonthIncome.setMoneyText(data.getGuarantor1MonthIncome());
+            mBinding.myElGuarantor1SettleInterest.setMoneyText(data.getGuarantor1SettleInterest());
+            mBinding.myElGuarantor1Balance.setMoneyText(data.getGuarantor1Balance());
+            mBinding.mySlGuarantor1JourShowIncome.setContentByKey(data.getGuarantor1JourShowIncome());
+            mBinding.mySlGuarantor1IsPrint.setContentByKey(data.getGuarantor1IsPrint());
+
+            mBinding.myNlGuarantor2UserName.setText(data.getApplyUserCompany());
+            mBinding.myElGuarantor2MonthIncome.setMoneyText(data.getGuarantor2MonthIncome());
+            mBinding.myElGuarantor2SettleInterest.setMoneyText(data.getGuarantor2SettleInterest());
+            mBinding.myElGuarantor2Balance.setMoneyText(data.getGuarantor2Balance());
+            mBinding.mySlGuarantor2JourShowIncome.setContentByKey(data.getGuarantor2JourShowIncome());
+            mBinding.mySlGuarantor2IsPrint.setContentByKey(data.getGuarantor2IsPrint());
+
+            mBinding.myElOtherIncomeNote.setText(data.getOtherIncomeNote());
+        }
+
     }
 
     private String checkFail;
 
-    public boolean check(){
-        if (mBinding.myElApplyUserCompany.check()){
+    public boolean check() {
+        if (mBinding.myElApplyUserCompany.check()) {
             checkFail = mBinding.myElApplyUserCompany.getTitle();
             return false;
         }
 
-        if (mBinding.myElApplyUserDuty.check()){
+        if (mBinding.myElApplyUserDuty.check()) {
             checkFail = mBinding.myElApplyUserDuty.getTitle();
             return false;
         }
 
-        if (mBinding.mySlApplyUserGhrRelation.check()){
-            checkFail =  mBinding.mySlApplyUserGhrRelation.getTitle();
+        if (mBinding.mySlApplyUserGhrRelation.check()) {
+            checkFail = mBinding.mySlApplyUserGhrRelation.getTitle();
             return false;
         }
 
-        if (mBinding.mySlMarryState.check()){
+        if (mBinding.mySlMarryState.check()) {
             checkFail = mBinding.mySlMarryState.getTitle();
             return false;
         }
 
-        if (mBinding.myElApplyUserMonthIncome.check()){
+        if (mBinding.myElApplyUserMonthIncome.check()) {
             checkFail = mBinding.myElApplyUserMonthIncome.getTitle();
             return false;
         }
@@ -165,25 +214,25 @@ public class JoinStep2Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doCheck(BudgetCheckModel model){
+    public void doCheck(BudgetCheckModel model) {
 
         if (model == null)
             return;
 
         // 检查未通过，由Activity提示，不往下check
-        if (!model.isCheckResult()){
+        if (!model.isCheckResult()) {
             return;
         }
 
-        if (model.getCheckIndex() == 1){
-            if (check()){
+        if (model.getCheckIndex() == 1) {
+            if (check()) {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
-                        .setCheckIndex(model.getCheckIndex()+1)
+                        .setCheckIndex(model.getCheckIndex() + 1)
                         .setCheckResult(true)
                         .setCheckFail(null));
 
-            }else {
+            } else {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
                         .setCheckIndex(model.getCheckIndex())
@@ -195,40 +244,40 @@ public class JoinStep2Fragment extends BaseLazyFragment {
 
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("applyUserCompany",mBinding.myElApplyUserCompany.getText());
-        map.put("applyUserDuty",mBinding.myElApplyUserDuty.getText());
-        map.put("applyUserGhrRelation",mBinding.mySlApplyUserGhrRelation.getDataKey());
-        map.put("marryState",mBinding.mySlMarryState.getDataKey());
+        map.put("applyUserCompany", mBinding.myElApplyUserCompany.getText());
+        map.put("applyUserDuty", mBinding.myElApplyUserDuty.getText());
+        map.put("applyUserGhrRelation", mBinding.mySlApplyUserGhrRelation.getDataKey());
+        map.put("marryState", mBinding.mySlMarryState.getDataKey());
 
-        map.put("applyUserMonthIncome",mBinding.myElApplyUserMonthIncome.getMoneyText());
-        map.put("applyUserSettleInterest",mBinding.myElApplyUserSettleInterest.getMoneyText());
-        map.put("applyUserBalance",mBinding.myElApplyUserBalance.getMoneyText());
-        map.put("applyUserJourShowIncome",mBinding.mySlApplyUserJourShowIncome.getDataKey());
-        map.put("applyUserIsPrint",mBinding.mySlApplyUserIsPrint.getDataKey());
+        map.put("applyUserMonthIncome", mBinding.myElApplyUserMonthIncome.getMoneyText());
+        map.put("applyUserSettleInterest", mBinding.myElApplyUserSettleInterest.getMoneyText());
+        map.put("applyUserBalance", mBinding.myElApplyUserBalance.getMoneyText());
+        map.put("applyUserJourShowIncome", mBinding.mySlApplyUserJourShowIncome.getDataKey());
+        map.put("applyUserIsPrint", mBinding.mySlApplyUserIsPrint.getDataKey());
 
-        map.put("ghMonthIncome",mBinding.myElGhMonthIncome.getMoneyText());
-        map.put("ghSettleInterest",mBinding.myElGhSettleInterest.getMoneyText());
-        map.put("ghBalance",mBinding.myElGhBalance.getMoneyText());
-        map.put("ghJourShowIncome",mBinding.mySlGhJourShowIncome.getDataKey());
-        map.put("ghIsPrint",mBinding.mySlGhIsPrint.getDataKey());
+        map.put("ghMonthIncome", mBinding.myElGhMonthIncome.getMoneyText());
+        map.put("ghSettleInterest", mBinding.myElGhSettleInterest.getMoneyText());
+        map.put("ghBalance", mBinding.myElGhBalance.getMoneyText());
+        map.put("ghJourShowIncome", mBinding.mySlGhJourShowIncome.getDataKey());
+        map.put("ghIsPrint", mBinding.mySlGhIsPrint.getDataKey());
 
-        map.put("guarantor1MonthIncome",mBinding.myElGuarantor1MonthIncome.getMoneyText());
-        map.put("guarantor1SettleInterest",mBinding.myElGuarantor1SettleInterest.getMoneyText());
-        map.put("guarantor1Balance",mBinding.myElGuarantor1Balance.getMoneyText());
-        map.put("uarantor1JourShowIncome",mBinding.mySlGuarantor1JourShowIncome.getDataKey());
-        map.put("guarantor1IsPrint",mBinding.mySlGuarantor1IsPrint.getDataKey());
+        map.put("guarantor1MonthIncome", mBinding.myElGuarantor1MonthIncome.getMoneyText());
+        map.put("guarantor1SettleInterest", mBinding.myElGuarantor1SettleInterest.getMoneyText());
+        map.put("guarantor1Balance", mBinding.myElGuarantor1Balance.getMoneyText());
+        map.put("uarantor1JourShowIncome", mBinding.mySlGuarantor1JourShowIncome.getDataKey());
+        map.put("guarantor1IsPrint", mBinding.mySlGuarantor1IsPrint.getDataKey());
 
-        map.put("guarantor2MonthIncome",mBinding.myElGuarantor2MonthIncome.getMoneyText());
-        map.put("guarantor2SettleInterest",mBinding.myElGuarantor2SettleInterest.getMoneyText());
-        map.put("guarantor2Balance",mBinding.myElGuarantor2Balance.getMoneyText());
-        map.put("guarantor2JourShowIncome",mBinding.mySlGuarantor2JourShowIncome.getDataKey());
-        map.put("guarantor2IsPrint",mBinding.mySlGuarantor2IsPrint.getDataKey());
+        map.put("guarantor2MonthIncome", mBinding.myElGuarantor2MonthIncome.getMoneyText());
+        map.put("guarantor2SettleInterest", mBinding.myElGuarantor2SettleInterest.getMoneyText());
+        map.put("guarantor2Balance", mBinding.myElGuarantor2Balance.getMoneyText());
+        map.put("guarantor2JourShowIncome", mBinding.mySlGuarantor2JourShowIncome.getDataKey());
+        map.put("guarantor2IsPrint", mBinding.mySlGuarantor2IsPrint.getDataKey());
 
-        map.put("otherIncomeNote",mBinding.myElOtherIncomeNote.getText());
+        map.put("otherIncomeNote", mBinding.myElOtherIncomeNote.getText());
 
         return map;
     }

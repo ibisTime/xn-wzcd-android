@@ -15,6 +15,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.FragmentJoinStep9Binding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
+import com.cdkj.wzcd.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,6 +84,45 @@ public class JoinStep9Fragment extends BaseLazyFragment {
 
     private void setView() {
 
+        if (((JoinApplyActivity) mActivity).isDetails) {
+
+            //合格证
+            mBinding.myMlSecondHgz.addListRequest(StringUtils.splitPIC(data.getSecondHgz()));
+            //里程表
+            mBinding.myMlSecondOdometer.addListRequest(StringUtils.splitPIC(data.getSecondOdometer()));
+            //车前正面照
+            mBinding.myMlSecondCarFrontPic.addListRequest(StringUtils.splitPIC(data.getSecondCarFrontPic()));//未返回--
+            //中控台
+            mBinding.myMlSecondConsolePic.addListRequest(StringUtils.splitPIC(data.getSecondConsolePic()));
+            //车300评估页
+            mBinding.myMlSecond300Pdf.addListRequest(StringUtils.splitPIC(data.getSecond300Pdf()));
+            //汽修宝截图
+            mBinding.myMlSecondQxbPic.addListRequest(StringUtils.splitPIC(data.getSecondQxbPic()));
+            //车内饰
+            mBinding.myMlSecondCarInPic.addListRequest(StringUtils.splitPIC(data.getSecondCarInPic()));
+            //铭牌
+            mBinding.myMlSecondNumber.addListRequest(StringUtils.splitPIC(data.getSecondNumber()));
+        } else {
+
+            //合格证
+            mBinding.myMlSecondHgz.addList(StringUtils.splitPIC(data.getSecondHgz()));
+            //里程表
+            mBinding.myMlSecondOdometer.addList(StringUtils.splitPIC(data.getSecondOdometer()));
+            //车前正面照
+            mBinding.myMlSecondCarFrontPic.addList(StringUtils.splitPIC(data.getSecondCarFrontPic()));//未返回--
+            //中控台
+            mBinding.myMlSecondConsolePic.addList(StringUtils.splitPIC(data.getSecondConsolePic()));
+            //车300评估页
+            mBinding.myMlSecond300Pdf.addList(StringUtils.splitPIC(data.getSecond300Pdf()));
+            //汽修宝截图
+            mBinding.myMlSecondQxbPic.addList(StringUtils.splitPIC(data.getSecondQxbPic()));
+            //车内饰
+            mBinding.myMlSecondCarInPic.addList(StringUtils.splitPIC(data.getSecondCarInPic()));
+            //铭牌
+            mBinding.myMlSecondNumber.addList(StringUtils.splitPIC(data.getSecondNumber()));
+
+        }
+
     }
 
     @Override
@@ -97,35 +137,35 @@ public class JoinStep9Fragment extends BaseLazyFragment {
             @Override
             public void onSuccess(String key) {
 
-                if (requestCode == mBinding.myMlSecondHgz.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondHgz.getRequestCode()) {
                     mBinding.myMlSecondHgz.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondOdometer.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondOdometer.getRequestCode()) {
                     mBinding.myMlSecondOdometer.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondCarFrontPic.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondCarFrontPic.getRequestCode()) {
                     mBinding.myMlSecondCarFrontPic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondConsolePic.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondConsolePic.getRequestCode()) {
                     mBinding.myMlSecondConsolePic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecond300Pdf.getRequestCode()){
+                if (requestCode == mBinding.myMlSecond300Pdf.getRequestCode()) {
                     mBinding.myMlSecond300Pdf.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondQxbPic.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondQxbPic.getRequestCode()) {
                     mBinding.myMlSecondQxbPic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondCarInPic.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondCarInPic.getRequestCode()) {
                     mBinding.myMlSecondCarInPic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSecondNumber.getRequestCode()){
+                if (requestCode == mBinding.myMlSecondNumber.getRequestCode()) {
                     mBinding.myMlSecondNumber.addList(key);
                 }
 
@@ -140,18 +180,18 @@ public class JoinStep9Fragment extends BaseLazyFragment {
         }, path);
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("secondHgz",mBinding.myMlSecondHgz.getListData());
-        map.put("secondOdometer",mBinding.myMlSecondOdometer.getListData());
-        map.put("secondCarFrontPic",mBinding.myMlSecondCarFrontPic.getListData());
-        map.put("secondConsolePic",mBinding.myMlSecondConsolePic.getListData());
-        map.put("second300Pdf",mBinding.myMlSecond300Pdf.getListData());
-        map.put("secondQxbPic",mBinding.myMlSecondQxbPic.getListData());
-        map.put("secondCarInPic",mBinding.myMlSecondCarInPic.getListData());
-        map.put("secondNumber",mBinding.myMlSecondNumber.getListData());
+        map.put("secondHgz", mBinding.myMlSecondHgz.getListData());
+        map.put("secondOdometer", mBinding.myMlSecondOdometer.getListData());
+        map.put("secondCarFrontPic", mBinding.myMlSecondCarFrontPic.getListData());
+        map.put("secondConsolePic", mBinding.myMlSecondConsolePic.getListData());
+        map.put("second300Pdf", mBinding.myMlSecond300Pdf.getListData());
+        map.put("secondQxbPic", mBinding.myMlSecondQxbPic.getListData());
+        map.put("secondCarInPic", mBinding.myMlSecondCarInPic.getListData());
+        map.put("secondNumber", mBinding.myMlSecondNumber.getListData());
 
         return map;
     }

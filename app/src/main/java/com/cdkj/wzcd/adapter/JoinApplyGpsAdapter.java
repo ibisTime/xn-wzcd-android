@@ -31,6 +31,10 @@ public class JoinApplyGpsAdapter extends BaseQuickAdapter<GpsInstallModel, BaseV
 
         mBinding.myItemNlCode.setContent(item.getGpsDevNo());
         mBinding.myItemNlType.setContent(TextUtils.equals(item.getGpsType(), "0") ? "无线" : "有线");
-        mBinding.myItemNlLocation.setContent(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.az_location, item.getAzLocation()));
+        if (TextUtils.equals("9", item.getAzLocation())) {
+            mBinding.myItemNlLocation.setContent(item.getAzLocationRemark());
+        } else {
+            mBinding.myItemNlLocation.setContent(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.az_location, item.getAzLocation()));
+        }
     }
 }

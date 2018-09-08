@@ -7,49 +7,74 @@
     </data>
 
     <LinearLayout
-        android:id="@+id/ll_root"
-        style="@style/style_my_item_root">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/common_my_image_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <com.cdkj.wzcd.view.item.MyItemNormalLayout
-            android:id="@+id/myItemNl_name"
-            app:txt_item_normal_title="姓\u3000名:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_choice"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/pay_no"
+            android:padding="5dp"
+            android:visibility="gone" />
 
-        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
 
-        <com.cdkj.wzcd.view.item.MyItemNormalLayout
-            android:id="@+id/myItemNl_phone"
-            app:txt_item_normal_title="手机号:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_root"
+            style="@style/style_my_item_root"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@null">
 
-        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
 
-        <com.cdkj.wzcd.view.item.MyItemNormalLayout
-            android:id="@+id/myItemNl_id"
-            app:txt_item_normal_title="身份证:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_item_normal_title="姓\u3000名:">
 
-        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
 
-        <com.cdkj.wzcd.view.item.MyItemNormalLayout
-            android:id="@+id/myItemNl_role"
-            app:txt_item_normal_title="角\u3000色:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_item_normal_title="手机号:">
 
-        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
 
-        <com.cdkj.wzcd.view.item.MyItemNormalLayout
-            android:id="@+id/myItemNl_relation"
-            app:txt_item_normal_title="关\u3000系:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_item_normal_title="身份证:">
 
-        </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_item_normal_title="角\u3000色:">
+
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+            <com.cdkj.wzcd.view.item.MyItemNormalLayout
+                android:id="@+id/myItemNl_relation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_item_normal_title="关\u3000系:">
+
+            </com.cdkj.wzcd.view.item.MyItemNormalLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
-
 </layout>

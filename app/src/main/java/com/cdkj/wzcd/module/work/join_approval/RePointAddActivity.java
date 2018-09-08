@@ -79,6 +79,7 @@ public class RePointAddActivity extends AbsBaseLoadActivity {
                     model.setUseMoneyPurpose("3");
                     model.setRepointAmount(mBinding.myElRepointAmount.getMoneyText());
                     model.setCarDealerName(mBinding.myElCarDealerName.getText());
+                    model.setAccountName(mBinding.myElAccountName.getText());
                     model.setAccountNO(mBinding.myElAccountNO.getText());
                     model.setOpenBankName(mBinding.myElOpenBankName.getText());
 
@@ -111,7 +112,7 @@ public class RePointAddActivity extends AbsBaseLoadActivity {
             return false;
         }
 
-        // 户名
+        // 单位
         if (mBinding.myElCarDealerName.check()){
             return false;
         }
@@ -123,6 +124,11 @@ public class RePointAddActivity extends AbsBaseLoadActivity {
 
         // 开户行
         if (mBinding.myElOpenBankName.check()){
+            return false;
+        }
+
+        //户名
+        if (mBinding.myElAccountName.check()) {
             return false;
         }
 

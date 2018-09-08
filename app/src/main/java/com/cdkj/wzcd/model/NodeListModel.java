@@ -1,5 +1,7 @@
 package com.cdkj.wzcd.model;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -138,6 +140,17 @@ public class NodeListModel {
      */
 
     private String code;
+    private String zfReason;
+    private String ghRealName;
+    private String guarantor1Name;//担保人
+    //紧急联系人  1   2
+    private String emergencyName1;
+    private String emergencyRelation1;
+    private String emergencyMobile1;
+    private String emergencyName2;
+    private String emergencyRelation2;
+    private String emergencyMobile2;
+
     private String creditCode;
     private String customerType;
     private String customerName;
@@ -154,6 +167,7 @@ public class NodeListModel {
     private double bankRate;
     private double companyLoanCs;
     private String isAdvanceFund;
+    private String frameNo;
     private double globalRate;
     private String fee;
     private String carDealerSubsidy;
@@ -194,7 +208,7 @@ public class NodeListModel {
     private String siteProve;
     private String siteArea;
     private String carType;
-    private String isDriveLicense;
+    private String isDriceLicense;
     private String driveLicense;
     private String otherPropertyNote;
     private String applyBirthAddress;
@@ -256,6 +270,7 @@ public class NodeListModel {
     private String idNo;
     private String curNodeCode;
     private String carDealerName;
+    private String outCarDealerName;
     private String loanBankName;
     private String saleUserName;
     private String companyName;
@@ -278,11 +293,147 @@ public class NodeListModel {
     private String deliveryDatetime;
     private String isRightInvoice;
     private String remark;
-
     private String useAmount;
     private String collectBankcardCode;
     private String currentInvoicePrice;
     private String advanceFundDatetime;
+    private String serviceChargeWay;
+    private String secondCarFrontPic;
+    private String ghIdNo;
+    private String fbhStatus;
+    private String carColor;
+    private Credit credit;
+
+    public String getCarColor() {
+        return carColor;
+    }
+
+    public void setCarColor(String carColor) {
+        this.carColor = carColor;
+    }
+
+    public String getFbhStatus() {
+        return fbhStatus;
+    }
+
+    public void setFbhStatus(String fbhStatus) {
+        this.fbhStatus = fbhStatus;
+    }
+
+    public String getGhIdNo() {
+        return ghIdNo;
+    }
+
+    public void setGhIdNo(String ghIdNo) {
+        this.ghIdNo = ghIdNo;
+    }
+
+    public String getSecondCarFrontPic() {
+        return secondCarFrontPic;
+    }
+
+    public void setSecondCarFrontPic(String secondCarFrontPic) {
+        this.secondCarFrontPic = secondCarFrontPic;
+    }
+
+    public String getServiceChargeWay() {
+        return serviceChargeWay;
+    }
+
+    public void setServiceChargeWay(String serviceChargeWay) {
+        this.serviceChargeWay = serviceChargeWay;
+    }
+
+    public String getZfReason() {
+        return zfReason;
+    }
+
+    public void setZfReason(String zfReason) {
+        this.zfReason = zfReason;
+    }
+
+
+    public String getFrameNo() {
+        return frameNo;
+    }
+
+    public void setFrameNo(String frameNo) {
+        this.frameNo = frameNo;
+    }
+
+    public Credit getCredit() {
+        return credit;
+    }
+
+    public void setCredit(Credit credit) {
+        this.credit = credit;
+    }
+
+
+    public String getEmergencyName1() {
+        return emergencyName1;
+    }
+
+    public void setEmergencyName1(String emergencyName1) {
+        this.emergencyName1 = emergencyName1;
+    }
+
+    public String getEmergencyRelation1() {
+        return emergencyRelation1;
+    }
+
+    public void setEmergencyRelation1(String emergencyRelation1) {
+        this.emergencyRelation1 = emergencyRelation1;
+    }
+
+    public String getEmergencyMobile1() {
+        return emergencyMobile1;
+    }
+
+    public void setEmergencyMobile1(String emergencyMobile1) {
+        this.emergencyMobile1 = emergencyMobile1;
+    }
+
+    public String getEmergencyName2() {
+        return emergencyName2;
+    }
+
+    public void setEmergencyName2(String emergencyName2) {
+        this.emergencyName2 = emergencyName2;
+    }
+
+    public String getEmergencyRelation2() {
+        return emergencyRelation2;
+    }
+
+    public void setEmergencyRelation2(String emergencyRelation2) {
+        this.emergencyRelation2 = emergencyRelation2;
+    }
+
+    public String getEmergencyMobile2() {
+        return emergencyMobile2;
+    }
+
+    public void setEmergencyMobile2(String emergencyMobile2) {
+        this.emergencyMobile2 = emergencyMobile2;
+    }
+
+    public String getGuarantor1Name() {
+        return guarantor1Name;
+    }
+
+    public void setGuarantor1Name(String guarantor1Name) {
+        this.guarantor1Name = guarantor1Name;
+    }
+
+    public String getGhRealName() {
+        return ghRealName;
+    }
+
+    public void setGhRealName(String ghRealName) {
+        this.ghRealName = ghRealName;
+    }
+
 
     public String getOtherIncomeNote() {
         return otherIncomeNote;
@@ -948,12 +1099,12 @@ public class NodeListModel {
         this.carType = carType;
     }
 
-    public String getIsDriveLicense() {
-        return isDriveLicense;
+    public String getIsDriceLicense() {
+        return isDriceLicense;
     }
 
-    public void setIsDriveLicense(String isDriveLicense) {
-        this.isDriveLicense = isDriveLicense;
+    public void setIsDriceLicense(String isDriveLicense) {
+        this.isDriceLicense = isDriveLicense;
     }
 
     public String getDriveLicense() {
@@ -1356,6 +1507,14 @@ public class NodeListModel {
 
     public void setCurNodeCode(String curNodeCode) {
         this.curNodeCode = curNodeCode;
+    }
+
+    public String getOutCarDealerName() {
+        return outCarDealerName;
+    }
+
+    public void setOutCarDealerName(String outCarDealerName) {
+        this.outCarDealerName = outCarDealerName;
     }
 
     public String getCarDealerName() {
@@ -1926,10 +2085,16 @@ public class NodeListModel {
         }
 
         public String getRepointAmount() {
-            return repointAmount;
+            if (TextUtils.isEmpty(repointAmount)) {
+                return "0";
+            }
+            int repointAmountInt = (int) Double.parseDouble(repointAmount);
+            return repointAmountInt + "";
         }
 
         public void setRepointAmount(String repointAmount) {
+
+
             this.repointAmount = repointAmount;
         }
 
@@ -1963,6 +2128,440 @@ public class NodeListModel {
 
         public void setAccountName(String accountName) {
             this.accountName = accountName;
+        }
+    }
+
+    public static class Credit {
+
+
+        /**
+         * applyDatetime : Aug 21, 2018 9:12:20 PM
+         * code : HX33180821123546003
+         * companyCode : DP201800000000000000001
+         * creditUserList : [{"authPdf":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","code":"CU201808212112206497724","courtNetworkResults":"法院网查询结果 ","dkdy2YearOverTimes":0,"dkdy6MonthAvgAmount":0,"dkdyAmount":0,"dkdyCount":0,"dkdyCurrentOverAmount":0,"dkdyMaxOverAmount":0,"hkxy2YearOverTimes":0,"hkxy6MonthAvgAmount":0,"hkxyCurrentOverAmount":0,"hkxyMonthMaxOverAmount":0,"hkxyUnsettleAmount":0,"hkxyUnsettleCount":0,"idNo":"410621199605101019","idNoFront":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","idNoReverse":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","interviewPic":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","isFirstAudit":"1","loanRole":"1","mobile":"13333333333","outGuaranteesAmount":0,"outGuaranteesCount":0,"outGuaranteesRemark":"备注","relation":"1","userName":"姓名8","xyk2YearOverTimes":0,"xyk6MonthUseAmount":0,"xykCount":0,"xykCreditAmount":0,"xykCurrentOverAmount":0,"xykMonthMaxOverAmount":0},{"authPdf":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","code":"CU201808212112206516019","courtNetworkResults":"法院网查询结果 ","dkdy2YearOverTimes":0,"dkdy6MonthAvgAmount":0,"dkdyAmount":0,"dkdyCount":0,"dkdyCurrentOverAmount":0,"dkdyMaxOverAmount":0,"hkxy2YearOverTimes":0,"hkxy6MonthAvgAmount":0,"hkxyCurrentOverAmount":0,"hkxyMonthMaxOverAmount":0,"hkxyUnsettleAmount":0,"hkxyUnsettleCount":0,"idNo":"410621199605101019","idNoFront":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","idNoReverse":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","interviewPic":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","isFirstAudit":"1","loanRole":"2","mobile":"13333333333","outGuaranteesAmount":0,"outGuaranteesCount":0,"outGuaranteesRemark":"备注","relation":"8","userName":"共换人","xyk2YearOverTimes":0,"xyk6MonthUseAmount":0,"xykCount":0,"xykCreditAmount":0,"xykCurrentOverAmount":0,"xykMonthMaxOverAmount":0},{"authPdf":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","code":"CU201808212112206538006","courtNetworkResults":"法院网查询结果 ","dkdy2YearOverTimes":0,"dkdy6MonthAvgAmount":0,"dkdyAmount":0,"dkdyCount":0,"dkdyCurrentOverAmount":0,"dkdyMaxOverAmount":0,"hkxy2YearOverTimes":0,"hkxy6MonthAvgAmount":0,"hkxyCurrentOverAmount":0,"hkxyMonthMaxOverAmount":0,"hkxyUnsettleAmount":0,"hkxyUnsettleCount":0,"idNo":"410621199605101019","idNoFront":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","idNoReverse":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","interviewPic":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","isFirstAudit":"1","loanRole":"3","mobile":"13333333333","outGuaranteesAmount":0,"outGuaranteesCount":0,"outGuaranteesRemark":"备注","relation":"5","userName":"担保人1","xyk2YearOverTimes":0,"xyk6MonthUseAmount":0,"xykCount":0,"xykCreditAmount":0,"xykCurrentOverAmount":0,"xykMonthMaxOverAmount":0},{"authPdf":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","code":"CU201808212112206555760","courtNetworkResults":"法院网查询结果 ","dkdy2YearOverTimes":0,"dkdy6MonthAvgAmount":0,"dkdyAmount":0,"dkdyCount":0,"dkdyCurrentOverAmount":0,"dkdyMaxOverAmount":0,"hkxy2YearOverTimes":0,"hkxy6MonthAvgAmount":0,"hkxyCurrentOverAmount":0,"hkxyMonthMaxOverAmount":0,"hkxyUnsettleAmount":0,"hkxyUnsettleCount":0,"idNo":"410621199605101019","idNoFront":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","idNoReverse":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","interviewPic":"Fumxo0uiOQlNa0pKxuvjsWPSCDXu","isFirstAudit":"1","loanRole":"3","mobile":"13333333333","outGuaranteesAmount":0,"outGuaranteesCount":0,"outGuaranteesRemark":"备注","relation":"8","userName":"担保人2","xyk2YearOverTimes":0,"xyk6MonthUseAmount":0,"xykCount":0,"xykCreditAmount":0,"xykCurrentOverAmount":0,"xykMonthMaxOverAmount":0}]
+         * curNodeCode : 001_06
+         * loanAmount : 2.0E9
+         * loanBankCode : BS201807171350293781303
+         * saleUserId : U201808181253226614914
+         * shopWay : 1
+         */
+
+        private String applyDatetime;
+        private String code;
+        private String companyCode;
+        private String curNodeCode;
+        private double loanAmount;
+        private String loanBankCode;
+        private String saleUserId;
+        private String shopWay;
+        private List<CreditUserListBean> creditUserList;
+
+        public String getApplyDatetime() {
+            return applyDatetime;
+        }
+
+        public void setApplyDatetime(String applyDatetime) {
+            this.applyDatetime = applyDatetime;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getCompanyCode() {
+            return companyCode;
+        }
+
+        public void setCompanyCode(String companyCode) {
+            this.companyCode = companyCode;
+        }
+
+        public String getCurNodeCode() {
+            return curNodeCode;
+        }
+
+        public void setCurNodeCode(String curNodeCode) {
+            this.curNodeCode = curNodeCode;
+        }
+
+        public double getLoanAmount() {
+            return loanAmount;
+        }
+
+        public void setLoanAmount(double loanAmount) {
+            this.loanAmount = loanAmount;
+        }
+
+        public String getLoanBankCode() {
+            return loanBankCode;
+        }
+
+        public void setLoanBankCode(String loanBankCode) {
+            this.loanBankCode = loanBankCode;
+        }
+
+        public String getSaleUserId() {
+            return saleUserId;
+        }
+
+        public void setSaleUserId(String saleUserId) {
+            this.saleUserId = saleUserId;
+        }
+
+        public String getShopWay() {
+            return shopWay;
+        }
+
+        public void setShopWay(String shopWay) {
+            this.shopWay = shopWay;
+        }
+
+        public List<CreditUserListBean> getCreditUserList() {
+            return creditUserList;
+        }
+
+        public void setCreditUserList(List<CreditUserListBean> creditUserList) {
+            this.creditUserList = creditUserList;
+        }
+
+        public static class CreditUserListBean {
+            /**
+             * authPdf : Fumxo0uiOQlNa0pKxuvjsWPSCDXu
+             * code : CU201808212112206497724
+             * courtNetworkResults : 法院网查询结果
+             * dkdy2YearOverTimes : 0.0
+             * dkdy6MonthAvgAmount : 0.0
+             * dkdyAmount : 0.0
+             * dkdyCount : 0.0
+             * dkdyCurrentOverAmount : 0.0
+             * dkdyMaxOverAmount : 0.0
+             * hkxy2YearOverTimes : 0.0
+             * hkxy6MonthAvgAmount : 0.0
+             * hkxyCurrentOverAmount : 0.0
+             * hkxyMonthMaxOverAmount : 0.0
+             * hkxyUnsettleAmount : 0.0
+             * hkxyUnsettleCount : 0.0
+             * idNo : 410621199605101019
+             * idNoFront : Fumxo0uiOQlNa0pKxuvjsWPSCDXu
+             * idNoReverse : Fumxo0uiOQlNa0pKxuvjsWPSCDXu
+             * interviewPic : Fumxo0uiOQlNa0pKxuvjsWPSCDXu
+             * isFirstAudit : 1
+             * loanRole : 1
+             * mobile : 13333333333
+             * outGuaranteesAmount : 0.0
+             * outGuaranteesCount : 0.0
+             * outGuaranteesRemark : 备注
+             * relation : 1
+             * userName : 姓名8
+             * xyk2YearOverTimes : 0.0
+             * xyk6MonthUseAmount : 0.0
+             * xykCount : 0.0
+             * xykCreditAmount : 0.0
+             * xykCurrentOverAmount : 0.0
+             * xykMonthMaxOverAmount : 0.0
+             */
+
+            private String authPdf;
+            private String code;
+            private String courtNetworkResults;
+            private double dkdy2YearOverTimes;
+            private double dkdy6MonthAvgAmount;
+            private double dkdyAmount;
+            private double dkdyCount;
+            private double dkdyCurrentOverAmount;
+            private double dkdyMaxOverAmount;
+            private double hkxy2YearOverTimes;
+            private double hkxy6MonthAvgAmount;
+            private double hkxyCurrentOverAmount;
+            private double hkxyMonthMaxOverAmount;
+            private double hkxyUnsettleAmount;
+            private double hkxyUnsettleCount;
+            private String idNo;
+            private String idNoFront;
+            private String idNoReverse;
+            private String interviewPic;
+            private String isFirstAudit;
+            private String loanRole;
+            private String mobile;
+            private double outGuaranteesAmount;
+            private double outGuaranteesCount;
+            private String outGuaranteesRemark;
+            private String relation;
+            private String userName;
+            private double xyk2YearOverTimes;
+            private double xyk6MonthUseAmount;
+            private double xykCount;
+            private double xykCreditAmount;
+            private double xykCurrentOverAmount;
+            private double xykMonthMaxOverAmount;
+
+            public String getAuthPdf() {
+                return authPdf;
+            }
+
+            public void setAuthPdf(String authPdf) {
+                this.authPdf = authPdf;
+            }
+
+            public String getCode() {
+                return code;
+            }
+
+            public void setCode(String code) {
+                this.code = code;
+            }
+
+            public String getCourtNetworkResults() {
+                return courtNetworkResults;
+            }
+
+            public void setCourtNetworkResults(String courtNetworkResults) {
+                this.courtNetworkResults = courtNetworkResults;
+            }
+
+            public double getDkdy2YearOverTimes() {
+                return dkdy2YearOverTimes;
+            }
+
+            public void setDkdy2YearOverTimes(double dkdy2YearOverTimes) {
+                this.dkdy2YearOverTimes = dkdy2YearOverTimes;
+            }
+
+            public double getDkdy6MonthAvgAmount() {
+                return dkdy6MonthAvgAmount;
+            }
+
+            public void setDkdy6MonthAvgAmount(double dkdy6MonthAvgAmount) {
+                this.dkdy6MonthAvgAmount = dkdy6MonthAvgAmount;
+            }
+
+            public double getDkdyAmount() {
+                return dkdyAmount;
+            }
+
+            public void setDkdyAmount(double dkdyAmount) {
+                this.dkdyAmount = dkdyAmount;
+            }
+
+            public double getDkdyCount() {
+                return dkdyCount;
+            }
+
+            public void setDkdyCount(double dkdyCount) {
+                this.dkdyCount = dkdyCount;
+            }
+
+            public double getDkdyCurrentOverAmount() {
+                return dkdyCurrentOverAmount;
+            }
+
+            public void setDkdyCurrentOverAmount(double dkdyCurrentOverAmount) {
+                this.dkdyCurrentOverAmount = dkdyCurrentOverAmount;
+            }
+
+            public double getDkdyMaxOverAmount() {
+                return dkdyMaxOverAmount;
+            }
+
+            public void setDkdyMaxOverAmount(double dkdyMaxOverAmount) {
+                this.dkdyMaxOverAmount = dkdyMaxOverAmount;
+            }
+
+            public double getHkxy2YearOverTimes() {
+                return hkxy2YearOverTimes;
+            }
+
+            public void setHkxy2YearOverTimes(double hkxy2YearOverTimes) {
+                this.hkxy2YearOverTimes = hkxy2YearOverTimes;
+            }
+
+            public double getHkxy6MonthAvgAmount() {
+                return hkxy6MonthAvgAmount;
+            }
+
+            public void setHkxy6MonthAvgAmount(double hkxy6MonthAvgAmount) {
+                this.hkxy6MonthAvgAmount = hkxy6MonthAvgAmount;
+            }
+
+            public double getHkxyCurrentOverAmount() {
+                return hkxyCurrentOverAmount;
+            }
+
+            public void setHkxyCurrentOverAmount(double hkxyCurrentOverAmount) {
+                this.hkxyCurrentOverAmount = hkxyCurrentOverAmount;
+            }
+
+            public double getHkxyMonthMaxOverAmount() {
+                return hkxyMonthMaxOverAmount;
+            }
+
+            public void setHkxyMonthMaxOverAmount(double hkxyMonthMaxOverAmount) {
+                this.hkxyMonthMaxOverAmount = hkxyMonthMaxOverAmount;
+            }
+
+            public double getHkxyUnsettleAmount() {
+                return hkxyUnsettleAmount;
+            }
+
+            public void setHkxyUnsettleAmount(double hkxyUnsettleAmount) {
+                this.hkxyUnsettleAmount = hkxyUnsettleAmount;
+            }
+
+            public double getHkxyUnsettleCount() {
+                return hkxyUnsettleCount;
+            }
+
+            public void setHkxyUnsettleCount(double hkxyUnsettleCount) {
+                this.hkxyUnsettleCount = hkxyUnsettleCount;
+            }
+
+            public String getIdNo() {
+                return idNo;
+            }
+
+            public void setIdNo(String idNo) {
+                this.idNo = idNo;
+            }
+
+            public String getIdNoFront() {
+                return idNoFront;
+            }
+
+            public void setIdNoFront(String idNoFront) {
+                this.idNoFront = idNoFront;
+            }
+
+            public String getIdNoReverse() {
+                return idNoReverse;
+            }
+
+            public void setIdNoReverse(String idNoReverse) {
+                this.idNoReverse = idNoReverse;
+            }
+
+            public String getInterviewPic() {
+                return interviewPic;
+            }
+
+            public void setInterviewPic(String interviewPic) {
+                this.interviewPic = interviewPic;
+            }
+
+            public String getIsFirstAudit() {
+                return isFirstAudit;
+            }
+
+            public void setIsFirstAudit(String isFirstAudit) {
+                this.isFirstAudit = isFirstAudit;
+            }
+
+            public String getLoanRole() {
+                return loanRole;
+            }
+
+            public void setLoanRole(String loanRole) {
+                this.loanRole = loanRole;
+            }
+
+            public String getMobile() {
+                return mobile;
+            }
+
+            public void setMobile(String mobile) {
+                this.mobile = mobile;
+            }
+
+            public double getOutGuaranteesAmount() {
+                return outGuaranteesAmount;
+            }
+
+            public void setOutGuaranteesAmount(double outGuaranteesAmount) {
+                this.outGuaranteesAmount = outGuaranteesAmount;
+            }
+
+            public double getOutGuaranteesCount() {
+                return outGuaranteesCount;
+            }
+
+            public void setOutGuaranteesCount(double outGuaranteesCount) {
+                this.outGuaranteesCount = outGuaranteesCount;
+            }
+
+            public String getOutGuaranteesRemark() {
+                return outGuaranteesRemark;
+            }
+
+            public void setOutGuaranteesRemark(String outGuaranteesRemark) {
+                this.outGuaranteesRemark = outGuaranteesRemark;
+            }
+
+            public String getRelation() {
+                return relation;
+            }
+
+            public void setRelation(String relation) {
+                this.relation = relation;
+            }
+
+            public String getUserName() {
+                return userName;
+            }
+
+            public void setUserName(String userName) {
+                this.userName = userName;
+            }
+
+            public double getXyk2YearOverTimes() {
+                return xyk2YearOverTimes;
+            }
+
+            public void setXyk2YearOverTimes(double xyk2YearOverTimes) {
+                this.xyk2YearOverTimes = xyk2YearOverTimes;
+            }
+
+            public double getXyk6MonthUseAmount() {
+                return xyk6MonthUseAmount;
+            }
+
+            public void setXyk6MonthUseAmount(double xyk6MonthUseAmount) {
+                this.xyk6MonthUseAmount = xyk6MonthUseAmount;
+            }
+
+            public double getXykCount() {
+                return xykCount;
+            }
+
+            public void setXykCount(double xykCount) {
+                this.xykCount = xykCount;
+            }
+
+            public double getXykCreditAmount() {
+                return xykCreditAmount;
+            }
+
+            public void setXykCreditAmount(double xykCreditAmount) {
+                this.xykCreditAmount = xykCreditAmount;
+            }
+
+            public double getXykCurrentOverAmount() {
+                return xykCurrentOverAmount;
+            }
+
+            public void setXykCurrentOverAmount(double xykCurrentOverAmount) {
+                this.xykCurrentOverAmount = xykCurrentOverAmount;
+            }
+
+            public double getXykMonthMaxOverAmount() {
+                return xykMonthMaxOverAmount;
+            }
+
+            public void setXykMonthMaxOverAmount(double xykMonthMaxOverAmount) {
+                this.xykMonthMaxOverAmount = xykMonthMaxOverAmount;
+            }
         }
     }
 }

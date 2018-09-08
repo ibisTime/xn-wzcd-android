@@ -39,20 +39,19 @@ public class GpsInstallListAdapter extends BaseQuickAdapter<NodeListModel, BaseV
 
         mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlCompany.setText(item.getCompanyName());
-        mBinding.myIlCode.setText(item.getCarBrand());
+        mBinding.myIlCode.setText(item.getCarModel());
 
-        mBinding.myItemCblConfirm.setContent("安装回录","回收作废");
-        mBinding.myItemCblConfirm.setLeftListener( view -> {
+        mBinding.myItemCblConfirm.setContent("安装回录", "回收作废");
+        mBinding.myItemCblConfirm.setLeftListener(view -> {
             GPSInstallInfoActivity.open(mContext, item.getCode());
         });
-        mBinding.myItemCblConfirm.setRightListener( view -> {
+        mBinding.myItemCblConfirm.setRightListener(view -> {
             GpsCancelActivity.open(mContext, item.getCode());
         });
 
 //        if (TextUtils.equals(item.getCurNodeCode(),"002_09") || TextUtils.equals(item.getCurNodeCode(),"002_12")){ // 业务团队安装GPS / 业务团队重新安装GPS
 //
 //        }
-
 
 
     }

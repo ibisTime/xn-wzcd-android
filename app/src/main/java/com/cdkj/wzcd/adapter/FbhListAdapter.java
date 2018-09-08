@@ -45,12 +45,24 @@ public class FbhListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHold
 
         mBinding.myItemCblConfirm.setContent("", "");
 
-        mBinding.myItemCblConfirm.setRightTextAndListener("录入发保合信息", view -> {
-            FbhDetailActivity.open(mContext, item.getCode(),false);
-        });
-
-//        if (TextUtils.equals(item.getCurNodeCode(),"002_06")){ // 录入发保合信息
 //
+        if (TextUtils.equals(item.getFbhStatus(), "0")) {
+            //待录入
+            mBinding.myItemCblConfirm.setRightTextAndListener("录入发保合信息", view -> {
+                FbhDetailActivity.open(mContext, item.getCode(), false);
+            });
+        } else {
+            mBinding.myItemCblConfirm.setRightTextAndListener("", null);
+        }
+
+
+//        if (TextUtils.equals(item.getCurNodeCode(), "003_07")) { // 录入发保合信息  垫资审核
+//            mBinding.myItemCblConfirm.setRightTextAndListener("录入发保合信息", view -> {
+//                FbhDetailActivity.open(mContext, item.getCode(), false);
+//            });
+//        }
+
+//        if (TextUtils.equals(item.getCurNodeCode(), "002_06")) { //   垫资审核
 //        }
 //
 //        if (TextUtils.equals(item.getCurNodeCode(),"002_15")){ // 驻行人员回录提交放款材料

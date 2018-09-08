@@ -111,7 +111,9 @@
         <!-- <activity android:name=".module.business.face_view.RoomActivity" /> -->
         <!-- <activity android:name=".module.business.face_view.MainActivity" /> -->
 
-        <activity android:name=".module.tool.calculator.CalculautorActivity"></activity>
+        <activity android:name=".module.tool.calculator.CalculautorActivity" />
+        <activity android:name=".module.work.credit.audit.AuditOneActivity" />
+        <activity android:name=".module.work.credit.audit.AuditCourtNetwork"></activity>
     </application>
 
 </manifest>

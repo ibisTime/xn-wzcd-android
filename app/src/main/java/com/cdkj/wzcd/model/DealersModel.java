@@ -1,12 +1,15 @@
 package com.cdkj.wzcd.model;
 
+import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by cdkj on 2018/7/2.
  */
 
-public class DealersModel {
+public class DealersModel  extends DataSupport implements Serializable{
 
 
     /**

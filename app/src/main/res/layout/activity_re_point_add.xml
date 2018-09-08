@@ -32,16 +32,26 @@
                     android:id="@+id/myEl_carDealerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:txt_input_hint="请输入单位"
+                    app:txt_input_title="单位">
+
+                </com.cdkj.wzcd.view.MyEditLayout>
+
+                <com.cdkj.wzcd.view.MyEditLayout
+                    android:id="@+id/myEl_accountName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
                     app:txt_input_hint="请输入户名"
                     app:txt_input_title="户名">
 
                 </com.cdkj.wzcd.view.MyEditLayout>
 
+
                 <com.cdkj.wzcd.view.MyEditLayout
                     android:id="@+id/myEl_accountNO"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:inputType="number"
                     app:txt_input_hint="请输入账号"
                     app:txt_input_title="账号">
 

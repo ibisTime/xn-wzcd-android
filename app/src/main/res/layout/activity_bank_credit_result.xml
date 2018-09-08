@@ -24,6 +24,7 @@
             </com.cdkj.wzcd.view.MyTitleBarLayout>
 
             <com.cdkj.wzcd.view.MyEditLayout
+
                 android:id="@+id/myEl_dkdyCount"
                 app:txt_input_title="笔数"
                 app:txt_input_content="0"
@@ -36,6 +37,7 @@
             </com.cdkj.wzcd.view.MyEditLayout>
 
             <com.cdkj.wzcd.view.MyEditLayout
+
                 android:id="@+id/myEl_dkdyAmount"
                 app:txt_input_title="贷款余额"
                 app:txt_input_hint="请输入贷款余额"

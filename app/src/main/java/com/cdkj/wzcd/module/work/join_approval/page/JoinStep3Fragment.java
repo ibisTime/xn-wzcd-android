@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.cdkj.wzcd.databinding.FragmentJoinStep3Binding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.event.BudgetCheckModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
+import com.cdkj.wzcd.util.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -77,7 +79,7 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
     }
 
-    private void initView(){
+    private void initView() {
         mBinding.myMlHouseProperty.build(mActivity, 10, 0);
         mBinding.mySlIsHouseProperty.setData(getDataDictionaries(), (dialog, which) -> {
             mBinding.myMlHouseProperty.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
@@ -91,7 +93,7 @@ public class JoinStep3Fragment extends BaseLazyFragment {
         mBinding.mySlCarType.setData(getCarType(), null);
 
         mBinding.myMlDriveLicense.build(mActivity, 10, 2);
-        mBinding.mySlIsDriveLicense.setData(getDataDictionaries(), (dialog, which) -> {
+        mBinding.mySlIsDriceLicense.setData(getDataDictionaries(), (dialog, which) -> {
             mBinding.myMlDriveLicense.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
         });
 
@@ -103,22 +105,58 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
     }
 
-    private void setView(){
+    private void setView() {
 
-        mBinding.mySlIsHouseProperty.setContentByKey(data.getIsHouseProperty());
+        if (((JoinApplyActivity) mActivity).isDetails) {
+            //房产证
+            mBinding.mySlIsHouseProperty.setTextByRequestByKey(data.getIsHouseProperty());
 
-
-        mBinding.mySlIsLicense.setContentByKey(data.getIsLicense());
-
-
-        mBinding.mySlCarType.setContentByKey(data.getCarType());
-
-
-        mBinding.mySlIsDriveLicense.setContentByKey(data.getIsDriveLicense());
+            mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlHouseProperty.addListRequest(StringUtils.splitPIC(data.getHouseProperty()));
 
 
-        mBinding.mySlIsSiteProve.setContentByKey(data.getIsSiteProve());
+            //营业执照
+            mBinding.mySlIsLicense.setTextByRequestByKey(data.getIsLicense());
 
+            mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
+
+
+            mBinding.mySlCarType.setTextByRequestByKey(data.getCarType());
+
+            //有无驾照  isDriceLicense
+            mBinding.mySlIsDriceLicense.setTextByRequestByKey(data.getIsDriceLicense());
+
+            mBinding.myMlDriveLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlDriveLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
+
+
+            mBinding.mySlIsSiteProve.setTextByRequestByKey(data.getIsSiteProve());
+            mBinding.myElSiteArea.setTextHint("");
+            mBinding.myElSiteArea.setTextByRequest(data.getSiteArea());//场地面积
+            mBinding.myElOtherPropertyNote.setTextHint("");//场地面积
+            mBinding.myElOtherPropertyNote.setTextByRequest(data.getOtherPropertyNote());//其他
+
+
+        } else {
+            mBinding.mySlIsHouseProperty.setContentByKey(data.getIsHouseProperty());
+            mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlHouseProperty.addList(StringUtils.splitPIC(data.getHouseProperty()));
+
+            mBinding.mySlIsLicense.setContentByKey(data.getIsLicense());
+            mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlLicense.addList(StringUtils.splitPIC(data.getLicense()));
+
+            mBinding.mySlCarType.setContentByKey(data.getCarType());
+
+
+            mBinding.mySlIsDriceLicense.setContentByKey(data.getIsDriceLicense());
+            mBinding.myMlDriveLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+            mBinding.myMlDriveLicense.addList(StringUtils.splitPIC(data.getLicense()));
+
+            mBinding.mySlIsSiteProve.setContentByKey(data.getIsSiteProve());
+
+        }
     }
 
     @NonNull
@@ -150,19 +188,19 @@ public class JoinStep3Fragment extends BaseLazyFragment {
             @Override
             public void onSuccess(String key) {
 
-                if (requestCode == mBinding.myMlHouseProperty.getRequestCode()){
+                if (requestCode == mBinding.myMlHouseProperty.getRequestCode()) {
                     mBinding.myMlHouseProperty.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlLicense.getRequestCode()){
+                if (requestCode == mBinding.myMlLicense.getRequestCode()) {
                     mBinding.myMlLicense.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlDriveLicense.getRequestCode()){
+                if (requestCode == mBinding.myMlDriveLicense.getRequestCode()) {
                     mBinding.myMlDriveLicense.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlSiteProve.getRequestCode()){
+                if (requestCode == mBinding.myMlSiteProve.getRequestCode()) {
                     mBinding.myMlSiteProve.addList(key);
                 }
 
@@ -179,20 +217,30 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
     private String checkFail;
 
-    public boolean check(){
-        if (mBinding.mySlIsHouseProperty.check()){
+    public boolean check() {
+        if (mBinding.mySlIsHouseProperty.check()) {
             checkFail = mBinding.mySlIsHouseProperty.getTitle();
             return false;
         }
 
-        if (mBinding.mySlIsLicense.check()){
+        if (mBinding.mySlIsLicense.check()) {
             checkFail = mBinding.mySlIsLicense.getTitle();
             return false;
         }
 
-        if (mBinding.mySlIsDriveLicense.check()){
-            checkFail = mBinding.mySlIsDriveLicense.getTitle();
+        if (mBinding.mySlIsDriceLicense.check()) {
+            checkFail = mBinding.mySlIsDriceLicense.getTitle();
             return false;
+        } else {
+            if (TextUtils.equals(data.getShopWay(), "2")) {
+                //二手车  必填
+
+                if (TextUtils.isEmpty(mBinding.myMlDriveLicense.getListData())) {
+                    checkFail = mBinding.mySlIsDriceLicense.getTitle();
+                    return false;
+                }
+
+            }
         }
 
 
@@ -200,25 +248,25 @@ public class JoinStep3Fragment extends BaseLazyFragment {
     }
 
     @Subscribe
-    public void doCheck(BudgetCheckModel model){
+    public void doCheck(BudgetCheckModel model) {
 
         if (model == null)
             return;
 
         // 检查未通过，由Activity提示，不往下check
-        if (!model.isCheckResult()){
+        if (!model.isCheckResult()) {
             return;
         }
 
-        if (model.getCheckIndex() == 2){
-            if (check()){
+        if (model.getCheckIndex() == 2) {
+            if (check()) {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
-                        .setCheckIndex(model.getCheckIndex()+1)
+                        .setCheckIndex(model.getCheckIndex() + 1)
                         .setCheckResult(true)
                         .setCheckFail(null));
 
-            }else {
+            } else {
 
                 EventBus.getDefault().post(new BudgetCheckModel()
                         .setCheckIndex(model.getCheckIndex())
@@ -230,22 +278,22 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("isHouseProperty",mBinding.mySlIsHouseProperty.getDataKey());
-        map.put("houseProperty",mBinding.myMlHouseProperty.getListData());
-        map.put("isLicense",mBinding.mySlIsLicense.getDataKey());
-        map.put("license",mBinding.myMlLicense.getListData());
-        map.put("carType",mBinding.mySlCarType.getDataKey());
-        map.put("isDriveLicense",mBinding.mySlIsDriveLicense.getDataKey());
+        map.put("isHouseProperty", mBinding.mySlIsHouseProperty.getDataKey());
+        map.put("houseProperty", mBinding.myMlHouseProperty.getListData());
+        map.put("isLicense", mBinding.mySlIsLicense.getDataKey());
+        map.put("license", mBinding.myMlLicense.getListData());
+        map.put("carType", mBinding.mySlCarType.getDataKey());
+        map.put("isDriceLicense", mBinding.mySlIsDriceLicense.getDataKey());
 
-        map.put("driveLicense",mBinding.myMlDriveLicense.getListData());
-        map.put("isSiteProve",mBinding.mySlIsSiteProve.getDataKey());
-        map.put("siteProve",mBinding.myMlSiteProve.getListData());
-        map.put("siteArea",mBinding.myElSiteArea.getText());
-        map.put("otherPropertyNote",mBinding.myElOtherPropertyNote.getText());
+        map.put("driveLicense", mBinding.myMlDriveLicense.getListData());
+        map.put("isSiteProve", mBinding.mySlIsSiteProve.getDataKey());
+        map.put("siteProve", mBinding.myMlSiteProve.getListData());
+        map.put("siteArea", mBinding.myElSiteArea.getText());
+        map.put("otherPropertyNote", mBinding.myElOtherPropertyNote.getText());
 
         return map;
     }

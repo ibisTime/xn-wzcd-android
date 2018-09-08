@@ -32,7 +32,7 @@ public class DatePickerHelper {
     private Calendar startCalendar;
     private Calendar endCalendar;
 
-    public DatePickerHelper build(Context context){
+    public DatePickerHelper build(Context context) {
         mContext = context;
 
         startCalendar = Calendar.getInstance();
@@ -75,7 +75,7 @@ public class DatePickerHelper {
     /**
      * 获取当前时间
      */
-    public void getDate(View view, boolean y, boolean m, boolean d, boolean h,  boolean mm,  boolean s) {
+    public void getDate(View view, boolean y, boolean m, boolean d, boolean h, boolean mm, boolean s) {
 
         Date date = new Date();
         startCalendar.setTime(date);
@@ -89,28 +89,28 @@ public class DatePickerHelper {
     /**
      * 显示日期picker
      */
-    private void showDatePicker(View view, boolean y, boolean m, boolean d, boolean h,  boolean mm,  boolean s) {
+    private void showDatePicker(View view, boolean y, boolean m, boolean d, boolean h, boolean mm, boolean s) {
 
         String lable_mins = s ? ":" : "";
 
         TimePickerView pvTime = new TimePickerView.Builder(mContext, (date, v) -> {//选中事件回调
 
-            if (view instanceof MyNormalLayout){
+            if (view instanceof MyNormalLayout) {
 
-                if (y & m & d & !h){
+                if (y & m & d & !h) {
                     ((MyNormalLayout) view).setText(DateUtil.format(date, DateUtil.DATE_YMD));
                     view.setTag(DateUtil.format(date, DateUtil.DEFAULT_DATE_FMT));
-                }else {
+                } else  {
                     ((MyNormalLayout) view).setText(DateUtil.format(date, DateUtil.DATE_MMddHHmm));
                     view.setTag(DateUtil.format(date, DateUtil.DEFAULT_DATE_FMT));
                 }
 
-            } else if(view instanceof TextView)  {
+            } else if (view instanceof TextView) {
 
-                if (y & m & d & !h){
+                if (y & m & d & !h) {
                     ((TextView) view).setText(DateUtil.format(date, DateUtil.DATE_YMD));
                     view.setTag(DateUtil.format(date, DateUtil.DEFAULT_DATE_FMT));
-                }else {
+                } else {
                     ((TextView) view).setText(DateUtil.format(date, DateUtil.DATE_MMddHHmm));
                     view.setTag(DateUtil.format(date, DateUtil.DEFAULT_DATE_FMT));
                 }
@@ -148,7 +148,7 @@ public class DatePickerHelper {
         }
     }
 
-    private void clearCall(){
+    private void clearCall() {
         if (call != null)
             call.cancel();
     }

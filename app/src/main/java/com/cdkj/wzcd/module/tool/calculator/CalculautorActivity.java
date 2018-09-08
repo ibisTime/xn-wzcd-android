@@ -21,7 +21,6 @@ import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityCalculautorBinding;
 import com.cdkj.wzcd.model.BanksModel;
 import com.cdkj.wzcd.model.CalculautorModel;
-import com.cdkj.wzcd.model.DealersModel;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ import retrofit2.Call;
  */
 public class CalculautorActivity extends AbsBaseLoadActivity {
     ActivityCalculautorBinding mBinding;
-    private DealersModel mDealersMode;//经销商
+//    private DealersModel mDealersMode;//经销商
     private BanksModel banksModel;//银行
     private DataDictionary rateType;//利率类型
     private String rate;//利率
@@ -63,9 +62,7 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
     public void afterCreate(Bundle savedInstanceState) {
         mBaseBinding.titleView.setMidTitle("月供计算器");
         mBinding.mElMoney.setInputCountenLeft();
-//        mBinding.mSlDealer.
-//        mBinding.mSlRateType
-        getDealers();
+//        getDealers();
         getBank();
         getRateTime();
         getRateType();
@@ -83,10 +80,10 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
 
     private void checkData() {
         //检查资料是否填写完毕
-        if (mDealersMode == null) {
-            UITipDialog.showInfo(this, "请选择经销商");
-            return;
-        }
+//        if (mDealersMode == null) {
+//            UITipDialog.showInfo(this, "请选择经销商");
+//            return;
+//        }
         if (banksModel == null) {
             UITipDialog.showInfo(this, "请选择银行");
             return;
@@ -107,12 +104,11 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
         }
         requestMap = new HashMap();
         if (banksModel != null) {
-            if (banksModel.getBankCode().equals("ICBC")) {
+            if (banksModel.getBankCode().equals("BOC")) {
                 if (poundageType == null) {
                     UITipDialog.showInfo(this, "请选择手续费收取方式");
                     return;
                 }
-
                 if (TextUtils.equals(poundageType.getDkey(), "3")) {
                     if (surcharge == null) {
                         UITipDialog.showInfo(this, "请选择附加费");
@@ -123,7 +119,7 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
                 requestMap.put("serviceChargeWay", poundageType.getDkey());
             }
         }
-        requestMap.put("carDealerCode", mDealersMode.getCode());//经销商编号
+//        requestMap.put("carDealerCode", mDealersMode.getCode());//经销商编号
         requestMap.put("loanBankCode", banksModel.getCode());//贷款银行
         requestMap.put("loanPeriods", rateTime.getDkey());//贷款周期
         requestMap.put("loanAmount", mBinding.mElMoney.getMoneyText());//贷款金额
@@ -175,42 +171,6 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
                 }
             });
         });
-
-
-//        HashMap<String, String> map = new HashMap<>();
-//        map.put("parentKey", "boc_fee_way");
-//        Call<BaseResponseListModel<DataDictionary>> call = RetrofitUtils.createApi(MyApiServer.class).getDataDictionary("630036", StringUtils.getJsonToString(map));
-//
-//        call.enqueue(new BaseResponseListCallBack<DataDictionary>(this) {
-//
-//            @Override
-//            protected void onSuccess(List<DataDictionary> data, String SucMessage) {
-//                if (data == null || data.size() == 0)
-//                    return;
-//                List<DataDictionary> list = new ArrayList<>();
-//                for (DataDictionary item : data) {
-//                    list.add(new DataDictionary().setDkey(item.getDkey()).setDvalue(item.getDvalue()));
-//                }
-//                mBinding.mSlPoundageType.setData(list, (dialog, which) -> {
-//
-//                    poundageType = data.get(which);
-//
-////                    poundageType.getDkey().equals()
-//                    if (TextUtils.equals(poundageType.getDkey(), "3")) {
-//
-//                        mBinding.mSlSurchargeMoney.setVisibility(View.VISIBLE);
-//                    } else {
-//                        mBinding.mSlSurchargeMoney.setVisibility(View.GONE);
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            protected void onFinish() {
-//                disMissLoading();
-//            }
-//        });
-
     }
 
     /**
@@ -371,7 +331,7 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
                 }
                 mBinding.mSlBankName.setData(list, (dialog, which) -> {
                     banksModel = data.get(which);
-                    if ("ICBC".equals(banksModel.getBankCode())) {
+                    if ("BOC".equals(banksModel.getBankCode())) {
                         mBinding.mSlPoundageType.setVisibility(View.VISIBLE);
                     } else {
                         mBinding.mSlPoundageType.setVisibility(View.GONE);
@@ -388,41 +348,41 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
         return;
     }
 
-    /**
-     * 获取经销商
-     */
-    private void getDealers() {
-        Map<String, String> map = RetrofitUtils.getNodeListMap();
-//        map.put("curNodeCode", "006_02");
-        showLoadingDialog();
-        Call call = RetrofitUtils.createApi(MyApiServer.class).getDealersList("632067", StringUtils.getJsonToString(map));
-        addCall(call);
-
-        call.enqueue(new BaseResponseListCallBack<DealersModel>(this) {
-            @Override
-            protected void onSuccess(List<DealersModel> data, String SucMessage) {
-
-                if (data == null || data.size() == 0)
-                    return;
-
-                List<DataDictionary> list = new ArrayList<>();
-                for (DealersModel model : data) {
-                    list.add(new DataDictionary().setDkey(model.getCode()).setDvalue(model.getParentGroup() + "-" + model.getAbbrName()));
-                }
-
-                mBinding.mSlDealer.setData(list, (dialog, which) -> {
-
-                    mDealersMode = data.get(which);
-
-                });
-            }
-
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
-        });
-    }
+//    /**
+//     * 获取经销商
+//     */
+//    private void getDealers() {
+//        Map<String, String> map = RetrofitUtils.getNodeListMap();
+////        map.put("curNodeCode", "006_02");
+//        showLoadingDialog();
+//        Call call = RetrofitUtils.createApi(MyApiServer.class).getDealersList("632067", StringUtils.getJsonToString(map));
+//        addCall(call);
+//
+//        call.enqueue(new BaseResponseListCallBack<DealersModel>(this) {
+//            @Override
+//            protected void onSuccess(List<DealersModel> data, String SucMessage) {
+//
+//                if (data == null || data.size() == 0)
+//                    return;
+//
+//                List<DataDictionary> list = new ArrayList<>();
+//                for (DealersModel model : data) {
+//                    list.add(new DataDictionary().setDkey(model.getCode()).setDvalue(model.getParentGroup() + "-" + model.getAbbrName()));
+//                }
+//
+//                mBinding.mSlDealer.setData(list, (dialog, which) -> {
+//
+//                    mDealersMode = data.get(which);
+//
+//                });
+//            }
+//
+//            @Override
+//            protected void onFinish() {
+//                disMissLoading();
+//            }
+//        });
+//    }
 
 
 }

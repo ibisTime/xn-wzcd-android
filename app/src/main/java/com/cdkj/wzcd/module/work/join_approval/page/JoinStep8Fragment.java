@@ -15,6 +15,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.FragmentJoinStep8Binding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
+import com.cdkj.wzcd.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,7 +78,28 @@ public class JoinStep8Fragment extends BaseLazyFragment {
     }
 
     private void setView() {
+        if (((JoinApplyActivity) mActivity).isDetails) {
+            //企业照片
+            mBinding.myMlCompanyNamePic.addListRequest(StringUtils.splitPIC(data.getCompanyNamePic()));
+            //办公场地照片
+            mBinding.myMlCompanyPlacePic.addListRequest(StringUtils.splitPIC(data.getCompanyPlacePic()));
+            //生产车间照片
+            mBinding.myMlCompanyWorkshopPic.addListRequest(StringUtils.splitPIC(data.getCompanyWorkshopPic()));
+            //签约员与客户合影 m
+            mBinding.myMlCompanySaleCustomerPic.addListRequest(StringUtils.splitPIC(data.getCompanySaleCustomerPic()));
 
+        } else {
+
+            //企业照片
+            mBinding.myMlCompanyNamePic.addList(StringUtils.splitPIC(data.getCompanyNamePic()));
+            //办公场地照片
+            mBinding.myMlCompanyPlacePic.addList(StringUtils.splitPIC(data.getCompanyPlacePic()));
+            //生产车间照片
+            mBinding.myMlCompanyWorkshopPic.addList(StringUtils.splitPIC(data.getCompanyWorkshopPic()));
+            //签约员与客户合影 m
+            mBinding.myMlCompanySaleCustomerPic.addList(StringUtils.splitPIC(data.getCompanySaleCustomerPic()));
+
+        }
     }
 
     @Override
@@ -92,19 +114,19 @@ public class JoinStep8Fragment extends BaseLazyFragment {
             @Override
             public void onSuccess(String key) {
 
-                if (requestCode == mBinding.myMlCompanyNamePic.getRequestCode()){
+                if (requestCode == mBinding.myMlCompanyNamePic.getRequestCode()) {
                     mBinding.myMlCompanyNamePic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlCompanyPlacePic.getRequestCode()){
+                if (requestCode == mBinding.myMlCompanyPlacePic.getRequestCode()) {
                     mBinding.myMlCompanyPlacePic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlCompanyWorkshopPic.getRequestCode()){
+                if (requestCode == mBinding.myMlCompanyWorkshopPic.getRequestCode()) {
                     mBinding.myMlCompanyWorkshopPic.addList(key);
                 }
 
-                if (requestCode == mBinding.myMlCompanySaleCustomerPic.getRequestCode()){
+                if (requestCode == mBinding.myMlCompanySaleCustomerPic.getRequestCode()) {
                     mBinding.myMlCompanySaleCustomerPic.addList(key);
                 }
 
@@ -119,14 +141,14 @@ public class JoinStep8Fragment extends BaseLazyFragment {
         }, path);
     }
 
-    public Map<String, Object> getData(){
+    public Map<String, Object> getData() {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("companyNamePic",mBinding.myMlCompanyNamePic.getListData());
-        map.put("companyPlacePic",mBinding.myMlCompanyPlacePic.getListData());
-        map.put("companyWorkshopPic",mBinding.myMlCompanyWorkshopPic.getListData());
-        map.put("companySaleCustomerPic",mBinding.myMlCompanySaleCustomerPic.getListData());
+        map.put("companyNamePic", mBinding.myMlCompanyNamePic.getListData());
+        map.put("companyPlacePic", mBinding.myMlCompanyPlacePic.getListData());
+        map.put("companyWorkshopPic", mBinding.myMlCompanyWorkshopPic.getListData());
+        map.put("companySaleCustomerPic", mBinding.myMlCompanySaleCustomerPic.getListData());
 
         return map;
     }

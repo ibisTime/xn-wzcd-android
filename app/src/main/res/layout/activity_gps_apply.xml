@@ -11,6 +11,7 @@
 
         <com.cdkj.wzcd.view.MySelectLayout
             android:id="@+id/mySl_add_gps"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:txt_select_title="添加GPS">
@@ -21,8 +22,7 @@
             android:id="@+id/myEl_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:inputType="phone"
+            app:inputType="id"
             app:txt_input_hint="请输入申领个数"
             app:txt_input_title="申领个数">
 

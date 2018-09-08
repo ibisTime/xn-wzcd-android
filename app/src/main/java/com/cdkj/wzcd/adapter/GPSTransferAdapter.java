@@ -38,7 +38,7 @@ public class GPSTransferAdapter extends BaseQuickAdapter<DataTransferModel, Base
 
         mBinding.myTlIdStatus.setText(item.getBizCode(), getStatus(item));
 
-        mBinding.myIlName.setText(item.getUserName());
+        mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlSendType.setText(DataDictionaryHelper.getValueBuyKey(send_type, item.getSendType()));
 
 

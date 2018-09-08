@@ -114,7 +114,7 @@ public class DataSendActivity extends AbsBaseLoadActivity {
 
     private void setView(DataTransferModel data) {
         mBinding.myNlName.setText(data.getUserName());
-        mBinding.myNlCode.setText(data.getCode());
+        mBinding.myNlCode.setText(data.getBizCode());
         mBinding.myNlType.setText(DataDictionaryHelper.getValueBuyKey(logistics_type, data.getType()));
         mBinding.myNlNodeSend.setText(NodeHelper.getNameOnTheCode(data.getToNodeCode()));
         mBinding.myNlNodeRe.setText(NodeHelper.getNameOnTheCode(data.getFromNodeCode()));
@@ -168,7 +168,7 @@ public class DataSendActivity extends AbsBaseLoadActivity {
         map.put("sendNote", mBinding.myElNote.getText());
         map.put("sendType", mBinding.mySlWay.getDataKey());
         map.put("operator", SPUtilHelper.getUserId());
-        map.put("sendDatetime", mBinding.myNlDateTime.getText());
+        map.put("sendDatetime", mBinding.myNlDateTime.getTag());
 
         if (mBinding.llLogistics.getVisibility() == View.VISIBLE){
             map.put("logisticsCode", mBinding.myElNumber.getText());

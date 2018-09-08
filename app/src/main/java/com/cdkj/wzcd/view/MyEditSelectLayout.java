@@ -109,12 +109,12 @@ public class MyEditSelectLayout extends LinearLayout {
      */
     public void setTextByRequest(String text) {
         // 隐藏更多
-        mBinding.llSelect.setVisibility(GONE);
+        mBinding.llSelect.setVisibility(INVISIBLE);
         // 设置不可弹出下拉
         isOnClickEnable = false;
         // 设置内容
         mBinding.edtInput.setText(text);
-
+        mBinding.edtInput.setFocusable(false);
         selectIndex = -2;
     }
 

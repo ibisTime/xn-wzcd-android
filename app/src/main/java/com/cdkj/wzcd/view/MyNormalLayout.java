@@ -103,8 +103,8 @@ public class MyNormalLayout extends LinearLayout {
      * @return 除以1000的金额字符串
      */
     public void setMoneyText(String moneyText) {
-        mBinding.tvContent.setText(RequestUtil.formatAmountDiv(moneyText));
 
+        mBinding.tvContent.setText(RequestUtil.formatAmountDiv(moneyText));
         mBinding.tvTitleRight.setText(context.getString(R.string.money_sing));
         mBinding.tvTitleRight.setVisibility(VISIBLE);
     }

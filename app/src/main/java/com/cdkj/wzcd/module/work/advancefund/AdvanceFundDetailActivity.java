@@ -16,6 +16,7 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityAdvanceFundDetailBinding;
 import com.cdkj.wzcd.model.AdvanceFundModel;
+import com.cdkj.wzcd.module.work.credit.CreditDetailActivity;
 import com.cdkj.wzcd.util.RequestUtil;
 
 import java.util.Map;
@@ -33,6 +34,8 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
     private ActivityAdvanceFundDetailBinding mBinding;
 
     private String code;
+
+    private AdvanceFundModel mData;
 
     public static void open(Context context, String code) {
         if (context != null) {
@@ -58,9 +61,18 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
 
         code = getIntent().getStringExtra(DATA_SIGN);
         getAdvanceFund();
+        initOnclick();
     }
 
-    public void getAdvanceFund(){
+    private void initOnclick() {
+        mBinding.myNlResult.setOnClickListener(view -> {
+            if (mData != null && mData.getBudgetOrder() != null) {
+                CreditDetailActivity.open(this, mData.getBudgetOrder().getCreditCode(), false);
+            }
+        });
+    }
+
+    public void getAdvanceFund() {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);
@@ -71,9 +83,11 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
         addCall(call);
 
         call.enqueue(new BaseResponseModelCallBack<AdvanceFundModel>(this) {
+
+
             @Override
             protected void onSuccess(AdvanceFundModel data, String SucMessage) {
-
+                mData = data;
                 setView(data);
 
             }
@@ -93,7 +107,7 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlAmount.setText(RequestUtil.formatAmountDivSign(data.getBudgetOrder().getLoanAmount()));
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlNumber.setText(data.getCollectionAccountNo());
-        mBinding.myNlIsAdvanceFund.setText(TextUtils.equals(data.getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
+        mBinding.myNlIsAdvanceFund.setText(TextUtils.equals(data.getIsAdvanceFund(), "1") ? "是" : "否");
         mBinding.myNlAdvanceFundDateTime.setText(DateUtil.formatStringData(data.getBudgetOrder().getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
     }
 }

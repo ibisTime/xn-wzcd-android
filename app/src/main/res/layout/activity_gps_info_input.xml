@@ -46,19 +46,18 @@
                     android:id="@+id/myNl_loan_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:txt_normal_title="贷款银行">
+                    app:txt_normal_title="贷款金额">
 
                 </com.cdkj.wzcd.view.MyNormalLayout>
 
-                <View
-                    style="@style/style_split_line_horizontal_broad"/>
+                <View style="@style/style_split_line_horizontal_broad" />
 
                 <LinearLayout
                     android:id="@+id/ll_gps"
-                    android:visibility="gone"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <com.cdkj.wzcd.view.MySelectLayout
                         android:id="@+id/mySl_code"
@@ -69,8 +68,18 @@
                     </com.cdkj.wzcd.view.MySelectLayout>
 
 
+                    <com.cdkj.wzcd.view.MySelectLayout
+                        android:id="@+id/mySl_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:txt_select_title="安装位置">
+
+                    </com.cdkj.wzcd.view.MySelectLayout>
+
+
                     <com.cdkj.wzcd.view.MyEditLayout
                         android:id="@+id/myEl_location"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:txt_input_hint="请输入安装位置"
@@ -80,11 +89,11 @@
 
                     <com.cdkj.wzcd.view.MyNormalLayout
                         android:id="@+id/myNl_date_time"
-                        app:txt_normal_title="安装时间"
-                        app:txt_normal_hint="请选择安装时间"
-                        app:img_normal_right="@drawable/more_right"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:img_normal_right="@drawable/more_right"
+                        app:txt_normal_hint="请选择安装时间"
+                        app:txt_normal_title="安装时间">
 
 
                     </com.cdkj.wzcd.view.MyNormalLayout>
@@ -107,8 +116,7 @@
 
                     </com.cdkj.wzcd.view.MyEditLayout>
 
-                    <View
-                        style="@style/style_split_line_horizontal_broad"/>
+                    <View style="@style/style_split_line_horizontal_broad" />
 
                 </LinearLayout>
 
@@ -121,46 +129,46 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_gps"
-                    android:paddingTop="15dp"
-                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingTop="15dp">
 
                 </android.support.v7.widget.RecyclerView>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:paddingTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:paddingBottom="15dp"
                         android:paddingLeft="@dimen/layout_left_interval"
                         android:paddingRight="@dimen/layout_right_interval"
-                        android:background="@color/white"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:paddingTop="10dp">
 
                         <LinearLayout
                             android:id="@+id/ll_add"
-                            android:background="@drawable/common_my_image_bg"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="132dp">
+                            android:layout_height="132dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/common_my_image_bg"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
                             <ImageView
-                                android:src="@mipmap/add"
                                 android:layout_width="25dp"
-                                android:layout_height="25dp" />
+                                android:layout_height="25dp"
+                                android:src="@mipmap/add" />
 
                             <TextView
-                                android:text="添加GPS"
-                                android:layout_marginTop="10dp"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="添加GPS" />
 
                         </LinearLayout>
 
@@ -168,9 +176,9 @@
 
                     <com.cdkj.wzcd.view.MyConfirmBtn
                         android:id="@+id/myCb_confirm"
-                        app:txt_confirm_content="确认"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:txt_confirm_content="确认">
 
 
                     </com.cdkj.wzcd.view.MyConfirmBtn>
@@ -181,23 +189,21 @@
             </LinearLayout>
 
 
-
         </ScrollView>
 
 
-
         <!--<Button-->
-            <!--android:id="@+id/btn_confirm"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="45dp"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_marginLeft="@dimen/layout_left_interval"-->
-            <!--android:layout_marginRight="@dimen/layout_right_interval"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:background="@drawable/common_my_confirm_btn"-->
-            <!--android:text="@string/save"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="16sp" />-->
+        <!--android:id="@+id/btn_confirm"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginLeft="@dimen/layout_left_interval"-->
+        <!--android:layout_marginRight="@dimen/layout_right_interval"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="@drawable/common_my_confirm_btn"-->
+        <!--android:text="@string/save"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp" />-->
 
 
     </LinearLayout>

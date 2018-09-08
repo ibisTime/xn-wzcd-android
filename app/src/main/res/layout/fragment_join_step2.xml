@@ -23,6 +23,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:txt_normal_title="共还人姓名" />
+            <com.cdkj.wzcd.view.MyNormalLayout
+                android:id="@+id/myNl_danbaoName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:txt_normal_title="担保人" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_applyUserCompany"

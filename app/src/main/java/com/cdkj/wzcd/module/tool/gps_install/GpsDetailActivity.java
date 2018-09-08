@@ -78,7 +78,7 @@ public class GpsDetailActivity extends AbsBaseLoadActivity {
         mBinding.rvGps.setAdapter(mAdapter);
     }
 
-    public void getGPS(){
+    public void getGPS() {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);
@@ -107,15 +107,16 @@ public class GpsDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
+        mBinding.myNlLoanAmount.setMoneyText(data.getLoanAmount());
 
         mBinding.llAdd.setVisibility(View.GONE);
         mBinding.myCbConfirm.setVisibility(View.GONE);
 
 
-        if (data.getBudgetOrderGpsList() != null || data.getBudgetOrderGpsList().size() != 0){
+        if (data.getBudgetOrderGpsList() != null && data.getBudgetOrderGpsList().size() != 0) {
 
             mList.clear();
-            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()){
+            for (NodeListModel.BudgetOrderGpsListBean bean : data.getBudgetOrderGpsList()) {
 
                 GpsInstallModel model = new GpsInstallModel();
                 model.setCode(bean.getCode());

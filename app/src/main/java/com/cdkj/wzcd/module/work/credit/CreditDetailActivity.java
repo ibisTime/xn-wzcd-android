@@ -14,9 +14,12 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.CameraHelper;
+import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.adapter.CreditUserAdapter;
+import com.cdkj.wzcd.adapter.CreditUserAdapterUp;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActivityZxLaunchBinding;
 import com.cdkj.wzcd.model.CreditModel;
@@ -24,6 +27,7 @@ import com.cdkj.wzcd.model.CreditUserModel;
 import com.cdkj.wzcd.util.BankHelper;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.RequestUtil;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,13 +59,12 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
     // 关系
     private List<DataDictionary> mRelation = new ArrayList<>();
 
-    private CreditUserAdapter mAdapter;
+    private BaseQuickAdapter mAdapter;
     private List<CreditUserModel> mList = new ArrayList<>();
 
     /**
-     *
      * @param context
-     * @param code 征信单Code
+     * @param code    征信单Code
      * @param isApply 是否是申请初审
      */
     public static void open(Context context, String code, boolean isApply) {
@@ -85,7 +88,7 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
 
         mBaseBinding.titleView.setMidTitle("征信详情");
 
-        if (getIntent() != null){
+        if (getIntent() != null) {
             creditCode = getIntent().getStringExtra(DATA_SIGN);
             isApply = getIntent().getBooleanExtra("isApply", false);
 
@@ -99,19 +102,33 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
 
     private void initListener() {
         mBinding.myCbApply.setOnConfirmListener(view -> {
-            apply("1");
+            //通过
+            if (isCheck()) {
+                apply("1");
+            }
         });
 
         mBinding.myCbApply.setOnConfirmRightListener(view -> {
-            apply("0");
+
+            if (isCheck()) {
+                apply("0");
+            }
         });
+    }
+
+    private boolean isCheck() {
+        if (TextUtils.isEmpty(mBinding.myElApproveNote.getText())) {
+            UITipDialog.showInfo(this, "备注不能为空");
+            return false;
+        }
+        return true;
     }
 
     public void initAdapter() {
 
         List<DataDictionary> listRole = DataDictionaryHelper.getListByParentKey(credit_user_loan_role);
 
-        if (listRole == null || listRole.size() == 0){
+        if (listRole == null || listRole.size() == 0) {
             return;
         }
         mRole.addAll(listRole);
@@ -119,19 +136,18 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
 
         List<DataDictionary> listRelation = DataDictionaryHelper.getListByParentKey(credit_user_relation);
 
-        if (listRelation == null || listRelation.size() == 0){
+        if (listRelation == null || listRelation.size() == 0) {
             return;
         }
         mRelation.addAll(listRelation);
 
         mAdapter = new CreditUserAdapter(mList, mRole, mRelation);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            CreditUserModel model = mAdapter.getItem(position);
+            CreditUserModel model = (CreditUserModel) mAdapter.getItem(position);
 
             CreditUserActivity.open(this, model, position, false, mRole, mRelation);
-
-
         });
+
 
         mBinding.rvZxr.setLayoutManager(getLinearLayoutManager(false));
         mBinding.rvZxr.setAdapter(mAdapter);
@@ -188,7 +204,7 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
         mBinding.mySlWay.setTextByRequest(DataDictionaryHelper.getBizTypeByKey(mData.getShopWay()));
         mBinding.myElAmount.setTextByRequest(RequestUtil.formatAmountDiv(mData.getLoanAmount()));
 
-        if (TextUtils.equals(mData.getShopWay(), "2")){ //二手车
+        if (TextUtils.equals(mData.getShopWay(), "2")) { //二手车
             // 新车则隐藏证件
             mBinding.myIlDocuments.setVisibility(View.VISIBLE);
 
@@ -200,12 +216,63 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
         mBinding.llAdd.setVisibility(View.GONE);
         mBinding.myCbConfirm.setVisibility(View.GONE);
 
+
+        if (isApply) {
+            mBaseBinding.titleView.setMidTitle("征信初审");
+            mAdapter = new CreditUserAdapterUp(mList, mRole, mRelation);
+            mBinding.rvZxr.setAdapter(mAdapter);
+//            mBinding.myElOtherFilePdf.setVisibility(View.VISIBLE);//显示附件
+            mBinding.myElOtherFilePdf.build(this, 10, 0);
+        }
         mList.addAll(mData.getCreditUserList());
         mAdapter.notifyDataSetChanged();
+
+        //这是一个新的 adapter 审核的时候  条目会多一个 选中的那按钮
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.iv_choice:
+                    mList.get(position).setChoice(!mList.get(position).isChoice());
+                    mAdapter.notifyItemChanged(position);
+                    break;
+            }
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            CreditUserModel model = (CreditUserModel) mAdapter.getItem(position);
+
+            CreditUserActivity.open(this, model, position, false, mRole, mRelation);
+        });
 
 
         mBinding.llApply.setVisibility(isApply ? View.VISIBLE : View.GONE);
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK || data == null) {
+            return;
+        }
+        String path = data.getStringExtra(CameraHelper.staticPath);
+        showLoadingDialog();
+        new QiNiuHelper(this).uploadSinglePic(new QiNiuHelper.QiNiuCallBack() {
+            @Override
+            public void onSuccess(String key) {
+
+                if (requestCode == mBinding.myElOtherFilePdf.getRequestCode()) {
+                    mBinding.myElOtherFilePdf.addList(key);
+                }
+
+                disMissLoading();
+
+            }
+
+            @Override
+            public void onFal(String info) {
+                disMissLoading();
+            }
+        }, path);
     }
 
 
@@ -214,14 +281,34 @@ public class CreditDetailActivity extends AbsBaseLoadActivity {
      */
     private void apply(String approveResult) {
 
-        HashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+        HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 
         hashMap.put("code", creditCode);
         hashMap.put("approveResult", approveResult);
         hashMap.put("operator", SPUtilHelper.getUserId());
         hashMap.put("approveNote", mBinding.myElApproveNote.getText());
 
-        Call call= RetrofitUtils.getBaseAPiService().successRequest("632113", StringUtils.getJsonToString(hashMap));
+        String listData = mBinding.myElOtherFilePdf.getListData();
+        if (!TextUtils.isEmpty(listData)) {
+            hashMap.put("accessory", listData);
+        }
+
+
+        if (TextUtils.equals("1", approveResult)) {
+
+            List list = new ArrayList<CreditUserModel>();
+            for (CreditUserModel item : mList) {
+                if (item.isChoice()) {
+                    list.add(item);
+                }
+            }
+            if (list.size() == 0) {
+                UITipDialog.showInfo(this, "请勾选征信人");
+                return;
+            }
+            hashMap.put("creditUserList", list);
+        }
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632113", StringUtils.getJsonToString(hashMap));
 
         addCall(call);
 

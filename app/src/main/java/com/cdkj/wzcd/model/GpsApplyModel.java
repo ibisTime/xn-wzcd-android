@@ -1,5 +1,9 @@
 package com.cdkj.wzcd.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * @author cdkj
  * @updateDts 2018/5/30
@@ -28,6 +32,24 @@ public class GpsApplyModel {
     private String status;
     private String applyUserName;
     private String companyName;
+    /**
+     * applyCount : 1.0
+     * approveNote : 审核意见
+     * approveUser : U201808181253226614914
+     * companyCode : DP201800000000000000001
+     * gpsList : [{"applyStatus":"0","code":"G201808201601309081257","companyApplyCode":"GA201808222231526947462","companyApplyDatetime":"Aug 22, 2018 10:31:52 PM","companyApplyStatus":"1","companyCode":"DP201800000000000000001","gpsDevNo":"008","gpsType":"1","supplierCode":"GS201808201519037695117","useStatus":"0"},{"applyStatus":"0","code":"G201808212345317657223","companyApplyCode":"GA201808222231526947462","companyApplyDatetime":"Aug 22, 2018 10:31:52 PM","companyApplyStatus":"1","companyCode":"DP201800000000000000001","gpsDevNo":"GPS120132453132","gpsType":"1","supplierCode":"GS201808212313369787456","useStatus":"0"}]
+     * receiveDatetime : Aug 22, 2018 10:33:26 PM
+     * sendDatetime : Aug 22, 2018 10:32:47 PM
+     */
+
+    @SerializedName("applyCount")
+    private double applyCountX;
+    private String approveNote;
+    private String approveUser;
+    private String companyCode;
+    private String receiveDatetime;
+    private String sendDatetime;
+    private List<GpsListBean> gpsList;
 
     public String getCompanyName() {
         return companyName;
@@ -99,5 +121,168 @@ public class GpsApplyModel {
 
     public void setApplyUserName(String applyUserName) {
         this.applyUserName = applyUserName;
+    }
+
+    public double getApplyCountX() {
+        return applyCountX;
+    }
+
+    public void setApplyCountX(double applyCountX) {
+        this.applyCountX = applyCountX;
+    }
+
+    public String getApproveNote() {
+        return approveNote;
+    }
+
+    public void setApproveNote(String approveNote) {
+        this.approveNote = approveNote;
+    }
+
+    public String getApproveUser() {
+        return approveUser;
+    }
+
+    public void setApproveUser(String approveUser) {
+        this.approveUser = approveUser;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getReceiveDatetime() {
+        return receiveDatetime;
+    }
+
+    public void setReceiveDatetime(String receiveDatetime) {
+        this.receiveDatetime = receiveDatetime;
+    }
+
+    public String getSendDatetime() {
+        return sendDatetime;
+    }
+
+    public void setSendDatetime(String sendDatetime) {
+        this.sendDatetime = sendDatetime;
+    }
+
+    public List<GpsListBean> getGpsList() {
+        return gpsList;
+    }
+
+    public void setGpsList(List<GpsListBean> gpsList) {
+        this.gpsList = gpsList;
+    }
+
+    public static class GpsListBean {
+        /**
+         * applyStatus : 0
+         * code : G201808201601309081257
+         * companyApplyCode : GA201808222231526947462
+         * companyApplyDatetime : Aug 22, 2018 10:31:52 PM
+         * companyApplyStatus : 1
+         * companyCode : DP201800000000000000001
+         * gpsDevNo : 008
+         * gpsType : 1
+         * supplierCode : GS201808201519037695117
+         * useStatus : 0
+         */
+
+        private String applyStatus;
+        @SerializedName("code")
+        private String codeX;
+        private String companyApplyCode;
+        private String companyApplyDatetime;
+        private String companyApplyStatus;
+        private String companyCode;
+        private String gpsDevNo;
+        private String gpsType;
+        private String supplierCode;
+        private String useStatus;
+
+        public String getApplyStatus() {
+            return applyStatus;
+        }
+
+        public void setApplyStatus(String applyStatus) {
+            this.applyStatus = applyStatus;
+        }
+
+        public String getCodeX() {
+            return codeX;
+        }
+
+        public void setCodeX(String codeX) {
+            this.codeX = codeX;
+        }
+
+        public String getCompanyApplyCode() {
+            return companyApplyCode;
+        }
+
+        public void setCompanyApplyCode(String companyApplyCode) {
+            this.companyApplyCode = companyApplyCode;
+        }
+
+        public String getCompanyApplyDatetime() {
+            return companyApplyDatetime;
+        }
+
+        public void setCompanyApplyDatetime(String companyApplyDatetime) {
+            this.companyApplyDatetime = companyApplyDatetime;
+        }
+
+        public String getCompanyApplyStatus() {
+            return companyApplyStatus;
+        }
+
+        public void setCompanyApplyStatus(String companyApplyStatus) {
+            this.companyApplyStatus = companyApplyStatus;
+        }
+
+        public String getCompanyCode() {
+            return companyCode;
+        }
+
+        public void setCompanyCode(String companyCode) {
+            this.companyCode = companyCode;
+        }
+
+        public String getGpsDevNo() {
+            return gpsDevNo;
+        }
+
+        public void setGpsDevNo(String gpsDevNo) {
+            this.gpsDevNo = gpsDevNo;
+        }
+
+        public String getGpsType() {
+            return gpsType;
+        }
+
+        public void setGpsType(String gpsType) {
+            this.gpsType = gpsType;
+        }
+
+        public String getSupplierCode() {
+            return supplierCode;
+        }
+
+        public void setSupplierCode(String supplierCode) {
+            this.supplierCode = supplierCode;
+        }
+
+        public String getUseStatus() {
+            return useStatus;
+        }
+
+        public void setUseStatus(String useStatus) {
+            this.useStatus = useStatus;
+        }
     }
 }

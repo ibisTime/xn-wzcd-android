@@ -76,7 +76,7 @@ public class GpsListActivity extends AbsRefreshListActivity<GpsApplyModel> {
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
         List<DataDictionary> list = DataDictionaryHelper.getListByParentKey(DataDictionaryHelper.gps_apply_status);
 
-        if (list == null || list.size() == 0){
+        if (list == null || list.size() == 0) {
             return;
         }
         mList.addAll(list);
@@ -86,6 +86,7 @@ public class GpsListActivity extends AbsRefreshListActivity<GpsApplyModel> {
         map.put("applyUser", SPUtilHelper.getUserId());
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("type", "2");
 
         if (isShowDialog) showLoadingDialog();
 
@@ -105,9 +106,7 @@ public class GpsListActivity extends AbsRefreshListActivity<GpsApplyModel> {
         });
 
 
-
     }
-
 
 
 }

@@ -100,4 +100,10 @@ dependencies {
     //二维码扫描
     compile 'cn.yipianfengye.android:zxing-library:2.2'
 
+//    compile 'com.github.arvinljw:PictureSelector:v2.0.6'
+
+    //大图预览
+    implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
+    implementation 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
+
 }

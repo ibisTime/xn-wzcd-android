@@ -44,7 +44,7 @@ public class BankLoanListAdapter extends BaseQuickAdapter<NodeListModel, BaseVie
 
         mBinding.myItemCblConfirm.setContent("", "");
 
-        if (TextUtils.equals(item.getCurNodeCode(),"007_04")){ // 确认提交银行
+        if (TextUtils.equals(item.getCurNodeCode(),"007_06")){ // 确认提交银行
             mBinding.myItemCblConfirm.setRightTextAndListener("确认提交银行", view -> {
                 BankLoanCommitActivity.open(mContext, item.getCode());
             });

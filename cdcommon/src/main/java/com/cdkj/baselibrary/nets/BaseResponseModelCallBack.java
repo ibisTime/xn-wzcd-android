@@ -5,7 +5,6 @@ import android.content.Context;
 import com.cdkj.baselibrary.CdApplication;
 import com.cdkj.baselibrary.R;
 import com.cdkj.baselibrary.api.BaseResponseModel;
-import com.cdkj.baselibrary.utils.LogUtil;
 
 import java.lang.ref.SoftReference;
 
@@ -44,16 +43,18 @@ public abstract class BaseResponseModelCallBack<T> implements Callback<BaseRespo
 
         if (response.isSuccessful()) {
 
-            try {
                 BaseResponseModel t = response.body();
                 checkState(t);      //根据返回错误的状态码实现相应的操作
-            } catch (Exception e) {
-                if (LogUtil.isDeBug) {
-                    onReqFailure(NETERRORCODE4, "未知错误" + e);
-                } else {
-                    onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.error_unknown));
-                }
-            }
+//            try {
+//                BaseResponseModel t = response.body();
+//                checkState(t);      //根据返回错误的状态码实现相应的操作
+//            } catch (Exception e) {
+//                if (LogUtil.isDeBug) {
+//                    onReqFailure(NETERRORCODE4, "未知错误" + e);
+//                } else {
+//                    onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.error_unknown));
+//                }
+//            }
 
         } else {
             onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.net_req_fail));

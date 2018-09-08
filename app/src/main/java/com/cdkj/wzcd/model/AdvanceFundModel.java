@@ -57,7 +57,17 @@ public class AdvanceFundModel {
     private String bizCompanyName;
     private String carDealerName;
     private String applyUserIdNo;
+    private String collectBankName;
     private BudgetOrderBean budgetOrder;
+
+    public String getCollectBankName() {
+        return collectBankName;
+    }
+
+    public void setCollectBankName(String collectBankName) {
+        this.collectBankName = collectBankName;
+    }
+
 
     public String getCode() {
         return code;

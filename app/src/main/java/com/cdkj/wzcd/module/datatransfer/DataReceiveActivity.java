@@ -207,7 +207,7 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
         mBinding.myNlType.setText(DataDictionaryHelper.getValueBuyKey(logistics_type, data.getType()));
         mBinding.myNlNodeSend.setText(NodeHelper.getNameOnTheCode(data.getToNodeCode()));
         mBinding.myNlNodeRe.setText(NodeHelper.getNameOnTheCode(data.getFromNodeCode()));
-        mBinding.myNlSendNote.setText(NodeHelper.getNameOnTheCode(data.getSendNote()));
+        mBinding.myNlSendNote.setText(data.getSendNote());
 
         String dValue = DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.send_type, data.getSendType());
         mBinding.myNlSendType.setText(dValue);
@@ -274,6 +274,8 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
      * 审核通过
      */
     private void passRequest() {
+//        632154  审核接口
+//        code operator token updater
         if (TextUtils.isEmpty(code))
             return;
 
@@ -282,11 +284,14 @@ public class DataReceiveActivity extends AbsBaseLoadActivity {
 
         Map<String, Object> map = new HashMap<>();
 
+        map.put("code", code);
         map.put("codeList", codeList);
         map.put("operator", SPUtilHelper.getUserId());
+        map.put("updater", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 //        hashMap.put("remark", mBinding.myElSendNote.getText());
-
-        Call call = RetrofitUtils.getBaseAPiService().successRequest("632151", StringUtils.getJsonToString(map));
+//        632151
+        Call call = RetrofitUtils.getBaseAPiService().successRequest("632154", StringUtils.getJsonToString(map));
 
         addCall(call);
 

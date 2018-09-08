@@ -48,7 +48,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
         mBinding.myTlIdStatus.setText(item.getBizCode(), getStatus(helper, item));
 
         mBinding.myIlType.setText(DataDictionaryHelper.getValueBuyKey(logistics_type, item.getType()));
-        mBinding.myIlName.setText(item.getUserName());
+        mBinding.myIlName.setText(item.getCustomerName());
         mBinding.myIlSendType.setText(DataDictionaryHelper.getValueBuyKey(send_type, item.getSendType()));
 
         if (TextUtils.equals(item.getSendType(), "1")) {
@@ -59,8 +59,8 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
         mBinding.myIlCompany.setText(DataDictionaryHelper.getValueBuyKey(DataDictionaryHelper.kd_company, item.getLogisticsCompany()));
         mBinding.myIlExpress.setText(item.getLogisticsCode());
 
-        mBinding.myIlFrom.setText(NodeHelper.getNameOnTheCode(item.getFromNodeCode()));
-        mBinding.myIlTo.setText(NodeHelper.getNameOnTheCode(item.getToNodeCode()));
+        mBinding.myIlFrom.setText(NodeHelper.getNameOnTheCode(item.getToNodeCode()));
+        mBinding.myIlTo.setText(NodeHelper.getNameOnTheCode(item.getFromNodeCode()));
 
     }
 
@@ -85,7 +85,7 @@ public class DataTransferAdapter extends BaseQuickAdapter<DataTransferModel, Bas
 
             case "2":
                 mBinding.myItemCblConfirm.setRightTextAndListener("审核", view -> {
-                    //收件并审核
+                    //审核
                     DataReceiveActivity.open(mContext, item.getCode());
                 });
                 return "待审核";
