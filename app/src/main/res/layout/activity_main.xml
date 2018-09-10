@@ -217,7 +217,6 @@
                                 app:img_content="@mipmap/main_fbh"
                                 app:txt_content="银行放款">
 
-
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout
@@ -227,14 +226,8 @@
                                 android:layout_weight="1"
                                 android:visibility="gone"
                                 app:img_content="@mipmap/main_cwdz"
-                                app:txt_content="车辆抵押">
-
-
-                            </com.cdkj.wzcd.view.MySquareRowLayout>
-
-
+                                app:txt_content="车辆抵押"></com.cdkj.wzcd.view.MySquareRowLayout>
                         </LinearLayout>
-
 
                     </LinearLayout>
 

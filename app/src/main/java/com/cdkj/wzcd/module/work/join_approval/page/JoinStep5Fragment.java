@@ -119,7 +119,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         mAdapter1 = new RePointAdapter(mList1);
         mAdapter1.setOnItemClickListener((adapter, view, position) -> {
             if (!isOutside) {// 正常单
-
+                isAdvanceFund = ((JoinApplyActivity) mActivity).getIsAdvanceFund();
                 LogUtil.E("isAdvanceFund = " + isAdvanceFund);
 
                 if (isAdvanceFund) { // 已垫资

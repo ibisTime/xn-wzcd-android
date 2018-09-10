@@ -105,6 +105,7 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlDealers.setText(data.getCarDealerName());
         mBinding.myNlAmount.setMoneyText(data.getBudgetOrder().getLoanAmount());
         mBinding.myNlBank.setText(data.getLoanBankName());
+        mBinding.myNlCollectBankName.setText(data.getCollectBankName());
         mBinding.myNlNumber.setText(data.getCollectionAccountNo());
         mBinding.myNlIsAdvanceFund.setText(TextUtils.equals(data.getIsAdvanceFund(), "1") ? "是" : "否");
         mBinding.myNlAdvanceFundDateTime.setText(DateUtil.formatStringData(data.getBudgetOrder().getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));

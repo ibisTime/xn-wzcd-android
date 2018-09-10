@@ -110,28 +110,33 @@ public class JoinStep3Fragment extends BaseLazyFragment {
         if (((JoinApplyActivity) mActivity).isDetails) {
             //房产证
             mBinding.mySlIsHouseProperty.setTextByRequestByKey(data.getIsHouseProperty());
-
-            mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlHouseProperty.addListRequest(StringUtils.splitPIC(data.getHouseProperty()));
-
+            if (!TextUtils.isEmpty(data.getIsHouseProperty())) {
+                mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlHouseProperty.addListRequest(StringUtils.splitPIC(data.getHouseProperty()));
+            }
 
             //营业执照
             mBinding.mySlIsLicense.setTextByRequestByKey(data.getIsLicense());
-
-            mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
-
-
-            mBinding.mySlCarType.setTextByRequestByKey(data.getCarType());
+            if (!TextUtils.isEmpty(data.getIsLicense())) {
+                mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
+            }
 
             //有无驾照  isDriceLicense
             mBinding.mySlIsDriceLicense.setTextByRequestByKey(data.getIsDriceLicense());
 
-            mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlDriceLicense.addListRequest(StringUtils.splitPIC(data.getLicense()));
-
+            if (!TextUtils.isEmpty(data.getIsDriceLicense())) {
+                mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlDriceLicense.addListRequest(StringUtils.splitPIC(data.getDriceLicense()));
+            }
 
             mBinding.mySlIsSiteProve.setTextByRequestByKey(data.getIsSiteProve());
+            if (!TextUtils.isEmpty(data.getIsSiteProve())) {
+                mBinding.myMlSiteProve.setVisibility(TextUtils.equals(data.getSiteProve(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlSiteProve.addListRequest(StringUtils.splitPIC(data.getSiteProve()));
+            }
+
+            mBinding.mySlCarType.setTextByRequestByKey(data.getCarType());
             mBinding.myElSiteArea.setTextHint("");
             mBinding.myElSiteArea.setTextByRequest(data.getSiteArea());//场地面积
             mBinding.myElOtherPropertyNote.setTextHint("");//场地面积
@@ -140,21 +145,32 @@ public class JoinStep3Fragment extends BaseLazyFragment {
 
         } else {
             mBinding.mySlIsHouseProperty.setContentByKey(data.getIsHouseProperty());
-            mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlHouseProperty.addList(StringUtils.splitPIC(data.getHouseProperty()));
+            if (!TextUtils.isEmpty(data.getIsHouseProperty())) {
+                mBinding.myMlHouseProperty.setVisibility(TextUtils.equals(data.getIsHouseProperty(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlHouseProperty.addList(StringUtils.splitPIC(data.getHouseProperty()));
+            }
 
             mBinding.mySlIsLicense.setContentByKey(data.getIsLicense());
-            mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlLicense.addList(StringUtils.splitPIC(data.getLicense()));
-
-            mBinding.mySlCarType.setContentByKey(data.getCarType());
-
+            if (!TextUtils.isEmpty(data.getIsLicense())) {
+                mBinding.myMlLicense.setVisibility(TextUtils.equals(data.getIsLicense(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlLicense.addList(StringUtils.splitPIC(data.getLicense()));
+            }
 
             mBinding.mySlIsDriceLicense.setContentByKey(data.getIsDriceLicense());
-            mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
-            mBinding.myMlDriceLicense.addList(StringUtils.splitPIC(data.getLicense()));
+            if (!TextUtils.isEmpty(data.getIsDriceLicense())) {
+                mBinding.myMlDriceLicense.setVisibility(TextUtils.equals(data.getIsDriceLicense(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlDriceLicense.addList(StringUtils.splitPIC(data.getDriceLicense()));
+            }
 
             mBinding.mySlIsSiteProve.setContentByKey(data.getIsSiteProve());
+            if (!TextUtils.isEmpty(data.getIsSiteProve())) {
+                mBinding.myMlSiteProve.setVisibility(TextUtils.equals(data.getSiteProve(), "0") ? View.GONE : View.VISIBLE);
+                mBinding.myMlSiteProve.addList(StringUtils.splitPIC(data.getSiteProve()));
+            }
+
+            mBinding.mySlCarType.setContentByKey(data.getCarType());
+            mBinding.myElSiteArea.setText(data.getSiteArea());//场地面积
+            mBinding.myElOtherPropertyNote.setText(data.getOtherPropertyNote());//其他
 
         }
     }

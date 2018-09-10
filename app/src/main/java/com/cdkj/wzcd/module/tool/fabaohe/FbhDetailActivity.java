@@ -180,7 +180,8 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             mBinding.myElCurrentBillPrice.setMoneyTextByRequest(data.getInvoicePrice());
             mBinding.myIlBill.setFlImgByRequest(data.getInvoice());
             mBinding.myIlCertification.setFlImgByRequest(data.getCertification());
-            mBinding.myIlJqx.setFlImgByRequest(data.getForceInsurance());
+            mBinding.myIlJqx.setFlImgByRequest(data.getForceInsurancePdf());
+            mBinding.myElForceInsurancePrice.setMoneyTextRequest(data.getForceInsurance());
             mBinding.myIlSyx.setFlImgByRequest(data.getBusinessInsurance());
             mBinding.myIlCarRegister.setFlImgByRequest(data.getMotorRegCertification());
             mBinding.myIlEndorsement.setFlImgByRequest(data.getPdPdf());
@@ -193,7 +194,8 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
             mBinding.myIlBill.setFlImg(data.getInvoice());
             mBinding.myIlCertification.setFlImg(data.getCertification());
-            mBinding.myIlJqx.setFlImg(data.getForceInsurance());
+            mBinding.myIlJqx.setFlImg(data.getForceInsurancePdf());
+            mBinding.myElForceInsurancePrice.setMoneyText(data.getForceInsurance());
             mBinding.myIlSyx.setFlImg(data.getBusinessInsurance());
             mBinding.myIlCarRegister.setFlImg(data.getMotorRegCertification());
             mBinding.myIlEndorsement.setFlImg(data.getPdPdf());
@@ -262,6 +264,10 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
             return false;
         }
 
+        if (mBinding.myElForceInsurancePrice.check()) {
+            return false;
+        }
+
 
         return true;
     }
@@ -276,7 +282,8 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
         map.put("currentInvoicePrice", mBinding.myElCurrentBillPrice.getMoneyText());
         map.put("invoice", mBinding.myIlBill.getFlImgUrl());
         map.put("certification", mBinding.myIlCertification.getFlImgUrl());
-        map.put("forceInsurance", mBinding.myIlJqx.getFlImgUrl());
+        map.put("forceInsurancePdf", mBinding.myIlJqx.getFlImgUrl());
+        map.put("forceInsurance", mBinding.myElForceInsurancePrice.getMoneyText());
         map.put("businessInsurance", mBinding.myIlSyx.getFlImgUrl());
         map.put("motorRegCertification", mBinding.myIlCarRegister.getFlImgUrl());
         map.put("pdPdf", mBinding.myIlEndorsement.getFlImgUrl());
@@ -294,7 +301,6 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
                 UITipDialog.showSuccess(FbhDetailActivity.this, "录入成功", dialogInterface -> {
                     finish();
                 });
-
             }
 
             @Override

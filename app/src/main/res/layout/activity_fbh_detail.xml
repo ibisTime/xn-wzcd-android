@@ -63,6 +63,17 @@
 
             </com.cdkj.wzcd.view.MyNormalLayout>
 
+            <com.cdkj.wzcd.view.MyEditLayout
+                android:id="@+id/myEl_forceInsurance_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:txt_input_title="交强险"
+                app:txt_input_hint="请输入交强险"
+                >
+
+            </com.cdkj.wzcd.view.MyEditLayout>
+
             <View style="@style/style_split_line_horizontal_broad" />
 
             <com.cdkj.wzcd.view.MyEditLayout

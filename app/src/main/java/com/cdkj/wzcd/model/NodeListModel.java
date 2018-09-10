@@ -302,7 +302,25 @@ public class NodeListModel {
     private String ghIdNo;
     private String fbhStatus;
     private String carColor;
+    private String forceInsurancePdf;
+    private String driceLicense;
     private Credit credit;
+
+    public String getDriceLicense() {
+        return driceLicense;
+    }
+
+    public void setDriceLicense(String driceLicense) {
+        this.driceLicense = driceLicense;
+    }
+
+    public String getForceInsurancePdf() {
+        return forceInsurancePdf;
+    }
+
+    public void setForceInsurancePdf(String forceInsurancePdf) {
+        this.forceInsurancePdf = forceInsurancePdf;
+    }
 
     public String getCarColor() {
         return carColor;
@@ -1973,6 +1991,15 @@ public class NodeListModel {
         private String azUser;
         private String remark;
         private String budgetOrder;
+        private String azLocationRemark;
+
+        public String getAzLocationRemark() {
+            return azLocationRemark;
+        }
+
+        public void setAzLocationRemark(String azLocationRemark) {
+            this.azLocationRemark = azLocationRemark;
+        }
 
         public String getAzLocation() {
             return azLocation;

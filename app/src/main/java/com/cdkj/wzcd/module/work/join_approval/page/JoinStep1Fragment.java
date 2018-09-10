@@ -331,7 +331,10 @@ public class JoinStep1Fragment extends BaseLazyFragment {
                 mBinding.mySlUserType.setTextByRequest("个人");
             } else if (TextUtils.equals("2", data.getCustomerType())) {
                 mBinding.mySlUserType.setTextByRequest("企业");
+            }else{
+                mBinding.mySlUserType.setTextByRequest("");
             }
+
             int LoanPeriods = (int) Double.parseDouble(data.getLoanPeriods() == null ? "0" : data.getLoanPeriods());
             mBinding.mySlLoanPeriod.setTextByRequestByKey(LoanPeriods + "");
             mBinding.mySlRateType.setTextByRequestByKey(data.getRateType());
@@ -369,6 +372,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
                 model.setCode(bean.getCode());
                 model.setGpsDevNo(bean.getGpsDevNo());
                 model.setAzLocation(bean.getAzLocation());
+                model.setAzLocationRemark(bean.getAzLocationRemark());
 
                 mList.add(model);
             }
@@ -432,6 +436,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
                 model.setCode(bean.getCode());
                 model.setGpsDevNo(bean.getGpsDevNo());
                 model.setAzLocation(bean.getAzLocation());
+                model.setAzLocationRemark(bean.getAzLocationRemark());
 
                 mList.add(model);
             }

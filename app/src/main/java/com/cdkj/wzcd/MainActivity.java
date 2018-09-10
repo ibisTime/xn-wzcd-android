@@ -350,7 +350,7 @@ public class MainActivity extends AbsBaseLoadActivity {
                     Log.i("pppppp", "onActivityResult: 返回的数据为:" + result);
 
                     setBarCode(result);
-                    setQRCode(result);
+//                    setQRCode(result);
 
 
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
@@ -413,10 +413,9 @@ public class MainActivity extends AbsBaseLoadActivity {
             UITipDialog.showInfo(this, "解析失败,请扫描正确的条形码");
             return;
         }
-//        GA20180
         String type = result.substring(0, 1);
         String code = result.substring(1, result.length());//从指定位置起截取到最后
-//        Log.i(TAG, "setBarCode: 单参截取" + result.substring(1));//从指定位置起截取到最后
+//        Log.i(TAG, "setBarCode: 单参截取" + result.substring(1));//单参数从指定位置起截取到最后
 //        Log.i(TAG, "setBarCode: result.length()的长度截取" + code);
 //        Log.i(TAG, "setBarCode: result.length()-1的长度截取" + result.substring(1, result.length()-1));
         ArrayList<String> codeList = new ArrayList<>();
