@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -65,6 +66,7 @@ public class AdvanceFundListActivity extends AbsRefreshListActivity {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("currentUserCompanyCode", SPUtilHelper.getUserCompanyCode());
 //        map.put("operator", SPUtilHelper.getUserId());
 
         if (isShowDialog) showLoadingDialog();

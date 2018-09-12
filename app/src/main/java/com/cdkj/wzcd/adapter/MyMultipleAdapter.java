@@ -108,7 +108,6 @@ public class MyMultipleAdapter extends BaseQuickAdapter<String, BaseViewHolder> 
 //                        photoPreviewIntentBuilder.previewPhoto("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1536235318&di=40753b5008a15bdf31dd8daf6681f59e&src=http://img0.pconline.com.cn/pconline/1703/30/9027001_53_thumb.jpg");
                         photoPreviewIntentBuilder.previewPhoto(MyCdConfig.QINIU_URL + item);
                         mContext.startActivity(photoPreviewIntentBuilder.build());
-
                     }
                 });
 
@@ -116,11 +115,12 @@ public class MyMultipleAdapter extends BaseQuickAdapter<String, BaseViewHolder> 
                     int index = helper.getAdapterPosition();
                     // 这里有时会返回-1造成数据下标越界,具体可参考getAdapterPosition()源码，
                     // 通过源码分析应该是bindViewHolder()暂未绘制完成导致
-                    if (index != RecyclerView.NO_POSITION) {
-                        getData().remove(index);
-                        notifyItemRemoved(index);
-                        notifyItemRangeChanged(index, getData().size());
-                    }
+                    if (index < getData().size())
+                        if (index != RecyclerView.NO_POSITION) {
+                            getData().remove(index);
+                            notifyItemRemoved(index);
+                            notifyItemRangeChanged(index, getData().size());
+                        }
                 });
             }
 

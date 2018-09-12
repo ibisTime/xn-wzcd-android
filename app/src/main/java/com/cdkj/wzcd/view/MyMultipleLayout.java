@@ -37,12 +37,14 @@ public class MyMultipleLayout extends LinearLayout {
     private int mRequestCode;
     private String tvTitle;
 
+
     public static String ADD = "add";
 
     private List<String> mList = new ArrayList<>();
 
     private MyMultipleAdapter adapter;
     private boolean isadd = true;//是否有添加功能
+    boolean isFrist = true;//是不是第一次
 
     public MyMultipleLayout(Context context) {
         this(context, null);
@@ -192,11 +194,17 @@ public class MyMultipleLayout extends LinearLayout {
      * @return
      */
     public String getListData() {
-        if (isadd) {
-            if (mList.size() > 0) {
-                mList.remove(0);
+        //是否是第一次调用  第一次调用才会remove(0);   否则如果在activity中多次调用的话会每次都remove(0);   导致数据丢失
+        if (isFrist) {
+            if (isadd) {
+                if (mList.size() > 0) {
+                    mList.remove(0);
+                }
             }
+        } else {
+            isFrist = false;
         }
+
 
         return StringUtils.listToString(mList, "||");
     }

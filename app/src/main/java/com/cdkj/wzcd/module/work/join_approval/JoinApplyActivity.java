@@ -230,7 +230,6 @@ public class JoinApplyActivity extends AbsBaseLoadActivity {
         fragments.add(JoinStep2Fragment.getInstance(code));
         fragments.add(JoinStep3Fragment.getInstance(code));
 
-
         fragments.add(JoinStep11Fragment.getInstance(code));
 
 

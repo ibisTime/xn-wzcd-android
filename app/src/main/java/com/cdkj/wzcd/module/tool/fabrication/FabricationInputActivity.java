@@ -120,7 +120,7 @@ public class FabricationInputActivity extends AbsBaseLoadActivity {
 
         showLoadingDialog();
 
-        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632210", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.getBaseAPiService().codeRequest("632211", StringUtils.getJsonToString(map));
         addCall(call);
 
         call.enqueue(new BaseResponseModelCallBack<CodeModel>(this) {

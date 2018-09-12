@@ -11,7 +11,6 @@ import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.module.work.cldy.CldyApplyActivity;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.cdkj.wzcd.util.UserHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -48,8 +47,8 @@ public class CldyListAdapter extends BaseQuickAdapter<NodeListModel, BaseViewHol
         mBinding.myItemCblConfirm.setContent("","");
 
         if (UserHelper.isZHRY()){
-
-            if (TextUtils.equals(item.getCurNodeCode(),"002_21")){ // 回录提交银行
+//            "pledgeCurNodeCode":"008_05",
+            if (TextUtils.equals(item.getPledgeCurNodeCode(),"008_04")){ // 回录提交银行
                 mBinding.myItemCblConfirm.setRightTextAndListener("提交", view -> {
                     CldyApplyActivity.open(mContext, item.getCode());
                 });

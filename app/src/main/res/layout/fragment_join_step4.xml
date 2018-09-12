@@ -12,28 +12,96 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <LinearLayout
+                android:id="@+id/ll_applyBirthAddress"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="*申请人户籍地"
+                    android:textColor="@color/fontColor_gray"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_applyBirthAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请选择省市区"
+                    android:textColor="#333333"
+                    android:textColorHint="@color/fontColor_hint"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View style="@style/style_split_line_horizontal" />
+
+
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_applyBirthAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入申请人户籍地"
-                app:txt_input_title="*申请人户籍地" />
+                app:txt_input_hint="详细地址"
+                app:txt_input_title="*详细地址" />
+
+            <LinearLayout
+                android:id="@+id/ll_applyNowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="*现住址"
+                    android:textColor="@color/fontColor_gray"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_applyNowAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请选择省市区"
+                    android:textColor="#333333"
+                    android:textColorHint="@color/fontColor_hint"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View style="@style/style_split_line_horizontal" />
+
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_applyNowAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:txt_input_hint="请输入现住地址"
-                app:txt_input_title="*现住地址" />
+                app:txt_input_hint="现住详细地址"
+                app:txt_input_title="*详细地址" />
 
             <com.cdkj.wzcd.view.MySelectLayout
                 android:id="@+id/mySl_houseType"
-                app:txt_select_title="*现住房屋类型"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:txt_select_title="*现住房屋类型" />
 
-            <View
-                style="@style/style_split_line_horizontal_broad"/>
+            <View style="@style/style_split_line_horizontal_broad" />
 
             <com.cdkj.wzcd.view.MyEditLayout
                 android:id="@+id/myEl_ghBirthAddress"

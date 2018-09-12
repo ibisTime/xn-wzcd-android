@@ -83,6 +83,7 @@ public class CldyApplyActivity extends AbsBaseLoadActivity {
 
         map.put("code", code);
 
+
         showLoadingDialog();
 
         Call call = RetrofitUtils.createApi(MyApiServer.class).getNode("632146", StringUtils.getJsonToString(map));

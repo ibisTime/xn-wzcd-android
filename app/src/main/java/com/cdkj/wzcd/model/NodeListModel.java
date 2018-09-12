@@ -173,6 +173,7 @@ public class NodeListModel {
     private String carDealerSubsidy;
     private double bankLoanCs;
     private String companyCode;
+
     private String saleUserId;
     private String applyUserCompany;
     private String applyUserDuty;
@@ -269,6 +270,7 @@ public class NodeListModel {
     private String idKind;
     private String idNo;
     private String curNodeCode;
+    private String pledgeCurNodeCode;
     private String carDealerName;
     private String outCarDealerName;
     private String loanBankName;
@@ -305,6 +307,123 @@ public class NodeListModel {
     private String forceInsurancePdf;
     private String driceLicense;
     private Credit credit;
+    private String applyBirthAddressProvince;
+    private String applyBirthAddressCity;
+    private String applyBirthAddressArea;
+    private String applyNowAddressProvince;
+    private String applyNowAddressCity;
+    private String applyNowAddressArea;
+
+    private String guarantor1IdPicz;
+    private String guarantor1IdPicf;
+    private String guarantor2IdPicz;
+    private String guarantor2IdPicf;
+    private String ghIdPicz;
+    private String ghIdPicf;
+
+    public String getGuarantor1IdPicz() {
+        return guarantor1IdPicz;
+    }
+
+    public void setGuarantor1IdPicz(String guarantor1IdPicz) {
+        this.guarantor1IdPicz = guarantor1IdPicz;
+    }
+
+    public String getGuarantor1IdPicf() {
+        return guarantor1IdPicf;
+    }
+
+    public void setGuarantor1IdPicf(String guarantor1IdPicf) {
+        this.guarantor1IdPicf = guarantor1IdPicf;
+    }
+
+    public String getGuarantor2IdPicz() {
+        return guarantor2IdPicz;
+    }
+
+    public void setGuarantor2IdPicz(String guarantor2IdPicz) {
+        this.guarantor2IdPicz = guarantor2IdPicz;
+    }
+
+    public String getGuarantor2IdPicf() {
+        return guarantor2IdPicf;
+    }
+
+    public void setGuarantor2IdPicf(String guarantor2IdPicf) {
+        this.guarantor2IdPicf = guarantor2IdPicf;
+    }
+
+    public String getGhIdPicz() {
+        return ghIdPicz;
+    }
+
+    public void setGhIdPicz(String ghIdPicz) {
+        this.ghIdPicz = ghIdPicz;
+    }
+
+    public String getGhIdPicf() {
+        return ghIdPicf;
+    }
+
+    public void setGhIdPicf(String ghIdPicf) {
+        this.ghIdPicf = ghIdPicf;
+    }
+
+    public String getApplyBirthAddressProvince() {
+        return applyBirthAddressProvince;
+    }
+
+    public void setApplyBirthAddressProvince(String applyBirthAddressProvince) {
+        this.applyBirthAddressProvince = applyBirthAddressProvince;
+    }
+
+    public String getApplyBirthAddressCity() {
+        return applyBirthAddressCity;
+    }
+
+    public void setApplyBirthAddressCity(String applyBirthAddressCity) {
+        this.applyBirthAddressCity = applyBirthAddressCity;
+    }
+
+    public String getApplyBirthAddressArea() {
+        return applyBirthAddressArea;
+    }
+
+    public void setApplyBirthAddressArea(String applyBirthAddressArea) {
+        this.applyBirthAddressArea = applyBirthAddressArea;
+    }
+
+    public String getApplyNowAddressProvince() {
+        return applyNowAddressProvince;
+    }
+
+    public void setApplyNowAddressProvince(String applyNowAddressProvince) {
+        this.applyNowAddressProvince = applyNowAddressProvince;
+    }
+
+    public String getApplyNowAddressCity() {
+        return applyNowAddressCity;
+    }
+
+    public void setApplyNowAddressCity(String applyNowAddressCity) {
+        this.applyNowAddressCity = applyNowAddressCity;
+    }
+
+    public String getApplyNowAddressArea() {
+        return applyNowAddressArea;
+    }
+
+    public void setApplyNowAddressArea(String applyNowAddressArea) {
+        this.applyNowAddressArea = applyNowAddressArea;
+    }
+
+    public String getPledgeCurNodeCode() {
+        return pledgeCurNodeCode;
+    }
+
+    public void setPledgeCurNodeCode(String pledgeCurNodeCode) {
+        this.pledgeCurNodeCode = pledgeCurNodeCode;
+    }
 
     public String getDriceLicense() {
         return driceLicense;

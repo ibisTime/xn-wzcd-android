@@ -87,6 +87,7 @@ public class BankLoanCommitActivity extends AbsBaseLoadActivity {
         Map<String, String> map = RetrofitUtils.getRequestMap();
 
         map.put("code", code);
+        //解除抵押提交银行  630577  oss
 
         showLoadingDialog();
 

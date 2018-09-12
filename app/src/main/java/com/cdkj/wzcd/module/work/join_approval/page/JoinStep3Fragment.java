@@ -252,6 +252,7 @@ public class JoinStep3Fragment extends BaseLazyFragment {
                 //二手车  必填
 
                 if (TextUtils.isEmpty(mBinding.myMlDriceLicense.getListData())) {
+
                     checkFail = mBinding.mySlIsDriceLicense.getTitle();
                     return false;
                 }

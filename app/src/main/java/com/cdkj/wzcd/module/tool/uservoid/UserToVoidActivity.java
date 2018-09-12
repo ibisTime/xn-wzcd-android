@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -76,6 +77,7 @@ public class UserToVoidActivity extends AbsRefreshListActivity<UserToVoidBean> {
         curNodeCodeList.add("012_03");
         curNodeCodeList.add("012_04");
         map.put("curNodeCodeList", curNodeCodeList);
+        map.put("currentUserCompanyCode", SPUtilHelper.getUserCompanyCode());
 
 
 //        code:632148

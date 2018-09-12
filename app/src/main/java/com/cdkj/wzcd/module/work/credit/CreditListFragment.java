@@ -118,6 +118,7 @@ public class CreditListFragment extends AbsRefreshListFragment {
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
         map.put("companyCode", SPUtilHelper.getUserCompanyCode());
+        map.put("currentUserCompanyCode", SPUtilHelper.getUserCompanyCode());
 
 //        if (UserHelper.isYWY())
 //            map.put("saleUserId", SPUtilHelper.getUserId());

@@ -11,7 +11,6 @@ import com.cdkj.wzcd.databinding.ItemJcdyListBinding;
 import com.cdkj.wzcd.model.RepaymentModel;
 import com.cdkj.wzcd.module.work.bank_loan.BankLoanCommitActivity;
 import com.cdkj.wzcd.util.NodeHelper;
-import com.cdkj.wzcd.util.RequestUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -45,8 +44,10 @@ public class JcdyListAdapter extends BaseQuickAdapter<RepaymentModel, BaseViewHo
 
         mBinding.myItemCblConfirm.setContent("", "");
 
-        if (TextUtils.equals(item.getBudgetOrder().getCurNodeCode(),"007_01")){ // 驻行人员回录提交放款材料
+//        if (TextUtils.equals(item.getBudgetOrder().getCurNodeCode(),"007_01")){ // 驻行人员回录提交放款材料
+        if (TextUtils.equals(item.getBudgetOrder().getCurNodeCode(),"007_09")){ // 驻行人员回录提交放款材料
             mBinding.myItemCblConfirm.setRightTextAndListener("确认提交银行", view -> {
+                //oss端直接调取接口成功即可 没有信息的录入
                 BankLoanCommitActivity.open(mContext, item.getCode());
             });
         }

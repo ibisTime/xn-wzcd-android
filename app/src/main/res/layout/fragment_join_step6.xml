@@ -14,99 +14,128 @@
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_marryDivorce"
-                app:title="结婚证(离婚证)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="结婚证(离婚证)" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_applyUserHkb"
-                app:title="户口本(主贷本人页)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="户口本(主贷本人页)" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_bankBillPdf"
-                app:title="银行流水"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="银行流水" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_singleProvePdf"
-                app:title="单身证明"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="单身证明" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_incomeProvePdf"
-                app:title="收入证明"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="收入证明" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_liveProvePdf"
-                app:title="居住证明"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="居住证明" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_houseInvoice"
-                app:title="购房发票"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="购房发票" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_buildProvePdf"
-                app:title="自建房证明"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="自建房证明" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_hkbFirstPage"
-                app:title="户口本（首页）"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="户口本（首页）" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_hkbMainPage"
-                app:title="户口本（户主页)"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="户口本（户主页)" />
 
-            <com.cdkj.wzcd.view.MyMultipleLayout
-                android:id="@+id/myMl_guarantor1IdNo"
-                app:title="担保人1身份证"
+            <!--<com.cdkj.wzcd.view.MyMultipleLayout-->
+                <!--android:id="@+id/myMl_guarantor1IdNo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:title="担保人1身份证" />-->
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myMi_guarantor1IdPic"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:isSingle="false"
+                app:txt_image_hint="担保人1身份证(正)"
+                app:txt_image_hint_right="担保人1身份证(反)"
+                app:txt_image_title="担保人1身份证">
+
+            </com.cdkj.wzcd.view.MyImageLayout>
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_guarantor1Hkb"
-                app:title="担保人1户口本"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="担保人1户口本" />
 
-            <com.cdkj.wzcd.view.MyMultipleLayout
-                android:id="@+id/myMl_guarantor2IdNo"
-                app:title="担保人2身份证"
+            <!--<com.cdkj.wzcd.view.MyMultipleLayout-->
+                <!--android:id="@+id/myMl_guarantor2IdNo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:title="担保人2身份证" />-->
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myMi_guarantor2IdPic"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:isSingle="false"
+                app:txt_image_hint="担保人2身份证(正)"
+                app:txt_image_hint_right="担保人2身份证(反)"
+                app:txt_image_title="担保人2身份证" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_guarantor2Hkb"
-                app:title="担保人2户口本"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="担保人2户口本" />
 
-            <com.cdkj.wzcd.view.MyMultipleLayout
-                android:id="@+id/myMl_ghID"
-                app:title="共还人身份证"
+            <!--<com.cdkj.wzcd.view.MyMultipleLayout-->
+                <!--android:id="@+id/myMl_ghID"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:title="共还人身份证" />-->
+
+            <com.cdkj.wzcd.view.MyImageLayout
+                android:id="@+id/myMi_ghIdPic"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:isSingle="false"
+                app:txt_image_hint="共还人身份证(正)"
+                app:txt_image_hint_right="共还人身份证(反)"
+                app:txt_image_title="共还人身份证" />
 
             <com.cdkj.wzcd.view.MyMultipleLayout
                 android:id="@+id/myMl_ghHkb"
-                app:title="共还人户口本"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:title="共还人户口本" />
 
         </LinearLayout>
 

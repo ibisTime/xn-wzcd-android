@@ -36,7 +36,7 @@ public class RetrofitUtils {
 
         if (retrofitInstance == null) {
             retrofitInstance = new Retrofit.Builder()
-                    .baseUrl(getBaseURL(DEBUG))
+                    .baseUrl(getBaseURL(TEST))
                     .client(OkHttpUtils.getInstance())
                     .addConverterFactory(FastJsonConverter.create())
 //                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -97,6 +97,7 @@ public class RetrofitUtils {
         Map<String, String> map = new HashMap();
         map.put("token", SPUtilHelper.getUserToken());
         map.put("roleCode", SPUtilHelper.getRoleCode());
+
         return map;
     }
 

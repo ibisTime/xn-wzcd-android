@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
@@ -77,6 +78,7 @@ public class FabricationListActivity extends AbsRefreshListActivity {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("currentUserCompanyCode", SPUtilHelper.getUserCompanyCode());
 
         if (isShowDialog) showLoadingDialog();
 

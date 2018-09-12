@@ -1,8 +1,10 @@
 package com.cdkj.wzcd.module.work.join_approval.page;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.cdkj.wzcd.databinding.FragmentJoinStep4Binding;
 import com.cdkj.wzcd.model.NodeListModel;
 import com.cdkj.wzcd.model.event.BudgetCheckModel;
 import com.cdkj.wzcd.module.work.join_approval.JoinApplyActivity;
+import com.lljjcoder.citypickerview.widget.CityPicker;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,6 +35,16 @@ public class JoinStep4Fragment extends BaseLazyFragment {
     private FragmentJoinStep4Binding mBinding;
 
     private NodeListModel data;
+    private CityPicker cityPicker;
+    private String mProvince;
+    private String mCity;
+    private String mDistrict;
+    private String applyBirthAddressProvince;
+    private String applyBirthAddressCity;
+    private String applyBirthAddressArea;
+    private String applyNowAddressProvince;
+    private String applyNowAddressCity;
+    private String applyNowAddressArea;
 
     public static JoinStep4Fragment getInstance(String code) {
         JoinStep4Fragment fragment = new JoinStep4Fragment();
@@ -53,10 +66,81 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
         data = ((JoinApplyActivity) mActivity).mData;
 
+        initOnclick();
+        initDefalutAddressInfo();
         initView();
         setView();
 
         return mBinding.getRoot();
+    }
+
+    private void initOnclick() {
+
+
+        mBinding.llApplyBirthAddress.setOnClickListener(view -> {
+            if (cityPicker == null) {
+                initCityPicker();
+            }
+            cityPicker.show();
+
+            //监听方法，获取选择结果
+            cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+                @Override
+                public void onSelected(String... citySelected) {
+                    //省份
+                    mProvince = citySelected[0];
+                    applyBirthAddressProvince = mProvince;
+                    //城市
+                    mCity = citySelected[1];
+                    applyBirthAddressCity = mCity;
+                    //区县（如果设定了两级联动，那么该项返回空）
+                    mDistrict = citySelected[2];
+                    applyBirthAddressArea = mDistrict;
+                    //邮编
+                    String code = citySelected[3];
+
+                    mBinding.tvApplyBirthAddress.setText(mProvince + " " + mCity + " " + mDistrict);
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        });
+
+        mBinding.llApplyNowAddress.setOnClickListener(view -> {
+            if (cityPicker == null) {
+                initCityPicker();
+            }
+            cityPicker.show();
+
+            //监听方法，获取选择结果
+            cityPicker.setOnCityItemClickListener(new CityPicker.OnCityItemClickListener() {
+
+                @Override
+                public void onSelected(String... citySelected) {
+                    //省份
+                    mProvince = citySelected[0];
+                    applyNowAddressProvince = mProvince;
+                    //城市
+                    mCity = citySelected[1];
+                    applyNowAddressCity = mCity;
+                    //区县（如果设定了两级联动，那么该项返回空）
+                    mDistrict = citySelected[2];
+                    applyNowAddressArea = mDistrict;
+                    //邮编
+                    String code = citySelected[3];
+
+                    mBinding.tvApplyNowAddress.setText(mProvince + " " + mCity + " " + mDistrict);
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        });
     }
 
     @Override
@@ -76,8 +160,27 @@ public class JoinStep4Fragment extends BaseLazyFragment {
     }
 
     private void setView() {
+//将之前的地址
+        applyBirthAddressArea=data.getApplyBirthAddressArea();
+        applyBirthAddressCity=data.getApplyBirthAddressCity();
+        applyBirthAddressProvince=data.getApplyBirthAddressProvince();
+        applyNowAddressArea=data.getApplyNowAddressArea();
+        applyNowAddressCity=data.getApplyNowAddressCity();
+        applyNowAddressProvince=data.getApplyNowAddressProvince();
 
         if (((JoinApplyActivity) mActivity).isDetails) {
+
+            mBinding.llApplyBirthAddress.setOnClickListener(null);
+            if (!TextUtils.isEmpty(data.getApplyBirthAddressProvince())) {
+
+                mBinding.tvApplyBirthAddress.setText(data.getApplyBirthAddressProvince() + " " + data.getApplyBirthAddressCity() + " " + data.getApplyBirthAddressArea());
+            }
+            mBinding.llApplyNowAddress.setOnClickListener(null);
+            if (!TextUtils.isEmpty(data.getApplyNowAddressProvince())) {
+
+                mBinding.tvApplyNowAddress.setText(data.getApplyNowAddressProvince() + " " + data.getApplyNowAddressCity() + " " + data.getApplyNowAddressArea());
+            }
+
             mBinding.myElApplyBirthAddress.setTextByRequest(data.getApplyBirthAddress());
             mBinding.myElApplyNowAddress.setTextByRequest(data.getApplyNowAddress());
 
@@ -90,6 +193,14 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
         } else {
 
+            if (!TextUtils.isEmpty(data.getApplyBirthAddressProvince())) {
+
+                mBinding.tvApplyBirthAddress.setText(data.getApplyBirthAddressProvince() + " " + data.getApplyBirthAddressCity() + " " + data.getApplyBirthAddressArea());
+            }
+            if (!TextUtils.isEmpty(data.getApplyNowAddressProvince())) {
+
+                mBinding.tvApplyNowAddress.setText(data.getApplyNowAddressProvince() + " " + data.getApplyNowAddressCity() + " " + data.getApplyNowAddressArea());
+            }
 
             mBinding.myElApplyBirthAddress.setText(data.getApplyBirthAddress());
             mBinding.myElApplyNowAddress.setText(data.getApplyNowAddress());
@@ -118,6 +229,14 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
         if (mBinding.mySlHouseType.check()) {
             checkFail = mBinding.mySlHouseType.getTitle();
+            return false;
+        }
+        if (TextUtils.isEmpty(mBinding.tvApplyBirthAddress.getText())) {
+            checkFail = "请输入申请人户籍地";
+            return false;
+        }
+        if (TextUtils.isEmpty(mBinding.tvApplyNowAddress.getText())) {
+            checkFail = "请输入申请现住地址";
             return false;
         }
 
@@ -173,6 +292,16 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
         Map<String, Object> map = new HashMap<>();
 
+
+        map.put("applyBirthAddressArea", applyBirthAddressArea);
+        map.put("applyBirthAddressCity", applyBirthAddressCity);
+        map.put("applyBirthAddressProvince", applyBirthAddressProvince);
+
+        map.put("applyNowAddressArea", applyNowAddressArea);
+        map.put("applyNowAddressCity", applyNowAddressCity);
+        map.put("applyNowAddressProvince", applyNowAddressProvince);
+
+
         map.put("applyBirthAddress", mBinding.myElApplyBirthAddress.getText());
         map.put("applyNowAddress", mBinding.myElApplyNowAddress.getText());
         map.put("houseType", mBinding.mySlHouseType.getDataKey());
@@ -184,4 +313,42 @@ public class JoinStep4Fragment extends BaseLazyFragment {
 
         return map;
     }
+
+
+    private void initCityPicker() {
+
+        cityPicker = new CityPicker.Builder(mActivity)
+                .textSize(18)
+                .titleBackgroundColor("#ffffff")
+                .titleTextColor("#ffffff")
+                .backgroundPop(0xa0000000)
+                .confirTextColor("#48b0fb")
+                .cancelTextColor("#48b0fb")
+                .province(mProvince)
+                .city(mCity)
+                .district(mDistrict)
+                .textColor(Color.parseColor("#000000"))
+                .provinceCyclic(true)
+                .cityCyclic(false)
+                .districtCyclic(false)
+                .visibleItemsCount(7)
+                .itemPadding(10)
+                .onlyShowProvinceAndCity(false)
+                .build();
+    }
+
+    /**
+     * 初始化选择框默认地址
+     */
+    public void initDefalutAddressInfo() {
+
+        if (!TextUtils.isEmpty(mProvince) && !TextUtils.isEmpty(mCity) && !TextUtils.isEmpty(mDistrict)) {
+
+        } else {
+            mProvince = getString(com.cdkj.baselibrary.R.string.select_province_def);
+            mCity = getString(com.cdkj.baselibrary.R.string.select_city_def);
+            mDistrict = getString(com.cdkj.baselibrary.R.string.select_district_def);
+        }
+    }
+
 }

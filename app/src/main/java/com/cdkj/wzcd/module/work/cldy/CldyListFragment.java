@@ -84,6 +84,7 @@ public class CldyListFragment extends AbsRefreshListFragment {
 
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
+        map.put("currentUserCompanyCode", SPUtilHelper.getUserCompanyCode());
         if (UserHelper.isYWY())
             map.put("saleUserId", SPUtilHelper.getUserId());
 
