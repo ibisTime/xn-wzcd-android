@@ -30,11 +30,8 @@ android {
                 JPUSH_APPKEY : "71e0d4688bcb8b4da3718630", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
-
-
         multiDexEnabled true
     }
-
 
     signingConfigs {
         config {
