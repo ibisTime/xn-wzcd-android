@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="收款账号信息"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="团队账号"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="收款银行名"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_sub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="收款支行名"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="返点信息"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="付款账号信息"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_realName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="户名"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_bankcardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="账号"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="垫资信息"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp"
+                    />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_advanceFundDatetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="垫资日期"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_advanceFundAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
+                    app:title="垫资金额"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_sd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="水单"/>
+
+                <com.cdkj.wzcd.custom.BaseRemarkLayout
+                    android:id="@+id/rl_makeBillNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="垫资说明"/>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

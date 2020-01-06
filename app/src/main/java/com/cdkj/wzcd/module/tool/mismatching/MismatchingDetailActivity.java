@@ -191,8 +191,8 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlWay.setText(getBizTypeByKey(data.getShopWay()));
 
-        mBinding.myNlBillPriceOriginal.setMoneyText(data.getInvoicePrice());
-        mBinding.myNlBillPriceCurrent.setMoneyText(data.getCurrentInvoicePrice());
+        mBinding.myNlBillPriceOriginal.setText(data.getInvoicePrice());
+        mBinding.myNlBillPriceCurrent.setText(data.getCurrentInvoicePrice());
     }
 
 
@@ -207,7 +207,7 @@ public class MismatchingDetailActivity extends AbsBaseLoadActivity {
 
         map.put("code", code);
         map.put("dealType", "1"); //0保存1发送
-        map.put("loanAmount", mBinding.myElLoanAmount.getMoneyText());
+        map.put("loanAmount", mBinding.myElLoanAmount.getText());
         map.put("operator", SPUtilHelper.getUserId());
 
         Call<BaseResponseModel<IsSuccessModes>> call = RetrofitUtils.getBaseAPiService().successRequest("632230", StringUtils.getJsonToString(map));

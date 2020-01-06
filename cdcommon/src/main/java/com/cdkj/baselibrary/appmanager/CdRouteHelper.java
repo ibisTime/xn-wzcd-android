@@ -27,6 +27,7 @@ public class CdRouteHelper {
     //获取数据标志
     public static final String DATA_SIGN = "dataSign";
     public static final String DATA_SIGN2 = "dataSign2";
+    public static final String DATA_SIGN3 = "dataSign3";
     //默认查询
     public static final String IS_FIRST_REQUEST = "isFirstRequest";
 

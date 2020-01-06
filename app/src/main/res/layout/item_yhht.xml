@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="客户姓名"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_idNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="身份证号"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_loanCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="货款编号"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_loanCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="车贷卡号"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_loanAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="money"
+                app:title="贷款金额"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="费率(%)"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_periods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="期数"/>
+
+            <com.cdkj.wzcd.custom.BaseEditLayout
+                android:id="@+id/el_fkDatetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="放款日期"/>
+
+        </LinearLayout>
+
+        <View
+            style="@style/style_split_line_horizontal_broad"/>
+
+    </LinearLayout>
+</layout>

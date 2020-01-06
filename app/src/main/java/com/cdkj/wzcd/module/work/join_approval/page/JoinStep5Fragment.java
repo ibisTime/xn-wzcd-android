@@ -183,7 +183,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
 
             mBinding.myElOilSubsidyKil.setTextByRequest(data.getOilSubsidyKil() + "");
-            mBinding.myNlOilSubsidy.setMoneyText(data.getOilSubsidy());
+            mBinding.myNlOilSubsidy.setText(data.getOilSubsidy());
             mBinding.mySlIsPlatInsure.setTextByRequestByKey(data.getIsPlatInsure());
             mBinding.myElGpsDeduct.setMoneyTextRequest(data.getGpsDeduct());
 
@@ -211,16 +211,16 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
             if (isOutside) {
 
-                mBinding.mySlOtherFee.setMoneyText(data.getOtherFee());
-                mBinding.mySlFxAmount.setMoneyText(data.getFxAmount());
-                mBinding.mySlLyAmount.setMoneyText(data.getLyAmount());
-                mBinding.mySlGpsFee.setMoneyText(data.getGpsFee());
+                mBinding.mySlOtherFee.setText(data.getOtherFee());
+                mBinding.mySlFxAmount.setText(data.getFxAmount());
+                mBinding.mySlLyAmount.setText(data.getLyAmount());
+                mBinding.mySlGpsFee.setText(data.getGpsFee());
 
             }
 
             mBinding.myElOilSubsidyKil.setText(data.getOilSubsidyKil() + "");
             mBinding.mySlIsPlatInsure.setContentByKey(data.getIsPlatInsure());
-            mBinding.myElGpsDeduct.setMoneyText(data.getGpsDeduct());
+            mBinding.myElGpsDeduct.setText(data.getGpsDeduct());
 
             mBinding.mySlGpsFeeWay.setContentByKey(data.getGpsFeeWay());
             mBinding.mySlServiceChargeWay.setContentByKey(data.getServiceChargeWay());
@@ -263,10 +263,10 @@ public class JoinStep5Fragment extends BaseLazyFragment {
             for (DealersModel.CarDealerProtocolListBean bean : model.getCarDealerProtocolList()) {
                 if (TextUtils.equals(bean.getBankCode(), data.getBankSubbranch().getBank().getBankCode())) {
 
-                    mBinding.mySlGpsFee.setMoneyText(!TextUtils.isEmpty(bean.getGpsFee()) ? bean.getGpsFee() : RequestUtil.mul(bean.getGpsRate() + "", data.getLoanAmount()));
-                    mBinding.mySlLyAmount.setMoneyText(!TextUtils.isEmpty(bean.getLyAmountFee()) ? bean.getLyAmountFee() : RequestUtil.mul(bean.getLyAmountRate() + "", data.getLoanAmount()));
-                    mBinding.mySlFxAmount.setMoneyText(!TextUtils.isEmpty(bean.getAssureFee()) ? bean.getAssureFee() : RequestUtil.mul(bean.getAssureRate() + "", data.getLoanAmount()));
-                    mBinding.mySlOtherFee.setMoneyText(!TextUtils.isEmpty(bean.getOtherFee()) ? bean.getOtherFee() : RequestUtil.mul(bean.getOtherRate() + "", data.getLoanAmount()));
+                    mBinding.mySlGpsFee.setText(!TextUtils.isEmpty(bean.getGpsFee()) ? bean.getGpsFee() : RequestUtil.mul(bean.getGpsRate() + "", data.getLoanAmount()));
+                    mBinding.mySlLyAmount.setText(!TextUtils.isEmpty(bean.getLyAmountFee()) ? bean.getLyAmountFee() : RequestUtil.mul(bean.getLyAmountRate() + "", data.getLoanAmount()));
+                    mBinding.mySlFxAmount.setText(!TextUtils.isEmpty(bean.getAssureFee()) ? bean.getAssureFee() : RequestUtil.mul(bean.getAssureRate() + "", data.getLoanAmount()));
+                    mBinding.mySlOtherFee.setText(!TextUtils.isEmpty(bean.getOtherFee()) ? bean.getOtherFee() : RequestUtil.mul(bean.getOtherRate() + "", data.getLoanAmount()));
 
                     isAdvanceFund = ((JoinApplyActivity) mActivity).getIsAdvanceFund();
 
@@ -298,10 +298,10 @@ public class JoinStep5Fragment extends BaseLazyFragment {
             return;
 
         if (TextUtils.equals(mBinding.mySlServiceChargeWay.getDataKey(), "2")) { // 按揭款
-            skhsxf = Double.parseDouble(mBinding.mySlGpsFee.getMoneyText())
-                    + Double.parseDouble(mBinding.mySlLyAmount.getMoneyText())
-                    + Double.parseDouble(mBinding.mySlFxAmount.getMoneyText())
-                    + Double.parseDouble(mBinding.mySlOtherFee.getMoneyText());
+            skhsxf = Double.parseDouble(mBinding.mySlGpsFee.getText())
+                    + Double.parseDouble(mBinding.mySlLyAmount.getText())
+                    + Double.parseDouble(mBinding.mySlFxAmount.getText())
+                    + Double.parseDouble(mBinding.mySlOtherFee.getText());
         } else {
             skhsxf = 0;
         }
@@ -311,7 +311,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
             return;
 
         if (TextUtils.equals(mBinding.mySlGpsFeeWay.getDataKey(), "2")) { // 按揭款
-            gpsf = Double.parseDouble(mBinding.mySlGpsFee.getMoneyText());
+            gpsf = Double.parseDouble(mBinding.mySlGpsFee.getText());
         } else {
             gpsf = 0;
         }
@@ -381,17 +381,17 @@ public class JoinStep5Fragment extends BaseLazyFragment {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("oilSubsidy", mBinding.myNlOilSubsidy.getMoneyText());
+        map.put("oilSubsidy", mBinding.myNlOilSubsidy.getText());
         map.put("oilSubsidyKil", mBinding.myElOilSubsidyKil.getText());
         map.put("isPlatInsure", mBinding.mySlIsPlatInsure.getDataKey());
         map.put("gpsDeduct", mBinding.myElGpsDeduct.getText());
         map.put("gpsFeeWay", mBinding.mySlGpsFeeWay.getDataKey());
         map.put("serviceChargeWay", mBinding.mySlServiceChargeWay.getDataKey());
 
-        map.put("gpsFee", mBinding.mySlGpsFee.getMoneyText());
-        map.put("lyAmount", mBinding.mySlLyAmount.getMoneyText());
-        map.put("fxAmount", mBinding.mySlFxAmount.getMoneyText());
-        map.put("otherFee", mBinding.mySlOtherFee.getMoneyText());
+        map.put("gpsFee", mBinding.mySlGpsFee.getText());
+        map.put("lyAmount", mBinding.mySlLyAmount.getText());
+        map.put("fxAmount", mBinding.mySlFxAmount.getText());
+        map.put("otherFee", mBinding.mySlOtherFee.getText());
 
 
         List<NodeListModel.RepointDetailListBean> list = new ArrayList<>();
@@ -418,7 +418,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         call.enqueue(new BaseResponseModelCallBack<SystemParameterModel>(mActivity) {
             @Override
             protected void onSuccess(SystemParameterModel model, String SucMessage) {
-                mBinding.myElGpsDeduct.setMoneyText(RequestUtil.mul(data.getLoanAmount(), model.getCvalue()));
+                mBinding.myElGpsDeduct.setText(RequestUtil.mul(data.getLoanAmount(), model.getCvalue()));
             }
 
             @Override
@@ -444,7 +444,7 @@ public class JoinStep5Fragment extends BaseLazyFragment {
         call.enqueue(new BaseResponseModelCallBack<SystemParameterModel>(mActivity) {
             @Override
             protected void onSuccess(SystemParameterModel model, String SucMessage) {
-                mBinding.myNlOilSubsidy.setMoneyText(RequestUtil.mul(data.getLoanAmount(), model.getCvalue()));
+                mBinding.myNlOilSubsidy.setText(RequestUtil.mul(data.getLoanAmount(), model.getCvalue()));
             }
 
             @Override

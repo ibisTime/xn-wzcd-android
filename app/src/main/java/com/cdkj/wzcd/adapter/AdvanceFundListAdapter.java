@@ -39,7 +39,7 @@ public class AdvanceFundListAdapter extends BaseQuickAdapter<AdvanceFundModel, B
         mBinding.myIlName.setText(item.getBudgetOrder().getCustomerName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getBudgetOrder().getShopWay()));
 
-        mBinding.myIlAmount.setMoneyText(item.getBudgetOrder().getLoanAmount());
+        mBinding.myIlAmount.setText(item.getBudgetOrder().getLoanAmount());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getIsAdvanceFund(), "1") ? "是" : "否");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getBudgetOrder().getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 

@@ -48,7 +48,7 @@ public class CreditListAdapter extends BaseQuickAdapter<CreditModel, BaseViewHol
 
         if (item.getCreditUser() != null)
             mBinding.myIlName.setText(item.getCreditUser().getUserName());
-        mBinding.myIlAmount.setMoneyText(item.getLoanAmount());
+        mBinding.myIlAmount.setText(item.getLoanAmount());
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getApplyDatetime(), DateUtil.DEFAULT_DATE_FMT));
 
         BankHelper.getValueOnTheKey(mContext, item.getLoanBankCode(), mBinding.myIlBank, null);

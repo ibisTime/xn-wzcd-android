@@ -24,9 +24,11 @@ public class BanksModel  {
      * updater : U201807171419188821682
      */
 
+
+    private String code;
     private String bankCode;
     private String bankName;
-    private String code;
+    private String subbranch;
     private double rate12;
     private double rate18;
     private double rate24;
@@ -35,6 +37,14 @@ public class BanksModel  {
     private String updateDatetime;
     private String updater;
     private List<BankRateListBean> bankRateList;
+
+    public String getSubbranch() {
+        return subbranch;
+    }
+
+    public void setSubbranch(String subbranch) {
+        this.subbranch = subbranch;
+    }
 
     public String getBankCode() {
         return bankCode;

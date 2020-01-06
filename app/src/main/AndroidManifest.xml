@@ -20,7 +20,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -115,6 +115,35 @@
         <activity android:name=".module.work.credit.audit.AuditOneActivity" />
         <activity android:name=".module.work.credit.audit.AuditCourtNetwork" />
         <activity android:name=".module.work.bank_loan.SendingLoanListActivity"></activity>
+        <activity android:name=".MainActivity2"/>
+        <activity android:name=".main.credit.module.zrzl.ZrzlActivity"/>
+        <activity android:name=".main.credit.module.zrzl.CarBrandActivity"/>
+        <activity android:name=".main.credit.CreditPageActivity"/>
+        <activity android:name=".main.credit.module.zrsh.ZrshActivity"/>
+        <activity android:name=".main.credit.module.yksq.YksqActivity"/>
+        <activity android:name=".main.credit.module.zrzl.step.dkrxx.StepDkrxxActivity"/>
+        <activity android:name=".main.credit.module.zrzl.step.dkrxx.StepDkrxxIdActivity"/>
+        <activity android:name=".main.credit.module.zrzl.step.dkrxx.StepDkrxxInfoActivity"/>
+        <activity android:name=".main.credit.module.zrzl.step.dkrxx.StepDkrxxInfoFeiActivity"/>
+        <activity android:name=".main.credit.module.yksh.YkshActivity"/>
+        <activity android:name=".main.credit.module.yhtj.YhtjActivity"/>
+        <activity android:name=".main.credit.module.zdhl.ZdhlActivity"/>
+        <activity android:name=".main.credit.module.yhsj.YhsjActivity"/>
+        <activity android:name=".main.credit.module.rd.RdActivity"/>
+        <activity android:name=".main.credit.module.qrsk.QrskActivity"/>
+        <activity android:name=".main.credit.module.qrdy.QrdyActivity"/>
+        <activity android:name=".main.credit.module.lrfk.LrfkActivity"/>
+        <activity android:name=".main.credit.module.fsdy.FsdyActivity"/>
+        <activity android:name=".main.credit.module.dzhl.DzhlActivity"/>
+        <activity android:name=".main.credit.module.ljdj.LjdjActivity"/>
+        <activity android:name=".main.credit.module.djcz.DjczActivity"/>
+        <activity android:name=".main.credit.module.lrfk.YhhtActivity"/>
+        <activity android:name=".main.credit.module.yksh.RwglActivity"/>
+        <activity android:name=".main.credit.module.yksh.RwActivity"/>
+        <activity android:name=".main.credit.CreditActivity"/>
+        <activity android:name=".main.credit.module.zrzl.detail.DetailSdActivity"/>
+        <activity android:name=".main.message.MessageActivity"/>
+        <activity android:name=".main.credit.CreditPledgePageActivity"/>
     </application>
 
 </manifest>

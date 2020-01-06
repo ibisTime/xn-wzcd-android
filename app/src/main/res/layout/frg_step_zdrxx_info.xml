@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_education"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="education"
+                    app:title="教育程度"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_nowAddressPCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="住宅"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/nowAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="nowAddress"
+                    app:title="住宅详细地址"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_nowAddressMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="nowAddressMobile"
+                    app:title="住宅电话"/>
+
+                <com.cdkj.wzcd.custom.BaseDateLayout
+                    android:id="@+id/dl_nowAddressDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dateType="ym"
+                    app:field="nowAddressDate"
+                    app:title="入住日期"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_nowAddressState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="nowAddressState"
+                    app:title="住宅状况"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_marryState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="marryState"
+                    app:title="婚姻状况"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_nowHouseType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="nowHouseType"
+                    app:title="住房类型"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_companyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="companyName"
+                    app:title="工作单位"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_companyPCA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="单位地址"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/sl_companyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="companyAddress"
+                    app:title="单位详细地址"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_workCompanyProperty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="workCompanyProperty"
+                    app:title="单位性质"/>
+
+                <com.cdkj.wzcd.custom.BaseDateLayout
+                    android:id="@+id/dl_workDatetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dateType="ym"
+                    app:field="workDatetime"
+                    app:title="何时进入单位"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="position"
+                    app:title="职业"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_yearIncome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="yearIncome"
+                    app:title="月收入"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_presentJobYears"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="presentJobYears"
+                    app:title="现职年数"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_permanentType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="permanentType"
+                    app:title="常住类型"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_btn_bg_std"
+                android:text="确定"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

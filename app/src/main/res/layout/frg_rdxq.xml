@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_enterCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="入档编号"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_enterLocationName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="存放位置"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_insuranceCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="保险公司"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_syxDateStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="商业险起"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_syxDateEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="商业险止"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_advanceContract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="垫资合同"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_guarantorContract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="担保和反担保合同"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_nodeFileList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="抵押合同"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="其他材料"/>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

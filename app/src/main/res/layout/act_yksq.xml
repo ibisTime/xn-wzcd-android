@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="团队账号"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="收款银行名"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_sub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="收款支行名"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="返点信息"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/btn_confirm"
+            app:txt_confirm_content="返回"
+            app:txt_confirm_content_right="确定"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+
+    </LinearLayout>
+</layout>

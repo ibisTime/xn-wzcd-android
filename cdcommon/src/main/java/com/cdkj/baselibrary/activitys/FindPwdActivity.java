@@ -10,6 +10,7 @@ import android.view.View;
 import com.cdkj.baselibrary.R;
 import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
+import com.cdkj.baselibrary.databinding.ActivityFindPasswordBinding;
 import com.cdkj.baselibrary.databinding.ActivityModifyPasswordBinding;
 import com.cdkj.baselibrary.interfaces.SendCodeInterface;
 import com.cdkj.baselibrary.interfaces.SendPhoneCodePresenter;
@@ -29,7 +30,7 @@ import retrofit2.Call;
  */
 public class FindPwdActivity extends AbsBaseLoadActivity implements SendCodeInterface {
 
-    private ActivityModifyPasswordBinding mBinding;
+    private ActivityFindPasswordBinding mBinding;
 
     private String mPhoneNumber;
 
@@ -52,7 +53,7 @@ public class FindPwdActivity extends AbsBaseLoadActivity implements SendCodeInte
 
     @Override
     public View addMainView() {
-        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_modify_password, null, false);
+        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_find_password, null, false);
         return mBinding.getRoot();
     }
 

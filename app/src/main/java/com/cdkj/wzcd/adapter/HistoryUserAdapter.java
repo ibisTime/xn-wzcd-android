@@ -40,7 +40,7 @@ public class HistoryUserAdapter extends BaseQuickAdapter<RepaymentModel, BaseVie
 
         mBinding.myIlName.setText(item.getUser().getRealName());
         mBinding.myIlType.setText(DataDictionaryHelper.getBizTypeByKey(item.getBudgetOrder().getBizType()));
-        mBinding.myIlAmount.setMoneyText(item.getLoanAmount());
+        mBinding.myIlAmount.setText(item.getLoanAmount());
         mBinding.myIlBank.setText(item.getLoanBankName());
         mBinding.myIlAdvanceFund.setText(TextUtils.equals(item.getBudgetOrder().getIsAdvanceFund(),"1") ? "已垫资" : "未垫资");
         mBinding.myIlDateTime.setText(DateUtil.formatStringData(item.getUpdateDatetime(), DateUtil.DEFAULT_DATE_FMT));

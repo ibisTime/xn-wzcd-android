@@ -122,7 +122,7 @@ public class CalculautorActivity extends AbsBaseLoadActivity {
 //        requestMap.put("carDealerCode", mDealersMode.getCode());//经销商编号
         requestMap.put("loanBankCode", banksModel.getCode());//贷款银行
         requestMap.put("loanPeriods", rateTime.getDkey());//贷款周期
-        requestMap.put("loanAmount", mBinding.mElMoney.getMoneyText());//贷款金额
+        requestMap.put("loanAmount", mBinding.mElMoney.getText());//贷款金额
         requestMap.put("rateType", rateType.getDkey());//利率类型
         requestMap.put("bankRate", rate);//银行利率
 

@@ -45,6 +45,9 @@ import static com.cdkj.baselibrary.utils.BitmapUtils.getImageWidthHeight;
 
 public class QiNiuHelper {
 
+    public static String IMAGE = "image";
+    public static String FILE = "file";
+
     private final String ANDROID = "ANDROID";
     private Context context;
     private ImageCompressInterface mImageCompressInterface;
@@ -73,13 +76,19 @@ public class QiNiuHelper {
      * @param callBack
      * @param url
      */
-    public void uploadSingle(final QiNiuCallBack callBack, final String url, final String token) {
+    public void uploadSingle(final QiNiuCallBack callBack, final String url, final String token,
+            String fileType) {
 
         Configuration config = new Configuration.Builder().build();
 
         final UploadManager uploadManager = new UploadManager(config);
 
-        final String key = ANDROID + timestamp() + getImageWidthHeight(url) + ".jpg";
+        final String key;
+        if (fileType.equals(IMAGE)) {
+            key = ANDROID + timestamp() + getImageWidthHeight(url) + ".jpg";
+        } else {
+            key = ANDROID + timestamp();
+        }
 
         mSubscription.add(Observable.just(url)
                 .subscribeOn(Schedulers.io())
@@ -96,13 +105,15 @@ public class QiNiuHelper {
                     public void accept(byte[] bytes) throws Exception {
 
                         if (bytes == null || bytes.length == 0) {
-                            callBack.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                            callBack.onFal(
+                                    CdApplication.getContext().getString(R.string.upload_pic_fail));
                             return;
                         }
                         uploadManager.put(url, key, token,
                                 new UpCompletionHandler() {
                                     @Override
-                                    public void complete(final String key, final ResponseInfo info, final JSONObject res) {
+                                    public void complete(final String key, final ResponseInfo info,
+                                            final JSONObject res) {
 
                                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                                         if (info != null && info.isOK()) {
@@ -112,7 +123,8 @@ public class QiNiuHelper {
                                                         .observeOn(AndroidSchedulers.mainThread())
                                                         .subscribe(new Consumer<String>() {
                                                             @Override
-                                                            public void accept(String s) throws Exception {
+                                                            public void accept(String s)
+                                                                    throws Exception {
                                                                 callBack.onSuccess(key);
                                                             }
                                                         });
@@ -120,11 +132,13 @@ public class QiNiuHelper {
 
                                         } else {
                                             if (callBack != null) {
-                                                Observable.just(CdApplication.getContext().getString(R.string.qiniu_token_error))
+                                                Observable.just(CdApplication.getContext()
+                                                        .getString(R.string.qiniu_token_error))
                                                         .observeOn(AndroidSchedulers.mainThread())
                                                         .subscribe(new Consumer<String>() {
                                                             @Override
-                                                            public void accept(String s) throws Exception {
+                                                            public void accept(String s)
+                                                                    throws Exception {
                                                                 callBack.onFal(s);
                                                             }
                                                         });
@@ -157,7 +171,8 @@ public class QiNiuHelper {
         Map<String, String> object = new HashMap<>();
         object.put("companyCode", MyCdConfig.COMPANY_CODE);
         object.put("systemCode", MyCdConfig.SYSTEM_CODE);
-        return RetrofitUtils.getBaseAPiService().getQiniuTOken("630091", StringUtils.getJsonToString(object));
+        return RetrofitUtils.getBaseAPiService()
+                .getQiniuTOken("630091", StringUtils.getJsonToString(object));
     }
 
     /**
@@ -170,14 +185,53 @@ public class QiNiuHelper {
         getQiniuToeknRequest().enqueue(new BaseResponseModelCallBack<QiniuGetTokenModel>(context) {
             @Override
             protected void onSuccess(QiniuGetTokenModel mo, String SucMessage) {
-                if (mo == null || TextUtils.isEmpty(mo.getUploadToken()) || TextUtils.isEmpty(filePath)) {
+                if (mo == null || TextUtils.isEmpty(mo.getUploadToken()) || TextUtils
+                        .isEmpty(filePath)) {
                     if (callBack != null) {
-                        callBack.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                        callBack.onFal(
+                                CdApplication.getContext().getString(R.string.upload_pic_fail));
                     }
                     return;
                 }
                 String token = mo.getUploadToken();
-                uploadSingle(callBack, filePath, token);
+                uploadSingle(callBack, filePath, token, IMAGE);
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+                if (callBack != null) {
+                    callBack.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                }
+            }
+
+            @Override
+            protected void onFinish() {
+
+            }
+        });
+
+    }
+
+    /**
+     * 上传单图片
+     *
+     * @param callBack
+     */
+    public void uploadSingleFile(final QiNiuCallBack callBack, final String filePath) {
+
+        getQiniuToeknRequest().enqueue(new BaseResponseModelCallBack<QiniuGetTokenModel>(context) {
+            @Override
+            protected void onSuccess(QiniuGetTokenModel mo, String SucMessage) {
+                if (mo == null || TextUtils.isEmpty(mo.getUploadToken()) || TextUtils
+                        .isEmpty(filePath)) {
+                    if (callBack != null) {
+                        callBack.onFal(
+                                CdApplication.getContext().getString(R.string.upload_pic_fail));
+                    }
+                    return;
+                }
+                String token = mo.getUploadToken();
+                uploadSingleFile(callBack, filePath, token);
             }
 
             @Override
@@ -202,7 +256,8 @@ public class QiNiuHelper {
      * @param dataList
      * @param listListener
      */
-    public void upLoadListPic(final List<String> dataList, final upLoadListImageListener listListener) {
+    public void upLoadListPic(final List<String> dataList,
+            final upLoadListImageListener listListener) {
         if (dataList == null || dataList.isEmpty()) {
             return;
         }
@@ -211,7 +266,8 @@ public class QiNiuHelper {
             protected void onSuccess(QiniuGetTokenModel data, String SucMessage) {
                 if (data == null || TextUtils.isEmpty(data.getUploadToken())) {
                     if (listListener != null) {
-                        listListener.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                        listListener.onFal(CdApplication.getContext()
+                                .getString(R.string.upload_pic_fail));
                     }
                     return;
                 }
@@ -221,7 +277,8 @@ public class QiNiuHelper {
             @Override
             protected void onReqFailure(String errorCode, String errorMessage) {
                 if (listListener != null) {
-                    listListener.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                    listListener
+                            .onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
                 }
             }
 
@@ -239,7 +296,8 @@ public class QiNiuHelper {
      * @param token
      * @param listListener
      */
-    public void upLoadListPic(int index, final List<String> dataList, final String token, final upLoadListImageListener listListener) {
+    public void upLoadListPic(int index, final List<String> dataList, final String token,
+            final upLoadListImageListener listListener) {
         this.upLoadListIndex = index;
         if (TextUtils.isEmpty(token)) {
             if (listListener != null) {
@@ -263,7 +321,8 @@ public class QiNiuHelper {
                     public void accept(byte[] bytes) throws Exception {
                         if (bytes == null || bytes.length == 0) {
                             if (listListener != null) {
-                                listListener.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                                listListener.onFal(CdApplication.getContext()
+                                        .getString(R.string.upload_pic_fail));
                             }
                             return;
                         }
@@ -297,7 +356,8 @@ public class QiNiuHelper {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         if (listListener != null) {
-                            listListener.onError(CdApplication.getContext().getString(R.string.error_unknown));
+                            listListener.onError(
+                                    CdApplication.getContext().getString(R.string.error_unknown));
                         }
                     }
                 }));
@@ -319,7 +379,8 @@ public class QiNiuHelper {
         uploadManager.put(data, key, token,
                 new UpCompletionHandler() {
                     @Override
-                    public void complete(final String key, final ResponseInfo info, final JSONObject res) {
+                    public void complete(final String key, final ResponseInfo info,
+                            final JSONObject res) {
                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                         if (info != null && info.isOK()) {
                             if (callBack != null) {
@@ -335,7 +396,61 @@ public class QiNiuHelper {
 
                         } else {
                             if (callBack != null) {
-                                Observable.just(CdApplication.getContext().getString(R.string.qiniu_token_error))
+                                Observable.just(CdApplication.getContext()
+                                        .getString(R.string.qiniu_token_error))
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Consumer<String>() {
+                                            @Override
+                                            public void accept(String s) throws Exception {
+                                                callBack.onFal(s);
+                                            }
+                                        });
+                            }
+                            Log.i("QiNiu", "Upload Fail");
+                            Log.i("QiNiu", "key=" + key);
+                            Log.i("QiNiu", "res=" + res);
+                            Log.i("QiNiu", "info=" + info);
+                        }
+                    }
+                }, null);
+
+    }
+
+    /**
+     * 图片单张上传
+     *
+     * @param callBack
+     * @param
+     */
+    public void uploadSingleFile(final QiNiuCallBack callBack, final String url, String token) {
+
+        Configuration config = new Configuration.Builder().build();
+        UploadManager uploadManager = new UploadManager(config);
+        String key = ANDROID + timestamp();
+
+        uploadManager.put(url, key, token,
+                new UpCompletionHandler() {
+                    @Override
+                    public void complete(final String key, final ResponseInfo info,
+                            final JSONObject res) {
+                        //res包含hash、key等信息，具体字段取决于上传策略的设置
+                        if (info != null && info.isOK()) {
+                            if (callBack != null) {
+                                Observable.just("")
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Consumer<String>() {
+                                            @Override
+                                            public void accept(String s) throws Exception {
+                                                Log.i("QiNiu", "onSuccess key="+key);
+                                                callBack.onSuccess(key);
+                                            }
+                                        });
+                            }
+
+                        } else {
+                            if (callBack != null) {
+                                Observable.just(CdApplication.getContext()
+                                        .getString(R.string.qiniu_token_error))
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(new Consumer<String>() {
                                             @Override
@@ -372,6 +487,7 @@ public class QiNiuHelper {
 
 
     public interface QiNiuCallBack {
+
         void onSuccess(String key);
 
         void onFal(String info);
@@ -381,6 +497,7 @@ public class QiNiuHelper {
      * 用于实现图片压缩 把图片压缩后返回byte[]用于上传
      */
     public interface ImageCompressInterface {
+
         byte[] onCompress(Context context, String path);
     }
 
@@ -402,6 +519,7 @@ public class QiNiuHelper {
      * 默认图片压缩实现
      */
     class DeflatCompreess implements ImageCompressInterface {
+
         @Override
         public byte[] onCompress(Context context, String path) {
             return BitmapUtils.compressLogoImage(path);

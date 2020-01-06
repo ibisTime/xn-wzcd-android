@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1d1d1d</color>
-    <color name="colorPrimaryDark">#1d1d1d</color>
-    <color name="colorAccent">#1d1d1d</color>
+    <color name="colorPrimary">#028EFF</color>
+    <color name="colorPrimaryDark">#028EFF</color>
+    <color name="colorAccent">#028EFF</color>
 
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
@@ -17,7 +17,7 @@
     <color name="color_myTitleBar_blue">#028eff</color>
     <color name="color_myTitleBar_txt">#484848</color>
 
-    <color name="color_mySquareRow_txt">#666666</color>
+    <color name="color_mySquareRow_txt">#333333</color>
 
     <color name="color_mySelectHorizontal_txt">#333333</color>
 

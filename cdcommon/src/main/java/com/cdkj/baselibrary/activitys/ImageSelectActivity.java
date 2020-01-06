@@ -9,14 +9,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cdkj.baselibrary.R;
+import com.cdkj.baselibrary.base.BaseActivity;
 import com.cdkj.baselibrary.interfaces.CameraPhotoListener;
+import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.utils.CameraHelper;
+import com.cdkj.baselibrary.utils.QiNiuHelper;
 import com.cdkj.baselibrary.utils.ToastUtil;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 打开相机 相册 图片裁剪 功能
  */
-public class ImageSelectActivity extends Activity implements View.OnClickListener, CameraPhotoListener {
+public class ImageSelectActivity extends BaseActivity implements View.OnClickListener,
+        CameraPhotoListener {
+
+    private String eventName;
+    private String cameraType;
 
     private TextView tv_take_capture;// 拍照
     private TextView tv_alumb;// 相册选取
@@ -52,8 +60,19 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
         }
         Intent intent = new Intent(activity, ImageSelectActivity.class);
 
-
         activity.startActivityForResult(intent, requestCode);
+    }
+
+    public static void launch(Activity activity, String eventName, int showType, boolean isSplit, String cameraType) {
+        if (activity == null) {
+            return;
+        }
+        Intent intent = new Intent(activity, ImageSelectActivity.class);
+        intent.putExtra("showType", showType);
+        intent.putExtra("isSplit", isSplit);
+        intent.putExtra("eventName", eventName);
+        intent.putExtra("cameraType", cameraType);
+        activity.startActivity(intent);
     }
 
     public static void launchFragment(Fragment fragment, int photoid) {
@@ -66,7 +85,7 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_image);
         initLayout();
@@ -75,6 +94,8 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
 
     private void initVar() {
         if (getIntent() != null) {
+            cameraType = getIntent().getStringExtra("cameraType");
+            eventName = getIntent().getStringExtra("eventName");
             isSplit = getIntent().getBooleanExtra("isSplit", isSplit); //获取是否裁剪
             switch (getIntent().getIntExtra("showType", 0)) {      //根据参数显示相册按钮还是显示拍照按钮 默认两个都显示
                 case SHOWPIC:
@@ -94,7 +115,7 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
             tv_take_capture.setVisibility(View.VISIBLE);
             tv_alumb.setVisibility(View.VISIBLE);
         }
-        cameraHelper = new CameraHelper(this, this);
+        cameraHelper = new CameraHelper(this, this,cameraType);
         cameraHelper.setSplit(isSplit);
     }
 
@@ -133,7 +154,8 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
 
     //权限申请回调函数
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            int[] grantResults) {
         cameraHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -147,13 +169,17 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
 
     @Override
     public void onPhotoSuccessful(int code, String path) {
-        setResult(Activity.RESULT_OK, new Intent().putExtra(CameraHelper.staticPath, path));
+        if (TextUtils.isEmpty(eventName)) {
+            setResult(Activity.RESULT_OK, new Intent().putExtra(CameraHelper.staticPath, path));
+        } else {
+            upload(path);
+        }
         finish();
     }
 
     @Override
     public void onPhotoFailure(int code, String msg) {
-        if(!TextUtils.isEmpty(msg)){
+        if (!TextUtils.isEmpty(msg)) {
             ToastUtil.show(this, msg);
         }
         finish();
@@ -162,5 +188,22 @@ public class ImageSelectActivity extends Activity implements View.OnClickListene
     @Override
     public void noPermissions(int code) {
         ToastUtil.show(this, getString(R.string.no_camera_permission));
+    }
+
+    public void upload(String path) {
+        EventBus.getDefault().post(new EventBean().setTag("showLoading"));
+
+        new QiNiuHelper(this).uploadSingleFile(new QiNiuHelper.QiNiuCallBack() {
+            @Override
+            public void onSuccess(String key) {
+                EventBus.getDefault().post(new EventBean().setTag("disMissLoading"));
+                EventBus.getDefault().post(new EventBean().setTag(eventName).setValue1(key));
+            }
+
+            @Override
+            public void onFal(String info) {
+                EventBus.getDefault().post(new EventBean().setTag("disMissLoading"));
+            }
+        }, path);
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.cdkj.wzcd.custom.BaseSelectLayout
+            android:id="@+id/sl_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isRequired="true"
+            app:field="code"
+            app:title="GPS"/>
+
+        <com.cdkj.wzcd.custom.BaseImageLayout
+            android:id="@+id/il_azPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isRequired="true"
+            app:field="azPhotos"
+            app:title="GPS图片"/>
+
+        <View
+            style="@style/style_split_line_horizontal_broad"/>
+
+    </LinearLayout>
+</layout>

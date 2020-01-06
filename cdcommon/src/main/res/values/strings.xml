@@ -104,4 +104,6 @@
     <string name="activity_nick_name_hint">请输入昵称</string>
     <string name="activity_nick_success">修改成功</string>
     <string name="activity_nick_name">昵称</string>
+
+    <string name="activity_mobile_title">修改手机号</string>
 </resources>

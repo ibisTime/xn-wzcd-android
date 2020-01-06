@@ -156,7 +156,7 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlLoanAmount.setMoneyText(data.getLoanAmount());
+        mBinding.myNlLoanAmount.setText(data.getLoanAmount());
 
 
         if (data.getBudgetOrderGpsList() != null && data.getBudgetOrderGpsList().size() != 0) {

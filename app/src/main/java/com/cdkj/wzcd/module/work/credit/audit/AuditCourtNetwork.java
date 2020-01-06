@@ -109,29 +109,29 @@ public class AuditCourtNetwork extends AbsBaseLoadActivity {
 
 
         mBinding.myElDkdyCount.setTextByRequest(mResult.getDkdyCount()+"");
-        mBinding.myElDkdyAmount.setMoneyTextByRequest(mResult.getDkdyAmount());
+        mBinding.myElDkdyAmount.setTextByRequest(mResult.getDkdyAmount());
         mBinding.myElDkdy2yearOverTimes.setTextByRequest(mResult.getDkdy2YearOverTimes());
-        mBinding.myElDkdyMaxOverAmount.setMoneyTextByRequest(mResult.getDkdyMaxOverAmount());
-        mBinding.myElDkdyCurrentOverAmount.setMoneyTextByRequest(mResult.getDkdyCurrentOverAmount());
-        mBinding.myElDkdy6monthAvgAmount.setMoneyTextByRequest(mResult.getDkdy6MonthAvgAmount());
+        mBinding.myElDkdyMaxOverAmount.setTextByRequest(mResult.getDkdyMaxOverAmount());
+        mBinding.myElDkdyCurrentOverAmount.setTextByRequest(mResult.getDkdyCurrentOverAmount());
+        mBinding.myElDkdy6monthAvgAmount.setTextByRequest(mResult.getDkdy6MonthAvgAmount());
 
 
         mBinding.myElHkxyUnsettleCount.setTextByRequest(mResult.getHkxyUnsettleCount()+"");
-        mBinding.myElHkxyUnsettleAmount.setMoneyTextByRequest(mResult.getHkxyUnsettleAmount());
+        mBinding.myElHkxyUnsettleAmount.setTextByRequest(mResult.getHkxyUnsettleAmount());
         mBinding.myElHkxy2yearOverTimes.setTextByRequest(mResult.getHkxy2YearOverTimes());
-        mBinding.myElHkxyMonthMaxOverAmount.setMoneyTextByRequest(mResult.getHkxyMonthMaxOverAmount());
-        mBinding.myElHkxyCurrentOverAmount.setMoneyTextByRequest(mResult.getHkxyCurrentOverAmount());
-        mBinding.myElHkxy6monthAvgAmount.setMoneyTextByRequest(mResult.getHkxy6MonthAvgAmount());
+        mBinding.myElHkxyMonthMaxOverAmount.setTextByRequest(mResult.getHkxyMonthMaxOverAmount());
+        mBinding.myElHkxyCurrentOverAmount.setTextByRequest(mResult.getHkxyCurrentOverAmount());
+        mBinding.myElHkxy6monthAvgAmount.setTextByRequest(mResult.getHkxy6MonthAvgAmount());
 
         mBinding.myElXykCount.setTextByRequest(mResult.getXykCount()+"");
-        mBinding.myElXykCreditAmount.setMoneyTextByRequest(mResult.getXykCreditAmount());
-        mBinding.myElXyk6monthUseAmount.setMoneyTextByRequest(mResult.getXyk6MonthUseAmount());
+        mBinding.myElXykCreditAmount.setTextByRequest(mResult.getXykCreditAmount());
+        mBinding.myElXyk6monthUseAmount.setTextByRequest(mResult.getXyk6MonthUseAmount());
         mBinding.myElXyk2yearOverTimes.setTextByRequest(mResult.getXyk2YearOverTimes());
-        mBinding.myElXykMonthMaxOverAmount.setMoneyTextByRequest(mResult.getXykMonthMaxOverAmount());
-        mBinding.myElXykCurrentOverAmount.setMoneyTextByRequest(mResult.getXykCurrentOverAmount());
+        mBinding.myElXykMonthMaxOverAmount.setTextByRequest(mResult.getXykMonthMaxOverAmount());
+        mBinding.myElXykCurrentOverAmount.setTextByRequest(mResult.getXykCurrentOverAmount());
 
         mBinding.myElOutGuaranteesCount.setTextByRequest(mResult.getOutGuaranteesCount()+"");
-        mBinding.myElOutGuaranteesAmount.setMoneyTextByRequest(mResult.getOutGuaranteesAmount());
+        mBinding.myElOutGuaranteesAmount.setTextByRequest(mResult.getOutGuaranteesAmount());
         mBinding.myElOutGuaranteesRemark.setTextByRequest(mResult.getOutGuaranteesRemark());
 
     }

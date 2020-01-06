@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_operator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="operator"
+                    app:isRequired="true"
+                    app:title="贷款人关系"/>
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:title="资料上传"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="身份证信息"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="phone"
+                    app:isRequired="true"
+                    app:title="手机号"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:title="征信结果"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:title="征信说明"/>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="完善主贷人信息"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_btn_bg_std"
+                android:text="确定"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

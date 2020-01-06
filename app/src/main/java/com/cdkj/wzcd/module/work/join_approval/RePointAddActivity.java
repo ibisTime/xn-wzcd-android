@@ -77,7 +77,7 @@ public class RePointAddActivity extends AbsBaseLoadActivity {
                     // 组装数据
                     NodeListModel.RepointDetailListBean model = new NodeListModel.RepointDetailListBean();
                     model.setUseMoneyPurpose("3");
-                    model.setRepointAmount(mBinding.myElRepointAmount.getMoneyText());
+                    model.setRepointAmount(mBinding.myElRepointAmount.getText());
                     model.setCarDealerName(mBinding.myElCarDealerName.getText());
                     model.setAccountName(mBinding.myElAccountName.getText());
                     model.setAccountNO(mBinding.myElAccountNO.getText());
@@ -138,7 +138,7 @@ public class RePointAddActivity extends AbsBaseLoadActivity {
 
     private void setView() {
 
-        mBinding.myElRepointAmount.setMoneyText(model.getRepointAmount());
+        mBinding.myElRepointAmount.setText(model.getRepointAmount());
         mBinding.myElCarDealerName.setText(model.getCarDealerName());
         mBinding.myElAccountNO.setText(model.getAccountNO());
         mBinding.myElOpenBankName.setText(model.getOpenBankName());

@@ -19,6 +19,7 @@ import com.cdkj.baselibrary.interfaces.LoginInterface;
 import com.cdkj.baselibrary.interfaces.LoginPresenter;
 import com.cdkj.baselibrary.model.UserLoginModel;
 import com.cdkj.wzcd.MainActivity;
+import com.cdkj.wzcd.MainActivity2;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ActivitySignInBinding;
 
@@ -42,11 +43,6 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
         Intent intent= new Intent(context, SignInActivity.class);
         intent.putExtra("canOpenMain",canOpenMain);
         context.startActivity(intent);
-    }
-
-    @Override
-    protected boolean canLoadTopTitleView() {
-        return false;
     }
 
     @Override
@@ -76,9 +72,6 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
     }
 
     private void initListener() {
-        mBinding.llFinish.setOnClickListener(view -> {
-            finish();
-        });
 
         //登录
         mBinding.btnConfirm.setOnClickListener(v -> {
@@ -146,7 +139,7 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
         SPUtilHelper.saveUserToken(user.getToken());
         SPUtilHelper.saveUserPhoneNum(mBinding.edtUsername.getText().toString().trim());
 
-        MainActivity.open(this);
+        MainActivity2.open(this);
 
         finish();
     }
@@ -179,7 +172,7 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
     @Override
     protected boolean canFinish() {
         if(canOpenMain){
-            MainActivity.open(this);
+            MainActivity2.open(this);
             finish();
             return false;
         }else{
@@ -190,7 +183,7 @@ public class SignInActivity extends AbsBaseLoadActivity implements LoginInterfac
     @Override
     public void onBackPressed() {
         if(canOpenMain){
-            MainActivity.open(this);
+            MainActivity2.open(this);
             finish();
         }else{
             super.onBackPressed();

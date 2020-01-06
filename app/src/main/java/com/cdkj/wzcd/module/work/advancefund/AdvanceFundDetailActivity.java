@@ -103,7 +103,7 @@ public class AdvanceFundDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlCompanyName.setText(data.getBizCompanyName());
         mBinding.myNlDealers.setText(data.getCarDealerName());
-        mBinding.myNlAmount.setMoneyText(data.getBudgetOrder().getLoanAmount());
+        mBinding.myNlAmount.setText(data.getBudgetOrder().getLoanAmount());
         mBinding.myNlBank.setText(data.getLoanBankName());
         mBinding.myNlCollectBankName.setText(data.getCollectBankName());
         mBinding.myNlNumber.setText(data.getCollectionAccountNo());

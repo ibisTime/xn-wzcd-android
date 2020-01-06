@@ -177,7 +177,7 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
         if (isViweDetails) {  //查看详情状态
             mBinding.myCbConfirm.setVisibility(View.GONE);
-            mBinding.myElCurrentBillPrice.setMoneyTextByRequest(data.getInvoicePrice());
+            mBinding.myElCurrentBillPrice.setTextByRequest(data.getInvoicePrice());
             mBinding.myIlBill.setFlImgByRequest(data.getInvoice());
             mBinding.myIlCertification.setFlImgByRequest(data.getCertification());
             mBinding.myIlJqx.setFlImgByRequest(data.getForceInsurancePdf());
@@ -190,12 +190,12 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
 
         } else {
             mBinding.myCbConfirm.setVisibility(View.VISIBLE);
-            mBinding.myElCurrentBillPrice.setMoneyText(data.getInvoicePrice());
+            mBinding.myElCurrentBillPrice.setText(data.getInvoicePrice());
 
             mBinding.myIlBill.setFlImg(data.getInvoice());
             mBinding.myIlCertification.setFlImg(data.getCertification());
             mBinding.myIlJqx.setFlImg(data.getForceInsurancePdf());
-            mBinding.myElForceInsurancePrice.setMoneyText(data.getForceInsurance());
+            mBinding.myElForceInsurancePrice.setText(data.getForceInsurance());
             mBinding.myIlSyx.setFlImg(data.getBusinessInsurance());
             mBinding.myIlCarRegister.setFlImg(data.getMotorRegCertification());
             mBinding.myIlEndorsement.setFlImg(data.getPdPdf());
@@ -219,7 +219,7 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlWay.setText(getBizTypeByKey(data.getShopWay()));
 
         LogUtil.E("InvoicePrice=" + data.getInvoicePrice());
-        mBinding.myNlBillPrice.setMoneyText(data.getInvoicePrice());
+        mBinding.myNlBillPrice.setText(data.getInvoicePrice());
 
 
     }
@@ -279,11 +279,11 @@ public class FbhDetailActivity extends AbsBaseLoadActivity {
         map.put("operator", SPUtilHelper.getUserId());
         map.put("deliveryDatetime", mBinding.myNlBuyCarDateTime.getText());
         map.put("isRightInvoice", mBinding.mySlIsRight.getDataKey());
-        map.put("currentInvoicePrice", mBinding.myElCurrentBillPrice.getMoneyText());
+        map.put("currentInvoicePrice", mBinding.myElCurrentBillPrice.getText());
         map.put("invoice", mBinding.myIlBill.getFlImgUrl());
         map.put("certification", mBinding.myIlCertification.getFlImgUrl());
         map.put("forceInsurancePdf", mBinding.myIlJqx.getFlImgUrl());
-        map.put("forceInsurance", mBinding.myElForceInsurancePrice.getMoneyText());
+        map.put("forceInsurance", mBinding.myElForceInsurancePrice.getText());
         map.put("businessInsurance", mBinding.myIlSyx.getFlImgUrl());
         map.put("motorRegCertification", mBinding.myIlCarRegister.getFlImgUrl());
         map.put("pdPdf", mBinding.myIlEndorsement.getFlImgUrl());

@@ -131,7 +131,7 @@ public class GpsCancelActivity extends AbsBaseLoadActivity {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlLoanAmount.setMoneyText(data.getLoanAmount());
+        mBinding.myNlLoanAmount.setText(data.getLoanAmount());
 
 
 

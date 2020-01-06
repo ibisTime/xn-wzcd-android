@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_gpsFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="gpsFee"
+                    app:inputType="money"
+                    app:isRequired="true"
+                    app:title="GPS费"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_fxAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="fxAmount"
+                    app:inputType="money"
+                    app:title="担保风险金"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_lyDeposit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="lyDeposit"
+                    app:inputType="money"
+                    app:title="履约押金"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_otherFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="otherFee"
+                    app:inputType="money"
+                    app:title="其他费用"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_loanAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="loanAmount"
+                    app:inputType="money"
+                    app:title="车款1"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_repointAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="repointAmount"
+                    app:inputType="money"
+                    app:title="车款2"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carFunds3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carFunds3"
+                    app:inputType="money"
+                    app:title="车款3"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carFunds4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carFunds4"
+                    app:inputType="money"
+                    app:title="车款4"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carFunds5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carFunds5"
+                    app:inputType="money"
+                    app:title="车款5"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_btn_bg_std"
+                android:text="保存"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

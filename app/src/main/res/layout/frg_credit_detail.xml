@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rightTitle="查看详情"
+            app:title="业务编号"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="主贷人"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="经办银行"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_bizType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="业务种类"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="贷款金额"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_node"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="当前节点"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="开始时间"/>
+
+        <com.cdkj.wzcd.custom.BaseLayout
+            android:id="@+id/bl_saleMan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="对应业务员"/>
+
+        <View
+            style="@style/style_split_line_horizontal_broad"/>
+
+    </LinearLayout>
+</layout>

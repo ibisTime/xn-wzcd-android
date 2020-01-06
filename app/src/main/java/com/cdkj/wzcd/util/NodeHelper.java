@@ -7,6 +7,7 @@ import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.MainActivity;
+import com.cdkj.wzcd.MainActivity2;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.model.NodeModel;
 
@@ -35,13 +36,13 @@ public class NodeHelper {
     }
 
     public static String getNameOnTheCode(String code){
-        if (MainActivity.BASE_NODE_LIST == null || MainActivity.BASE_NODE_LIST.size() == 0)
+        if (MainActivity2.BASE_NODE_LIST == null || MainActivity2.BASE_NODE_LIST.size() == 0)
             return "";
 
         if (TextUtils.isEmpty(code))
             return "";
 
-        for (NodeModel nodeModel : MainActivity.BASE_NODE_LIST){
+        for (NodeModel nodeModel : MainActivity2.BASE_NODE_LIST){
             if (TextUtils.equals(code, nodeModel.getCode()))
                 return nodeModel.getName();
         }

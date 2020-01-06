@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_companyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="companyName"
+                    app:title="工作单位"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="position"
+                    app:title="职业"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_nowAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="nowAddress"
+                    app:title="现住地址"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_companyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="companyAddress"
+                    app:title="单位地址"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_relation"
+                    app:field="relation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="与主贷人关系"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_btn_bg_std"
+                android:text="确定"
+                android:textColor="#ffffffff"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

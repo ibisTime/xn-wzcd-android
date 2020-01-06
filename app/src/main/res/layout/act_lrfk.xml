@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <com.cdkj.wzcd.custom.BaseMoreLayout
+                    android:id="@+id/ml_yhht"
+                    app:title="银行合同匹配"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_loanNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="货款编号"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_repayBankDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="银行还款日"/>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_repayBillDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="账单日"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_bankcardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="卡号"/>
+
+                <com.cdkj.wzcd.custom.BaseRemarkLayout
+                    android:id="@+id/rl_bankFkRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="备注"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_confirm_content="返回"
+            app:txt_confirm_content_right="确定">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+
+    </LinearLayout>
+</layout>

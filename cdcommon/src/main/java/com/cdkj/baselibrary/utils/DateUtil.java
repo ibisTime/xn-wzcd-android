@@ -15,6 +15,7 @@ import java.util.List;
  * @date 2012-5-29 下午11:31:09
  */
 public class DateUtil {
+
     public static final String DEFAULT_DATE_FMT = "yyyy-MM-dd HH:mm:ss";
 
     public static final String DATE_FMT_YMD = "MM月dd日";
@@ -156,8 +157,9 @@ public class DateUtil {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (w < 0)
+        if (w < 0) {
             w = 0;
+        }
         return weekDays[w];
     }
 
@@ -171,8 +173,9 @@ public class DateUtil {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dt);
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (w < 0)
+        if (w < 0) {
             w = 0;
+        }
         return w;
     }
 
@@ -185,8 +188,9 @@ public class DateUtil {
         } catch (ParseException e) {
         }
         int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (w < 0)
+        if (w < 0) {
             w = 0;
+        }
         return weekDays[w];
     }
 
@@ -354,6 +358,13 @@ public class DateUtil {
         return format(new Date(), DEFAULT_DATE_FMT);
     }
 
+
+    public static String formatStringData(String s) {
+        if (TextUtils.isEmpty(s)) {
+            return "";
+        }
+        return DateUtil.format(new Date(s), DEFAULT_DATE_FMT);
+    }
 
     public static String formatStringData(String s, String format) {
         if (TextUtils.isEmpty(s) || TextUtils.isEmpty(format)) {

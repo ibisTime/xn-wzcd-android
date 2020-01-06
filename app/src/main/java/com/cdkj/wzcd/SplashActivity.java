@@ -83,7 +83,7 @@ public class SplashActivity extends BaseActivity {
                     if (!SPUtilHelper.isLoginNoStart()) {  //没有登录
                         SignInActivity.open(this, false);
                     }else {
-                        MainActivity.open(this);
+                        MainActivity2.open(this);
                     }
                     finish();
 

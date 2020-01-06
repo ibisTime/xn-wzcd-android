@@ -35,6 +35,8 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
+import static android.provider.MediaStore.ACTION_VIDEO_CAPTURE;
+
 /**
  * 拍照、相册辅助类
  * 使用注意 需要在启动页面中调用onActivityResult处理拍照回调
@@ -46,6 +48,9 @@ import io.reactivex.schedulers.Schedulers;
 //TODO 裁剪接口抽取
 public class CameraHelper {
 
+    public final static String CAMERA_TYPE_IMAGE = "0";
+    public final static String CAMERA_TYPE_VIDEO = "1";
+
     public final static int CAPTURE_PHOTO_CODE = 3;//相机
     public final static int CAPTURE_WALBUM_CODE = 4;//相册
     public final static int CAPTURE_ZOOM_CODE = 5;//裁剪
@@ -53,6 +58,7 @@ public class CameraHelper {
     private int mRequestCode = -1;//用于记录是相机还是相册裁剪
 
     private Object mContext;
+    private String cameraType = CAMERA_TYPE_IMAGE;
 
     private Uri imageUrl;
     protected CompositeDisposable mSubscription;
@@ -84,7 +90,8 @@ public class CameraHelper {
      *
      * @param mCamerahelperCropInterface
      */
-    public void setmCamerahelperCropInterface(CamerahelperCropInterface mCamerahelperCropInterface) {
+    public void setmCamerahelperCropInterface(
+            CamerahelperCropInterface mCamerahelperCropInterface) {
         this.mCamerahelperCropInterface = mCamerahelperCropInterface;
     }
 
@@ -93,8 +100,9 @@ public class CameraHelper {
      *
      * @param cameraPhotoListener 获取图片监听
      */
-    public CameraHelper(@NonNull Object object, @NonNull CameraPhotoListener cameraPhotoListener) {
+    public CameraHelper(@NonNull Object object, @NonNull CameraPhotoListener cameraPhotoListener, String cameraType) {
         this.mContext = object;
+        this.cameraType = cameraType;
         checkCallingObjectSuitability(object);
         this.isSplit = true;
         this.mCameraPhotoListener = cameraPhotoListener;
@@ -169,7 +177,8 @@ public class CameraHelper {
         }
         PackageManager packageManager = getContextActivity(mContext).getPackageManager();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> list = packageManager
+                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
 
@@ -180,21 +189,28 @@ public class CameraHelper {
 
         if (!hasCamera())  //判断有没有可用相机
         {
-            mCameraPhotoListener.onPhotoFailure(CAPTURE_PHOTO_CODE, CdApplication.getContext().getString(R.string.no_camera));
+            mCameraPhotoListener.onPhotoFailure(CAPTURE_PHOTO_CODE,
+                    CdApplication.getContext().getString(R.string.no_camera));
             return;
         }
 
-
         if (FileUtils.isExternalStorageWritable()) {
-            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+            Intent intent;
+            if (CAMERA_TYPE_IMAGE.equals(cameraType)) {
+                intent = new Intent("android.media.action.IMAGE_CAPTURE");
+            } else {
+                intent = new Intent(ACTION_VIDEO_CAPTURE);
+            }
+
             File file = FileUtils.saveAlbumPic("cream");
             imageUrl = FileProviderHelper.getUriForFile(getContextActivity(mContext), file);
             photoPath = file.getAbsolutePath();
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUrl);
-            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
             startActivity(intent, CAPTURE_PHOTO_CODE);
         } else {
-            mCameraPhotoListener.onPhotoFailure(CAPTURE_PHOTO_CODE, CdApplication.getContext().getString(R.string.no_sd_card));
+            mCameraPhotoListener.onPhotoFailure(CAPTURE_PHOTO_CODE,
+                    CdApplication.getContext().getString(R.string.no_sd_card));
         }
     }
 
@@ -240,7 +256,8 @@ public class CameraHelper {
     private void zoomNext(Intent data, final int requestCode) {
 
         if (data == null || TextUtils.isEmpty(data.getStringExtra(cropPath))) {
-            mCameraPhotoListener.onPhotoFailure(requestCode, CdApplication.getContext().getString(R.string.get_pic_fail));
+            mCameraPhotoListener.onPhotoFailure(requestCode,
+                    CdApplication.getContext().getString(R.string.get_pic_fail));
             return;
         }
         mCameraPhotoListener.onPhotoSuccessful(requestCode, data.getStringExtra(cropPath));
@@ -288,15 +305,17 @@ public class CameraHelper {
                     File file = new File(imageUrl.getPath());
                     mCameraPhotoListener.onPhotoSuccessful(CAPTURE_PHOTO_CODE, imageUrl.getPath());
                     //通知相册更新
-                    CdApplication.getContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                            Uri.fromFile(file)));
+                    CdApplication.getContext()
+                            .sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                    Uri.fromFile(file)));
 
                 } else {
                     File file = new File(photoPath);
                     mCameraPhotoListener.onPhotoSuccessful(CAPTURE_PHOTO_CODE, photoPath);
                     //通知相册更新
-                    CdApplication.getContext().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                            Uri.fromFile(file)));
+                    CdApplication.getContext()
+                            .sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                    Uri.fromFile(file)));
 
                 }
 
@@ -349,7 +368,9 @@ public class CameraHelper {
      * @param data
      */
     private void abumNext(Intent data) {
-        if (data == null) return;
+        if (data == null) {
+            return;
+        }
         Uri imageUri = data.getData();
 
         if ("Xiaomi".equals(Build.MANUFACTURER) || SystemUtils.isMIUI())   //小米相册兼容代码
@@ -357,7 +378,8 @@ public class CameraHelper {
             String imgP = setPhotoForMiuiSystem(data);
 
             if (imageUri == null) {
-                mCameraPhotoListener.onPhotoFailure(CAPTURE_WALBUM_CODE, CdApplication.getContext().getString(R.string.get_pic_fail));
+                mCameraPhotoListener.onPhotoFailure(CAPTURE_WALBUM_CODE,
+                        CdApplication.getContext().getString(R.string.get_pic_fail));
                 return;
             }
             if (isSplit) {
@@ -372,7 +394,8 @@ public class CameraHelper {
             return;
         }
         if (imageUri == null) {
-            mCameraPhotoListener.onPhotoFailure(CAPTURE_WALBUM_CODE, CdApplication.getContext().getString(R.string.get_pic_fail));
+            mCameraPhotoListener.onPhotoFailure(CAPTURE_WALBUM_CODE,
+                    CdApplication.getContext().getString(R.string.get_pic_fail));
             return;
         }
 
@@ -409,7 +432,8 @@ public class CameraHelper {
         String imagePath = "";
         if ("content".equals(scheme)) {
             String[] filePathColumns = {MediaStore.Images.Media.DATA};
-            Cursor c = getContextActivity(mContext).getContentResolver().query(localUri, filePathColumns, null, null, null);
+            Cursor c = getContextActivity(mContext).getContentResolver()
+                    .query(localUri, filePathColumns, null, null, null);
             c.moveToFirst();
             int columnIndex = c.getColumnIndex(filePathColumns[0]);
             imagePath = c.getString(columnIndex);
@@ -510,8 +534,12 @@ public class CameraHelper {
         mRequestCode = CAPTURE_WALBUM_CODE;
         Intent intent = new Intent(Intent.ACTION_PICK, null);
 
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                "image/*");
+        if (CAMERA_TYPE_IMAGE.equals(cameraType)){
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        }else {
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*");
+        }
+
         startActivity(intent, CAPTURE_WALBUM_CODE);
     }
 
@@ -523,8 +551,12 @@ public class CameraHelper {
      * @param permissions
      * @param grantResults
      */
-    public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
-        if (mPreHelper == null) return;
+    public void onRequestPermissionsResult(int requestCode,
+            @android.support.annotation.NonNull String[] permissions,
+            @android.support.annotation.NonNull int[] grantResults) {
+        if (mPreHelper == null) {
+            return;
+        }
         mPreHelper.handleRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -544,6 +576,7 @@ public class CameraHelper {
      * 裁剪接口
      */
     public interface CamerahelperCropInterface {
+
         void startCrop(Object context, int requestCode, String path);//从Activity页面启动
     }
 
@@ -552,6 +585,7 @@ public class CameraHelper {
      * 默认裁剪实现
      */
     class defaultCropInterface implements CamerahelperCropInterface {
+
         @Override
         public void startCrop(Object context, int requestCode, String path) {
 
@@ -580,7 +614,8 @@ public class CameraHelper {
         boolean isActivity = object instanceof android.app.Activity;
         boolean isSupportFragment = object instanceof android.support.v4.app.Fragment;
         boolean isAppFragment = object instanceof android.app.Fragment;
-        if (!(isSupportFragment || isActivity || (isAppFragment && CameraHelper.isNeedRequestPremission()))) {
+        if (!(isSupportFragment || isActivity || (isAppFragment && CameraHelper
+                .isNeedRequestPremission()))) {
             if (isAppFragment) {
                 throw new IllegalArgumentException(
                         "Target SDK needs to be greater than 23 if caller is android.app.Fragment");
@@ -627,14 +662,16 @@ public class CameraHelper {
 
     public void startActivity(Intent intent, int requestCode) {
         try {
-            Method method = this.mContext.getClass().getMethod("startActivityForResult", new Class[]{Intent.class, Integer.TYPE});
+            Method method = this.mContext.getClass()
+                    .getMethod("startActivityForResult", new Class[]{Intent.class, Integer.TYPE});
             if (!method.isAccessible()) {
                 method.setAccessible(true);
             }
             method.invoke(this.mContext, new Object[]{intent, requestCode});
         } catch (Exception var2) {
             var2.printStackTrace();
-            ToastUtil.show(getContextActivity(this.mContext), CdApplication.getContext().getString(R.string.error_unknown));
+            ToastUtil.show(getContextActivity(this.mContext),
+                    CdApplication.getContext().getString(R.string.error_unknown));
         }
     }
 

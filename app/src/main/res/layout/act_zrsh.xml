@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+
+                <com.cdkj.wzcd.custom.BaseRemarkLayout
+                    android:id="@+id/rl_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="备注事项"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/btn_confirm"
+            app:txt_confirm_content="通过"
+            app:txt_confirm_content_right="不通过"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+
+    </LinearLayout>
+</layout>

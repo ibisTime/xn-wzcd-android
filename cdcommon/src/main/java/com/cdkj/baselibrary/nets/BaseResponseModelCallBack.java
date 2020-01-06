@@ -35,7 +35,6 @@ public abstract class BaseResponseModelCallBack<T> implements Callback<BaseRespo
 
     @Override
     public void onResponse(Call<BaseResponseModel<T>> call, Response<BaseResponseModel<T>> response) {
-        onFinish();
 
         if (response == null || response.body() == null) {
             onReqFailure(DATA_NULL, CdApplication.getContext().getString(R.string.net_data_is_null));
@@ -43,20 +42,22 @@ public abstract class BaseResponseModelCallBack<T> implements Callback<BaseRespo
         }
 
         if (response.isSuccessful()) {
-            try {
+//            try {
                 BaseResponseModel t = response.body();
                 checkState(t);      //根据返回错误的状态码实现相应的操作
-            } catch (Exception e) {
-                if (LogUtil.isDeBug) {
-                    onReqFailure(NETERRORCODE4, "未知错误" + e);
-                } else {
-                    onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.error_unknown));
-                }
-            }
+//            } catch (Exception e) {
+//                if (LogUtil.isDeBug) {
+//                    onReqFailure(NETERRORCODE4, "未知错误" + e);
+//                } else {
+//                    onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.error_unknown));
+//                }
+//            }
 
         } else {
             onReqFailure(NETERRORCODE4, CdApplication.getContext().getString(R.string.net_req_fail));
         }
+
+        onFinish();
 
     }
 
@@ -67,14 +68,13 @@ public abstract class BaseResponseModelCallBack<T> implements Callback<BaseRespo
             return;
         }
 
-        onFinish();
-
         if (!NetUtils.isNetworkConnected(CdApplication.getContext())) {
             onNoNet(CdApplication.getContext().getString(R.string.no_net));
         }
 
         onReqFailure(getThrowableStateCode(t), getThrowableStateString(t));
 
+        onFinish();
     }
 
     /**

@@ -351,7 +351,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             if (TextUtils.equals(data.getLoanBankCode(), "BS201807171350293781303")) {
                 //工商银行才有服务费  其他银行没有
 
-//            mBinding.myElServicePrice.setMoneyText(data.getFee());
+//            mBinding.myElServicePrice.setText(data.getFee());
                 mBinding.myElServicePrice.setMoneyTextRequest(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
                 mBinding.myElServicePrice.setVisibility(View.VISIBLE);
             } else {
@@ -408,21 +408,21 @@ public class JoinStep1Fragment extends BaseLazyFragment {
                 mBinding.mySlDealers.setContentByKey(data.getCarDealerCode());
             }
 
-            mBinding.myElOriginalPrice.setMoneyText(data.getOriginalPrice());
+            mBinding.myElOriginalPrice.setText(data.getOriginalPrice());
             mBinding.myElCarNumber.setText(data.getCarModel());
-            mBinding.myElBillPrice.setMoneyText(data.getInvoicePrice());
-            mBinding.myElLoanAmount.setMoneyText(data.getLoanAmount());
+            mBinding.myElBillPrice.setText(data.getInvoicePrice());
+            mBinding.myElLoanAmount.setText(data.getLoanAmount());
             if (TextUtils.equals(data.getLoanBankCode(), "BS201807171350293781303")) {
                 //工商银行才有服务费  其他银行没有
 
-//            mBinding.myElServicePrice.setMoneyText(data.getFee());
-                mBinding.myElServicePrice.setMoneyText(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
+//            mBinding.myElServicePrice.setText(data.getFee());
+                mBinding.myElServicePrice.setText(TextUtils.isEmpty(data.getFee()) ? "0" : data.getFee());
                 mBinding.myElServicePrice.setVisibility(View.VISIBLE);
             } else {
                 mBinding.myElServicePrice.setVisibility(View.GONE);
             }
 
-            mBinding.myElCarDealerSubsidy.setMoneyText(data.getCarDealerSubsidy());
+            mBinding.myElCarDealerSubsidy.setText(data.getCarDealerSubsidy());
             mBinding.myNlGlobalRate.setText(data.getGlobalRate() + "");
 
 
@@ -613,16 +613,16 @@ public class JoinStep1Fragment extends BaseLazyFragment {
             map.put("carDealerCode", mBinding.mySlDealers.getDataKey());
         }
 
-        map.put("originalPrice", mBinding.myElOriginalPrice.getMoneyText());
+        map.put("originalPrice", mBinding.myElOriginalPrice.getText());
         map.put("carModel", mBinding.myElCarNumber.getText());
         map.put("frameNo", mBinding.myElFrameNo.getText());
-        map.put("invoicePrice", mBinding.myElBillPrice.getMoneyText());
-        map.put("loanAmount", mBinding.myElLoanAmount.getMoneyText());
+        map.put("invoicePrice", mBinding.myElBillPrice.getText());
+        map.put("loanAmount", mBinding.myElLoanAmount.getText());
         if (TextUtils.equals(data.getLoanBankCode(), "BS201807171350293781303")) {
             //工商银行
-            map.put("fee", mBinding.myElServicePrice.getMoneyText());
+            map.put("fee", mBinding.myElServicePrice.getText());
         }
-        map.put("carDealerSubsidy", mBinding.myElCarDealerSubsidy.getMoneyText());
+        map.put("carDealerSubsidy", mBinding.myElCarDealerSubsidy.getText());
         map.put("gpsList", mList);
 
         if (mBinding.mySlHandType.getVisibility() != View.GONE) {
@@ -831,7 +831,7 @@ public class JoinStep1Fragment extends BaseLazyFragment {
 
 
     public String getCarDealerSubsidy() {
-        return TextUtils.isEmpty(mBinding.myElCarDealerSubsidy.getMoneyText()) ? "0" : mBinding.myElCarDealerSubsidy.getMoneyText();
+        return TextUtils.isEmpty(mBinding.myElCarDealerSubsidy.getText()) ? "0" : mBinding.myElCarDealerSubsidy.getText();
     }
 
     public DealersModel getDealers() {

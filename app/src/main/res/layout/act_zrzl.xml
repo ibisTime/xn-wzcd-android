@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="基本信息"
+                android:textColor="@color/title_mid_tv"
+                android:textSize="@dimen/top_center_title_size"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_stepSelect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:paddingRight="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="目录"
+                    android:textColor="@color/title_right_tv"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/iv_mid"
+                    android:layout_width="10dp"
+                    android:layout_height="6dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/pull"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="@dimen/title_left_img_widht"
+                    android:layout_height="@dimen/title_left_img_height"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/back_img"/>
+            </FrameLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cdkj.baselibrary.views.EnabledViewpager
+                android:id="@+id/vp_step"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.cdkj.baselibrary.views.EnabledViewpager>
+
+            <LinearLayout
+                android:id="@+id/ll_step"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80000000">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_step"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

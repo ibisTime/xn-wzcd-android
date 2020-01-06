@@ -13,7 +13,7 @@ public class MyCdConfig {
 
     public final static String USER_TYPE = "P";//用户类型
 
-    public final static String QINIU_URL = "http://ounm8iw2d.bkt.clouddn.com/";
+    public final static String QINIU_URL = "http://img.wzhaoyuan.com/";
 
     public final static String PROJECT_NAME = "bige";
 

@@ -15,7 +15,6 @@
             android:layout_height="45dp"
             android:background="@color/white" />
 
-
         <View
             android:id="@+id/view_v"
             android:layout_width="match_parent"

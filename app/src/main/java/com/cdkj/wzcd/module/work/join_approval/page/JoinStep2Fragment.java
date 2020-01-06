@@ -151,29 +151,29 @@ public class JoinStep2Fragment extends BaseLazyFragment {
             mBinding.mySlApplyUserGhrRelation.setContentByKey(data.getApplyUserGhrRelation());
             mBinding.mySlMarryState.setContentByKey(data.getMarryState());
 
-            mBinding.myElApplyUserMonthIncome.setMoneyText(data.getApplyUserMonthIncome());
-            mBinding.myElApplyUserSettleInterest.setMoneyText(data.getApplyUserSettleInterest());
-            mBinding.myElApplyUserBalance.setMoneyText(data.getApplyUserBalance());
+            mBinding.myElApplyUserMonthIncome.setText(data.getApplyUserMonthIncome());
+            mBinding.myElApplyUserSettleInterest.setText(data.getApplyUserSettleInterest());
+            mBinding.myElApplyUserBalance.setText(data.getApplyUserBalance());
             mBinding.mySlApplyUserJourShowIncome.setContentByKey(data.getApplyUserJourShowIncome());
             mBinding.mySlApplyUserIsPrint.setContentByKey(data.getApplyUserIsPrint());
 
-            mBinding.myElGhMonthIncome.setMoneyText(data.getGhMonthIncome());
-            mBinding.myElGhSettleInterest.setMoneyText(data.getGhSettleInterest());
-            mBinding.myElGhBalance.setMoneyText(data.getGhBalance());
+            mBinding.myElGhMonthIncome.setText(data.getGhMonthIncome());
+            mBinding.myElGhSettleInterest.setText(data.getGhSettleInterest());
+            mBinding.myElGhBalance.setText(data.getGhBalance());
             mBinding.mySlGhJourShowIncome.setContentByKey(data.getGhJourShowIncome());
             mBinding.mySlGhIsPrint.setContentByKey(data.getGhIsPrint());
 
             mBinding.myNlGuarantor1UserName.setText(data.getApplyUserCompany());
-            mBinding.myElGuarantor1MonthIncome.setMoneyText(data.getGuarantor1MonthIncome());
-            mBinding.myElGuarantor1SettleInterest.setMoneyText(data.getGuarantor1SettleInterest());
-            mBinding.myElGuarantor1Balance.setMoneyText(data.getGuarantor1Balance());
+            mBinding.myElGuarantor1MonthIncome.setText(data.getGuarantor1MonthIncome());
+            mBinding.myElGuarantor1SettleInterest.setText(data.getGuarantor1SettleInterest());
+            mBinding.myElGuarantor1Balance.setText(data.getGuarantor1Balance());
             mBinding.mySlGuarantor1JourShowIncome.setContentByKey(data.getGuarantor1JourShowIncome());
             mBinding.mySlGuarantor1IsPrint.setContentByKey(data.getGuarantor1IsPrint());
 
             mBinding.myNlGuarantor2UserName.setText(data.getApplyUserCompany());
-            mBinding.myElGuarantor2MonthIncome.setMoneyText(data.getGuarantor2MonthIncome());
-            mBinding.myElGuarantor2SettleInterest.setMoneyText(data.getGuarantor2SettleInterest());
-            mBinding.myElGuarantor2Balance.setMoneyText(data.getGuarantor2Balance());
+            mBinding.myElGuarantor2MonthIncome.setText(data.getGuarantor2MonthIncome());
+            mBinding.myElGuarantor2SettleInterest.setText(data.getGuarantor2SettleInterest());
+            mBinding.myElGuarantor2Balance.setText(data.getGuarantor2Balance());
             mBinding.mySlGuarantor2JourShowIncome.setContentByKey(data.getGuarantor2JourShowIncome());
             mBinding.mySlGuarantor2IsPrint.setContentByKey(data.getGuarantor2IsPrint());
 
@@ -253,27 +253,27 @@ public class JoinStep2Fragment extends BaseLazyFragment {
         map.put("applyUserGhrRelation", mBinding.mySlApplyUserGhrRelation.getDataKey());
         map.put("marryState", mBinding.mySlMarryState.getDataKey());
 
-        map.put("applyUserMonthIncome", mBinding.myElApplyUserMonthIncome.getMoneyText());
-        map.put("applyUserSettleInterest", mBinding.myElApplyUserSettleInterest.getMoneyText());
-        map.put("applyUserBalance", mBinding.myElApplyUserBalance.getMoneyText());
+        map.put("applyUserMonthIncome", mBinding.myElApplyUserMonthIncome.getText());
+        map.put("applyUserSettleInterest", mBinding.myElApplyUserSettleInterest.getText());
+        map.put("applyUserBalance", mBinding.myElApplyUserBalance.getText());
         map.put("applyUserJourShowIncome", mBinding.mySlApplyUserJourShowIncome.getDataKey());
         map.put("applyUserIsPrint", mBinding.mySlApplyUserIsPrint.getDataKey());
 
-        map.put("ghMonthIncome", mBinding.myElGhMonthIncome.getMoneyText());
-        map.put("ghSettleInterest", mBinding.myElGhSettleInterest.getMoneyText());
-        map.put("ghBalance", mBinding.myElGhBalance.getMoneyText());
+        map.put("ghMonthIncome", mBinding.myElGhMonthIncome.getText());
+        map.put("ghSettleInterest", mBinding.myElGhSettleInterest.getText());
+        map.put("ghBalance", mBinding.myElGhBalance.getText());
         map.put("ghJourShowIncome", mBinding.mySlGhJourShowIncome.getDataKey());
         map.put("ghIsPrint", mBinding.mySlGhIsPrint.getDataKey());
 
-        map.put("guarantor1MonthIncome", mBinding.myElGuarantor1MonthIncome.getMoneyText());
-        map.put("guarantor1SettleInterest", mBinding.myElGuarantor1SettleInterest.getMoneyText());
-        map.put("guarantor1Balance", mBinding.myElGuarantor1Balance.getMoneyText());
+        map.put("guarantor1MonthIncome", mBinding.myElGuarantor1MonthIncome.getText());
+        map.put("guarantor1SettleInterest", mBinding.myElGuarantor1SettleInterest.getText());
+        map.put("guarantor1Balance", mBinding.myElGuarantor1Balance.getText());
         map.put("uarantor1JourShowIncome", mBinding.mySlGuarantor1JourShowIncome.getDataKey());
         map.put("guarantor1IsPrint", mBinding.mySlGuarantor1IsPrint.getDataKey());
 
-        map.put("guarantor2MonthIncome", mBinding.myElGuarantor2MonthIncome.getMoneyText());
-        map.put("guarantor2SettleInterest", mBinding.myElGuarantor2SettleInterest.getMoneyText());
-        map.put("guarantor2Balance", mBinding.myElGuarantor2Balance.getMoneyText());
+        map.put("guarantor2MonthIncome", mBinding.myElGuarantor2MonthIncome.getText());
+        map.put("guarantor2SettleInterest", mBinding.myElGuarantor2SettleInterest.getText());
+        map.put("guarantor2Balance", mBinding.myElGuarantor2Balance.getText());
         map.put("guarantor2JourShowIncome", mBinding.mySlGuarantor2JourShowIncome.getDataKey());
         map.put("guarantor2IsPrint", mBinding.mySlGuarantor2IsPrint.getDataKey());
 

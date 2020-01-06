@@ -107,7 +107,7 @@ public class GpsDetailActivity extends AbsBaseLoadActivity {
         mBinding.myNlName.setText(data.getCustomerName());
         mBinding.myNlCode.setText(data.getCode());
         mBinding.myNlBank.setText(data.getLoanBankName());
-        mBinding.myNlLoanAmount.setMoneyText(data.getLoanAmount());
+        mBinding.myNlLoanAmount.setText(data.getLoanAmount());
 
         mBinding.llAdd.setVisibility(View.GONE);
         mBinding.myCbConfirm.setVisibility(View.GONE);
