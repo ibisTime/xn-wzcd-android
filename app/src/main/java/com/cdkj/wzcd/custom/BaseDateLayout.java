@@ -1,6 +1,5 @@
 package com.cdkj.wzcd.custom;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -12,13 +11,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
+
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.custom.interfaces.BaseDateInterface;
 import com.cdkj.wzcd.databinding.LayoutBaseDateBinding;
-import com.cdkj.wzcd.databinding.LayoutBaseEditBinding;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -252,4 +250,8 @@ public class BaseDateLayout extends LinearLayout {
         mBinding.tvContent.setHint("");
     }
 
+    public void isRequired(boolean isRequired) {
+        this.isRequired = isRequired;
+        mBinding.tvRequired.setVisibility(isRequired ? VISIBLE : GONE);
+    }
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +28,7 @@
                     android:layout_height="wrap_content"
                     app:field="saleUserId"
                     app:isRequired="true"
-                    app:title="业务员"/>
+                    app:title="业务员" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_loanBankCode"
@@ -34,7 +36,7 @@
                     android:layout_height="wrap_content"
                     app:field="loanBankCode"
                     app:isRequired="true"
-                    app:title="经办银行"/>
+                    app:title="经办银行" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_region"
@@ -42,15 +44,24 @@
                     android:layout_height="wrap_content"
                     app:field="region"
                     app:isRequired="true"
-                    app:title="业务发生地"/>
+                    app:title="业务发生地" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_shopCarGarage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="shopCarGarage"
+                    app:isOpenActivity="true"
                     app:isRequired="true"
-                    app:title="汽车经销商"/>
+                    app:title="汽车经销商" />
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_company_ascription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="ascription"
+                    app:isRequired="true"
+                    app:title="公司归口" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_bizType"
@@ -58,85 +69,8 @@
                     android:layout_height="wrap_content"
                     app:field="bizType"
                     app:isRequired="true"
-                    app:title="购车途径"/>
+                    app:title="购车途径" />
 
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_carBrand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carBrand"
-                    app:isRequired="true"
-                    app:title="品牌"/>
-
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_carSeries"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carSeries"
-                    app:isRequired="true"
-                    app:title="车系"/>
-
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_carModel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carModel"
-                    app:isRequired="true"
-                    app:title="车型"/>
-
-                <com.cdkj.wzcd.custom.BaseDateLayout
-                    android:id="@+id/dl_regDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:dateType="ym"
-                    app:field="regDate"
-                    app:isRequired="true"
-                    app:title="上牌时间"/>
-
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_mile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:field="mile"
-                    app:isRequired="true"
-                    app:title="公里数(万)"/>
-
-                <FrameLayout
-                    android:id="@+id/fl_report"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:paddingLeft="@dimen/layout_left_interval"
-                    android:paddingRight="@dimen/layout_right_interval"
-                    android:background="@color/white"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="评估报告"
-                        android:textColor="#999999"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_report"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:layout_gravity="center_vertical"
-                        android:text="点击生成评报告"
-                        android:textColor="#ff028eff"
-                        android:textSize="12sp"
-                        />
-
-                </FrameLayout>
-
-                <View
-                    style="@style/style_split_line_horizontal"
-                    android:layout_marginLeft="@dimen/layout_right_interval"
-                    android:layout_marginRight="@dimen/layout_left_interval"/>
 
             </LinearLayout>
 
@@ -154,7 +88,7 @@
                 android:background="@drawable/shape_btn_bg_std"
                 android:text="保存"
                 android:textColor="#ffffffff"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

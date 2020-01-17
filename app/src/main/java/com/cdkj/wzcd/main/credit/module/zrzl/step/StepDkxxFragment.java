@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -17,7 +18,6 @@ import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
@@ -27,12 +27,14 @@ import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlMonthAmountBean;
-import com.cdkj.wzcd.util.RequestUtil;
-import org.greenrobot.eventbus.EventBus;
-import retrofit2.Call;
+import com.cdkj.wzcd.util.StringStaticFinal;
 
-import java.math.BigDecimal;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 
@@ -74,7 +76,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_step_dkxx, null, false);
 
@@ -93,7 +95,9 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
     private void initListener() {
         mBinding.btnConfirm.setOnClickListener(view -> {
-            doRequest();
+            if (BaseViewUtil.check(mBinding.llInput)) {
+                doRequest();
+            }
         });
     }
 
@@ -273,7 +277,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
     }
 
-    private void checkLoanAmount(){
+    private void checkLoanAmount() {
 
         if (mBinding.elLoanAmount.checkNoTip()) {
             return;
@@ -295,8 +299,9 @@ public class StepDkxxFragment extends BaseLazyFragment {
         }
 
         EventBus.getDefault().post(new EventBean().setTag("set_repointAmount")
-                .setValue1(mBinding.elLoanAmount.getText())
-                .setValue2(mBinding.elRebateRate.getText()));
+                .setValue1(mBinding.elLoanAmount.getText())//贷款本金
+                .setValue2(mBinding.elRebateRate.getText())//烦存利率
+                .setValue3(mBinding.elTotalRate.getText()));//总利率
     }
 
     private void checcarFunds3() {
@@ -352,4 +357,14 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
     }
 
+
+    @Subscribe
+    public void setRate(EventBean eventBean) {
+        if (eventBean != null && StringStaticFinal.Default_dealer_rate.equals(eventBean.getTag())) {
+            String value = (String) eventBean.getValue();
+            mBinding.elRebateRate.setText(value);
+            return;
+        }
+
+    }
 }

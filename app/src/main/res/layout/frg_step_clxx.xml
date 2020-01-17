@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,86 +24,172 @@
                 android:orientation="vertical">
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_model"
+                    android:id="@+id/el_regAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:field="model"
-                    app:title="车辆型号"/>
+                    app:field="reg_Address"
+                    app:isRequired="true"
+                    app:title="上牌地" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_carPrice"
+                <com.cdkj.wzcd.custom.BaseDateLayout
+                    android:id="@+id/dl_regDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:field="carPrice"
-                    app:inputType="money"
-                    app:title="厂商指导价"/>
-
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_carFrameNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carFrameNo"
-                    app:title="车架号"/>
-
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_carEngineNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carEngineNo"
-                    app:title="发动机"/>
-
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_carNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="carNumber"
-                    app:title="车牌号"/>
+                    app:dateType="ym"
+                    app:field="regDate"
+                    app:title="上牌时间" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_mile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="mile"
-                    app:title="行驶里程"/>
+                    app:title="行驶里程(万KM)" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/bil_vin_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cameraType="image"
+                    app:selectMultiple="false"
+                    app:title="VIN码识别">
+
+                </com.cdkj.wzcd.custom.BaseImageLayout>
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_carBrand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carBrand"
+                    app:isRequired="true"
+                    app:title="品牌" />
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_carSeries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carSeries"
+                    app:isOpenActivity="true"
+                    app:isRequired="true"
+                    app:title="车系" />
+
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_carModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carModel"
+                    app:isOpenActivity="true"
+                    app:isRequired="true"
+                    app:title="车型" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="model"
+                    app:title="车辆型号" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carPrice"
+                    app:title="厂商指导价" />
+                    <!--app:inputType="money"-->
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carFrameNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carFrameNo"
+                    app:title="车架号" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carEngineNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carEngineNo"
+                    app:title="发动机" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_carNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="carNumber"
+                    app:title="车牌号" />
+
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_evalPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="evalPrice"
-                    app:title="评估价格"/>
+                    app:title="评估价格" />
 
-                <com.cdkj.wzcd.custom.BaseDateLayout
-                    android:id="@+id/dl_regDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="regDate"
-                    app:dateType="ym"
-                    app:title="上牌时间"/>
-
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_regAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:field="reg_Address"
-                    app:title="上牌地"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_isPublicCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="isPublicCard"
-                    app:title="是否公牌"/>
+                    app:title="是否公牌" />
 
-                <View
-                    style="@style/style_split_line_horizontal_broad"/>
+
+
+                <LinearLayout
+                    android:id="@+id/fl_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/layout_left_interval"
+                    android:paddingRight="@dimen/layout_right_interval"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="评估报告"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_report"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="50dp"
+                        android:layout_weight="1"
+                        android:text="点击生成评报告"
+                        android:textColor="#ff028eff"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_regenerate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginLeft="100dp"
+                        android:text="重新生成"
+                        android:textColor="#ff028eff"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+                <View style="@style/style_split_line_horizontal_broad" />
+                <!--<View-->
+                <!--style="@style/style_split_line_horizontal"-->
+                <!--android:layout_marginLeft="@dimen/layout_right_interval"-->
+                <!--android:layout_marginRight="@dimen/layout_left_interval" />-->
+
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_isAzGps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="isAzGps"
-                    app:title="是否加装GPS"/>
+                    app:title="是否加装GPS" />
 
                 <LinearLayout
                     android:id="@+id/ll_gps"
@@ -113,28 +201,27 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_gps"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:id="@+id/ll_addGps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_gravity="center_horizontal"
-                        android:paddingTop="6dp"
-                        android:paddingBottom="6dp"
+                        android:background="@drawable/shape_zrzl_step_gps"
                         android:paddingLeft="17dp"
+                        android:paddingTop="6dp"
                         android:paddingRight="17dp"
-                        android:background="@drawable/shape_zrzl_step_gps">
+                        android:paddingBottom="6dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+ 添加GPS"
                             android:textColor="#ff028eff"
-                            android:textSize="12sp"
-                            />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -157,7 +244,7 @@
                 android:background="@drawable/shape_btn_bg_std"
                 android:text="保存"
                 android:textColor="#ffffffff"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

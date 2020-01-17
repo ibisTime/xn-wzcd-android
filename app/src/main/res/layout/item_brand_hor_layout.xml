@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:background="#fff5f5f5"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_sort"
@@ -23,11 +26,12 @@
                 android:layout_marginLeft="15dp"
                 android:textColor="#333333"
                 android:textSize="12sp"
-                tools:text="A"/>
+                tools:text="A" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
@@ -38,7 +42,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                tools:src="@mipmap/ic_launcher"/>
+                tools:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/tv_brand_name"
@@ -47,12 +51,12 @@
                 android:layout_marginLeft="5dp"
                 android:textColor="#ff333333"
                 android:textSize="12sp"
-                tools:text="丰田"/>
+                tools:text="丰田" />
         </LinearLayout>
 
         <View
             style="@style/style_split_line_horizontal"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp" />
 
     </LinearLayout>
 </layout>

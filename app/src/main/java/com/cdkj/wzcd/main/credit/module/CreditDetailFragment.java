@@ -3,16 +3,15 @@ package com.cdkj.wzcd.main.credit.module;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.base.BaseLazyFragment;
 import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.FrgCreditDetailBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
-import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.util.NodeHelper;
 
@@ -55,7 +54,7 @@ public class CreditDetailFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_credit_detail, null, false);
 

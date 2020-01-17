@@ -7,20 +7,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
+import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.custom.BaseSelectLayout;
 import com.cdkj.wzcd.custom.util.BaseViewUtil;
 import com.cdkj.wzcd.databinding.FrgStepZdrxxInfoBinding;
-import com.cdkj.wzcd.databinding.FrgStepZdrxxPeopleBinding;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxBean;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxIdBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxInfoBean;
 import com.lljjcoder.citypickerview.widget.CityPicker;
+
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+
+import java.util.Date;
 
 /**
  * @author : qianLei
@@ -80,7 +81,18 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
 
     private void initListener() {
         mBinding.btnConfirm.setOnClickListener(view -> {
-            setData();
+            if (BaseViewUtil.check(mBinding.llInput)) {
+                setData();
+            }
+        });
+
+        mBinding.dlWorkDatetime.setInterface(dateTime -> {
+            String currentDate = DateUtil.format(new Date(), "yyyy-M");
+            long dateTimeDifference = DateUtil.getDateTimeDifference(currentDate, dateTime, "yyyy-M");
+            double yearNumber = DateUtil.switchYear(dateTimeDifference);
+            //不满一年不算
+            mBinding.elPresentJobYears.setText((int) yearNumber + "");
+
         });
     }
 
@@ -121,6 +133,7 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
         mBinding.slMarryState.setData("marry_state");
 
         mBinding.slNowHouseType.setData("0", "自由", "1", "租用");
+//        mBinding.slNowHouseType.setData("now_address_state");
 
         mBinding.slCompanyPCA.setListener(view -> {
             if (cityPicker == null) {
@@ -216,8 +229,7 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
         }
 
 
-
-        if (isDetail){
+        if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
             mBinding.btnConfirm.setVisibility(View.GONE);
         }

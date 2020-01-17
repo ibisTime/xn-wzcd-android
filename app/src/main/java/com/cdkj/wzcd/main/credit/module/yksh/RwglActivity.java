@@ -94,14 +94,14 @@ public class RwglActivity extends AbsBaseLoadActivity {
     @Subscribe
     public void rw(EventBean bean) {
 
-        if (bean.getTag().equals("yksh_rw_add")) {
+        if ("yksh_rw_add".equals(bean.getTag())) {
 
             list.add((RwBean) bean.getValue());
             mAdapter.notifyDataSetChanged();
 
         }
 
-        if (bean.getTag().equals("yksh_rw_modify")) {
+        if ("yksh_rw_modify".equals(bean.getTag())) {
 
             RwBean rwBean = (RwBean) bean.getValue();
 

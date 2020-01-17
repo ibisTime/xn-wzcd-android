@@ -61,6 +61,7 @@
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_advanceContract"
                     android:layout_width="match_parent"
+                    app:selectMultiple="true"
                     android:layout_height="wrap_content"
                     app:title="垫资合同"/>
 
@@ -68,18 +69,21 @@
                     android:id="@+id/il_guarantorContract"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:selectMultiple="true"
                     app:title="担保和反担保合同"/>
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_pledgeContract"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:selectMultiple="true"
                     app:title="担保和反担保合同"/>
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_enterOtherPdf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:selectMultiple="true"
                     app:title="担保和反担保合同"/>
 
             </LinearLayout>

@@ -1,190 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr format="reference|color" name="picture.title.textColor"/>
-    <attr format="reference|color" name="picture.right.textColor"/>
-    <attr format="reference" name="picture.leftBack.icon"/>
-    <attr format="reference" name="picture.arrow_down.icon"/>
-    <attr format="reference" name="picture.arrow_up.icon"/>
-    <attr format="reference" name="picture.num.style"/>
-    <attr format="reference" name="picture.checked.style"/>
-    <attr format="reference|color" name="picture.bottom.bg"/>
-    <attr format="reference|color" name="picture.preview.textColor"/>
-    <attr format="reference|color" name="picture.complete.textColor"/>
-    <attr format="reference|color" name="picture.ac_preview.title.textColor"/>
-    <attr format="reference|color" name="picture.ac_preview.complete.textColor"/>
-    <attr format="reference|color" name="picture.ac_preview.bottom.bg"/>
-    <attr format="reference|color" name="picture.status.color"/>
-    <attr format="reference|color" name="picture.ac_preview.title.bg"/>
-    <attr format="reference" name="picture.preview.leftBack.icon"/>
-    <attr format="boolean" name="picture.statusFontColor"/>
-    <attr format="boolean" name="picture.style.numComplete"/>
-    <attr format="boolean" name="picture.style.checkNumMode"/>
-    <attr format="reference|color" name="picture.crop.toolbar.bg"/>
-    <attr format="reference|color" name="picture.crop.status.color"/>
-    <attr format="reference|color" name="picture.crop.title.color"/>
-    <attr format="reference" name="picture.folder_checked_dot"/>
+    <attr name="picture.title.textColor" format="reference|color" />
+    <attr name="picture.right.textColor" format="reference|color" />
+    <attr name="picture.leftBack.icon" format="reference" />
+    <attr name="picture.arrow_down.icon" format="reference" />
+    <attr name="picture.arrow_up.icon" format="reference" />
+    <attr name="picture.num.style" format="reference" />
+    <attr name="picture.checked.style" format="reference" />
+    <attr name="picture.bottom.bg" format="reference|color" />
+    <attr name="picture.preview.textColor" format="reference|color" />
+    <attr name="picture.complete.textColor" format="reference|color" />
+    <attr name="picture.ac_preview.title.textColor" format="reference|color" />
+    <attr name="picture.ac_preview.complete.textColor" format="reference|color" />
+    <attr name="picture.ac_preview.bottom.bg" format="reference|color" />
+    <attr name="picture.status.color" format="reference|color" />
+    <attr name="picture.ac_preview.title.bg" format="reference|color" />
+    <attr name="picture.preview.leftBack.icon" format="reference" />
+    <attr name="picture.statusFontColor" format="boolean" />
+    <attr name="picture.style.numComplete" format="boolean" />
+    <attr name="picture.style.checkNumMode" format="boolean" />
+    <attr name="picture.crop.toolbar.bg" format="reference|color" />
+    <attr name="picture.crop.status.color" format="reference|color" />
+    <attr name="picture.crop.title.color" format="reference|color" />
+    <attr name="picture.folder_checked_dot" format="reference" />
 
-    <attr format="string" name="field"/>
-    <attr format="string" name="title"/>
-    <attr format="string" name="text"/>
-    <attr format="string" name="hint"/>
-    <attr format="boolean" name="isRequired"/>
-    <attr format="string" name="inputType">
-        <enum name="phone" value="0"/> <!-- 电话 -->
-        <enum name="id" value="1"/> <!-- 身份证类型 -->
-        <enum name="text" value="2"/> <!-- 文本 -->
-        <enum name="money" value="3"/> <!-- 金钱类型 -->
-        <enum name="number" value="4"/> <!-- 数字类型 -->
-        <enum name="rate" value="5"/> <!-- 数字类型 -->
+    <attr name="field" format="string" />
+    <attr name="title" format="string" />
+    <attr name="text" format="string" />
+    <attr name="hint" format="string" />
+    <attr name="isRequired" format="boolean" />
+    <!--<attr format="boolean" name="isRequired"/>-->
+    <attr name="inputType" format="string">
+        <enum name="phone" value="0" /> <!-- 电话 -->
+        <enum name="id" value="1" /> <!-- 身份证类型 -->
+        <enum name="text" value="2" /> <!-- 文本 -->
+        <enum name="money" value="3" /> <!-- 金钱类型 -->
+        <enum name="number" value="4" /> <!-- 数字类型 -->
+        <enum name="rate" value="5" /> <!-- 数字类型 -->
 
     </attr>
 
     <declare-styleable name="MyTitleBarLayout">
-        <attr format="string" name="txt_title"></attr>
+        <attr name="txt_title" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MySquareRowLayout">
-        <attr format="string" name="txt_content"></attr>
-        <attr format="reference" name="img_content"></attr>
-        <attr format="boolean" name="isShowRedPoint"></attr>
+        <attr name="txt_content" format="string"></attr>
+        <attr name="img_content" format="reference"></attr>
+        <attr name="isShowRedPoint" format="boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="MySelectLayout">
-        <attr format="string" name="txt_select_title"></attr>
-        <attr format="string" name="txt_select_content"></attr>
+        <attr name="txt_select_title" format="string"></attr>
+        <attr name="txt_select_content" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyEditSelectLayout">
-        <attr format="string" name="txt_edit_select_title"></attr>
-        <attr format="string" name="txt_edit_select_content"></attr>
+        <attr name="txt_edit_select_title" format="string"></attr>
+        <attr name="txt_edit_select_content" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyNormalLayout">
-        <attr format="string" name="txt_normal_title"></attr>
-        <attr format="string" name="txt_normal_content"></attr>
-        <attr format="string" name="txt_normal_hint"></attr>
-        <attr format="reference" name="img_normal_right"></attr>
+        <attr name="txt_normal_title" format="string"></attr>
+        <attr name="txt_normal_content" format="string"></attr>
+        <attr name="txt_normal_hint" format="string"></attr>
+        <attr name="img_normal_right" format="reference"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyListItemTitleLayout">
-        <attr format="string" name="txt_list_item_left"></attr>
-        <attr format="string" name="txt_list_item_right"></attr>
+        <attr name="txt_list_item_left" format="string"></attr>
+        <attr name="txt_list_item_right" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyListItemLayout">
-        <attr format="string" name="txt_list_item_title"></attr>
-        <attr format="string" name="txt_list_item_content"></attr>
+        <attr name="txt_list_item_title" format="string"></attr>
+        <attr name="txt_list_item_content" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyConfirmBtn">
-        <attr format="string" name="txt_confirm_content"></attr>
-        <attr format="string" name="txt_confirm_content_right"></attr>
+        <attr name="txt_confirm_content" format="string"></attr>
+        <attr name="txt_confirm_content_right" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyEditLayout">
-        <attr format="string" name="txt_input_title"></attr>
-        <attr format="string" name="txt_input_content"></attr>
-        <attr format="string" name="txt_input_title_right"></attr>
-        <attr format="string" name="txt_input_hint"></attr>
-        <attr name="inputType"/>
+        <attr name="txt_input_title" format="string"></attr>
+        <attr name="txt_input_content" format="string"></attr>
+        <attr name="txt_input_title_right" format="string"></attr>
+        <attr name="txt_input_hint" format="string"></attr>
+        <attr name="inputType" />
     </declare-styleable>
 
     <declare-styleable name="MyImageLayout">
-        <attr format="string" name="txt_image_title"></attr>
-        <attr format="string" name="txt_image_hint"></attr>
-        <attr format="boolean" name="isSingle"></attr>
+        <attr name="txt_image_title" format="string"></attr>
+        <attr name="txt_image_hint" format="string"></attr>
+        <attr name="isSingle" format="boolean"></attr>
 
-        <attr format="string" name="txt_image_hint_right"></attr>
+        <attr name="txt_image_hint_right" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyLayout">
-        <attr name="title"/>
+        <attr name="title" />
 
     </declare-styleable>
 
     <declare-styleable name="MyItemRootLayout">
-        <attr format="reference" name="background"></attr>
+        <attr name="background" format="reference"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyItemNormalLayout">
-        <attr format="string" name="txt_item_normal_title"></attr>
-        <attr format="string" name="txt_item_normal_content"></attr>
-        <attr format="string" name="txt_item_normal_content_right"></attr>
-        <attr format="string" name="txt_item_normal_content_middle"></attr>
+        <attr name="txt_item_normal_title" format="string"></attr>
+        <attr name="txt_item_normal_content" format="string"></attr>
+        <attr name="txt_item_normal_content_right" format="string"></attr>
+        <attr name="txt_item_normal_content_middle" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyItemDoubleLayout">
-        <attr format="string" name="txt_item_double_content"></attr>
-        <attr format="string" name="txt_item_double_content_right"></attr>
+        <attr name="txt_item_double_content" format="string"></attr>
+        <attr name="txt_item_double_content_right" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyListItemBtnLayout">
-        <attr format="string" name="txt_item_confirm_content_left"></attr>
-        <attr format="string" name="txt_item_confirm_content_right"></attr>
+        <attr name="txt_item_confirm_content_left" format="string"></attr>
+        <attr name="txt_item_confirm_content_right" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="MyItemChoiceLayout">
-        <attr format="string" name="txt_item_choice_title"></attr>
-        <attr format="reference" name="txt_item_choice_img"></attr>
+        <attr name="txt_item_choice_title" format="string"></attr>
+        <attr name="txt_item_choice_img" format="reference"></attr>
     </declare-styleable>
 
 
     <declare-styleable name="BaseEditLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="text"/>
-        <attr name="hint"/>
-        <attr name="isRequired"/>
-        <attr name="inputType"/>
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="text" />
+        <attr name="hint" />
+        <attr name="isRequired" />
+        <attr name="inputType" />
     </declare-styleable>
 
     <declare-styleable name="BaseSelectLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="text"/>
-        <attr name="isRequired"/>
+        <attr name="field" />
+        <attr name="isOpenActivity" format="boolean" />
+        <attr name="title" />
+        <attr name="text" />
+        <attr name="isRequired" />
     </declare-styleable>
 
     <declare-styleable name="BaseDateLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="text"/>
-        <attr name="isRequired"/>
-        <attr format="string" name="dateType">
-            <enum name="ymdhms" value="0"/> <!-- yyyy-MM-dd HH:mm:ss -->
-            <enum name="ymd" value="1"/> <!-- yyyy-MM—dd -->
-            <enum name="ym" value="2"/> <!-- yyyy-MM -->
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="text" />
+        <attr name="isRequired" />
+        <attr name="dateType" format="string">
+            <enum name="ymdhms" value="0" /> <!-- yyyy-MM-dd HH:mm:ss -->
+            <enum name="ymd" value="1" /> <!-- yyyy-MM—dd -->
+            <enum name="ym" value="2" /> <!-- yyyy-MM -->
         </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseImageLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="isRequired"/>
-        <attr format="string" name="cameraType">
-            <enum name="image" value="0"/>
-            <enum name="video" value="1"/>
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="selectMultiple" format="boolean" />
+        <attr name="isRequired" />
+        <attr name="cameraType" format="string">
+            <enum name="image" value="0" />
+            <enum name="video" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseLayout">
-        <attr name="title"/>
-        <attr format="string" name="rightTitle"/>
+        <attr name="title" />
+        <attr name="rightTitle" format="string" />
     </declare-styleable>
 
     <declare-styleable name="BaseRemarkLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="text"/>
-        <attr name="hint"/>
-        <attr name="isRequired"/>
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="text" />
+        <attr name="hint" />
+        <attr name="isRequired" />
     </declare-styleable>
 
     <declare-styleable name="BaseMoreLayout">
-        <attr name="field"/>
-        <attr name="title"/>
-        <attr name="text"/>
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="text" />
     </declare-styleable>
 
 </resources>

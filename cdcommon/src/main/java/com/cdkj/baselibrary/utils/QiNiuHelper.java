@@ -18,6 +18,7 @@ import com.qiniu.android.storage.UploadManager;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ public class QiNiuHelper {
     private ImageCompressInterface mImageCompressInterface;
 
     private int upLoadListIndex; //多张图片上传索引
+    private int upLoadListFileIndex; //多个文件上传索引
 
     private CompositeDisposable mSubscription;
 
@@ -77,7 +79,7 @@ public class QiNiuHelper {
      * @param url
      */
     public void uploadSingle(final QiNiuCallBack callBack, final String url, final String token,
-            String fileType) {
+                             String fileType) {
 
         Configuration config = new Configuration.Builder().build();
 
@@ -113,7 +115,7 @@ public class QiNiuHelper {
                                 new UpCompletionHandler() {
                                     @Override
                                     public void complete(final String key, final ResponseInfo info,
-                                            final JSONObject res) {
+                                                         final JSONObject res) {
 
                                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                                         if (info != null && info.isOK()) {
@@ -213,7 +215,7 @@ public class QiNiuHelper {
     }
 
     /**
-     * 上传单图片
+     * 上传单文件
      *
      * @param callBack
      */
@@ -257,7 +259,7 @@ public class QiNiuHelper {
      * @param listListener
      */
     public void upLoadListPic(final List<String> dataList,
-            final upLoadListImageListener listListener) {
+                              final upLoadListImageListener listListener) {
         if (dataList == null || dataList.isEmpty()) {
             return;
         }
@@ -297,7 +299,7 @@ public class QiNiuHelper {
      * @param listListener
      */
     public void upLoadListPic(int index, final List<String> dataList, final String token,
-            final upLoadListImageListener listListener) {
+                              final upLoadListImageListener listListener) {
         this.upLoadListIndex = index;
         if (TextUtils.isEmpty(token)) {
             if (listListener != null) {
@@ -380,7 +382,7 @@ public class QiNiuHelper {
                 new UpCompletionHandler() {
                     @Override
                     public void complete(final String key, final ResponseInfo info,
-                            final JSONObject res) {
+                                         final JSONObject res) {
                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                         if (info != null && info.isOK()) {
                             if (callBack != null) {
@@ -417,7 +419,7 @@ public class QiNiuHelper {
     }
 
     /**
-     * 图片单张上传
+     * 单文件上传
      *
      * @param callBack
      * @param
@@ -432,7 +434,7 @@ public class QiNiuHelper {
                 new UpCompletionHandler() {
                     @Override
                     public void complete(final String key, final ResponseInfo info,
-                            final JSONObject res) {
+                                         final JSONObject res) {
                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                         if (info != null && info.isOK()) {
                             if (callBack != null) {
@@ -441,7 +443,7 @@ public class QiNiuHelper {
                                         .subscribe(new Consumer<String>() {
                                             @Override
                                             public void accept(String s) throws Exception {
-                                                Log.i("QiNiu", "onSuccess key="+key);
+                                                Log.i("QiNiu", "onSuccess key=" + key);
                                                 callBack.onSuccess(key);
                                             }
                                         });
@@ -467,6 +469,73 @@ public class QiNiuHelper {
                     }
                 }, null);
 
+    }
+
+
+    /**
+     * 多文件上传
+     *
+     * @param listListener
+     * @param urls
+     */
+    public void uploadListFile(final upLoadListImageListener listListener, final ArrayList<String> urls) {
+        getQiniuToeknRequest().enqueue(new BaseResponseModelCallBack<QiniuGetTokenModel>(context) {
+            @Override
+            protected void onSuccess(QiniuGetTokenModel mo, String SucMessage) {
+                if (mo == null || TextUtils.isEmpty(mo.getUploadToken()) || urls == null || urls.size() <= 0
+                        ) {
+                    if (listListener != null) {
+                        listListener.onFal(
+                                CdApplication.getContext().getString(R.string.upload_pic_fail));
+                    }
+                    return;
+                }
+                String token = mo.getUploadToken();
+                //调用单个图片上传
+
+                upLoadSingFile(0, token, listListener, urls);
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+                if (listListener != null) {
+                    listListener.onFal(CdApplication.getContext().getString(R.string.upload_pic_fail));
+                }
+            }
+
+            @Override
+            protected void onFinish() {
+
+            }
+        });
+
+
+    }
+
+    private void upLoadSingFile(int index, String token, upLoadListImageListener listListener, ArrayList<String> urls) {
+        upLoadListFileIndex = index;
+        uploadSingleFile(new QiNiuCallBack() {
+            @Override
+            public void onSuccess(String key) {
+                if (listListener != null) {
+                    listListener.onChange(upLoadListFileIndex, key);
+                }
+                if (upLoadListFileIndex < urls.size() - 1) {
+                    upLoadListFileIndex++;
+                    upLoadSingFile(upLoadListFileIndex, token, listListener, urls);
+                } else {
+                    upLoadListFileIndex = 0;
+                    if (listListener != null) {
+                        listListener.onSuccess();
+                    }
+                }
+            }
+
+            @Override
+            public void onFal(String info) {
+                listListener.onFal(info);
+            }
+        }, urls.get(upLoadListFileIndex), token);
     }
 
     /**

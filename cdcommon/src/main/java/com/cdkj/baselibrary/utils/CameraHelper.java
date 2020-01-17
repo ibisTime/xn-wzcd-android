@@ -7,33 +7,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.cdkj.baselibrary.CdApplication;
 import com.cdkj.baselibrary.R;
-import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.interfaces.CameraPhotoListener;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 import static android.provider.MediaStore.ACTION_VIDEO_CAPTURE;
 
@@ -54,6 +43,7 @@ public class CameraHelper {
     public final static int CAPTURE_PHOTO_CODE = 3;//相机
     public final static int CAPTURE_WALBUM_CODE = 4;//相册
     public final static int CAPTURE_ZOOM_CODE = 5;//裁剪
+    private final boolean selectMultiple;
 
     private int mRequestCode = -1;//用于记录是相机还是相册裁剪
 
@@ -77,8 +67,7 @@ public class CameraHelper {
     private String[] needLocationPermissions = {
             Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-    };
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
     public void setSplit(boolean split) {
@@ -100,17 +89,32 @@ public class CameraHelper {
      *
      * @param cameraPhotoListener 获取图片监听
      */
-    public CameraHelper(@NonNull Object object, @NonNull CameraPhotoListener cameraPhotoListener, String cameraType) {
+    public CameraHelper(@NonNull Object object, @NonNull CameraPhotoListener cameraPhotoListener, String cameraType,boolean selectMultiple) {
         this.mContext = object;
         this.cameraType = cameraType;
         checkCallingObjectSuitability(object);
         this.isSplit = true;
+        this.selectMultiple = selectMultiple;
         this.mCameraPhotoListener = cameraPhotoListener;
         mSubscription = new CompositeDisposable();
         mPreHelper = new PermissionHelper(object);
         mCamerahelperCropInterface = new defaultCropInterface();
+
     }
 
+    /**
+     * 判断权限并启动相册
+     * 通过三方启动可以多选
+     *
+     * @return
+     */
+    public void startAlbumDouble() {
+        if (isNeedRequestPremission()) {
+            requestPermissions(CAPTURE_WALBUM_CODE);
+            return;
+        }
+
+    }
     /**
      * 判断权限并启动相册
      *
@@ -123,6 +127,7 @@ public class CameraHelper {
         }
         startImageFromAlbum();
     }
+
 
     /**
      * 判断权限并启动相机
@@ -539,6 +544,7 @@ public class CameraHelper {
         }else {
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*");
         }
+
 
         startActivity(intent, CAPTURE_WALBUM_CODE);
     }

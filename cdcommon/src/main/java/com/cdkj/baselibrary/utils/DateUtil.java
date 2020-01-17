@@ -2,6 +2,8 @@ package com.cdkj.baselibrary.utils;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -485,5 +487,47 @@ public class DateUtil {
 
         return diffMinute <= 5 ? "刚刚" : diffMinute + "分钟";
     }
+
+
+    /**
+     * 获取两个时间差的毫秒值
+     *
+     * @param timeMax  大的时间
+     * @param timeMin  小的时间
+     * @param dateType 格式化类型  yyyMMMM.....
+     * @return
+     */
+    public static long getDateTimeDifference(String timeMax, String timeMin, String dateType) {
+
+//        String StringTime1 = "2018-08-13 12:20:30";
+//        String StringTime2 = "2018-08-13 12:20:31";
+        SimpleDateFormat sdf = new SimpleDateFormat(dateType);//yyyy-mm-dd, 会出现时间不对, 因为小写的mm是代表: 秒
+        Date dateTime1 = null;
+        Date dateTime2 = null;
+        try {
+            dateTime1 = sdf.parse(timeMax);
+            dateTime2 = sdf.parse(timeMin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        long difference = dateTime1.getTime() - dateTime2.getTime();
+        return difference;
+    }
+
+    /**
+     * 将毫秒值转化为多少年
+     *
+     * @param timeLong
+     * @return
+     */
+    public static double switchYear(long timeLong) {
+        long yearLongTime = 1000l * 60l * 60l * 24l * 365l;
+        //bigDecimal  计算除法的时候需要注意 后面要有保留的小数位,或者进行四舍五入等处理,否则遇到除不尽的情况会崩溃
+        BigDecimal divide = BigDecimal.valueOf(timeLong).divide(BigDecimal.valueOf(yearLongTime), RoundingMode.UP);
+        String year = divide.toString();
+        return Double.parseDouble(year);
+    }
+
 
 }

@@ -14,6 +14,8 @@ public class UserHelper {
     public static final String ZHRY = "SR20180000000000000ZHRY"; // 驻行人员
     public static final String NQZY = "SR20180000000000000NQZY"; // 内勤专员
 
+    public static final String PGY = "SR202000000000000000PGY"; // 内勤专员
+
     public static boolean isZHRY(){
         if (TextUtils.isEmpty(SPUtilHelper.getRoleCode()))
             return false;

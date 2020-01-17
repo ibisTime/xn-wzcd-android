@@ -114,4 +114,14 @@ public class MyConfirmBtn extends LinearLayout {
     public void setRightText(String content) {
         mBinding.btnConfirmRight.setText(content);
     }
+
+    /**
+     * 隐藏右边按钮
+     */
+    public void setRightGone() {
+        mBinding.btnConfirmRight.setVisibility(GONE);
+    }
+    public void setGone(String content) {
+        mBinding.btnConfirm.setVisibility(GONE);
+    }
 }

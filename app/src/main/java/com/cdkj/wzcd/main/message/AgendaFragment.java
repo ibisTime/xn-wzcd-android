@@ -4,24 +4,23 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.api.ResponseInListModel;
-import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListFragment;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.api.MyApiServer;
-import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
 import com.cdkj.wzcd.main.credit.module.djcz.DjczActivity;
 import com.cdkj.wzcd.main.credit.module.dzhl.DzhlActivity;
 import com.cdkj.wzcd.main.credit.module.fsdy.FsdyActivity;
 import com.cdkj.wzcd.main.credit.module.ljdj.LjdjActivity;
 import com.cdkj.wzcd.main.credit.module.lrfk.LrfkActivity;
 import com.cdkj.wzcd.main.credit.module.qrdy.QrdyActivity;
+import com.cdkj.wzcd.main.credit.module.qrpg.QrpgActivity;
 import com.cdkj.wzcd.main.credit.module.qrsk.QrskActivity;
 import com.cdkj.wzcd.main.credit.module.rd.RdActivity;
 import com.cdkj.wzcd.main.credit.module.yhsj.YhsjActivity;
@@ -32,12 +31,12 @@ import com.cdkj.wzcd.main.credit.module.zdhl.ZdhlActivity;
 import com.cdkj.wzcd.main.credit.module.zrsh.ZrshActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.message.adapter.AgendaAdapter;
-import com.cdkj.wzcd.main.message.adapter.MessageAdapter;
 import com.cdkj.wzcd.main.message.bean.AgendaBean;
-import retrofit2.Call;
 
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 
 /**
@@ -60,7 +59,7 @@ public class AgendaFragment extends AbsRefreshListFragment {
 
     @Override
     protected void afterCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                               @Nullable Bundle savedInstanceState) {
 
         initRefreshHelper(10);
         mRefreshHelper.onDefaultMRefresh(true);
@@ -125,11 +124,15 @@ public class AgendaFragment extends AbsRefreshListFragment {
             case "a1x":
                 ZrzlActivity.open(mActivity, item.getBizCode());
                 break;
-
+            case "h1":
+                QrpgActivity.open(mActivity, item.getBizCode(), false);
+                break;
+            case "h2":
+                QrpgActivity.open(mActivity, item.getBizCode(), true);
+                break;
             case "a2":
                 ZrshActivity.open(mActivity, item.getBizCode());
                 break;
-
             case "b1":
                 YksqActivity.open(mActivity, item.getBizCode());
                 break;

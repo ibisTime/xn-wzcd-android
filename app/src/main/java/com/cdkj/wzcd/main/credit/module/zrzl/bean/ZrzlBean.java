@@ -61,6 +61,8 @@ public class ZrzlBean implements Serializable {
     private String insideJob;
     private String loanBank;
     private String loanAmount;
+    private String ascription;
+    private String ascriptionName;
     private String applyDatetime;
     private String remark;
     private String curNodeCode;
@@ -105,6 +107,22 @@ public class ZrzlBean implements Serializable {
     private List<GPSBean> gpsAzList;
     private List<DkrxxBean> creditUserList;
     private List<AttachmentsBean> attachments;
+
+    public String getAscription() {
+        return ascription;
+    }
+
+    public void setAscription(String ascription) {
+        this.ascription = ascription;
+    }
+
+    public String getAscriptionName() {
+        return ascriptionName;
+    }
+
+    public void setAscriptionName(String ascriptionName) {
+        this.ascriptionName = ascriptionName;
+    }
 
     public String getRegionName() {
         return regionName;
@@ -909,6 +927,15 @@ public class ZrzlBean implements Serializable {
         private String carModelName;
         private String model;
         private String regAddress;
+        private String shopCarGarageRate;
+
+        public String getShopCarGarageRate() {
+            return shopCarGarageRate;
+        }
+
+        public void setShopCarGarageRate(String shopCarGarageRate) {
+            this.shopCarGarageRate = shopCarGarageRate;
+        }
 
         public String getIsPublicCard() {
             return isPublicCard;

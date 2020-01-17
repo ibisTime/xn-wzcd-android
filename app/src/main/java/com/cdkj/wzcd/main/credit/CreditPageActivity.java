@@ -5,21 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
+import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.main.credit.adapter.CreditPageAdapter;
 import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
+import com.cdkj.wzcd.main.credit.bean.JurisdictionBean;
 import com.cdkj.wzcd.main.credit.module.djcz.DjczActivity;
 import com.cdkj.wzcd.main.credit.module.dzhl.DzhlActivity;
-import com.cdkj.wzcd.main.credit.module.fsdy.FsdyActivity;
 import com.cdkj.wzcd.main.credit.module.ljdj.LjdjActivity;
 import com.cdkj.wzcd.main.credit.module.lrfk.LrfkActivity;
-import com.cdkj.wzcd.main.credit.module.qrdy.QrdyActivity;
+import com.cdkj.wzcd.main.credit.module.qrpg.QrpgActivity;
 import com.cdkj.wzcd.main.credit.module.qrsk.QrskActivity;
 import com.cdkj.wzcd.main.credit.module.rd.RdActivity;
 import com.cdkj.wzcd.main.credit.module.yhsj.YhsjActivity;
@@ -29,11 +32,13 @@ import com.cdkj.wzcd.main.credit.module.yksq.YksqActivity;
 import com.cdkj.wzcd.main.credit.module.zdhl.ZdhlActivity;
 import com.cdkj.wzcd.main.credit.module.zrsh.ZrshActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
-import retrofit2.Call;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -42,6 +47,7 @@ import java.util.Map;
 public class CreditPageActivity extends AbsRefreshListActivity {
 
     ArrayList<String> curNodeCodeList;
+    private boolean isShowCrate;
 
     public static void open(Context context, ArrayList<String> nodeList) {
         if (context == null) {
@@ -49,6 +55,22 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         }
         Intent intent = new Intent(context, CreditPageActivity.class);
         intent.putStringArrayListExtra(CdRouteHelper.DATA_SIGN, nodeList);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 只有准入资料界面  再有权限的情况下会显示新建按钮 其他界面都不先是
+     * @param context
+     * @param nodeList
+     * @param isShowCrate  传入true+有权限 右上角就会显示 新建按钮
+     */
+    public static void open(Context context, ArrayList<String> nodeList, boolean isShowCrate) {
+        if (context == null) {
+            return;
+        }
+        Intent intent = new Intent(context, CreditPageActivity.class);
+        intent.putStringArrayListExtra(CdRouteHelper.DATA_SIGN, nodeList);
+        intent.putExtra(CdRouteHelper.DATA_SIGN2, isShowCrate);
         context.startActivity(intent);
     }
 
@@ -102,7 +124,42 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         init();
 
         initRefreshHelper(10);
+        //获取用户权限  显示隐藏右上角的新建按钮
+        if (isShowCrate) {
+            getJurisdiction();
+        }
 
+    }
+
+    private void getJurisdiction() {
+
+//        Map<String, Object> map = RetrofitUtils.getNodeListMap();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("roleCode", SPUtilHelper.getRoleCode());
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getJurisdiction("630167", StringUtils.getJsonToString(map));
+        addCall(call);
+        call.enqueue(new BaseResponseListCallBack<JurisdictionBean>(null) {
+
+            @Override
+            protected void onSuccess(List<JurisdictionBean> data, String SucMessage) {
+                if (data != null && data.size() > 0) {
+                    for (JurisdictionBean datum : data) {
+                        if (TextUtils.equals("a1", datum.getCode())) {
+                            mBaseBinding.titleView.setRightTitle("新建");
+                            mBaseBinding.titleView.setRightFraClickListener(view -> {
+                                ZrzlActivity.open(CreditPageActivity.this, null);
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            protected void onFinish() {
+
+            }
+        });
     }
 
     @Override
@@ -113,6 +170,7 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
     private void init() {
         curNodeCodeList = getIntent().getStringArrayListExtra(CdRouteHelper.DATA_SIGN);
+        isShowCrate = getIntent().getBooleanExtra(CdRouteHelper.DATA_SIGN2, false);
 
         if (curNodeCodeList.isEmpty()) {
             return;
@@ -122,12 +180,12 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
             if (node.equals("a1") || node.equals("a1x")) {
                 mBaseBinding.titleView.setMidTitle("准入资料");
-                mBaseBinding.titleView.setRightTitle("录入");
-                mBaseBinding.titleView.setRightFraClickListener(view -> {
-                    ZrzlActivity.open(this, null);
-                });
             } else if (node.equals("a2")) {
                 mBaseBinding.titleView.setMidTitle("准入审核");
+            } else if (node.equals("h1")) {
+                mBaseBinding.titleView.setMidTitle("确认评估");
+            } else if (node.equals("h2")) {
+                mBaseBinding.titleView.setMidTitle("接收评估");
             } else if (node.equals("b1")) {
                 mBaseBinding.titleView.setMidTitle("用款申请");
             } else if (node.equals("b3")) {
@@ -164,9 +222,14 @@ public class CreditPageActivity extends AbsRefreshListActivity {
             case "a1x":
                 ZrzlActivity.open(this, item.getCode());
                 break;
-
             case "a2":
                 ZrshActivity.open(this, item.getCode());
+                break;
+            case "h1":
+                QrpgActivity.open(this, item.getCode(), false);
+                break;
+            case "h2":
+                QrpgActivity.open(this, item.getCode(), true);
                 break;
 
             case "b1":
@@ -212,8 +275,6 @@ public class CreditPageActivity extends AbsRefreshListActivity {
             case "f1":
                 RdActivity.open(this, item.getCode());
                 break;
-
-
         }
 
     }

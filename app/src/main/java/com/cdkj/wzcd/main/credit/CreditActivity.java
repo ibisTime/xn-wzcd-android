@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cdkj.baselibrary.adapters.ViewPagerAdapter;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
@@ -22,13 +23,27 @@ import com.cdkj.wzcd.main.credit.module.zrzl.adapter.ZrzlStepAdapter;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlStepBean;
-import com.cdkj.wzcd.main.credit.module.zrzl.detail.*;
-import com.cdkj.wzcd.main.credit.module.zrzl.step.*;
-import retrofit2.Call;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailCzrzFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailDzxqFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailFkxqFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailHkjhFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailLjxqFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.detail.DetailRdxqFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepCltFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepClxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkcltFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkrxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepFyxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepJbxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepJjlxrFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepSmdctFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -156,6 +171,7 @@ public class CreditActivity extends AbsBaseLoadActivity {
 
         Map<String, Object> map = RetrofitUtils.getRequestMap();
         map.put("code", code);
+//        map.put("teamCode", SPUtilHelper.getTeamCode());
 
         showLoadingDialog();
 

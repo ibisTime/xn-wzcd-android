@@ -9,18 +9,25 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+
 import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.model.eventmodels.EventBean;
+import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
+import com.cdkj.wzcd.common.SearchActivity;
 import com.cdkj.wzcd.databinding.LayoutBaseSelectBinding;
-import com.cdkj.wzcd.databinding.LayoutMySelectHorizontalBinding;
 import com.cdkj.wzcd.util.DataDictionaryHelper;
 import com.cdkj.wzcd.view.interfaces.MyFrontSelectInterface;
 import com.cdkj.wzcd.view.interfaces.MySelectInterface;
 
-import java.util.*;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
-import static com.cdkj.wzcd.util.DataDictionaryHelper.send_type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 下拉框Layout
@@ -40,9 +47,10 @@ public class BaseSelectLayout extends LinearLayout {
     private String txtTitle;
     private String txtContent;
     private boolean isRequired;
+    private boolean isOpenActivity;//是否打开新的搜索的页面,不打开的话默认是弹窗的形式展示的
 
     //
-    private String mKey;
+    private String mKey = "";
     private String[] mKeyList;
 
     private String mValue;
@@ -74,11 +82,13 @@ public class BaseSelectLayout extends LinearLayout {
         txtTitle = typedArray.getString(R.styleable.BaseSelectLayout_title);
         txtContent = typedArray.getString(R.styleable.BaseSelectLayout_text);
         isRequired = typedArray.getBoolean(R.styleable.BaseSelectLayout_isRequired, false);
+        isOpenActivity = typedArray.getBoolean(R.styleable.BaseSelectLayout_isOpenActivity, false);
 
         typedArray.recycle();
 
         init(context);
         setData();
+        EventBus.getDefault().register(this);
     }
 
     private void init(Context context) {
@@ -139,6 +149,8 @@ public class BaseSelectLayout extends LinearLayout {
         mBinding.ivMore.setVisibility(GONE);
         // 设置不可弹出下拉
         isOnClickEnable = false;
+
+        mValue = text;
         // 设置内容
         mBinding.tvContent.setText(text);
 
@@ -228,7 +240,7 @@ public class BaseSelectLayout extends LinearLayout {
      * @param selectInterface
      */
     public void setData(String key1, String value1, String key2, String value2,
-            MySelectInterface selectInterface) {
+                        MySelectInterface selectInterface) {
 
         if (TextUtils.isEmpty(key1) || TextUtils.isEmpty(value1) || TextUtils.isEmpty(key2)
                 || TextUtils.isEmpty(value2)) {
@@ -239,7 +251,7 @@ public class BaseSelectLayout extends LinearLayout {
         data.add(new DataDictionary().setDkey(key1).setDvalue(value1));
         data.add(new DataDictionary().setDkey(key2).setDvalue(value2));
 
-        mData = data;
+        mData = (ArrayList<DataDictionary>) data;
         mySelectInterface = selectInterface;
 
     }
@@ -251,7 +263,7 @@ public class BaseSelectLayout extends LinearLayout {
      */
     public void setDataIs(MySelectInterface selectInterface) {
 
-        List<DataDictionary> data = new ArrayList<>();
+        ArrayList<DataDictionary> data = new ArrayList<>();
         data.add(new DataDictionary().setDkey("1").setDvalue("是"));
         data.add(new DataDictionary().setDkey("0").setDvalue("否"));
 
@@ -267,7 +279,7 @@ public class BaseSelectLayout extends LinearLayout {
      * @param parentKey
      */
     public void setData(String parentKey) {
-        setData(DataDictionaryHelper.getListByParentKey(parentKey), null);
+        setData((ArrayList<DataDictionary>) DataDictionaryHelper.getListByParentKey(parentKey), null);
     }
 
     /**
@@ -276,7 +288,7 @@ public class BaseSelectLayout extends LinearLayout {
      * @param parentKey
      */
     public void setData(String parentKey, MySelectInterface selectInterface) {
-        setData(DataDictionaryHelper.getListByParentKey(parentKey), selectInterface);
+        setData((ArrayList<DataDictionary>) DataDictionaryHelper.getListByParentKey(parentKey), selectInterface);
     }
 
     /**
@@ -286,6 +298,18 @@ public class BaseSelectLayout extends LinearLayout {
      */
     public void setData(List<DataDictionary> data) {
         mData = data;
+    }
+
+    /**
+     * 直接设置List数据
+     *
+     * @param data
+     */
+    public void setData(List<DataDictionary> data,boolean isOpenActivity) {
+        mData = data;
+        if (isOpenActivity){
+            SearchActivity.open(mBinding.getRoot().getContext(),"请输入搜索数据",field,(ArrayList<DataDictionary>) data);
+        }
     }
 
     /**
@@ -307,7 +331,7 @@ public class BaseSelectLayout extends LinearLayout {
      * @param selectInterface
      */
     public void setData(List<DataDictionary> data, MyFrontSelectInterface frontSelectInterface,
-            MySelectInterface selectInterface) {
+                        MySelectInterface selectInterface) {
         mData = data;
         mySelectInterface = selectInterface;
         myFrontSelectInterface = frontSelectInterface;
@@ -335,9 +359,22 @@ public class BaseSelectLayout extends LinearLayout {
                 ToastUtil.show(getContext(), "没有可选列表");
                 return;
             }
-            showSelect();
+            if (isOpenActivity) {
+                SearchActivity.open(context, "请输入搜索内容", field, (ArrayList<DataDictionary>) mData);
+            } else {
+                showSelect();
+            }
 
         });
+    }
+
+    /**
+     * 设置field   此方法适用于  列表条目的重新设置,否则一般是在布局写死的
+     *
+     * @param field
+     */
+    public void setField(String field) {
+        this.field = field;
     }
 
     public void setListener(OnClickListener listener) {
@@ -452,6 +489,26 @@ public class BaseSelectLayout extends LinearLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 //        clearCall();
+    }
+
+
+    //接收从SearchActivity界面返回的数据
+    @Subscribe
+    public void searchCheckdData(EventBean eventBean) {
+        if (TextUtils.equals(eventBean.getTag(), field)) {
+            mKey = eventBean.getValue1();
+            mValue = eventBean.getValue2();
+            try {
+                selectIndex = Integer.parseInt(eventBean.getValue3());
+            } catch (Exception ex) {
+                LogUtil.E("BaseSelectLayout第490行:数据类型转换异常");
+            }
+            if (mySelectInterface != null) {
+                mySelectInterface.onClick(null, selectIndex);
+            }
+            mBinding.tvContent.setText(mValue);
+        }
+
     }
 
 }

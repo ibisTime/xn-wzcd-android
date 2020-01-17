@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -13,26 +14,24 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.model.IsSuccessModes;
-import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActRdBinding;
-import com.cdkj.wzcd.databinding.ActYhtjBinding;
 import com.cdkj.wzcd.main.credit.module.CreditDetailFragment;
 import com.cdkj.wzcd.main.credit.module.rd.bean.BXCompanyBean;
 import com.cdkj.wzcd.main.credit.module.rd.bean.RdPlaceBean;
-import com.cdkj.wzcd.main.credit.module.zrsh.ZrshActivity;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.CarSeriesBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
-import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import retrofit2.Call;
-
-import java.util.*;
-
-import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 
 /**
  * @author : qianLei

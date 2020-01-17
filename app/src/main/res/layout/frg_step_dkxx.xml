@@ -122,11 +122,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="money"
+                    app:isRequired="true"
                     app:title="发票价格"/>
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_wanFactor"
                     app:field="wanFactor"
+                    app:dateType="ym"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="开票日期"/>

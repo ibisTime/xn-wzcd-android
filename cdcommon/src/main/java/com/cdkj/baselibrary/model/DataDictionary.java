@@ -24,11 +24,21 @@ public class DataDictionary extends DataSupport implements Serializable  {
 
     private int id;
     private String type;
+    private String tag;//用于记录一些其他的值
     private String parentKey;
     private String dkey;
     private String dvalue;
     private String updater;
     private String updateDatetime;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public DataDictionary setTag(String tag) {
+        this.tag = tag;
+        return this;
+    }
 
     public int getId() {
         return id;

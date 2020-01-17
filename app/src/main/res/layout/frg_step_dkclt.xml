@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,42 +27,56 @@
                     android:id="@+id/il_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="材料上传"/>
+                    app:title="材料上传" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:title="户口本"/>
+                    app:selectMultiple="true"
+                    app:title="户口本" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_hk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="户口本"/>
+                    app:selectMultiple="true"
+                    app:title="户口本" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_bank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="银行流水"/>
+                    app:selectMultiple="true"
+                    app:title="银行流水" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_zfb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="支付宝流水"/>
+                    app:selectMultiple="true"
+                    app:title="支付宝流水" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_wx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="微信流水"/>
+                    app:selectMultiple="true"
+                    app:title="微信流水" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_other"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="其他"/>
+                    app:selectMultiple="true"
+                    app:title="其他" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_signing_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    app:cameraType="video"
+                    app:title="合同签约视频"/>
 
             </LinearLayout>
 
@@ -78,7 +94,7 @@
                 android:background="@drawable/shape_btn_bg_std"
                 android:text="保存"
                 android:textColor="#ffffffff"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

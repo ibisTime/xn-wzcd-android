@@ -63,7 +63,31 @@ public class UserModel implements Parcelable {
     private String styleName;
     private String signStatus;
     private String roleCode;
+    private String roleName;
     private int maxNumber;
+    /**
+     * type : P
+     * postCode : DP201909171119479292849
+     * jobNo : 065
+     * teamCode : BT201909171301034281856
+     * postName : 温州业务员
+     * teamName : A团队
+     */
+
+    private String type;
+    private String postCode;
+    private String jobNo;
+    private String teamCode;
+    private String postName;
+    private String teamName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public String getDepartmentCode() {
         return departmentCode;
@@ -391,4 +415,52 @@ public class UserModel implements Parcelable {
             return new UserModel[size];
         }
     };
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getJobNo() {
+        return jobNo;
+    }
+
+    public void setJobNo(String jobNo) {
+        this.jobNo = jobNo;
+    }
+
+    public String getTeamCode() {
+        return teamCode;
+    }
+
+    public void setTeamCode(String teamCode) {
+        this.teamCode = teamCode;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
 }

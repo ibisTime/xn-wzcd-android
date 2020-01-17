@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -23,10 +24,14 @@ import com.cdkj.wzcd.databinding.FrgStepDkcltBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
-import org.greenrobot.eventbus.EventBus;
-import retrofit2.Call;
 
-import java.util.*;
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 
@@ -68,7 +73,7 @@ public class StepDkcltFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_step_dkclt, null, false);
 
@@ -107,6 +112,10 @@ public class StepDkcltFragment extends BaseLazyFragment {
         mBinding.ilZfb.initMultiple(mActivity, "zfbJour");
         mBinding.ilWx.initMultiple(mActivity, "wxJour");
         mBinding.ilOther.initMultiple(mActivity, "otherPdf");
+
+        List<BaseImageBean> signingList = new ArrayList<>();
+        signingList.add(new BaseImageBean("合同签约视频", "contractAwardVideo"));
+        mBinding.ilSigningVideo.initMultiple(mActivity, "contractAwardVideo");
 
     }
 
@@ -181,15 +190,16 @@ public class StepDkcltFragment extends BaseLazyFragment {
                     if (bean.getKname().equals("other_pdf")) {
                         mBinding.ilOther.setData(bean.getUrl());
                     }
-
+                    if (bean.getKname().equals("contract_award_video")) {
+                        mBinding.ilSigningVideo.setData("contractAwardVideo",bean.getUrl());
+                    }
                 }
-
             }
 
         }
 
 
-        if (isDetail){
+        if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
             mBinding.btnConfirm.setVisibility(View.GONE);
         }
@@ -200,6 +210,7 @@ public class StepDkcltFragment extends BaseLazyFragment {
         Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInput);
         map.put("code", ((ZrzlActivity) mActivity).code);
         map.put("operator", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632535", StringUtils.getJsonToString(map));

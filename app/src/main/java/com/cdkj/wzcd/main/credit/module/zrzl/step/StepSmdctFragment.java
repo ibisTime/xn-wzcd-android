@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -17,18 +18,18 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
-import com.cdkj.wzcd.custom.bean.BaseImageBean;
 import com.cdkj.wzcd.custom.util.BaseViewUtil;
 import com.cdkj.wzcd.databinding.FrgStepSmdctBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
-import org.greenrobot.eventbus.EventBus;
-import retrofit2.Call;
 
-import java.util.ArrayList;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 
@@ -70,7 +71,7 @@ public class StepSmdctFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_step_smdct, null, false);
 
@@ -98,9 +99,13 @@ public class StepSmdctFragment extends BaseLazyFragment {
         mBinding.ilDoorPdf.initMultiple(mActivity, "doorPdf");
         mBinding.ilGroupPhoto.initMultiple(mActivity, "groupPhoto");
 
-        List<BaseImageBean> list = new ArrayList<>();
-        list.add(new BaseImageBean("家访视频", "houseVideo"));
-        mBinding.ilHouseVideo.init(mActivity, list);
+//        List<BaseImageBean> list = new ArrayList<>();
+//        list.add(new BaseImageBean("家访视频", "houseVideo"));
+        mBinding.ilHouseVideo.initMultiple(mActivity, "houseVideo");
+
+//        List<BaseImageBean> companyList = new ArrayList<>();
+//        companyList.add(new BaseImageBean("公司视频", "companyVideo"));
+        mBinding.ilCompanyVideo.initMultiple(mActivity, "companyVideo");
 
     }
 
@@ -133,7 +138,8 @@ public class StepSmdctFragment extends BaseLazyFragment {
                 for (ZrzlBean.AttachmentsBean bean : attachments) {
 
                     if (bean.getKname().equals("house_video")) {
-                        mBinding.ilHouseVideo.setData("houseVideo", bean.getUrl());
+//                        mBinding.ilHouseVideo.setData("houseVideo", bean.getUrl());
+                        mBinding.ilHouseVideo.setData( bean.getUrl());
                     }
 
                     if (bean.getKname().equals("door_photo")) {
@@ -141,6 +147,10 @@ public class StepSmdctFragment extends BaseLazyFragment {
                     }
                     if (bean.getKname().equals("group_photo")) {
                         mBinding.ilGroupPhoto.setData(bean.getUrl());
+                    }
+                    if (bean.getKname().equals("company_video")) {
+//                        mBinding.ilCompanyVideo.setData("companyVideo",bean.getUrl());
+                        mBinding.ilCompanyVideo.setData(bean.getUrl());
                     }
 
                 }
@@ -150,7 +160,7 @@ public class StepSmdctFragment extends BaseLazyFragment {
         }
 
 
-        if (isDetail){
+        if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
             mBinding.btnConfirm.setVisibility(View.GONE);
         }
@@ -162,6 +172,7 @@ public class StepSmdctFragment extends BaseLazyFragment {
         Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInput);
         map.put("code", ((ZrzlActivity) mActivity).code);
         map.put("operator", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632536", StringUtils.getJsonToString(map));

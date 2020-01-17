@@ -4,17 +4,19 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
-import android.text.*;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.LayoutBaseEditBinding;
 import com.cdkj.wzcd.util.RequestUtil;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -161,6 +163,12 @@ public class BaseEditLayout extends LinearLayout {
             }
         }
         return false;
+    }
+
+    public void isRequired(boolean isRequired) {
+        this.isRequired = isRequired;
+        mBinding.tvRequired.setVisibility(isRequired ? VISIBLE : GONE);
+
     }
 
     public boolean checkNoTip() {

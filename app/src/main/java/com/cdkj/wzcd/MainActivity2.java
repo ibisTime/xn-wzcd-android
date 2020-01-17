@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+
 import com.cdkj.baselibrary.adapters.ViewPagerAdapter;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
+import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.eventmodels.EventFinishAll;
-import com.cdkj.baselibrary.utils.LogUtil;
+import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
+import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.adapter.MainBottomTabAdapter;
+import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActMainBinding;
 import com.cdkj.wzcd.main.MainClientFragment;
 import com.cdkj.wzcd.main.MainCreditFragment;
@@ -19,11 +25,17 @@ import com.cdkj.wzcd.main.MainMessageFragment;
 import com.cdkj.wzcd.main.MainUserFragment;
 import com.cdkj.wzcd.model.NavigationBean;
 import com.cdkj.wzcd.model.NodeModel;
+import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.util.NodeHelper;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -83,6 +95,48 @@ public class MainActivity2 extends AbsBaseLoadActivity {
             @Override
             public void onReqFailure(String errorCode, String errorMessage) {
 
+            }
+        });
+
+        /**
+         * 获取用户信息
+         */
+
+        if (!SPUtilHelper.isLoginNoStart()) {  //没有登录不用请求
+            return;
+        }
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("userId", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getUserInfoDetails("630067", StringUtils.getJsonToString(map));
+
+        addCall(call);
+        showLoadingDialog();
+
+        call.enqueue(new BaseResponseModelCallBack<UserModel>(this) {
+            @Override
+            protected void onSuccess(UserModel data, String SucMessage) {
+                SPUtilHelper.saveisTradepwdFlag(data.isTradepwdFlag());
+                SPUtilHelper.saveUserPhoneNum(data.getMobile());
+                SPUtilHelper.saveUserName(data.getRealName());
+                SPUtilHelper.saveUserNickName(data.getNickname());
+                SPUtilHelper.saveUserPhoto(data.getPhoto());
+                SPUtilHelper.saveRoleCode(data.getRoleCode());
+                SPUtilHelper.saveUserCompanyCode(data.getCompanyCode());
+                SPUtilHelper.saveTeamCode(data.getTeamCode());
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+                UITipDialog.showFail(MainActivity2.this, errorMessage);
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
             }
         });
     }

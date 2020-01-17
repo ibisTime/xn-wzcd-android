@@ -45,6 +45,7 @@ public class DealersModel  extends DataSupport implements Serializable{
 
     private String code;
     private String fullName;
+    private double rebateRate;
     private String abbrName;
     private String isSelfDevelop;
     private String address;
@@ -68,6 +69,14 @@ public class DealersModel  extends DataSupport implements Serializable{
     private List<GsCollectBankcardListBean> gsCollectBankcardList;
     private List<ZhCollectBankcardListBean> zhCollectBankcardList;
     private List<JhCollectBankcardListBean> jhCollectBankcardList;
+
+    public double getRebateRate() {
+        return rebateRate;
+    }
+
+    public void setRebateRate(double rebateRate) {
+        this.rebateRate = rebateRate;
+    }
 
     public boolean isAdvanceFund() {
         return isAdvanceFund;

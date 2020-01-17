@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cdkj.baselibrary.adapters.ViewPagerAdapter;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -15,28 +16,34 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
-import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
-import com.cdkj.wzcd.custom.util.BaseViewUtil;
 import com.cdkj.wzcd.databinding.ActZrzlBinding;
 import com.cdkj.wzcd.main.credit.module.zrzl.adapter.ZrzlStepAdapter;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.CarBrandBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlStepBean;
-import com.cdkj.wzcd.main.credit.module.zrzl.step.*;
-import org.greenrobot.eventbus.EventBus;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepCltFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepClxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkcltFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkrxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepDkxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepFyxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepJbxxFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepJjlxrFragment;
+import com.cdkj.wzcd.main.credit.module.zrzl.step.StepSmdctFragment;
+
 import org.greenrobot.eventbus.Subscribe;
-import retrofit2.Call;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -51,9 +58,12 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
 
     public String code;
     public ZrzlBean data;
+    public static String slRegion;//业务发生地
+    public static String slBizType;//二手车 /新车
 
     private List<ZrzlStepBean> steps = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
+    private boolean isShowCrate;
 
     public static void open(Context context, String code) {
         if (context == null) {
@@ -63,6 +73,7 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
         intent.putExtra(CdRouteHelper.DATA_SIGN, code);
         context.startActivity(intent);
     }
+
 
     @Override
     protected boolean canLoadTopTitleView() {
@@ -89,6 +100,7 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
 
     private void init() {
         code = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN);
+        isShowCrate = getIntent().getBooleanExtra(CdRouteHelper.DATA_SIGN2, false);
         getDetail(true);
     }
 
@@ -149,13 +161,13 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
     private void initFragments() {
         fragments.add(StepJbxxFragment.getInstance(false));
         fragments.add(StepDkrxxFragment.getInstance(false));
-        fragments.add(StepJjlxrFragment.getInstance(false));
+        fragments.add(StepJjlxrFragment.getInstance(false));//3
         fragments.add(StepDkxxFragment.getInstance(false));
         fragments.add(StepFyxxFragment.getInstance(false));
-        fragments.add(StepClxxFragment.getInstance(false));
+        fragments.add(StepClxxFragment.getInstance(false));//6
         fragments.add(StepDkcltFragment.getInstance(false));
         fragments.add(StepSmdctFragment.getInstance(false));
-        fragments.add(StepCltFragment.getInstance(false));
+        fragments.add(StepCltFragment.getInstance(false));//9
     }
 
     /**
@@ -229,6 +241,7 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
         Map<String, String> map = new HashMap<>();
         map.put("code", code);
         map.put("operator", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632539", StringUtils.getJsonToString(map));

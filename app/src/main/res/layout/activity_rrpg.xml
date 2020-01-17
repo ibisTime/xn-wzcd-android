@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--业务编号基本信息-->
+                <LinearLayout
+                    android:id="@+id/ll_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:title="身份证信息" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_carHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectMultiple="true"
+                    app:title="车辆图" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_carRegisterCertificateFirst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:selectMultiple="true"
+                    app:title="登记证书" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:selectMultiple="true"
+                    app:title="保单" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_carInvoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:selectMultiple="false"
+                    app:title="发票" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_driveLicense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:selectMultiple="false"
+                    app:title="行驶证" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:txt_confirm_content="保存"
+            app:txt_confirm_content_right="提交">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/btn_confirm2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:txt_confirm_content="提交">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+    </LinearLayout>
+</layout>

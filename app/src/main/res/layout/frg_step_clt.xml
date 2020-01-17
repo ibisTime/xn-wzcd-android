@@ -23,15 +23,32 @@
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_carHead"
+                    app:selectMultiple="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="车辆图"/>
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
+                    app:selectMultiple="true"
                     android:id="@+id/il_carRegisterCertificateFirst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="车辆登记证书"/>
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectMultiple="true"
+                    app:title="保单" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_carInvoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectMultiple="false"
+                    app:title="发票" />
+
 
             </LinearLayout>
 

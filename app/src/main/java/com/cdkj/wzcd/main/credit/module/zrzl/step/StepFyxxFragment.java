@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -22,12 +23,14 @@ import com.cdkj.wzcd.databinding.FrgStepFyxxBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import retrofit2.Call;
 
 import java.math.BigDecimal;
 import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 
@@ -69,7 +72,7 @@ public class StepFyxxFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_step_fyxx, null, false);
 
@@ -138,10 +141,9 @@ public class StepFyxxFragment extends BaseLazyFragment {
         mBinding.elCarFunds5.setText(data.getCarFunds5());
 
         if (null != data.getBankLoan()) {
-            setRepointAmount(data.getBankLoan().getLoanAmount(),
-                    data.getBankLoan().getRebateRate());
+            setRepointAmount(data.getBankLoan().getLoanAmount(), data.getBankLoan().getRebateRate(), data.getBankLoan().getTotalRate());
 
-            setCarFunds3(data.getBankLoan().getLoanAmount(), data.getBankLoan().getTotalRate(),
+            setCarFunds3(data.getBankLoan().getLoanAmount(),
                     data.getBankLoan().getRebateRate(), data.getBankLoan().getBankRate());
         }
 
@@ -199,7 +201,7 @@ public class StepFyxxFragment extends BaseLazyFragment {
                 return;
             }
 
-            setRepointAmount(bean.getValue1(), bean.getValue2());
+            setRepointAmount(bean.getValue1(), bean.getValue2(), bean.getValue3());
 
         }
 
@@ -209,39 +211,39 @@ public class StepFyxxFragment extends BaseLazyFragment {
                 return;
             }
 
-            setCarFunds3(bean.getValue1(), bean.getValue2(), bean.getValue3(), bean.getValue4());
-
+            setCarFunds3(bean.getValue1(), bean.getValue3(), bean.getValue4());
         }
-
     }
 
-    private void setRepointAmount(String loanAmountStr, String rebateRateStr) {
+    private void setRepointAmount(String loanAmountStr, String rebateRateStr, String tooleRateStr) {
 
-        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr)) {
+        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr)||TextUtils.isEmpty(tooleRateStr)) {
             return;
         }
 
         BigDecimal loanAmount = new BigDecimal(loanAmountStr.trim());
         BigDecimal rebateRate = new BigDecimal(rebateRateStr.trim());
+        BigDecimal tooleRate = new BigDecimal(tooleRateStr.trim());
+        //车款2的计算公式为  (总利率-返存利率)*贷款本金
 
-        mBinding.elRepointAmount.setText(loanAmount.multiply(rebateRate).toPlainString());
+        mBinding.elRepointAmount.setText(loanAmount.multiply(tooleRate.subtract(rebateRate)).toPlainString());
 
     }
 
-    private void setCarFunds3(String loanAmountStr, String totalRateStr, String rebateRateStr,
-            String bankRateStr) {
-
-        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(totalRateStr) || TextUtils
+    private void setCarFunds3(String loanAmountStr, String rebateRateStr,
+                              String bankRateStr) {
+        //车款3  （返存利率-银行利率）*贷款本金
+        if (TextUtils.isEmpty(loanAmountStr)  || TextUtils
                 .isEmpty(rebateRateStr) || TextUtils.isEmpty(bankRateStr)) {
             return;
         }
 
         BigDecimal loanAmount = new BigDecimal(loanAmountStr.trim());
-        BigDecimal totalRate = new BigDecimal(totalRateStr.trim());
+//        BigDecimal totalRate = new BigDecimal(totalRateStr.trim());
         BigDecimal rebateRate = new BigDecimal(rebateRateStr.trim());
         BigDecimal bankRate = new BigDecimal(bankRateStr.trim());
 
-        BigDecimal rate = totalRate.subtract(rebateRate).subtract(bankRate);
+        BigDecimal rate = rebateRate.subtract(bankRate);
 
         mBinding.elCarFunds3.setText(loanAmount.multiply(rate).toPlainString());
 

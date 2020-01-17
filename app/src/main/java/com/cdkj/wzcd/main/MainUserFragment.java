@@ -3,11 +3,10 @@ package com.cdkj.wzcd.main;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.cdkj.baselibrary.activitys.FindPwdActivity;
+
 import com.cdkj.baselibrary.activitys.UpDataPhoneActivity;
 import com.cdkj.baselibrary.activitys.UpDataPwdActivity;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
@@ -18,20 +17,17 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.wzcd.MainActivity;
+import com.cdkj.wzcd.BuildConfig;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.MainFrgUserBinding;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.module.user.SignInActivity;
-import retrofit2.Call;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.cdkj.wzcd.util.UserHelper.NQZY;
-import static com.cdkj.wzcd.util.UserHelper.YWY;
-import static com.cdkj.wzcd.util.UserHelper.ZHRY;
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -64,15 +60,28 @@ public class MainUserFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.main_frg_user, null, false);
-
+        init();
         initListener();
 
         getUserInfoRequest();
 
         return mBinding.getRoot();
+    }
+
+    private void init() {
+
+        mBinding.tvVesionName.setText(BuildConfig.VERSION_NAME);
+//        try {
+//            PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+//            String versionName = packageInfo.versionName;
+//            mBinding.tvVesionName.setText(versionName);
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//            mBinding.tvVesionName.setText("未知");
+//        }
     }
 
     private void initListener() {
@@ -156,19 +165,22 @@ public class MainUserFragment extends BaseLazyFragment {
         mBinding.tvNick.setText(data.getLoginName());
         mBinding.tvMobile.setText(data.getMobile());
         mBinding.tvCompany.setText(data.getCompanyName());
-
-        if (TextUtils.equals(data.getRoleCode(), ZHRY)) { // 驻行人员
-            mBinding.tvRole.setText("角色名称：驻行人员");
-
-        } else if (TextUtils.equals(data.getRoleCode(), YWY)) {// 业务员
-            mBinding.tvRole.setText("角色名称：业务员");
-
-        } else if (TextUtils.equals(data.getRoleCode(), NQZY)) {// 内勤专员
-            mBinding.tvRole.setText("角色名称：内勤专员");
-
-        } else {
-            mBinding.tvRole.setText("角色名称：其他");
-        }
+        mBinding.tvRole.setText("角色名称：" + data.getRoleName());
+//        if (TextUtils.equals(data.getRoleCode(), ZHRY)) { // 驻行人员
+//            mBinding.tvRole.setText("角色名称：驻行人员");
+//
+//        } else if (TextUtils.equals(data.getRoleCode(), YWY)) {// 业务员
+//            mBinding.tvRole.setText("角色名称：业务员");
+//
+//        } else if (TextUtils.equals(data.getRoleCode(), NQZY)) {// 内勤专员
+//            mBinding.tvRole.setText("角色名称：内勤专员");
+//
+//        } else if (TextUtils.equals(data.getRoleCode(), PGY)) {// 评估员
+//            mBinding.tvRole.setText("角色名称：评估员");
+//
+//        } else {
+//            mBinding.tvRole.setText("角色名称：其他");
+//        }
 
     }
 

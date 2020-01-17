@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -20,16 +21,17 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.custom.bean.BaseImageBean;
 import com.cdkj.wzcd.custom.util.BaseViewUtil;
 import com.cdkj.wzcd.databinding.FrgStepCltBinding;
-import com.cdkj.wzcd.databinding.FrgStepJbxxBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
+
 import org.greenrobot.eventbus.EventBus;
-import retrofit2.Call;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.UPLOAD;
@@ -105,6 +107,11 @@ public class StepCltFragment extends BaseLazyFragment {
         mBinding.ilCarRegisterCertificateFirst
                 .initMultiple(mActivity, "carRegisterCertificateFirst");
 
+        mBinding.ilPolicy.initMultiple(mActivity, "policy");
+        List<BaseImageBean> carInvoiceList = new ArrayList<>();
+        carInvoiceList.add(new BaseImageBean("发票", "carInvoice"));
+        mBinding.ilCarInvoice.init(mActivity, carInvoiceList);
+
     }
 
     private ZrzlBean getData() {
@@ -142,6 +149,13 @@ public class StepCltFragment extends BaseLazyFragment {
                         mBinding.ilCarRegisterCertificateFirst.setData(bean.getUrl());
                     }
 
+                    if (bean.getKname().equals("policy")) {
+                        mBinding.ilPolicy.setData(bean.getUrl());
+                    }
+                    if (bean.getKname().equals("car_invoice")) {
+                        mBinding.ilCarInvoice.setData("carInvoice", bean.getUrl());
+                    }
+
                 }
 
             }
@@ -161,6 +175,7 @@ public class StepCltFragment extends BaseLazyFragment {
         Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInput);
         map.put("code", ((ZrzlActivity) mActivity).code);
         map.put("operator", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632537", StringUtils.getJsonToString(map));

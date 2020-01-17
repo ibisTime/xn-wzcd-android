@@ -2,6 +2,8 @@ package com.cdkj.wzcd.main.credit.module.zrzl.adapter;
 
 import android.app.Activity;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -14,11 +16,12 @@ import com.cdkj.wzcd.main.credit.module.zrzl.bean.GPSBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.GPSSaleBean;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import retrofit2.Call;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -29,9 +32,10 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
     private boolean isDetail;
     private Activity mActivity;
     private List<DataDictionary> selectList;
+    private String item_field = "code";
 
     public GPSAdapter(@Nullable List<GPSBean> data, List<DataDictionary> selectList,
-            boolean isDetail, Activity mActivity) {
+                      boolean isDetail, Activity mActivity) {
         super(R.layout.item_zrzl_gps, data);
         this.isDetail = isDetail;
         this.mActivity = mActivity;
@@ -40,8 +44,9 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, GPSBean item) {
-
         BaseSelectLayout slCode = helper.getView(R.id.sl_code);
+        slCode.setField(item_field + "_" + helper.getLayoutPosition());
+
         slCode.setData(selectList, (dialog, which) -> {
             item.setCode(slCode.getDataKey());
             item.setGpsDevNo(slCode.getDataValue());
@@ -56,11 +61,17 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
 
         BaseImageLayout ilAzPhotos = helper.getView(R.id.il_azPhotos);
         if (item.isInit()) {
-            ilAzPhotos.initMultiple(mActivity,item.getAzPhotos(), "azPhotos" + helper.getLayoutPosition());
+            String azPhotos = item.getAzPhotos();
+            if (TextUtils.equals("null", azPhotos) || TextUtils.isEmpty(azPhotos)) {
+                azPhotos = "";
+            }
+            ilAzPhotos.initMultiple(mActivity, azPhotos, "azPhotos" + helper.getLayoutPosition());
             item.setInit(false);
         }
         ilAzPhotos.setImageInterface((location, field, key) -> {
-            item.setAzPhotos(ilAzPhotos.getData());
+            if (TextUtils.equals(field, "azPhotos" + helper.getLayoutPosition())) {
+                item.setAzPhotos(ilAzPhotos.getData());
+            }
         });
         if (isDetail) {
             slCode.setOnClickEnable(false);
@@ -88,8 +99,7 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
                             .setDvalue(bean.getGpsDevNo()));
                 }
 
-                slCode.setData(selectList);
-                slCode.showSelect();
+                slCode.setData(selectList, true);
             }
 
             @Override

@@ -26,10 +26,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="education"
+                    app:isRequired="true"
                     app:title="教育程度"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_nowAddressPCA"
+                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="住宅"/>
@@ -39,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="nowAddress"
+                    app:isRequired="true"
                     app:title="住宅详细地址"/>
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
@@ -46,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="nowAddressMobile"
+                    app:isRequired="true"
                     app:title="住宅电话"/>
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
@@ -53,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:dateType="ym"
+                    app:isRequired="true"
                     app:field="nowAddressDate"
                     app:title="入住日期"/>
 
@@ -61,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="nowAddressState"
+                    app:isRequired="true"
                     app:title="住宅状况"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
@@ -68,6 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="marryState"
+                    app:isRequired="true"
                     app:title="婚姻状况"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
@@ -82,11 +89,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="companyName"
+                    app:isRequired="true"
                     app:title="工作单位"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_companyPCA"
                     android:layout_width="match_parent"
+                    app:isRequired="true"
                     android:layout_height="wrap_content"
                     app:title="单位地址"/>
 
@@ -101,6 +110,7 @@
                     android:id="@+id/sl_workCompanyProperty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:field="workCompanyProperty"
                     app:title="单位性质"/>
 
@@ -109,6 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:dateType="ym"
+                    app:isRequired="true"
                     app:field="workDatetime"
                     app:title="何时进入单位"/>
 
@@ -117,6 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="position"
+                    app:isRequired="true"
                     app:title="职业"/>
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
@@ -124,6 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="yearIncome"
+                    app:isRequired="true"
                     app:title="月收入"/>
 
                 <com.cdkj.wzcd.custom.BaseEditLayout

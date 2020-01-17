@@ -21,6 +21,7 @@
         <com.cdkj.wzcd.custom.BaseImageLayout
             android:id="@+id/il_azPhotos"
             android:layout_width="match_parent"
+            app:selectMultiple="true"
             android:layout_height="wrap_content"
             app:isRequired="true"
             app:field="azPhotos"

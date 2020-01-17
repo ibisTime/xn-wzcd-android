@@ -9,6 +9,15 @@ public class BaseImageBean {
     private String title;
     private String field;
     private String pic;
+    private boolean isRequired = true;
+
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean required) {
+        isRequired = required;
+    }
 
     private boolean isDetail = false;
 
@@ -51,6 +60,12 @@ public class BaseImageBean {
     public BaseImageBean(String title, String field) {
         this.title = title;
         this.field = field;
+    }
+
+    public BaseImageBean(String title, String field, boolean isRequired) {
+        this.title = title;
+        this.field = field;
+        this.isRequired = isRequired;
     }
 
     public BaseImageBean(String title, String field, String pic) {

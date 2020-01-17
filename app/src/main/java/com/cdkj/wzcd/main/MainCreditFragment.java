@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.cdkj.baselibrary.base.BaseLazyFragment;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.MainFrgCreditBinding;
@@ -51,7 +52,7 @@ public class MainCreditFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.main_frg_credit, null, false);
 
@@ -64,7 +65,9 @@ public class MainCreditFragment extends BaseLazyFragment {
     private void initDatas() {
 
         list.add(new CreditBean("zrzl", "准入资料", R.mipmap.credit_zrzl));
-        list.add(new CreditBean("lrsh", "录入审核", R.mipmap.credit_lrsh));
+        list.add(new CreditBean("lrsh", "准入审核", R.mipmap.credit_lrsh));
+        list.add(new CreditBean("qrpg", "确认评估", R.mipmap.credit_qrpg));
+        list.add(new CreditBean("jspg", "接收评估", R.mipmap.credit_jspg));
         list.add(new CreditBean("yksq", "用款申请", R.mipmap.credit_yksq));
         list.add(new CreditBean("yksh", "用款审核", R.mipmap.credit_yksh));
         list.add(new CreditBean("zdhl", "制单回录", R.mipmap.credit_zdhl));
@@ -78,6 +81,7 @@ public class MainCreditFragment extends BaseLazyFragment {
         list.add(new CreditBean("fsdy", "发送抵押", R.mipmap.credit_fsdy));
         list.add(new CreditBean("qrdy", "确认抵押", R.mipmap.credit_qrdy));
         list.add(new CreditBean("rd", "入档", R.mipmap.credit_rd));
+
 
     }
 
@@ -102,12 +106,23 @@ public class MainCreditFragment extends BaseLazyFragment {
                 nodeList.clear();
                 nodeList.add("a1");
                 nodeList.add("a1x");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, true);
                 break;
 
             case "lrsh":
                 nodeList.clear();
                 nodeList.add("a2");
+                CreditPageActivity.open(mActivity, nodeList);
+                break;
+
+            case "qrpg":
+                nodeList.clear();
+                nodeList.add("h1");
+                CreditPageActivity.open(mActivity, nodeList);
+                break;
+            case "jspg":
+                nodeList.clear();
+                nodeList.add("h2");
                 CreditPageActivity.open(mActivity, nodeList);
                 break;
 
@@ -188,7 +203,6 @@ public class MainCreditFragment extends BaseLazyFragment {
                 nodeList.add("f1");
                 CreditPageActivity.open(mActivity, nodeList);
                 break;
-
         }
 
     }

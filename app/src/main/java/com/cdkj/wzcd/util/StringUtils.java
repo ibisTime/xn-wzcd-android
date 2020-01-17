@@ -13,6 +13,9 @@ import java.util.List;
 
 public class StringUtils {
 
+
+
+
     public static List<String> splitPIC(String pic) {
         if (TextUtils.isEmpty(pic)) {
             return null;

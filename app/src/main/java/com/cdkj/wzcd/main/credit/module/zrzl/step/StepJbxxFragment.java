@@ -1,27 +1,25 @@
 package com.cdkj.wzcd.main.credit.module.zrzl.step;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.cdkj.baselibrary.activitys.WebViewActivity;
+
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.DataDictionary;
+import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
-import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.custom.BaseDateLayout;
@@ -30,24 +28,28 @@ import com.cdkj.wzcd.custom.BaseSelectLayout;
 import com.cdkj.wzcd.custom.util.BaseViewUtil;
 import com.cdkj.wzcd.databinding.FrgStepJbxxBinding;
 import com.cdkj.wzcd.main.credit.CreditActivity;
-import com.cdkj.wzcd.main.credit.module.zrzl.CarBrandActivity;
+import com.cdkj.wzcd.main.credit.bean.AscriptionBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.CarModelBean;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.CarSeriesBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
-import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlReportBean;
 import com.cdkj.wzcd.model.BanksModel;
 import com.cdkj.wzcd.model.DealersModel;
 import com.cdkj.wzcd.model.LocalityModel;
 import com.cdkj.wzcd.model.SalesmanModel;
-import com.cdkj.baselibrary.model.eventmodels.EventBean;
+import com.cdkj.wzcd.util.StringStaticFinal;
+import com.cdkj.wzcd.view.interfaces.MySelectInterface;
+
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import retrofit2.Call;
 
-import java.util.*;
-
 import static com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity.SET_UPLOAD_RESULT;
+
 
 /**
  * 基本信息
@@ -72,13 +74,9 @@ public class StepJbxxFragment extends BaseLazyFragment {
     // 汽车经销商列表
     List<DataDictionary> dealersList = new ArrayList<>();
 
-    // 汽车品牌
-    String carBrand;
-    // 汽车车系
-    String carSeries;
-    List<DataDictionary> carSeriesList = new ArrayList<>();
-    // 汽车车型
-    List<DataDictionary> carModelList = new ArrayList<>();
+    //公司归口
+    List<DataDictionary> ascriptionList = new ArrayList<>();
+    private boolean isShowCreate;
 
     /**
      * 获得fragment实例
@@ -93,6 +91,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
         return fragment;
     }
 
+
     @Override
     protected void lazyLoad() {
 
@@ -106,7 +105,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         mBinding = DataBindingUtil.inflate(inflater, R.layout.frg_step_jbxx, null, false);
 
@@ -120,41 +119,11 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
     private void init() {
         isDetail = getArguments().getBoolean(CdRouteHelper.DATA_SIGN);
+        isShowCreate = getArguments().getBoolean(CdRouteHelper.DATA_SIGN2);
     }
 
     private void initListener() {
 
-        mBinding.tvReport.setOnClickListener(view -> {
-
-            if (!mBinding.tvReport.getText().equals("点击生成评报告")) {
-
-                if (TextUtils.isEmpty(mBinding.tvReport.getText())) {
-                    return;
-                }
-
-                CdRouteHelper.openWebViewActivityForUrl("评估报告",
-                        mBinding.tvReport.getText().toString());
-            } else {
-                if (mBinding.slCarModel.check()) {
-                    return;
-                }
-
-                if (mBinding.dlRegDate.check()) {
-                    return;
-                }
-
-                if (mBinding.elMile.check()) {
-                    return;
-                }
-
-                if (mBinding.slRegion.check()) {
-                    return;
-                }
-
-                getReport();
-            }
-
-        });
 
         mBinding.btnConfirm.setOnClickListener(view -> {
             if (check()) {
@@ -193,28 +162,17 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
         mBinding.slOperator.setContentByKey(data.getSaleUserId());
         mBinding.slLoanBankCode.setContentByKey(data.getLoanBank());
+        mBinding.slCompanyAscription.setContentByKey(data.getAscription());  //设置公司归口
         mBinding.slRegion.setContentByKey(data.getCarInfo().getRegion());
-
+        EventBus.getDefault().post(new EventBean().setTag("zrzl_region")
+                .setValue1(mBinding.slRegion.getDataValue()).setValue2(mBinding.slRegion.getDataKey()));
+        ZrzlActivity.slRegion = data.getCarInfo().getRegion();
         mBinding.slShopCarGarage.setContentByKey(data.getCarInfo().getShopCarGarage());
+        notifyRate(data.getCarInfo().getShopCarGarageRate());
+//        mBinding.slCompanyAscription.setContentByKey(data.getCarInfo().getShopCarGarage());//公司归口
         mBinding.slBizType.setContentByKey(data.getBizType());
-        mBinding.dlRegDate.setVisibility(data.getBizType().equals("0") ? View.GONE : View.VISIBLE);
-        mBinding.elMile.setVisibility(data.getBizType().equals("0") ? View.GONE : View.VISIBLE);
-        mBinding.flReport.setVisibility(data.getBizType().equals("0") ? View.GONE : View.VISIBLE);
-
-        carBrand = data.getCarInfo().getCarBrand();
-        mBinding.slCarBrand.setTextAndKey(data.getCarInfo().getCarBrand(),
-                data.getCarInfo().getCarBrandName());
-        carSeries = data.getCarInfo().getCarBrand();
-        mBinding.slCarSeries.setTextAndKey(data.getCarInfo().getCarSeries(),
-                data.getCarInfo().getCarSeriesName());
-        mBinding.slCarModel.setTextAndKey(data.getCarInfo().getCarModel(),
-                data.getCarInfo().getCarModelName());
-
-        mBinding.dlRegDate.setText(data.getCarInfo().getRegDate());
-        mBinding.elMile.setText(data.getCarInfo().getMile());
-        if (!TextUtils.isEmpty(data.getCarInfo().getSecondCarReport())) {
-            mBinding.tvReport.setText(data.getCarInfo().getSecondCarReport());
-        }
+        ZrzlActivity.slBizType = data.getBizType();
+        EventBus.getDefault().post(new EventBean().setTag("change_car_type").setValue1(TextUtils.equals(data.getBizType(), "0") ? "新车" : "二手车"));
 
     }
 
@@ -242,7 +200,6 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
                 }
 
-
             }
 
             @Override
@@ -259,6 +216,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
         Map<String, String> map = new HashMap<>();
         map.put("roleCode", "SR201800000000000000YWY");
+        map.put("teamCode", SPUtilHelper.getTeamCode());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class)
                 .getSalesmanList("630066", StringUtils.getJsonToString(map));
@@ -319,6 +277,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
         });
     }
 
+
     /**
      * 获取汽车经销商
      */
@@ -327,6 +286,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
         Map<String, String> map = new HashMap<>();
         map.put("start", "1");
         map.put("limit", "10000");
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class)
                 .getDealersPage("632065", StringUtils.getJsonToString(map));
@@ -338,12 +298,38 @@ public class StepJbxxFragment extends BaseLazyFragment {
             protected void onSuccess(ResponseInListModel<DealersModel> data, String SucMessage) {
 
                 for (DealersModel model : data.getList()) {
-
                     dealersList.add(new DataDictionary().setDkey(model.getCode() + "")
-                            .setDvalue(model.getFullName()));
+                            .setDvalue(model.getFullName()).setTag(String.valueOf(model.getRebateRate())));
 
                 }
+            }
 
+            @Override
+            protected void onFinish() {
+                getAscription();
+            }
+        });
+    }
+
+
+    /**
+     * 获取公司归口
+     */
+    public void getAscription() {
+        Map<String, String> map = new HashMap<>();
+        map.put("start", "1");
+        map.put("limit", "10000");
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class)
+                .getAscription("632905", StringUtils.getJsonToString(map));
+        addCall(call);
+        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<AscriptionBean>>(mActivity) {
+            @Override
+            protected void onSuccess(ResponseInListModel<AscriptionBean> data, String SucMessage) {
+                for (AscriptionBean model : data.getList()) {
+                    ascriptionList.add(new DataDictionary().setDkey(model.getId() + "")
+                            .setDvalue(model.getFullName()).setTag(String.valueOf(model.getFullName())));
+                }
             }
 
             @Override
@@ -352,25 +338,18 @@ public class StepJbxxFragment extends BaseLazyFragment {
                 initView();
             }
         });
+
     }
 
-    @Subscribe
-    public void setCarBrand(EventBean bean) {
-
-        if (!bean.getTag().equals("jbxx_brand")) {
-            return;
-        }
-
-        carBrand = bean.getValue1();
-        mBinding.slCarBrand.setTextAndKey(bean.getValue1(), bean.getValue2());
-        getCarSeries();
-    }
 
     private void initView() {
 
         mBinding.slOperator.setData(salesmanList, null);
         mBinding.slLoanBankCode.setData(bankList, null);
         mBinding.slRegion.setData(localityList, (dialog, which) -> {
+            ZrzlActivity.slRegion = localityList.get(which).getDkey();
+            EventBus.getDefault().post(new EventBean().setTag("zrzl_region")
+                    .setValue1(mBinding.slRegion.getDataValue()).setValue2(mBinding.slRegion.getDataKey()));
 
         });
         // 默认选中第一个
@@ -378,52 +357,24 @@ public class StepJbxxFragment extends BaseLazyFragment {
             mBinding.slRegion
                     .setTextAndKey(localityList.get(0).getDkey(), localityList.get(0).getDvalue());
         }
-        mBinding.slShopCarGarage.setData(dealersList, null);
+        mBinding.slShopCarGarage.setData(dealersList, new MySelectInterface() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DataDictionary dataDictionary = dealersList.get(which);
+                notifyRate(dataDictionary.getTag());
+            }
+        });
+//        mBinding.slCompanyAscription.setData(dealersList);//公司归口
         mBinding.slBizType.setData("0", "新车", "1", "二手车", (dialog, which) -> {
-            mBinding.dlRegDate.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
-            mBinding.elMile.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
-            mBinding.flReport.setVisibility(which == 0 ? View.GONE : View.VISIBLE);
+            ZrzlActivity.slBizType = mBinding.slBizType.getDataKey();
+            /**
+             * 通知车辆信息界面  改为必填项或者非必填项
+             */
+            EventBus.getDefault().post(new EventBean().setTag("change_car_type").setValue1(which == 0 ? "新车" : "二手车"));
         });
 
-        mBinding.slCarBrand.setListener(view -> {
-            if (isDetail) {
-                return;
-            }
+        mBinding.slCompanyAscription.setData(ascriptionList);
 
-            CarBrandActivity.open(mActivity);
-
-        });
-
-        mBinding.slCarSeries.setData(carSeriesList, (dialog, which) -> {
-            carSeries = carSeriesList.get(which).getDkey();
-            getCarModel();
-        });
-
-        mBinding.slCarSeries.setListener(view -> {
-            if (isDetail) {
-                return;
-            }
-
-            if (TextUtils.isEmpty(carBrand)) {
-                UITipDialog.showInfo(mActivity, "请先选择品牌");
-            } else {
-                mBinding.slCarSeries.setData(carSeriesList);
-                mBinding.slCarSeries.showSelect();
-            }
-        });
-
-        mBinding.slCarModel.setListener(view -> {
-            if (isDetail) {
-                return;
-            }
-
-            if (TextUtils.isEmpty(carSeries)) {
-                UITipDialog.showInfo(mActivity, "请先选择车系");
-            } else {
-                mBinding.slCarModel.setData(carModelList);
-                mBinding.slCarModel.showSelect();
-            }
-        });
 
         if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
@@ -433,114 +384,6 @@ public class StepJbxxFragment extends BaseLazyFragment {
         setView();
     }
 
-    /**
-     * 获取汽车车系
-     */
-    public void getCarSeries() {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("start", "1");
-        map.put("limit", "10000");
-        map.put("brandCode", carBrand);
-        map.put("type", "1");
-
-        showLoadingDialog();
-
-        Call call = RetrofitUtils.createApi(MyApiServer.class)
-                .getCarSeriesPage("630415", StringUtils.getJsonToString(map));
-        addCall(call);
-
-        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<CarSeriesBean>>(mActivity) {
-
-            @Override
-            protected void onSuccess(ResponseInListModel<CarSeriesBean> data, String SucMessage) {
-
-                carSeriesList.clear();
-                for (CarSeriesBean model : data.getList()) {
-
-                    carSeriesList.add(new DataDictionary().setDkey(model.getCode() + "")
-                            .setDvalue(model.getName()));
-
-                }
-
-
-            }
-
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
-        });
-    }
-
-    /**
-     * 获取汽车车系
-     */
-    public void getCarModel() {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("start", "1");
-        map.put("limit", "10000");
-        map.put("seriesCode", carSeries);
-
-        showLoadingDialog();
-
-        Call call = RetrofitUtils.createApi(MyApiServer.class)
-                .getCarModelsPage("630425", StringUtils.getJsonToString(map));
-        addCall(call);
-
-        call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<CarModelBean>>(mActivity) {
-
-            @Override
-            protected void onSuccess(ResponseInListModel<CarModelBean> data, String SucMessage) {
-
-                carModelList.clear();
-                for (CarModelBean model : data.getList()) {
-
-                    carModelList.add(new DataDictionary().setDkey(model.getCode() + "")
-                            .setDvalue(model.getName()));
-
-                }
-
-            }
-
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
-        });
-    }
-
-    private void getReport() {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("modelId", mBinding.slCarModel.getDataKey());
-        map.put("regDate", mBinding.dlRegDate.getText());
-        map.put("mile", mBinding.elMile.getText());
-        map.put("zone", mBinding.slRegion.getDataKey());
-
-        showLoadingDialog();
-
-        Call call = RetrofitUtils.createApi(MyApiServer.class)
-                .getZrzlReport("630479", StringUtils.getJsonToString(map));
-        addCall(call);
-
-        call.enqueue(new BaseResponseModelCallBack<ZrzlReportBean>(mActivity) {
-
-            @Override
-            protected void onSuccess(ZrzlReportBean data, String SucMessage) {
-
-                mBinding.tvReport.setText(data.getUrl());
-
-            }
-
-            @Override
-            protected void onFinish() {
-                disMissLoading();
-            }
-        });
-
-    }
 
     private boolean check() {
 
@@ -562,13 +405,13 @@ public class StepJbxxFragment extends BaseLazyFragment {
         // 是否是二手车
         if (mBinding.slBizType.getDataKey().equals("1")) {
 
-            if (mBinding.dlRegDate.check()) {
-                return false;
-            }
-
-            if (mBinding.elMile.check()) {
-                return false;
-            }
+//            if (mBinding.dlRegDate.check()) {
+//                return false;
+//            }
+//
+//            if (mBinding.elMile.check()) {
+//                return false;
+//            }
         }
 
         return true;
@@ -612,9 +455,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
         Map<String, String> map = buildMap();
         map.put("operator", SPUtilHelper.getUserId());
-        if (!mBinding.tvReport.getText().equals("点击生成评报告")) {
-            map.put("secondCarReport", mBinding.tvReport.getText().toString());
-        }
+
 
         if (!TextUtils.isEmpty(((ZrzlActivity) mActivity).code)) {
             map.put("code", ((ZrzlActivity) mActivity).code);
@@ -652,17 +493,28 @@ public class StepJbxxFragment extends BaseLazyFragment {
         // 只有保存以后才可以通知界面去修改
 
         EventBus.getDefault().post(new EventBean().setTag("zrzl_region")
-                .setValue1(mBinding.slRegion.getDataValue()));
+                .setValue1(mBinding.slRegion.getDataValue()).setValue2(mBinding.slRegion.getDataKey()));
 
-        // 二手车
-        if (mBinding.slBizType.getDataKey().equals("1")) {
-            EventBus.getDefault().post(new EventBean().setTag("zrzl_regDate")
-                    .setValue1(mBinding.dlRegDate.getText()));
-
-            EventBus.getDefault().post(new EventBean().setTag("zrzl_mile")
-                    .setValue1(mBinding.elMile.getText()));
-        }
+//                // 二手车
+//                if (mBinding.slBizType.getDataKey().equals("1")) {
+//                    EventBus.getDefault().post(new EventBean().setTag("zrzl_regDate")
+//                            .setValue1(mBinding.dlRegDate.getText()));
+//
+//                    EventBus.getDefault().post(new EventBean().setTag("zrzl_mile")
+//                            .setValue1(mBinding.elMile.getText()));
+//                }
 
     }
 
+    /**
+     * 通知贷款信息设置利率
+     *
+     * @param value
+     */
+    private void notifyRate(String value) {
+        EventBean eventBean = new EventBean();
+        eventBean.setTag(StringStaticFinal.Default_dealer_rate);
+        eventBean.setValue(value);
+        EventBus.getDefault().post(eventBean);
+    }
 }

@@ -85,6 +85,7 @@ public class ImgUtils {
                 }
                 try {
                     GlideApp.with((Activity) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).transform(new GlideCircleTransform(((Activity) obj))).into(img);
+//                    GlideApp.with((Activity) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(img);
                 } catch (Exception e) {
                     LogUtil.E("图片加载错误");
                 }
@@ -92,12 +93,14 @@ public class ImgUtils {
             } else if (obj instanceof Fragment) {
                 try {
                     GlideApp.with((Fragment) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).transform(new GlideCircleTransform(((Fragment) obj).getContext())).into(img);
+//                    GlideApp.with((Fragment) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(img);
                 } catch (Exception e) {
                     LogUtil.E("图片加载错误");
                 }
             } else if (obj instanceof Context) {
                 try {
                     GlideApp.with((Context) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).transform(new GlideCircleTransform(((Context) obj))).into(img);
+//                    GlideApp.with((Context) obj).load(imgId).placeholder(R.drawable.photo_default).error(R.drawable.photo_default).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(img);
                 } catch (Exception e) {
                     LogUtil.E("图片加载错误");
                 }
@@ -110,7 +113,10 @@ public class ImgUtils {
         try {
             /*.skipMemoryCache(true)   .diskCacheStrategy(DiskCacheStrategy.NONE)*/
             GlideApp.with(context).load(MyCdConfig.QINIU_URL + url).error(R.drawable.photo_default).transform(new GlideCircleBorderTransform(context, 2, ContextCompat.getColor(context, borderColor))).into(imageView);
-
+//            Glide.with(context).load(MyCdConfig.QINIU_URL + url)
+//                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+//                    .error(R.drawable.photo_default)
+//                    .into(imageView);
         } catch (Exception e) {
 
         }

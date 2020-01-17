@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
@@ -14,21 +15,24 @@ import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
-import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.ActYkshBinding;
-import com.cdkj.wzcd.databinding.ActZrshBinding;
 import com.cdkj.wzcd.main.credit.module.CreditDetailFragment;
 import com.cdkj.wzcd.main.credit.module.yksh.bean.RwBean;
-import com.cdkj.wzcd.main.credit.module.yksq.YksqActivity;
-import com.cdkj.wzcd.main.credit.module.zrsh.ZrshActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
-import org.greenrobot.eventbus.Subscribe;
-import retrofit2.Call;
 
-import java.util.*;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -169,7 +173,7 @@ public class YkshActivity extends AbsBaseLoadActivity {
     @Subscribe
     public void rw(EventBean bean) {
 
-        if (bean.getTag().equals("yksh_rw_list")) {
+        if ("yksh_rw_list".equals(bean.getTag())) {
             missionList.clear();
             missionList.addAll((Collection<? extends RwBean>) bean.getValue());
 

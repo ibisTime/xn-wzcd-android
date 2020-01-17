@@ -50,7 +50,7 @@ android {
 
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "${rootProject.ext.packageName}_${rootProject.ext.android["versionName"]}_${releaseTime()}.apk"
+                    outputFileName = "${rootProject.ext.packageName}_${rootProject.ext.android["versionName"]}_${releaseTime()}_${rootProject.ext.android["LOG_DEBUG"] ? "debug" : "release"}.apk"
                 }
             }
             signingConfig signingConfigs.config
@@ -103,4 +103,10 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
     implementation 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
 
+
+////    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.3'
+//    compile('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {
+////        exclude(group: 'com.google.android', module: 'support-v4')
+//        exclude(group: 'com.android.support')
+//    }
 }

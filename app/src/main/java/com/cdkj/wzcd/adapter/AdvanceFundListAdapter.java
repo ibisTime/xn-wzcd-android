@@ -21,7 +21,6 @@ import java.util.List;
  *
  * @updateDts 2018/5/30
  */
-
 public class AdvanceFundListAdapter extends BaseQuickAdapter<AdvanceFundModel, BaseViewHolder> {
     private ItemAdvanceFoundListBinding mBinding;
 

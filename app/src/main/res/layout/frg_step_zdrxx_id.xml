@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,21 +28,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="user_name"
-                    app:title="姓名"/>
+                    app:title="姓名" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="gender"
-                    app:title="性别"/>
+                    app:title="性别" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_nation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="nation"
-                    app:title="民族"/>
+                    app:title="民族" />
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_customerBirth"
@@ -48,44 +50,51 @@
                     android:layout_height="wrap_content"
                     app:dateType="ymd"
                     app:field="customerBirth"
-                    app:title="出生日期"/>
+                    app:title="出生日期" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_authref"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="authref"
-                    app:title="签发机关"/>
+                    app:title="签发机关" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_birthAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="birthAddress"
-                    app:title="户籍地"/>
+                    app:title="户籍地" />
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_startDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:field="startDate"
                     app:dateType="ymd"
-                    app:title="有效期起"/>
+                    app:field="startDate"
+                    app:title="有效期起" />
 
-                <com.cdkj.wzcd.custom.BaseDateLayout
+                <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/dl_statdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="statdate"
-                    app:dateType="ymd"
-                    app:title="有效期止"/>
+                    app:title="有效期止" />
+
+                <!--<com.cdkj.wzcd.custom.BaseDateLayout-->
+                <!--android:id="@+id/dl_statdate"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:dateType="ymd"-->
+                <!--app:field="statdate"-->
+                <!--app:title="有效期止" />-->
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_idNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="idNo"
-                    app:title="证件号"/>
+                    app:title="证件号" />
 
 
             </LinearLayout>
@@ -104,7 +113,7 @@
                 android:background="@drawable/shape_btn_bg_std"
                 android:text="确定"
                 android:textColor="#ffffffff"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

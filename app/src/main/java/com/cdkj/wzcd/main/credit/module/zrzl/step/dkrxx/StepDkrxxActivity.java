@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
@@ -13,6 +14,7 @@ import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
+import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.custom.bean.BaseImageBean;
@@ -21,11 +23,16 @@ import com.cdkj.wzcd.databinding.FrgStepZdrxxPeopleBinding;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxIdBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.DkrxxInfoBean;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import retrofit2.Call;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -86,6 +93,17 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
                 bean.setMobile(mBinding.elMobile.getText());
                 bean.setBankCreditResult(mBinding.slResult.getDataKey());
                 bean.setBankCreditResultRemark(mBinding.elRemark.getText());
+                //主贷人的情况下申请人界面有多个必填项  这里值判断一个必填项就好了 因为完善申请人界面已经判断过了  不填写完不能保存返回
+                if (TextUtils.equals("申请人", mBinding.slOperator.getDataValue())) {
+                    if (TextUtils.isEmpty(bean.getEducation())) {
+                        ToastUtil.show(this, "请完善申请人信息");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(bean.getUserName())) {
+                        ToastUtil.show(this, "请完善身份证信息");
+                        return;
+                    }
+                }
 
                 EventBus.getDefault().post(new EventBean().setTag("dkrxx").setValue(bean)
                         .setValue1(position + ""));
@@ -103,7 +121,7 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
         List<BaseImageBean> list = new ArrayList<>();
         list.add(new BaseImageBean("身份证正面", "idFront"));
         list.add(new BaseImageBean("身份证反面", "idReverse"));
-        list.add(new BaseImageBean("人证照片", "holdIdCardPdf"));
+        list.add(new BaseImageBean("人证照片", "holdIdCardPdf",false));
         mBinding.ilInfo.init(this, list);
         mBinding.ilInfo.setImageInterface((location, field, key) -> {
 
@@ -124,6 +142,8 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
         mBinding.slResult.setData("0", "不通过", "1", "通过", (dialog, which) -> {
 
         });
+        //默认设置通过
+        mBinding.slResult.setContentByKey("1");
 
         mBinding.mlInfo.setOnClickListener(view -> {
             if (bean.getLoanRole().equals("1")) {
@@ -250,8 +270,6 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
             bean.setPresentJobYears(data.getPresentJobYears());
             bean.setPermanentType(data.getPermanentType());
         }
-
     }
-
 
 }

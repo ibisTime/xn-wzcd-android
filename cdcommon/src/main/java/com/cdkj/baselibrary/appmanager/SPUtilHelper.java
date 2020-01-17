@@ -53,6 +53,24 @@ public class SPUtilHelper {
         return SPUtils.getString(CdApplication.getContext(), "CompanyCode", "");
     }
 
+    /**
+     * 设置用户TeamCode
+     *
+     * @param s
+     */
+    public static void saveTeamCode(String s) {
+        SPUtils.put(CdApplication.getContext(), "TeamCode", s);
+    }
+
+    /**
+     * 设置用户TeamCode
+     *
+     * @param
+     */
+    public static String getTeamCode() {
+        return SPUtils.getString(CdApplication.getContext(), "TeamCode", "");
+    }
+
 
     /**
      * 设置用户token
