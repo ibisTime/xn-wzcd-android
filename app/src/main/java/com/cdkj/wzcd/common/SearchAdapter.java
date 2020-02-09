@@ -20,10 +20,12 @@ public class SearchAdapter extends BaseQuickAdapter<DataDictionary, BaseViewHold
 
     private final boolean isCenter;
     private final boolean isShowLogo;
+    private final boolean isMultipleSelect;
 
-    public SearchAdapter(@Nullable List<DataDictionary> data, boolean isShowLogo, boolean isCenter) {
+    public SearchAdapter(@Nullable List<DataDictionary> data, boolean isShowLogo, boolean isCenter, boolean isMultipleSelect) {
         super(R.layout.item_brand_hor_layout, data);
         this.isCenter = isCenter;
+        this.isMultipleSelect = isMultipleSelect;
         this.isShowLogo = isShowLogo;
     }
 
@@ -32,7 +34,7 @@ public class SearchAdapter extends BaseQuickAdapter<DataDictionary, BaseViewHold
         if (isCenter) {
             LinearLayout view = helper.getView(R.id.ll_content);
             view.setGravity(Gravity.CENTER);
-        }else{
+        } else {
             LinearLayout view = helper.getView(R.id.ll_content);
             view.setGravity(Gravity.CENTER_VERTICAL);
         }
@@ -43,11 +45,19 @@ public class SearchAdapter extends BaseQuickAdapter<DataDictionary, BaseViewHold
             helper.setGone(R.id.iv_brand_img, false);
         }
 
+        if (isMultipleSelect) {
+            helper.setGone(R.id.cb_check, true);
+        } else {
+            helper.setGone(R.id.cb_check, false);
+        }
+
         if (!TextUtils.isEmpty(item.getDkey())) {
             helper.setText(R.id.tv_brand_name, item.getDvalue());
         } else {
             helper.setText(R.id.tv_brand_name, "");
         }
+
+        helper.addOnClickListener(R.id.cb_check);
 
 //        helper.setText(R.id.tv_sort, item.getLetter());
 

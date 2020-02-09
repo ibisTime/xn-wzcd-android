@@ -29,6 +29,9 @@ android {
                 JPUSH_PKGNAME: rootProject.ext.applicationId,
                 JPUSH_APPKEY : "71e0d4688bcb8b4da3718630", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+                //信鸽推送的配置
+                XG_ACCESS_ID:"2100352818",
+                XG_ACCESS_KEY : "A5G5GP2LC71F",
         ]
         multiDexEnabled true
     }
@@ -41,7 +44,12 @@ android {
             keyPassword "wzcd123456"
         }
     }
-
+    dexOptions {
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "4g"//越大越好
+//        incremental true
+    }
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
@@ -103,6 +111,18 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
     implementation 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
 
+    //------------------信鸽推送 4个依赖----------------------------
+    //完整的信鸽依赖四个都必须有，如果发生依赖冲突请根据对应的依赖版本号选择高版本的依赖。（使用jcenter自动接入请确认libs中没有信鸽的相关jar包）
+    //信鸽jar，不包含厂商通道
+    implementation 'com.tencent.xinge:xinge:4.3.7-release'
+    //jg包
+    implementation 'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-Release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
+
+    //------------------信鸽推送----------------------------
 
 ////    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.3'
 //    compile('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {

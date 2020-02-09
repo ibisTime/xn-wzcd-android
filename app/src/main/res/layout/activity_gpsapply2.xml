@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_rooot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cdkj.wzcd.custom.BaseEditLayout
+            android:id="@+id/el_teamName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="所在团队">
+
+        </com.cdkj.wzcd.custom.BaseEditLayout>
+
+        <com.cdkj.wzcd.custom.BaseEditLayout
+            android:id="@+id/el_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="申领人">
+
+        </com.cdkj.wzcd.custom.BaseEditLayout>
+
+        <com.cdkj.wzcd.custom.BaseEditLayout
+            android:id="@+id/el_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:field="applyCount"
+            app:inputType="number"
+            app:isRequired="true"
+            app:title="申领个数">
+
+        </com.cdkj.wzcd.custom.BaseEditLayout>
+
+        <com.cdkj.wzcd.custom.BaseEditLayout
+            android:id="@+id/el_remaker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:field="applyReason"
+            app:isRequired="true"
+            app:title="申领原因">
+
+        </com.cdkj.wzcd.custom.BaseEditLayout>
+
+        <TextView
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/myCb_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_confirm_content="确定">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+    </LinearLayout>
+</layout>

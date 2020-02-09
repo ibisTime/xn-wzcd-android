@@ -33,6 +33,15 @@ public class CarVINDetailBean {
     private String brandName;
     private String seriesName;
     private String modelName;
+    private String modelNumber;
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
 
     public String getCarBrand() {
         return carBrand;

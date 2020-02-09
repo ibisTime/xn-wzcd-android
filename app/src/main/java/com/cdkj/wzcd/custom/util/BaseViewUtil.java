@@ -2,12 +2,16 @@ package com.cdkj.wzcd.custom.util;
 
 import android.view.View;
 import android.widget.LinearLayout;
-import com.cdkj.wzcd.custom.*;
+
+import com.cdkj.wzcd.custom.BaseDateLayout;
+import com.cdkj.wzcd.custom.BaseEditLayout;
+import com.cdkj.wzcd.custom.BaseImageLayout;
+import com.cdkj.wzcd.custom.BaseRemarkLayout;
+import com.cdkj.wzcd.custom.BaseSelectLayout;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,6 +66,11 @@ public class BaseViewUtil {
 
     }
 
+    /**
+     * 返回true代表检查通过
+     * @param parent
+     * @return
+     */
     public static boolean check(LinearLayout parent) {
 
         int count = parent.getChildCount();

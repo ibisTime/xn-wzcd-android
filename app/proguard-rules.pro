@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#--------------信鸽推送混淆  https://xg.qq.com/app/ctr_index/index#/app/list--------------
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep class com.tencent.android.tpush.** {*;}
+-keep class com.tencent.mid.** {*;}
+-keep class com.qq.taf.jce.** {*;}
+#--------------信鸽推送混淆  https://xg.qq.com/app/ctr_index/index#/app/list--------------
+

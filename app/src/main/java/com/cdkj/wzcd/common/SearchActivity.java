@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.interfaces.BaseRefreshCallBack;
@@ -18,6 +19,7 @@ import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.databinding.ActCarBrandBinding;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,28 +40,8 @@ public class SearchActivity extends AbsBaseLoadActivity {
     private ArrayList<DataDictionary> data;
     private String tag;
     private static Object clazz;
-//
-//    /**
-//     * @param context       上下文
-//     * @param apiCode       接口
-//     * @param map           接口参数
-//     * @param clazz         接口参数返回的实例类型
-//     * @param enableRefresh 是否开启刷新和加载
-//     * @param itemShowImg   条目是否显示logo
-//     * @param <T>
-//     */
-//    public static <T> void open(Context context, String apiCode, HashMap map, T clazz, boolean enableRefresh, boolean itemShowImg) {
-//        if (context == null) {
-//            return;
-//        }
-//        SearchActivity.clazz = clazz;
-//        Intent intent = new Intent(context, SearchActivity.class);
-//        intent.putExtra("enableRefresh", enableRefresh);
-//        intent.putExtra("itemShowImg", itemShowImg);
-//        intent.putExtra("map", map);
-//        intent.putExtra("apiCode", apiCode);
-//        context.startActivity(intent);
-//    }
+    private boolean isSelectMultiple;
+    ArrayList<DataDictionary> selectDataList = new ArrayList<>();
 
     public static void open(Context context, String topHintText, String tag, ArrayList<DataDictionary> data) {
         if (context == null) {
@@ -72,24 +54,33 @@ public class SearchActivity extends AbsBaseLoadActivity {
         context.startActivity(intent);
     }
 
-//    public static SearchDataAddListener dataListener;
+    /**
+     * @param context          上下文
+     * @param topHintText      提示搜索语
+     * @param tag              标记  可当做id
+     * @param isSelectMultiple 是否是多选
+     * @param data             数据集合
+     */
+    public static void open(Context context, String topHintText, String tag, boolean isSelectMultiple, ArrayList<DataDictionary> data) {
+        if (context == null) {
+            return;
+        }
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtra("topHintText", topHintText);
+        intent.putExtra("tag", tag);
+        intent.putExtra("isSelectMultiple", isSelectMultiple);
+        intent.putExtra("data", data);
+        context.startActivity(intent);
+    }
 
-//    /**
-//     * 如果需要分页加载的话 通过这个回调设置数据
-//     *
-//     * @param dataListener
-//     */
-//    public static void setSearchDataAddListener(SearchDataAddListener dataListener) {
-//        SearchActivity.dataListener = dataListener;
-//    }
 
     @Override
     public View addMainView() {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.act_car_brand, null, false);
         if (getIntent() != null) {
-//            enableRefresh = getIntent().getBooleanExtra("enableRefresh", false);
             itemShowImg = getIntent().getBooleanExtra("itemShowImg", false);
             topHintText = getIntent().getStringExtra("topHintText");
+            isSelectMultiple = getIntent().getBooleanExtra("isSelectMultiple", false);
             tag = getIntent().getStringExtra("tag");
             data = (ArrayList<DataDictionary>) getIntent().getSerializableExtra("data");
         }
@@ -99,20 +90,28 @@ public class SearchActivity extends AbsBaseLoadActivity {
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         setShowTitle(false);//取消标题
+        if (isSelectMultiple) {
+            mBinding.tvSearch.setText("确定");
+        }
         mBinding.etSearch.setHint(topHintText);
-
         initRefreshHelper();
         mRefreshHelper.setData(data, "暂无数据", 0);
         initListener();
-//        if (enableRefresh) {
-//        } else {
-//            mRefreshHelper.setData(data, "暂无数据", 0);
-//
-//        }
     }
 
     private void initListener() {
         mBinding.tvSearch.setOnClickListener(v -> {
+            if (isSelectMultiple) {
+                if (selectDataList.size() <= 0) {
+                    ToastUtil.show(this, "没有选择数据");
+                    finish();
+                    return;
+                }
+                //单选
+                EventBus.getDefault().post(new EventBean().setTag(tag).setValue(selectDataList));
+                finish();
+                return;
+            }
             if (TextUtils.isEmpty(mBinding.etSearch.getText().toString())) {
                 ToastUtil.show(this, topHintText);
                 return;
@@ -163,6 +162,7 @@ public class SearchActivity extends AbsBaseLoadActivity {
         mRefreshHelper.setData(searchData, "暂无数据", 0);
     }
 
+
     /**
      * 初始化刷新相关
      */
@@ -181,12 +181,35 @@ public class SearchActivity extends AbsBaseLoadActivity {
 
             @Override
             public RecyclerView.Adapter getAdapter(List listData) {
-                SearchAdapter mAdapter = new SearchAdapter(listData, false, true);
+                SearchAdapter mAdapter = new SearchAdapter(listData, false, true, isSelectMultiple);
                 mAdapter.setOnItemClickListener((adapter, view, position) -> {
+
                     DataDictionary item = mAdapter.getItem(position);
-                    finish();
-                    EventBus.getDefault().post(new EventBean().setTag(tag).setValue1(item.getDkey())
-                            .setValue2(item.getDvalue()).setValue3(data.indexOf(item) + ""));
+
+                    if (isSelectMultiple) {
+                        //多选
+//                        selectDataList.add(item);
+                    } else {
+                        //单选
+                        EventBus.getDefault().post(new EventBean().setTag(tag).setValue1(item.getDkey())
+                                .setValue2(item.getDvalue()).setValue3(data.indexOf(item) + ""));
+                        finish();
+                    }
+                });
+
+                mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                    @Override
+                    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                        switch (view.getId()) {
+                            case R.id.cb_check:
+                                if (((CheckBox) view).isChecked()) {
+                                    selectDataList.add((DataDictionary) adapter.getItem(position));
+                                } else {
+                                    selectDataList.remove(adapter.getItem(position));
+                                }
+                                break;
+                        }
+                    }
                 });
                 return mAdapter;
             }
@@ -215,8 +238,3 @@ public class SearchActivity extends AbsBaseLoadActivity {
 //        }
     }
 }
-
-//interface SearchDataAddListener {
-//
-//    List getListData(int pageIndex, int limit, boolean isShowDialog);
-//}

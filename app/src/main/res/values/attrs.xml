@@ -147,6 +147,11 @@
         <attr name="text" />
         <attr name="isRequired" />
     </declare-styleable>
+    <declare-styleable name="BaseMultipleSelectLayout">
+        <attr name="field" />
+        <attr name="title" />
+        <attr name="isRequired" />
+    </declare-styleable>
 
     <declare-styleable name="BaseDateLayout">
         <attr name="field" />

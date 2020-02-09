@@ -7,7 +7,12 @@ import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.wzcd.main.credit.bean.AscriptionBean;
 import com.cdkj.wzcd.main.credit.bean.CarVINDetailBean;
+import com.cdkj.wzcd.main.credit.bean.ConfirmBean;
 import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
+import com.cdkj.wzcd.main.credit.bean.GPSDetialsGPSListBean;
+import com.cdkj.wzcd.main.credit.bean.GPSPermissionBean;
+import com.cdkj.wzcd.main.credit.bean.GPSSHBean;
+import com.cdkj.wzcd.main.credit.bean.GPSSHDetialsBean;
 import com.cdkj.wzcd.main.credit.bean.JurisdictionBean;
 import com.cdkj.wzcd.main.credit.module.lrfk.bean.YhhtBean;
 import com.cdkj.wzcd.main.credit.module.rd.bean.BXCompanyBean;
@@ -58,6 +63,18 @@ import retrofit2.http.POST;
 
 public interface MyApiServer {
 
+
+    /**
+     * 通用提交
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<ConfirmBean>> confirm(@Field("code") String code,
+                                                 @Field("json") String json);
 
     /**
      * 待办事项小红点
@@ -710,4 +727,57 @@ public interface MyApiServer {
     Call<BaseResponseModel<CarVINDetailBean>> getCarVINDetail(
             @Field("code") String code, @Field("json") String json);
 
+    /**
+     * 获取GPS审核 列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<ResponseInListModel<GPSSHBean>>> getGPSExamine(
+            @Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取GPS审核 列表 详情
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<GPSSHDetialsBean>> getGPSExamineDetials(
+            @Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取GPS审核 列表 详情 可选择的gps列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<GPSDetialsGPSListBean>> getGPSExamineDetialsGPSList(
+            @Field("code") String code, @Field("json") String json);
+
+
+    /**
+     * 获取有没有GPS审核 权限
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<GPSPermissionBean>> getGPSExaminePermission(
+            @Field("code") String code, @Field("json") String json);
+
+//    @FormUrlEncoded
+//    @POST("api")
+//    Call<BaseResponseModel<GPSPermissionBean>> sendPushToken(
+//            @Field("code") String code, @Field("json") String json);
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context="com.cdkj.wzcd.main.credit.module.gps.GPSSHDetialsActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申领团队："
+                android:textColor="#999999" />
+
+            <TextView
+                android:id="@+id/tv_teamName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                tools:text="A团队：" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申领人："
+                android:textColor="#999999" />
+
+            <TextView
+                android:id="@+id/tv_pople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                tools:text="A团队：" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申领原因："
+                android:textColor="#999999" />
+
+            <TextView
+                android:id="@+id/tv_remaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                tools:text="A团队：" />
+        </LinearLayout>
+
+        <com.cdkj.wzcd.custom.BaseMultipleSelectLayout
+            android:id="@+id/sl_gpsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:field="gpsList"
+            app:isRequired="true"
+            app:title="GPS编号">
+
+        </com.cdkj.wzcd.custom.BaseMultipleSelectLayout>
+
+        <com.cdkj.wzcd.custom.BaseEditLayout
+            android:id="@+id/el_remaker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isRequired="true"
+            app:title="审核意见">
+
+        </com.cdkj.wzcd.custom.BaseEditLayout>
+
+        <com.cdkj.wzcd.view.MyConfirmBtn
+            android:id="@+id/myCb_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:txt_confirm_content="通过"
+            app:txt_confirm_content_right="不通过">
+
+        </com.cdkj.wzcd.view.MyConfirmBtn>
+    </LinearLayout>
+</layout>

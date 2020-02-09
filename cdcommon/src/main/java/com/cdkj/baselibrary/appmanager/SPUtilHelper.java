@@ -71,6 +71,62 @@ public class SPUtilHelper {
         return SPUtils.getString(CdApplication.getContext(), "TeamCode", "");
     }
 
+    /**
+     * 设置用户TeamCode  团队名称
+     *
+     * @param s
+     */
+    public static void saveTeamName(String s) {
+        SPUtils.put(CdApplication.getContext(), "TeamName", s);
+    }
+
+    /**
+     * 设置用户TeamCode  团队名称
+     *
+     * @param
+     */
+    public static String getTeamName() {
+        return SPUtils.getString(CdApplication.getContext(), "TeamName", "");
+    }
+
+
+    /**
+     * 部门名称
+     *
+     * @param s
+     */
+    public static void saveDepartmentName(String s) {
+        SPUtils.put(CdApplication.getContext(), "DepartmentName", s);
+    }
+
+    /**
+     * 部门名称
+     *
+     * @param
+     */
+    public static String getDepartmentName() {
+        return SPUtils.getString(CdApplication.getContext(), "DepartmentName", "");
+    }
+
+    /**
+     * 角色定位名称
+     * 例如:温州业务员
+     *
+     * @param s
+     */
+    public static void savePostName(String s) {
+        SPUtils.put(CdApplication.getContext(), "PostName", s);
+    }
+
+    /**
+     * 角色定位名称
+     * 例如:温州业务员
+     *
+     * @param
+     */
+    public static String getPostName() {
+        return SPUtils.getString(CdApplication.getContext(), "PostName", "");
+    }
 
     /**
      * 设置用户token

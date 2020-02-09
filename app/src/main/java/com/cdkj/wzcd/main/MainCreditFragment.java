@@ -4,20 +4,33 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cdkj.baselibrary.api.BaseResponseListModel;
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
+import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
+import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
+import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.MainFrgCreditBinding;
 import com.cdkj.wzcd.main.credit.CreditPageActivity;
 import com.cdkj.wzcd.main.credit.CreditPledgePageActivity;
 import com.cdkj.wzcd.main.credit.adapter.CreditAdapter;
 import com.cdkj.wzcd.main.credit.bean.CreditBean;
+import com.cdkj.wzcd.main.credit.bean.GPSPermissionBean;
+import com.cdkj.wzcd.main.credit.module.gps.GPSApplyActivity2;
+import com.cdkj.wzcd.main.credit.module.gps.GPSSHActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
 
 /**
  * @author : qianLei
@@ -28,6 +41,7 @@ public class MainCreditFragment extends BaseLazyFragment {
     private MainFrgCreditBinding mBinding;
 
     private List<CreditBean> list = new ArrayList<>();
+    private CreditAdapter mAdapter;
 
     /**
      * 获得fragment实例
@@ -58,8 +72,39 @@ public class MainCreditFragment extends BaseLazyFragment {
 
         initDatas();
         initAdapter();
-
+        getGpsExamine();
         return mBinding.getRoot();
+    }
+
+    /**
+     * 获取该角色有没有 gps审核的权限有的话就显示  没有的话就不显示
+     */
+    private void getGpsExamine() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("roleCode", SPUtilHelper.getRoleCode());
+        map.put("parentCode", "SM201904231247451139996");
+        Call<BaseResponseListModel<GPSPermissionBean>> gpsExaminePermission = RetrofitUtils.createApi(MyApiServer.class).getGPSExaminePermission("630025", StringUtils.getJsonToString(map));
+        showLoadingDialog();
+        gpsExaminePermission.enqueue(new BaseResponseListCallBack<GPSPermissionBean>(getActivity()) {
+            @Override
+            protected void onSuccess(List<GPSPermissionBean> data, String SucMessage) {
+                if (data != null && data.size() > 0) {
+                    for (GPSPermissionBean datum : data) {
+                        if (TextUtils.equals("SM201904231326152699024", datum.getCode()) && TextUtils.equals("GPS管理员审核", datum.getName())) {
+                            list.add(new CreditBean("gpssh", "GPS审核", R.mipmap.main_gpssl));
+                            mAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+
     }
 
     private void initDatas() {
@@ -81,13 +126,13 @@ public class MainCreditFragment extends BaseLazyFragment {
         list.add(new CreditBean("fsdy", "发送抵押", R.mipmap.credit_fsdy));
         list.add(new CreditBean("qrdy", "确认抵押", R.mipmap.credit_qrdy));
         list.add(new CreditBean("rd", "入档", R.mipmap.credit_rd));
-
+        list.add(new CreditBean("gpssl", "GPS申领", R.mipmap.main_gpssl));
 
     }
 
     private void initAdapter() {
 
-        CreditAdapter mAdapter = new CreditAdapter(list);
+        mAdapter = new CreditAdapter(list);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             itemClickListener(mAdapter.getItem(position));
         });
@@ -202,6 +247,14 @@ public class MainCreditFragment extends BaseLazyFragment {
                 nodeList.clear();
                 nodeList.add("f1");
                 CreditPageActivity.open(mActivity, nodeList);
+                break;
+            case "gpssl":
+                //GPS申领
+                GPSApplyActivity2.open(mActivity);
+                break;
+            case "gpssh":
+                //GPS审核
+                GPSSHActivity.open(mActivity);
                 break;
         }
 

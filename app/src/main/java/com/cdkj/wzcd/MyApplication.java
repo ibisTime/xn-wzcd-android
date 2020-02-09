@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.cdkj.baselibrary.CdApplication;
+import com.tencent.android.tpush.XGPushConfig;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import org.litepal.LitePal;
@@ -29,6 +30,8 @@ public class MyApplication extends Application {
 
         //二维码初始化
         ZXingLibrary.initDisplayOpinion(this);
+
+        initXinGePush();
     }
 
 
@@ -46,5 +49,20 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+
+    }
+
+    /**
+     * 信鸽推送初始化设置
+     */
+    private void initXinGePush(){
+        XGPushConfig.enableDebug(this,true);
+
+        XGPushConfig.enableOtherPush(getApplicationContext(), true);
+        XGPushConfig.setHuaweiDebug(true);
+        XGPushConfig.setMiPushAppId(getApplicationContext(), "5abfe0cef45a7");
+        XGPushConfig.setMiPushAppKey(getApplicationContext(), "fec23468c91a48556148fc921d59db04");
+        XGPushConfig.setMzPushAppId(this, "5abfe0cef45a7");
+        XGPushConfig.setMzPushAppKey(this, "fec23468c91a48556148fc921d59db04");
     }
 }

@@ -320,7 +320,6 @@
                                 app:img_content="@mipmap/main_gpssl"
                                 app:txt_content="GPS申领">
 
-
                             </com.cdkj.wzcd.view.MySquareRowLayout>
 
                             <com.cdkj.wzcd.view.MySquareRowLayout

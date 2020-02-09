@@ -16,6 +16,27 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+
+    <!-- 【必须】 信鸽SDK所需权限   -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 【常用】 信鸽SDK所需权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 【可选】 信鸽SDK所需权限 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <!--信鸽SDK结束END-->
+
+
     <!-- 二维码扫描上面↑↑↑↑↑↑ -->
     <application
         android:name=".MyApplication"
@@ -115,7 +136,16 @@
         <activity android:name=".module.work.credit.audit.AuditOneActivity" />
         <activity android:name=".module.work.credit.audit.AuditCourtNetwork" />
         <activity android:name=".module.work.bank_loan.SendingLoanListActivity" />
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity2">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.xg.push"
+                    android:path="/notify_detail"
+                    android:scheme="xgscheme" />
+            </intent-filter>
+        </activity>
         <activity android:name=".main.credit.module.zrzl.ZrzlActivity" />
         <activity android:name=".main.credit.module.zrzl.CarBrandActivity" />
         <activity android:name=".main.credit.CreditPageActivity" />
@@ -145,7 +175,24 @@
         <activity android:name=".main.message.MessageActivity" />
         <activity android:name=".main.credit.CreditPledgePageActivity" />
         <activity android:name=".common.SearchActivity" />
-        <activity android:name=".main.credit.module.qrpg.QrpgActivity"></activity>
+        <activity android:name=".main.credit.module.qrpg.QrpgActivity" />
+        <activity android:name=".main.credit.module.gps.GPSApplyActivity2" />
+        <activity android:name=".main.credit.module.gps.GPSSHActivity" />
+        <activity android:name=".main.credit.module.gps.GPSSHDetialsActivity"></activity>
+
+
+        <!--<activity-->
+        <!--android:name=".MainActivity2"-->
+        <!--android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >-->
+        <!--<intent-filter >-->
+        <!--<action android:name="android.intent.action.VIEW" />-->
+        <!--<category android:name="android.intent.category.DEFAULT"/>-->
+        <!--<data android:scheme="xgscheme"-->
+        <!--android:host="com.xg.push"-->
+        <!--android:path="/notify_detail" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
+
     </application>
 
 </manifest>

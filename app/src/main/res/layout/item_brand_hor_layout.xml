@@ -37,6 +37,13 @@
             android:layout_marginTop="10dp"
             android:gravity="center_vertical">
 
+            <CheckBox
+                android:id="@+id/cb_check"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone" />
+
             <ImageView
                 android:id="@+id/iv_brand_img"
                 android:layout_width="50dp"

@@ -237,6 +237,7 @@ public class CreditPageActivity extends AbsRefreshListActivity {
                 break;
 
             case "b3":
+                //用款审核
                 YkshActivity.open(this, item.getCode());
                 break;
 
