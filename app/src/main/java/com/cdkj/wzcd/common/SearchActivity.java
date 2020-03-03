@@ -77,26 +77,32 @@ public class SearchActivity extends AbsBaseLoadActivity {
     @Override
     public View addMainView() {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.act_car_brand, null, false);
-        if (getIntent() != null) {
-            itemShowImg = getIntent().getBooleanExtra("itemShowImg", false);
-            topHintText = getIntent().getStringExtra("topHintText");
-            isSelectMultiple = getIntent().getBooleanExtra("isSelectMultiple", false);
-            tag = getIntent().getStringExtra("tag");
-            data = (ArrayList<DataDictionary>) getIntent().getSerializableExtra("data");
-        }
         return mBinding.getRoot();
     }
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
         setShowTitle(false);//取消标题
+
+        init();
+        initListener();
+
         if (isSelectMultiple) {
             mBinding.tvSearch.setText("确定");
         }
         mBinding.etSearch.setHint(topHintText);
         initRefreshHelper();
-        mRefreshHelper.setData(data, "暂无数据", 0);
-        initListener();
+    }
+
+    private void init(){
+        if (getIntent() != null) {
+            itemShowImg = getIntent().getBooleanExtra("itemShowImg", false);
+            topHintText = getIntent().getStringExtra("topHintText");
+            isSelectMultiple = getIntent().getBooleanExtra("isSelectMultiple", false);
+            tag = getIntent().getStringExtra("tag");
+            data = (ArrayList<DataDictionary>) getIntent().getSerializableExtra("data");
+
+        }
     }
 
     private void initListener() {
@@ -186,13 +192,20 @@ public class SearchActivity extends AbsBaseLoadActivity {
 
                     DataDictionary item = mAdapter.getItem(position);
 
+                    if (item == null){
+                        return;
+                    }
+
                     if (isSelectMultiple) {
                         //多选
 //                        selectDataList.add(item);
                     } else {
+
+                        int index = data.indexOf(item);
+
                         //单选
                         EventBus.getDefault().post(new EventBean().setTag(tag).setValue1(item.getDkey())
-                                .setValue2(item.getDvalue()).setValue3(data.indexOf(item) + ""));
+                                .setValue2(item.getDvalue()).setValue3(index + ""));
                         finish();
                     }
                 });

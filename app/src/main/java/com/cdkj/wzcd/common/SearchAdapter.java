@@ -51,10 +51,12 @@ public class SearchAdapter extends BaseQuickAdapter<DataDictionary, BaseViewHold
             helper.setGone(R.id.cb_check, false);
         }
 
-        if (!TextUtils.isEmpty(item.getDkey())) {
-            helper.setText(R.id.tv_brand_name, item.getDvalue());
-        } else {
-            helper.setText(R.id.tv_brand_name, "");
+        if (null != item){
+            if (!TextUtils.isEmpty(item.getDkey())) {
+                helper.setText(R.id.tv_brand_name, item.getDvalue());
+            } else {
+                helper.setText(R.id.tv_brand_name, "");
+            }
         }
 
         helper.addOnClickListener(R.id.cb_check);
@@ -62,5 +64,20 @@ public class SearchAdapter extends BaseQuickAdapter<DataDictionary, BaseViewHold
 //        helper.setText(R.id.tv_sort, item.getLetter());
 
 //        helper.setGone(R.id.ll_sort, false);
+    }
+
+    /**
+     * 重写getItemViewType 避免checkBox因为复用引起状态混乱
+     * @param position
+     * @return
+     */
+    @Override
+    public int getItemViewType(int position) {
+
+        if (getData() == null || getData().size() == 0){
+            return super.getItemViewType(position);
+        }else {
+            return position;
+        }
     }
 }

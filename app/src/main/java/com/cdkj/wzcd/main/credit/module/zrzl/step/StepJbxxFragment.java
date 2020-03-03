@@ -1,10 +1,12 @@
 package com.cdkj.wzcd.main.credit.module.zrzl.step;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
 
     //公司归口
     List<DataDictionary> ascriptionList = new ArrayList<>();
+
     private boolean isShowCreate;
 
     /**
@@ -146,33 +149,6 @@ public class StepJbxxFragment extends BaseLazyFragment {
             }
             return ((ZrzlActivity) mActivity).data;
         }
-
-    }
-
-    private void setView() {
-
-        ZrzlBean data = getData();
-        if (null == data) {
-            return;
-        }
-
-        if (null == data.getCarInfo()) {
-            return;
-        }
-
-        mBinding.slOperator.setContentByKey(data.getSaleUserId());
-        mBinding.slLoanBankCode.setContentByKey(data.getLoanBank());
-        mBinding.slCompanyAscription.setContentByKey(data.getAscription());  //设置公司归口
-        mBinding.slRegion.setContentByKey(data.getCarInfo().getRegion());
-        EventBus.getDefault().post(new EventBean().setTag("zrzl_region")
-                .setValue1(mBinding.slRegion.getDataValue()).setValue2(mBinding.slRegion.getDataKey()));
-        ZrzlActivity.slRegion = data.getCarInfo().getRegion();
-        mBinding.slShopCarGarage.setContentByKey(data.getCarInfo().getShopCarGarage());
-        notifyRate(data.getCarInfo().getShopCarGarageRate());
-//        mBinding.slCompanyAscription.setContentByKey(data.getCarInfo().getShopCarGarage());//公司归口
-        mBinding.slBizType.setContentByKey(data.getBizType());
-        ZrzlActivity.slBizType = data.getBizType();
-        EventBus.getDefault().post(new EventBean().setTag("change_car_type").setValue1(TextUtils.equals(data.getBizType(), "0") ? "新车" : "二手车"));
 
     }
 
@@ -286,6 +262,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
         Map<String, String> map = new HashMap<>();
         map.put("start", "1");
         map.put("limit", "10000");
+        map.put("agreementStatus", "1");
         map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class)
@@ -326,9 +303,10 @@ public class StepJbxxFragment extends BaseLazyFragment {
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<AscriptionBean>>(mActivity) {
             @Override
             protected void onSuccess(ResponseInListModel<AscriptionBean> data, String SucMessage) {
+
                 for (AscriptionBean model : data.getList()) {
                     ascriptionList.add(new DataDictionary().setDkey(model.getId() + "")
-                            .setDvalue(model.getFullName()).setTag(String.valueOf(model.getFullName())));
+                            .setDvalue(model.getFullName()));
                 }
             }
 
@@ -364,7 +342,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
                 notifyRate(dataDictionary.getTag());
             }
         });
-//        mBinding.slCompanyAscription.setData(dealersList);//公司归口
+
         mBinding.slBizType.setData("0", "新车", "1", "二手车", (dialog, which) -> {
             ZrzlActivity.slBizType = mBinding.slBizType.getDataKey();
             /**
@@ -373,8 +351,7 @@ public class StepJbxxFragment extends BaseLazyFragment {
             EventBus.getDefault().post(new EventBean().setTag("change_car_type").setValue1(which == 0 ? "新车" : "二手车"));
         });
 
-        mBinding.slCompanyAscription.setData(ascriptionList);
-
+        mBinding.slCompanyAscription.setData(ascriptionList, null);
 
         if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
@@ -382,6 +359,33 @@ public class StepJbxxFragment extends BaseLazyFragment {
         }
 
         setView();
+    }
+
+    private void setView() {
+
+        ZrzlBean data = getData();
+        if (null == data) {
+            return;
+        }
+
+        if (null == data.getCarInfo()) {
+            return;
+        }
+
+        mBinding.slOperator.setTextAndKey(data.getSaleUserId(), data.getSaleUserName());
+        mBinding.slLoanBankCode.setContentByKey(data.getLoanBank());
+        mBinding.slCompanyAscription.setContentByKey(data.getAscription());  //设置公司归口
+        mBinding.slRegion.setContentByKey(data.getCarInfo().getRegion());
+        EventBus.getDefault().post(new EventBean().setTag("zrzl_region")
+                .setValue1(mBinding.slRegion.getDataValue()).setValue2(mBinding.slRegion.getDataKey()));
+        ZrzlActivity.slRegion = data.getCarInfo().getRegion();
+        mBinding.slShopCarGarage.setContentByKey(data.getCarInfo().getShopCarGarage());
+        notifyRate(data.getCarInfo().getShopCarGarageRate());
+//        mBinding.slCompanyAscription.setContentByKey(data.getCarInfo().getShopCarGarage());//公司归口
+        mBinding.slBizType.setContentByKey(data.getBizType());
+        ZrzlActivity.slBizType = data.getBizType();
+        EventBus.getDefault().post(new EventBean().setTag("change_car_type").setValue1(TextUtils.equals(data.getBizType(), "0") ? "新车" : "二手车"));
+
     }
 
 

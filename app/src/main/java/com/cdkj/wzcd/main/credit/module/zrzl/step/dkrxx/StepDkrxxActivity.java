@@ -269,6 +269,7 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
             bean.setYearIncome(data.getYearIncome());
             bean.setPresentJobYears(data.getPresentJobYears());
             bean.setPermanentType(data.getPermanentType());
+            bean.setCardPostAddress(data.getCardPostAddress());
         }
     }
 

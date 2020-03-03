@@ -71,6 +71,10 @@ public class DataDictionaryHelper {
 
         List<DataDictionary> list = new ArrayList<>();
 
+        if (TextUtils.isEmpty(parentKey)){
+            return list;
+        }
+
         for (DataDictionary dataDictionary : BASE_DATA_LIST) {
 
             if (TextUtils.equals(dataDictionary.getParentKey(), parentKey)) {

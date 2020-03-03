@@ -57,6 +57,7 @@ public class DkrxxInfoBean implements Serializable {
     private String position;
     private String yearIncome;
     private String permanentType;
+    private String cardPostAddress;
     private String localBirthAddress;
     private String localResidencePermit;
     private String presentJobYears;
@@ -193,6 +194,14 @@ public class DkrxxInfoBean implements Serializable {
 
     public void setPermanentType(String permanentType) {
         this.permanentType = permanentType;
+    }
+
+    public String getCardPostAddress() {
+        return cardPostAddress;
+    }
+
+    public void setCardPostAddress(String cardPostAddress) {
+        this.cardPostAddress = cardPostAddress;
     }
 
     public String getLocalBirthAddress() {

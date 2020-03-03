@@ -31,6 +31,8 @@ import java.util.Map;
 
 import retrofit2.Call;
 
+import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
+
 public class QrpgActivity extends AbsBaseLoadActivity {
 
     private ActivityRrpgBinding mBinding;
@@ -60,7 +62,7 @@ public class QrpgActivity extends AbsBaseLoadActivity {
 
     @Override
     public void afterCreate(Bundle savedInstanceState) {
-        mBaseBinding.titleView.setMidTitle(isDetials ? "确认评估" : "接收评估");
+        mBaseBinding.titleView.setMidTitle(isDetials ? "接收评估" : "确认评估");
     }
 
     private void init() {
@@ -73,7 +75,7 @@ public class QrpgActivity extends AbsBaseLoadActivity {
 
     private void initDetail() {
         FragmentTransaction mFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mFragmentTransaction.add(R.id.ll_detail, CreditDetailFragment.getInstance(bean));
+        mFragmentTransaction.add(R.id.ll_detail, CreditDetailFragment.getInstance(bean, MATERIAL));
         mFragmentTransaction.commit();
     }
 
@@ -134,7 +136,6 @@ public class QrpgActivity extends AbsBaseLoadActivity {
 
         mBinding.ilCarHead.initMultiple(this, "carHead");
         mBinding.ilCarRegisterCertificateFirst.initMultiple(this, "carRegisterCertificateFirst");
-
 
         List<BaseImageBean> driveLicenseList = new ArrayList<>();
         driveLicenseList.add(new BaseImageBean("行驶证", "driveLicense"));

@@ -3,6 +3,7 @@ package com.cdkj.wzcd.main.credit.module;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.util.NodeHelper;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
+import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
 import static com.cdkj.baselibrary.utils.DateUtil.DEFAULT_DATE_FMT;
+import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
 
 /**
  * @author : qianLei
@@ -27,6 +30,7 @@ public class CreditDetailFragment extends BaseLazyFragment {
     private FrgCreditDetailBinding mBinding;
 
     private ZrzlBean bean;
+    private String codeType;
 
     /**
      * 获得fragment实例
@@ -37,6 +41,20 @@ public class CreditDetailFragment extends BaseLazyFragment {
         CreditDetailFragment fragment = new CreditDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(DATA_SIGN, bean);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    /**
+     * 获得fragment实例
+     *
+     * @return
+     */
+    public static CreditDetailFragment getInstance(ZrzlBean bean, String codeType) {
+        CreditDetailFragment fragment = new CreditDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DATA_SIGN, bean);
+        bundle.putString(DATA_SIGN2, codeType);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -69,6 +87,7 @@ public class CreditDetailFragment extends BaseLazyFragment {
     private void init() {
 
         bean = (ZrzlBean) getArguments().getSerializable(DATA_SIGN);
+        codeType = getArguments().getString(DATA_SIGN2);
 
     }
 
@@ -91,7 +110,12 @@ public class CreditDetailFragment extends BaseLazyFragment {
         mBinding.blAmount.setMoneyText(bean.getLoanAmount());
         mBinding.blSaleMan.setText(bean.getSaleUserName() + "(" + bean.getTeamName() + ")");
 
-        mBinding.blNode.setText(NodeHelper.getNameOnTheCode(bean.getCurNodeCode()));
+        if (!TextUtils.isEmpty(codeType) || codeType.equals(MATERIAL)) {
+            mBinding.blNode.setText(NodeHelper.getNameOnTheCode(bean.getMaterialNodeCode()));
+        } else {
+            mBinding.blNode.setText(NodeHelper.getNameOnTheCode(bean.getCurNodeCode()));
+        }
+
         mBinding.blStart
                 .setText(DateUtil.formatStringData(bean.getApplyDatetime(), DEFAULT_DATE_FMT));
     }

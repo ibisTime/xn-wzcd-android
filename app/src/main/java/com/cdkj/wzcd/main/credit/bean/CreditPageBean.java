@@ -75,6 +75,7 @@ public class CreditPageBean implements Serializable {
     private String cancelStatus;
     private String curNodeCode;
     private String pledgeNodeCode;
+    private String materialNodeCode;
     private String isAdvanceFund;
     private String isCancel;
     private String applyDatetime;
@@ -268,6 +269,14 @@ public class CreditPageBean implements Serializable {
 
     public void setPledgeNodeCode(String pledgeNodeCode) {
         this.pledgeNodeCode = pledgeNodeCode;
+    }
+
+    public String getMaterialNodeCode() {
+        return materialNodeCode;
+    }
+
+    public void setMaterialNodeCode(String materialNodeCode) {
+        this.materialNodeCode = materialNodeCode;
     }
 
     public String getCurNodeCode() {

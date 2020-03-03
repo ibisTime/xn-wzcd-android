@@ -95,6 +95,7 @@ public class DkrxxBean implements Serializable {
     private String position;
     private String yearIncome;
     private String permanentType;
+    private String cardPostAddress;
     private String emergencyName1;
     private String emergencyRelation1;
     private String emergencyMobile1;
@@ -383,6 +384,14 @@ public class DkrxxBean implements Serializable {
 
     public void setPermanentType(String permanentType) {
         this.permanentType = permanentType;
+    }
+
+    public String getCardPostAddress() {
+        return cardPostAddress;
+    }
+
+    public void setCardPostAddress(String cardPostAddress) {
+        this.cardPostAddress = cardPostAddress;
     }
 
     public String getEmergencyName1() {

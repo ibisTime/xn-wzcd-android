@@ -32,6 +32,9 @@ import java.util.List;
 
 import retrofit2.Call;
 
+import static com.cdkj.wzcd.main.credit.CreditPageActivity.CUR;
+import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
+
 /**
  * @author : qianLei
  * @since : 2019/12/25 14:28
@@ -151,84 +154,85 @@ public class MainCreditFragment extends BaseLazyFragment {
                 nodeList.clear();
                 nodeList.add("a1");
                 nodeList.add("a1x");
-                CreditPageActivity.open(mActivity, nodeList, true);
+                CreditPageActivity.open(mActivity, nodeList, true, CUR);
                 break;
 
             case "lrsh":
                 nodeList.clear();
                 nodeList.add("a2");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "qrpg":
                 nodeList.clear();
                 nodeList.add("h1");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, MATERIAL);
                 break;
+
             case "jspg":
                 nodeList.clear();
                 nodeList.add("h2");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, MATERIAL);
                 break;
 
             case "yksq":
                 nodeList.clear();
                 nodeList.add("b1");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "yksh":
                 nodeList.clear();
                 nodeList.add("b3");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "zdhl":
                 nodeList.clear();
                 nodeList.add("b4");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "dzhl":
                 nodeList.clear();
                 nodeList.add("b5");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "lj":
                 nodeList.clear();
                 nodeList.add("c1");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "dj":
                 nodeList.clear();
                 nodeList.add("c2");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "yhsj":
                 nodeList.clear();
                 nodeList.add("d1");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "yhtj":
                 nodeList.clear();
                 nodeList.add("d2");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "lrfk":
                 nodeList.clear();
                 nodeList.add("d3");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "qrsk":
                 nodeList.clear();
                 nodeList.add("d4");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
 
             case "fsdy":
@@ -246,7 +250,7 @@ public class MainCreditFragment extends BaseLazyFragment {
             case "rd":
                 nodeList.clear();
                 nodeList.add("f1");
-                CreditPageActivity.open(mActivity, nodeList);
+                CreditPageActivity.open(mActivity, nodeList, CUR);
                 break;
             case "gpssl":
                 //GPS申领

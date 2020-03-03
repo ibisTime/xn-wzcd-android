@@ -153,6 +153,13 @@
                     app:field="permanentType"
                     app:title="常住类型"/>
 
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_cardPostAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:field="cardPostAddress"
+                    app:title="寄卡地址"/>
+
             </LinearLayout>
 
         </ScrollView>

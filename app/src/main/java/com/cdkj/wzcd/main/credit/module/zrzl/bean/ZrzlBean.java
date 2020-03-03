@@ -67,6 +67,7 @@ public class ZrzlBean implements Serializable {
     private String remark;
     private String curNodeCode;
     private String pledgeNodeCode;
+    private String materialNodeCode;
     private String teamCode;
     private BankLoanBean bankLoan;
     private CarInfoBean carInfo;
@@ -138,6 +139,14 @@ public class ZrzlBean implements Serializable {
 
     public void setPledgeNodeCode(String pledgeNodeCode) {
         this.pledgeNodeCode = pledgeNodeCode;
+    }
+
+    public String getMaterialNodeCode() {
+        return materialNodeCode;
+    }
+
+    public void setMaterialNodeCode(String materialNodeCode) {
+        this.materialNodeCode = materialNodeCode;
     }
 
     public String getCurNodeCode() {

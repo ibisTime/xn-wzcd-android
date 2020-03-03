@@ -168,6 +168,8 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
         mBinding.slPosition.setData("work_profession");
 
         mBinding.slPermanentType.setData("permanent_type");
+
+        mBinding.slCardPostAddress.setData("jk_address");
     }
 
     private void initCityPicker() {
@@ -226,6 +228,7 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
             mBinding.elYearIncome.setText(bean.getYearIncome());
             mBinding.elPresentJobYears.setText(bean.getPresentJobYears());
             mBinding.slPermanentType.setContentByKey(bean.getPermanentType());
+            mBinding.slCardPostAddress.setContentByKey(bean.getCardPostAddress());
         }
 
 
@@ -259,6 +262,7 @@ public class StepDkrxxInfoActivity extends AbsBaseLoadActivity {
         bean.setYearIncome(mBinding.elYearIncome.getText());
         bean.setPresentJobYears(mBinding.elPresentJobYears.getText());
         bean.setPermanentType(mBinding.slPermanentType.getDataKey());
+        bean.setCardPostAddress(mBinding.slCardPostAddress.getDataKey());
 
         EventBus.getDefault().post(new EventBean().setTag("dkrxx_info").setValue(bean));
         finish();

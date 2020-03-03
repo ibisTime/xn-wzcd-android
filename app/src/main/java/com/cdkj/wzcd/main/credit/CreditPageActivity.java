@@ -46,31 +46,38 @@ import retrofit2.Call;
  */
 public class CreditPageActivity extends AbsRefreshListActivity {
 
+    public static String MATERIAL = "0";
+    public static String CUR = "1";
+
     ArrayList<String> curNodeCodeList;
     private boolean isShowCrate;
+    private String type;
 
-    public static void open(Context context, ArrayList<String> nodeList) {
+    public static void open(Context context, ArrayList<String> nodeList, String type) {
         if (context == null) {
             return;
         }
         Intent intent = new Intent(context, CreditPageActivity.class);
         intent.putStringArrayListExtra(CdRouteHelper.DATA_SIGN, nodeList);
+        intent.putExtra(CdRouteHelper.DATA_SIGN3, type);
         context.startActivity(intent);
     }
 
     /**
      * 只有准入资料界面  再有权限的情况下会显示新建按钮 其他界面都不先是
+     *
      * @param context
      * @param nodeList
-     * @param isShowCrate  传入true+有权限 右上角就会显示 新建按钮
+     * @param isShowCrate 传入true+有权限 右上角就会显示 新建按钮
      */
-    public static void open(Context context, ArrayList<String> nodeList, boolean isShowCrate) {
+    public static void open(Context context, ArrayList<String> nodeList, boolean isShowCrate, String type) {
         if (context == null) {
             return;
         }
         Intent intent = new Intent(context, CreditPageActivity.class);
         intent.putStringArrayListExtra(CdRouteHelper.DATA_SIGN, nodeList);
         intent.putExtra(CdRouteHelper.DATA_SIGN2, isShowCrate);
+        intent.putExtra(CdRouteHelper.DATA_SIGN3, type);
         context.startActivity(intent);
     }
 
@@ -80,7 +87,12 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
 
             CreditPageBean item = mAdapter.getItem(position);
-            onItemClick(item);
+            if (!TextUtils.isEmpty(type) && MATERIAL.equals(type)) {
+                onItemClickMaterial(item);
+            } else {
+                onItemClick(item);
+            }
+
 
         });
         return mAdapter;
@@ -93,7 +105,17 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
 
-        map.put("curNodeCodeList", curNodeCodeList);
+        boolean codeFlag = true;
+        for (String code : curNodeCodeList) {
+            if (code.equals("h1") || code.equals("h2")) {
+                codeFlag = false;
+                map.put("materialNodeCodeList", curNodeCodeList);
+            }
+        }
+
+        if (codeFlag) {
+            map.put("curNodeCodeList", curNodeCodeList);
+        }
 
 
         if (isShowDialog) {
@@ -171,6 +193,7 @@ public class CreditPageActivity extends AbsRefreshListActivity {
     private void init() {
         curNodeCodeList = getIntent().getStringArrayListExtra(CdRouteHelper.DATA_SIGN);
         isShowCrate = getIntent().getBooleanExtra(CdRouteHelper.DATA_SIGN2, false);
+        type = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN3);
 
         if (curNodeCodeList.isEmpty()) {
             return;
@@ -222,14 +245,9 @@ public class CreditPageActivity extends AbsRefreshListActivity {
             case "a1x":
                 ZrzlActivity.open(this, item.getCode());
                 break;
+
             case "a2":
                 ZrshActivity.open(this, item.getCode());
-                break;
-            case "h1":
-                QrpgActivity.open(this, item.getCode(), false);
-                break;
-            case "h2":
-                QrpgActivity.open(this, item.getCode(), true);
                 break;
 
             case "b1":
@@ -280,4 +298,18 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
     }
 
+    private void onItemClickMaterial(CreditPageBean item) {
+
+        switch (item.getMaterialNodeCode()) {
+
+            case "h1":
+                QrpgActivity.open(this, item.getCode(), false);
+                break;
+            case "h2":
+                QrpgActivity.open(this, item.getCode(), true);
+                break;
+
+        }
+
+    }
 }

@@ -298,6 +298,7 @@ public class StepClxxFragment extends BaseLazyFragment {
             if (TextUtils.isEmpty(carBrand)) {
                 UITipDialog.showInfo(mActivity, "请先选择品牌");
             } else {
+
                 mBinding.slCarSeries.setData(carSeriesList);
                 SearchActivity.open(getContext(), "请输入搜索内容", mBinding.slCarSeries.getField(), (ArrayList<DataDictionary>) carSeriesList);
 //                mBinding.slCarSeries.showSelect();
@@ -312,6 +313,7 @@ public class StepClxxFragment extends BaseLazyFragment {
             if (TextUtils.isEmpty(carSeries)) {
                 UITipDialog.showInfo(mActivity, "请先选择车系");
             } else {
+
                 mBinding.slCarModel.setData(carModelList);
                 SearchActivity.open(getContext(), "请输入搜索内容", mBinding.slCarModel.getField(), (ArrayList<DataDictionary>) carModelList);
             }

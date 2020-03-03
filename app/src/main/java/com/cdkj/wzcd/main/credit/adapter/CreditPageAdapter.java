@@ -28,7 +28,13 @@ public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseView
     protected void convert(BaseViewHolder helper, CreditPageBean item) {
 
         helper.setText(R.id.tv_code, item.getBizCode());
-        helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
+
+        if (TextUtils.isEmpty(item.getMaterialNodeCode())){
+            helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
+        }else {
+            helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getMaterialNodeCode()));
+        }
+
         helper.setText(R.id.tv_name, item.getCustomerName());
         helper.setText(R.id.tv_type, item.getBizType().equals("1") ? "二手车" : "新车");
         helper.setText(R.id.tv_price, MoneyUtils.showPrice(item.getLoanAmount()));
