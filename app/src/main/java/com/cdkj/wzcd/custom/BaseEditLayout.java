@@ -147,7 +147,7 @@ public class BaseEditLayout extends LinearLayout {
 
         if (TextUtils.equals(inputType, "0")) {
             //验证手机号
-            String regex = "^1[3|4|5|7|8|9][0-9]\\d{4,8}$";
+            String regex = "^1[3|4|5|6|7|8|9][0-9]\\d{4,8}$";
             String phone = mBinding.edtInput.getText().toString().trim();
             if (phone.length() != 11) {
                 ToastUtil.show(context, "请输入正确的手机号");

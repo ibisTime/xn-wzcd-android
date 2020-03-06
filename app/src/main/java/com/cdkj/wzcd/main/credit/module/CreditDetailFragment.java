@@ -110,7 +110,7 @@ public class CreditDetailFragment extends BaseLazyFragment {
         mBinding.blAmount.setMoneyText(bean.getLoanAmount());
         mBinding.blSaleMan.setText(bean.getSaleUserName() + "(" + bean.getTeamName() + ")");
 
-        if (!TextUtils.isEmpty(codeType) || codeType.equals(MATERIAL)) {
+        if (MATERIAL.equals(codeType)) {
             mBinding.blNode.setText(NodeHelper.getNameOnTheCode(bean.getMaterialNodeCode()));
         } else {
             mBinding.blNode.setText(NodeHelper.getNameOnTheCode(bean.getCurNodeCode()));

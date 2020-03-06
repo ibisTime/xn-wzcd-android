@@ -128,7 +128,7 @@
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_wanFactor"
                     app:field="wanFactor"
-                    app:dateType="ym"
+                    app:dateType="ymd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="开票日期"/>
@@ -144,6 +144,7 @@
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_rateType"
                     app:field="rateType"
+                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="利率类型"/>
@@ -151,6 +152,7 @@
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_fee"
                     app:field="fee"
+                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="money"

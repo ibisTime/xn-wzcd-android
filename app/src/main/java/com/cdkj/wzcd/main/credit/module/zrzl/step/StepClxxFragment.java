@@ -407,7 +407,7 @@ public class StepClxxFragment extends BaseLazyFragment {
         mBinding.slCarBrand.setTextAndKey(data.getCarBrand(), data.getBrandName());//品牌
         mBinding.slCarSeries.setTextAndKey(data.getCarSeries(), data.getSeriesName());//车系
         mBinding.slCarModel.setTextAndKey(data.getCarModel(), data.getModelName());//车型
-        mBinding.elModel.setText(data.getModelName());//车辆型号
+        mBinding.elModel.setText(data.getModelNumber());//车辆型号
         mBinding.elCarPrice.setText(data.getOriginalPrice());//厂商指导价
         mBinding.elCarFrameNo.setText(data.getCarFrameNo());//车架号
         mBinding.elCarEngineNo.setText(data.getCarEngineNo());//发动机

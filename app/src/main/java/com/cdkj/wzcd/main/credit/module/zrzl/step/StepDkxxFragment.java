@@ -27,6 +27,8 @@ import com.cdkj.wzcd.main.credit.CreditActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlMonthAmountBean;
+import com.cdkj.wzcd.model.SystemParameterModel;
+import com.cdkj.wzcd.util.RequestUtil;
 import com.cdkj.wzcd.util.StringStaticFinal;
 
 import org.greenrobot.eventbus.EventBus;
@@ -83,8 +85,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
         init();
         initListener();
 
-        initView();
-        setView();
+        getRebateRate();
 
         return mBinding.getRoot();
     }
@@ -97,6 +98,31 @@ public class StepDkxxFragment extends BaseLazyFragment {
         mBinding.btnConfirm.setOnClickListener(view -> {
             if (BaseViewUtil.check(mBinding.llInput)) {
                 doRequest();
+            }
+        });
+    }
+
+    public void getRebateRate() {
+        Map<String, String> map = RetrofitUtils.getRequestMap();
+
+        map.put("key", "rebate_rate");
+
+        showLoadingDialog();
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getSystemParameter("630047", StringUtils.getJsonToString(map));
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<SystemParameterModel>(mActivity) {
+            @Override
+            protected void onSuccess(SystemParameterModel model, String SucMessage) {
+                mBinding.elRebateRate.setText(model.getCvalue());
+
+                initView();
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
             }
         });
     }
@@ -131,6 +157,8 @@ public class StepDkxxFragment extends BaseLazyFragment {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
             mBinding.btnConfirm.setVisibility(View.GONE);
         }
+
+        setView();
     }
 
     public class Watcher implements TextWatcher {
@@ -360,10 +388,16 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
     @Subscribe
     public void setRate(EventBean eventBean) {
-        if (eventBean != null && StringStaticFinal.Default_dealer_rate.equals(eventBean.getTag())) {
-            String value = (String) eventBean.getValue();
-            mBinding.elRebateRate.setText(value);
-            return;
+
+        if (eventBean != null && TextUtils.equals("change_car_type", eventBean.getTag())) {
+            boolean newCar = TextUtils.equals("新车", eventBean.getValue1());
+
+            if (newCar){
+                mBinding.dlWanFactor.isRequired(false);
+            }else {
+                mBinding.dlWanFactor.isRequired(true);
+            }
+
         }
 
     }

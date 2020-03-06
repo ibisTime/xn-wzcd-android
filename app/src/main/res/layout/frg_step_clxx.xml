@@ -93,6 +93,7 @@
                     android:id="@+id/el_carPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:inputType="money"
                     app:field="carPrice"
                     app:title="厂商指导价" />
                     <!--app:inputType="money"-->
@@ -124,6 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="evalPrice"
+                    app:inputType="money"
                     app:title="评估价格" />
 
 
