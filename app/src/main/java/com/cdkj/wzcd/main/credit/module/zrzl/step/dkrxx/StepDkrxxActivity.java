@@ -34,6 +34,9 @@ import java.util.Map;
 
 import retrofit2.Call;
 
+import static com.cdkj.wzcd.custom.BaseImageLayout.MODEL_ID;
+import static com.cdkj.wzcd.custom.BaseImageLayout.MODEL_PREVIEW;
+
 /**
  * @author : qianLei
  * @since : 2019/12/31 14:28
@@ -103,6 +106,11 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
                         ToastUtil.show(this, "请完善身份证信息");
                         return;
                     }
+                } else {
+                    if (TextUtils.isEmpty(bean.getRelation())) {
+                        ToastUtil.show(this, "请完善" + mBinding.slOperator.getDataValue() + "信息");
+                        return;
+                    }
                 }
 
                 EventBus.getDefault().post(new EventBean().setTag("dkrxx").setValue(bean)
@@ -121,8 +129,9 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
         List<BaseImageBean> list = new ArrayList<>();
         list.add(new BaseImageBean("身份证正面", "idFront"));
         list.add(new BaseImageBean("身份证反面", "idReverse"));
-        list.add(new BaseImageBean("人证照片", "holdIdCardPdf",false));
+        list.add(new BaseImageBean("人证照片", "holdIdCardPdf", false));
         mBinding.ilInfo.init(this, list);
+        mBinding.ilInfo.setClickModel(MODEL_ID);
         mBinding.ilInfo.setImageInterface((location, field, key) -> {
 
             if (field.equals("idFront")) {
@@ -164,6 +173,8 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
             pic.add(bean.getHoldIdCardPdf());
             mBinding.ilInfo.setData(pic);
 
+            mBinding.mlId.setText(bean.getIdNo());
+
             mBinding.elMobile.setText(bean.getMobile());
             mBinding.slResult.setContentByKey(bean.getBankCreditResult());
             mBinding.elRemark.setText(bean.getBankCreditResultRemark());
@@ -203,6 +214,7 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
                     bean.setIdNo(data.getIdNo());
                     bean.setGender(data.getGender());
 
+                    mBinding.mlId.setText(data.getIdNo());
                 } else {
 
                     bean.setStartDate(data.getStartDate());
@@ -236,6 +248,7 @@ public class StepDkrxxActivity extends AbsBaseLoadActivity {
             bean.setStartDate(data.getStartDate());
             bean.setStatdate(data.getStatdate());
             bean.setAuthref(data.getAuthref());
+
         }
 
     }

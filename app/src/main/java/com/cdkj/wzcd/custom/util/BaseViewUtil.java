@@ -14,6 +14,8 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static com.cdkj.wzcd.custom.BaseImageLayout.MODEL_PREVIEW;
+
 /**
  * @author : qianLei
  * @since : 2019/12/31 15:48
@@ -198,7 +200,7 @@ public class BaseViewUtil {
 
             if (childView instanceof BaseImageLayout) {
 
-                ((BaseImageLayout) childView).setOnClickEnable(false);
+                ((BaseImageLayout) childView).setClickModel(MODEL_PREVIEW);
 
             }
 

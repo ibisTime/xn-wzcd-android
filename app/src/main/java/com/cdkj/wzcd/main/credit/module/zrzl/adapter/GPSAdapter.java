@@ -23,6 +23,8 @@ import java.util.Map;
 
 import retrofit2.Call;
 
+import static com.cdkj.wzcd.custom.BaseImageLayout.MODEL_PREVIEW;
+
 /**
  * @author : qianLei
  * @since : 2019/12/31 23:39
@@ -75,7 +77,7 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
         });
         if (isDetail) {
             slCode.setOnClickEnable(false);
-            ilAzPhotos.setOnClickEnable(false);
+            ilAzPhotos.setClickModel(MODEL_PREVIEW);
         }
     }
 

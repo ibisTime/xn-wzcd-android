@@ -69,7 +69,9 @@ public class StepDkrxxInfoFeiActivity extends AbsBaseLoadActivity {
 
     private void initListener() {
         mBinding.btnConfirm.setOnClickListener(view -> {
-            setData();
+            if (BaseViewUtil.check(mBinding.llInput)) {
+                setData();
+            }
         });
     }
 

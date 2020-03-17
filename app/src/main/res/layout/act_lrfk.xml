@@ -38,24 +38,28 @@
                     android:id="@+id/el_loanNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:title="货款编号"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_repayBankDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:title="银行还款日"/>
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_repayBillDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:title="账单日"/>
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_bankcardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:title="卡号"/>
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout

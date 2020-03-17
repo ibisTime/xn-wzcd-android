@@ -32,6 +32,7 @@
                     android:id="@+id/dl_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:title="放款日期"/>
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout

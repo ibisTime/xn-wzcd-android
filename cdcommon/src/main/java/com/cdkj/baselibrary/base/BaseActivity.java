@@ -162,6 +162,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         commonDialog.show();
     }
 
+    /**
+     * 显示确认取消弹框
+     */
+    protected void showDoubleWarnListen(String title, String content,
+                                        CommonDialog.OnPositiveListener onPositiveListener,
+                                        CommonDialog.OnNegativeListener onNegativeListener) {
+
+        if (isFinishing()) {
+            return;
+        }
+
+        CommonDialog commonDialog = new CommonDialog(this).builder()
+                .setTitle(title).setContentMsg(content)
+                .setPositiveBtn(getString(R.string.sure),
+                        onPositiveListener)
+                .setNegativeBtn(getString(R.string.cancel),
+                        onNegativeListener, false);
+
+        commonDialog.show();
+    }
+
     protected void showSureDialog(String str, CommonDialog.OnPositiveListener onPositiveListener) {
 
         if (isFinishing()) {

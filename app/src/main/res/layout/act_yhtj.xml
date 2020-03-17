@@ -30,6 +30,7 @@
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_date"
+                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="提交时间"/>

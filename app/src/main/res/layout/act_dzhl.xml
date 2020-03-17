@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,26 +34,29 @@
                     android:id="@+id/dl_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="垫资日期"/>
+                    app:isRequired="true"
+                    app:title="垫资日期" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="money"
-                    app:title="垫资金额"/>
+                    app:isRequired="true"
+                    app:title="垫资金额" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_shuidan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="水单上传"/>
+                    app:isRequired="true"
+                    app:title="水单上传" />
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout
                     android:id="@+id/rl_remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="垫资说明"/>
+                    app:title="垫资说明" />
 
             </LinearLayout>
 

@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 
 import com.cdkj.baselibrary.activitys.UpDataPhoneActivity;
 import com.cdkj.baselibrary.activitys.UpDataPwdActivity;
+import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
 import com.cdkj.baselibrary.dialog.CommonDialog;
 import com.cdkj.baselibrary.dialog.UITipDialog;
+import com.cdkj.baselibrary.model.eventmodels.EventFinishAll;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.AppUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.BuildConfig;
@@ -22,12 +25,18 @@ import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.MainFrgUserBinding;
 import com.cdkj.wzcd.model.UserModel;
+import com.cdkj.wzcd.model.VersionModel;
 import com.cdkj.wzcd.module.user.SignInActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
+
+import static com.cdkj.baselibrary.utils.UpdateUtil.isForceUpload;
+import static com.cdkj.baselibrary.utils.UpdateUtil.startWeb;
 
 /**
  * @author : qianLei
@@ -36,6 +45,9 @@ import retrofit2.Call;
 public class MainUserFragment extends BaseLazyFragment {
 
     private MainFrgUserBinding mBinding;
+
+    private boolean isUpdate = false;
+    private VersionModel versionModel;
 
     /**
      * 获得fragment实例
@@ -66,6 +78,7 @@ public class MainUserFragment extends BaseLazyFragment {
         init();
         initListener();
 
+        getVersion();
         getUserInfoRequest();
 
         return mBinding.getRoot();
@@ -74,14 +87,7 @@ public class MainUserFragment extends BaseLazyFragment {
     private void init() {
 
         mBinding.tvVesionName.setText(BuildConfig.VERSION_NAME);
-//        try {
-//            PackageInfo packageInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-//            String versionName = packageInfo.versionName;
-//            mBinding.tvVesionName.setText(versionName);
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//            mBinding.tvVesionName.setText("未知");
-//        }
+
     }
 
     private void initListener() {
@@ -96,6 +102,12 @@ public class MainUserFragment extends BaseLazyFragment {
 
         mBinding.btnLogout.setOnClickListener(view -> {
             logOut();
+        });
+
+        mBinding.llVersionName.setOnClickListener(v -> {
+            if (versionModel != null && isUpdate) {
+                showUploadDialog(versionModel);
+            }
         });
 
     }
@@ -203,5 +215,106 @@ public class MainUserFragment extends BaseLazyFragment {
 
         commonDialog.show();
 
+    }
+
+    /**
+     * 获取最新版本
+     *
+     * @return
+     */
+    private void getVersion() {
+        Map<String, String> map = new HashMap<>();
+        map.put("type", "android");
+        map.put("systemCode", MyCdConfig.SYSTEM_CODE);
+        map.put("companyCode", MyCdConfig.COMPANY_CODE);
+
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getVersion("630048", StringUtils.getJsonToString(map));
+
+        addCall(call);
+
+        showLoadingDialog();
+
+        call.enqueue(new BaseResponseModelCallBack<VersionModel>(mActivity) {
+
+            @Override
+            protected void onSuccess(VersionModel data, String SucMessage) {
+                if (data == null) {
+                    return;
+                }
+                versionModel = data;
+
+                //版本号不一致说明有更新
+                isUpdate = data.getVersion() > AppUtils.getAppVersionCode(mActivity);
+                if (isUpdate) {
+                    mBinding.tvVesionName.setText(mBinding.tvVesionName.getText() + "(有新版本可更新)");
+                    showUploadDialog(data);
+                } else {
+                    mBinding.tvVesionName.setText(mBinding.tvVesionName.getText() + "(当前最新版本)");
+                }
+
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+    }
+
+    /**
+     * 显示更新dialog
+     *
+     * @param versionModel
+     */
+    private void showUploadDialog(VersionModel versionModel) {
+
+        if (isForceUpload(versionModel.getForceUpdate())) { // 强制更新
+            showSureDialog("更新提示", versionModel.getNote(), view -> {
+                startWeb(mActivity, versionModel.getDownloadUrl());
+                EventBus.getDefault().post(new EventFinishAll()); //结束所有界面
+                mActivity.finish();
+            });
+
+        } else {
+            showDoubleWarnListen("更新提示", versionModel.getNote(), view -> {
+                startWeb(mActivity, versionModel.getDownloadUrl());
+            }, view -> {
+
+            });
+        }
+    }
+
+    /**
+     * 只显示确认弹框的按钮
+     *
+     * @param title
+     * @param str
+     * @param onPositiveListener
+     */
+    protected void showSureDialog(String title, String str, CommonDialog.OnPositiveListener onPositiveListener) {
+
+        CommonDialog commonDialog = new CommonDialog(mActivity).builder()
+                .setTitle(title)
+                .setContentMsg(str)
+                .setPositiveBtn(getString(R.string.sure), onPositiveListener);
+
+        commonDialog.show();
+    }
+
+    /**
+     * 显示确认取消弹框
+     */
+    protected void showDoubleWarnListen(String title, String content,
+                                        CommonDialog.OnPositiveListener onPositiveListener,
+                                        CommonDialog.OnNegativeListener onNegativeListener) {
+
+        CommonDialog commonDialog = new CommonDialog(mActivity).builder()
+                .setTitle(title).setContentMsg(content)
+                .setPositiveBtn(getString(R.string.sure),
+                        onPositiveListener)
+                .setNegativeBtn(getString(R.string.cancel),
+                        onNegativeListener, false);
+
+        commonDialog.show();
     }
 }

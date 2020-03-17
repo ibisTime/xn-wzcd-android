@@ -16,6 +16,7 @@
             android:id="@+id/el_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:isRequired="true"
             app:title="任务名称" />
 
         <com.cdkj.wzcd.custom.BaseEditLayout
@@ -23,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:inputType="number"
+            app:isRequired="true"
             app:title="任务时效（小时）" />
 
         <com.cdkj.wzcd.custom.BaseSelectLayout
@@ -31,6 +33,7 @@
             android:layout_height="wrap_content"
             app:field="sl_user"
             app:isOpenActivity="true"
+            app:isRequired="true"
             app:title="执行人" />
 
         <LinearLayout

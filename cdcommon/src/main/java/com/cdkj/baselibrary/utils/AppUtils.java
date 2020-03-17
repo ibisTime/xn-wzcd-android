@@ -436,4 +436,18 @@ public class AppUtils {
         }
     }
 
+    /*获取版本信息*/
+    public static int getAppVersionCode(Context context) {
+        int versionName = 1;
+        try {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionName = pi.versionCode;
+
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionName;
+    }
+
 }

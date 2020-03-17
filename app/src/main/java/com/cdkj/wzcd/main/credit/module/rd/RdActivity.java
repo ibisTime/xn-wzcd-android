@@ -254,9 +254,7 @@ public class RdActivity extends AbsBaseLoadActivity {
         if (mBinding.ilPledgeContract.check()) {
             return false;
         }
-        if (mBinding.ilEnterOtherPdf.check()) {
-            return false;
-        }
+
 
         return true;
     }

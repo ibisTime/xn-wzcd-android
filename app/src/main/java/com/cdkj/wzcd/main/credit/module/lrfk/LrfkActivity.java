@@ -68,12 +68,12 @@ public class LrfkActivity extends AbsBaseLoadActivity {
         code = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN);
 
         for (int i = 1; i < 32; i++) {
-
             list.add(new DataDictionary().setDkey(i + "").setDvalue(i + ""));
-
         }
 
         mBinding.slRepayBankDate.setData(list);
+        // 默认每月25日
+        mBinding.slRepayBankDate.setTextAndKey("25","25");
         mBinding.slRepayBillDate.setData(list);
 
     }
@@ -110,7 +110,7 @@ public class LrfkActivity extends AbsBaseLoadActivity {
             protected void onSuccess(ZrzlBean data, String SucMessage) {
                 bean = data;
                 initDetail();
-                setView();
+                setView(data);
             }
 
             @Override
@@ -126,7 +126,7 @@ public class LrfkActivity extends AbsBaseLoadActivity {
         mFragmentTransaction.commit();
     }
 
-    private void setView() {
+    private void setView(ZrzlBean data) {
 
     }
 

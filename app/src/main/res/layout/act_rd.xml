@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,59 +34,69 @@
                     android:id="@+id/el_enterCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="档案编号"/>
+                    app:isRequired="true"
+                    app:title="档案编号" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_enterLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="档案存放位置"/>
+                    app:isRequired="true"
+                    app:title="档案存放位置" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_insuranceCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="保险公司"/>
+                    app:field="insuranceCompany"
+                    app:isOpenActivity="true"
+                    app:isRequired="true"
+                    app:title="保险公司" />
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_syxDateStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="商业险开始"/>
+                    app:isRequired="true"
+                    app:title="商业险开始" />
 
                 <com.cdkj.wzcd.custom.BaseDateLayout
                     android:id="@+id/dl_syxDateEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="商业险结束"/>
+                    app:isRequired="true"
+                    app:title="商业险结束" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_advanceContract"
                     android:layout_width="match_parent"
-                    app:selectMultiple="true"
                     android:layout_height="wrap_content"
-                    app:title="垫资合同"/>
+                    app:isRequired="true"
+                    app:selectMultiple="true"
+                    app:title="垫资合同" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_guarantorContract"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:selectMultiple="true"
-                    app:title="担保和反担保合同"/>
+                    app:title="担保和反担保合同" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_pledgeContract"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:isRequired="true"
                     app:selectMultiple="true"
-                    app:title="担保和反担保合同"/>
+                    app:title="抵押合同" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_enterOtherPdf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:selectMultiple="true"
-                    app:title="担保和反担保合同"/>
+                    app:title="其他材料" />
 
             </LinearLayout>
 

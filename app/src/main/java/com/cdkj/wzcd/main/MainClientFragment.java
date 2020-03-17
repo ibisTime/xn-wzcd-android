@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.cdkj.baselibrary.interfaces.RefreshHelper;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
+import com.cdkj.baselibrary.utils.ToastUtil;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.MainFrgClientBinding;
@@ -35,6 +37,7 @@ public class MainClientFragment extends BaseLazyFragment {
 
     private MainFrgClientBinding mBinding;
 
+    private String keyword = "";
     protected RefreshHelper mRefreshHelper;
 
     /**
@@ -63,9 +66,23 @@ public class MainClientFragment extends BaseLazyFragment {
             @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.main_frg_client, null, false);
 
+        initListener();
         initRefreshHelper(10);
 
         return mBinding.getRoot();
+    }
+
+    private void initListener() {
+        mBinding.tvSearch.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(mBinding.etSearch.getText().toString())) {
+                ToastUtil.show(mActivity, "请输入客户姓名，手机号，身份证号");
+                return;
+            }
+
+            keyword = mBinding.etSearch.getText().toString();
+            mRefreshHelper.onDefaultMRefresh(true);
+
+        });
     }
 
     /**
@@ -99,7 +116,7 @@ public class MainClientFragment extends BaseLazyFragment {
 
 
     public RecyclerView.Adapter getListAdapter(List listData) {
-        CreditPageAdapter mAdapter = new CreditPageAdapter(listData);
+        CreditPageAdapter mAdapter = new CreditPageAdapter(listData, null);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
 
             CreditPageBean item = mAdapter.getItem(position);
@@ -113,6 +130,7 @@ public class MainClientFragment extends BaseLazyFragment {
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
         Map<String, Object> map = RetrofitUtils.getNodeListMap();
 
+        map.put("keyword", keyword);
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
         map.put("isMy", "1");

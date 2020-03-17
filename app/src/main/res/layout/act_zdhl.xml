@@ -30,6 +30,7 @@
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_team"
+                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:title="收款账号选择"/>

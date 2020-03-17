@@ -83,7 +83,7 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
     @Override
     public RecyclerView.Adapter getListAdapter(List listData) {
-        CreditPageAdapter mAdapter = new CreditPageAdapter(listData);
+        CreditPageAdapter mAdapter = new CreditPageAdapter(listData, type);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
 
             CreditPageBean item = mAdapter.getItem(position);

@@ -119,7 +119,6 @@
                     app:field="carNumber"
                     app:title="车牌号" />
 
-
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_evalPrice"
                     android:layout_width="match_parent"
@@ -128,15 +127,12 @@
                     app:inputType="money"
                     app:title="评估价格" />
 
-
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_isPublicCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:field="isPublicCard"
                     app:title="是否公牌" />
-
-
 
                 <LinearLayout
                     android:id="@+id/fl_report"

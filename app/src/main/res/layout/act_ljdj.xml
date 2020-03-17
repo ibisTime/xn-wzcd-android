@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,13 +34,14 @@
                     android:id="@+id/dl_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="完成时间"/>
+                    app:isRequired="true"
+                    app:title="完成时间" />
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout
                     android:id="@+id/rl_remark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="完成说明"/>
+                    app:title="完成说明" />
 
             </LinearLayout>
 

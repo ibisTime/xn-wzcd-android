@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 import static com.cdkj.baselibrary.utils.DateUtil.DEFAULT_DATE_FMT;
+import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
 
 /**
  * @author : qianLei
@@ -20,8 +21,12 @@ import static com.cdkj.baselibrary.utils.DateUtil.DEFAULT_DATE_FMT;
  */
 public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseViewHolder> {
 
-    public CreditPageAdapter(@Nullable List<CreditPageBean> data) {
+    // 节点类型
+    private String type;
+
+    public CreditPageAdapter(@Nullable List<CreditPageBean> data,String type) {
         super(R.layout.item_zrzl, data);
+        this.type = type;
     }
 
     @Override
@@ -29,10 +34,10 @@ public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseView
 
         helper.setText(R.id.tv_code, item.getBizCode());
 
-        if (TextUtils.isEmpty(item.getMaterialNodeCode())){
-            helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
-        }else {
+        if (!TextUtils.isEmpty(type) && MATERIAL.equals(type)) {
             helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getMaterialNodeCode()));
+        }else {
+            helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
         }
 
         helper.setText(R.id.tv_name, item.getCustomerName());

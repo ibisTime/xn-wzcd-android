@@ -31,6 +31,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 
+import static com.cdkj.wzcd.custom.BaseImageLayout.MODEL_PREVIEW;
 import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
 
 public class QrpgActivity extends AbsBaseLoadActivity {
@@ -183,8 +184,8 @@ public class QrpgActivity extends AbsBaseLoadActivity {
                 }
             }
         }
-        mBinding.ilInfo.setOnClickEnable(false);
-        mBinding.ilCarHead.setOnClickEnable(false);
+        mBinding.ilInfo.setClickModel(MODEL_PREVIEW);
+        mBinding.ilCarHead.setClickModel(MODEL_PREVIEW);
         if (isDetials) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
             mBinding.btnConfirm2.setVisibility(View.VISIBLE);

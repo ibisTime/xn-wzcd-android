@@ -43,6 +43,13 @@ import static com.cdkj.baselibrary.utils.CameraHelper.CAMERA_TYPE_VIDEO;
  */
 public class BaseImageLayout extends LinearLayout {
 
+    // 正常：点击选择，可删除
+    public static String MODEL_NORMAL = "0";
+    // 预览：点击预览，不可删除
+    public static String MODEL_PREVIEW = "1";
+    // 身份证模式：点击预览，可删除
+    public static String MODEL_ID = "2";
+
     private LayoutBaseImageBinding mBinding;
 
     private Context context;
@@ -59,7 +66,9 @@ public class BaseImageLayout extends LinearLayout {
 
     private BaseImageInterface imageInterface;
 
-    private boolean isOnClickEnable = true;
+    // item点击模式
+    private String clickModel;
+
     private boolean selectMultiple;//是否要多选
 
     public BaseImageLayout(Context context) {
@@ -129,7 +138,7 @@ public class BaseImageLayout extends LinearLayout {
         isMultiple = false;
         mList.addAll(list);
 
-        isOnClickEnable = true;
+        clickModel = MODEL_NORMAL;
         mAdapter.notifyDataSetChanged();
     }
 
@@ -146,7 +155,7 @@ public class BaseImageLayout extends LinearLayout {
         emptyImageBean.setField(field);
         mList.add(emptyImageBean);
 
-        isOnClickEnable = true;
+        clickModel = MODEL_NORMAL;
         mAdapter.notifyDataSetChanged();
     }
 
@@ -177,7 +186,7 @@ public class BaseImageLayout extends LinearLayout {
         emptyImageBean.setField(field);
         mList.add(emptyImageBean);
 
-        isOnClickEnable = true;
+        clickModel = MODEL_NORMAL;
         mAdapter.notifyDataSetChanged();
     }
 
@@ -199,20 +208,7 @@ public class BaseImageLayout extends LinearLayout {
         emptyImageBean.setField(field);
         mList.add(emptyImageBean);
 
-        isOnClickEnable = true;
-        mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * 设置数据，仅展示
-     *
-     * @param list
-     */
-    public void setDatas(List<BaseImageBean> list) {
-        isMultiple = false;
-        mList.addAll(list);
-
-        isOnClickEnable = false;
+        clickModel = MODEL_NORMAL;
         mAdapter.notifyDataSetChanged();
     }
 
@@ -287,10 +283,13 @@ public class BaseImageLayout extends LinearLayout {
 
             BaseImageBean item = mAdapter.getItem(position);
 
-            if (isOnClickEnable) {
+            if (MODEL_NORMAL.equals(clickModel)) {
+
                 field = item.getField();
                 ImageSelectActivity2.launch((Activity) context, field + "_" + position, 0, false, cameraType, selectMultiple);
-            } else {
+
+            } else if (MODEL_PREVIEW.equals(clickModel)) {
+
                 if (mActivity == null) {
                     return;
                 }
@@ -299,6 +298,31 @@ public class BaseImageLayout extends LinearLayout {
                         .saveImgDir(null); // 保存图片的目录，如果传 null，则没有保存图片功能
                 photoPreviewIntentBuilder.previewPhoto(MyCdConfig.QINIU_URL + item.getPic());
                 mActivity.startActivity(photoPreviewIntentBuilder.build());
+
+            } else if (MODEL_ID.equals(clickModel)) {
+
+                if (null == item || TextUtils.isEmpty(item.getPic())) {
+
+                    // 选择图片
+                    field = item.getField();
+                    ImageSelectActivity2.launch((Activity) context, field + "_" + position, 0, false, cameraType, selectMultiple);
+
+                } else {
+
+                    // 预览
+                    if (mActivity == null) {
+                        return;
+                    }
+                    BGAPhotoPreviewActivity.IntentBuilder photoPreviewIntentBuilder = new BGAPhotoPreviewActivity.IntentBuilder(
+                            mActivity)
+                            .saveImgDir(null); // 保存图片的目录，如果传 null，则没有保存图片功能
+                    photoPreviewIntentBuilder.previewPhoto(MyCdConfig.QINIU_URL + item.getPic());
+                    mActivity.startActivity(photoPreviewIntentBuilder.build());
+
+                }
+
+
+
             }
 
         });
@@ -306,7 +330,8 @@ public class BaseImageLayout extends LinearLayout {
 
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
 
-            if (isOnClickEnable) {
+            if (MODEL_NORMAL.equals(clickModel)) {
+
                 BaseImageBean item = mAdapter.getItem(position);
 
                 if (isMultiple) {
@@ -318,6 +343,25 @@ public class BaseImageLayout extends LinearLayout {
                 }
 
                 mAdapter.notifyDataSetChanged();
+
+            } else if (MODEL_PREVIEW.equals(clickModel)) {
+
+                // 不可删除
+
+            } else if (MODEL_ID.equals(clickModel)) {
+
+                BaseImageBean item = mAdapter.getItem(position);
+
+                if (isMultiple) {
+                    mList.remove(position);
+                } else {
+                    item.setPic(null);
+                    mList.remove(position);
+                    mList.add(position, item);
+                }
+
+                mAdapter.notifyDataSetChanged();
+
             }
 
         });
@@ -473,35 +517,20 @@ public class BaseImageLayout extends LinearLayout {
             }
         }
 
-
-//        if (isMultiple) {
-//
-//
-//
-//
-//        } else {
-//
-//            if (mList.size() == 0 || TextUtils.isEmpty(mList.get(0).getPic())) {
-//                ToastUtil.show(context, "请上传至少一份" + txtTitle);
-//                return true;
-//            }
-//
-//        }
-
         return false;
 
     }
 
-    public void setOnClickEnable(boolean isOnClickEnable) {
+    public void setClickModel(String clickModel) {
 
-        this.isOnClickEnable = isOnClickEnable;
+        this.clickModel = clickModel;
 
-        if (!isOnClickEnable) {
+        if (MODEL_PREVIEW.equals(clickModel)) {
 
             Iterator<BaseImageBean> iterator = mList.iterator();
             while (iterator.hasNext()) {
                 BaseImageBean bean = iterator.next();
-                bean.setDetail(!isOnClickEnable);
+                bean.setDetail(true);
                 if (TextUtils.isEmpty(bean.getPic())) {
                     iterator.remove();
                 }
@@ -512,7 +541,6 @@ public class BaseImageLayout extends LinearLayout {
         }
 
     }
-
 
     /**
      * 获取是否必填项

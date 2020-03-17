@@ -254,7 +254,11 @@ public class StepClxxFragment extends BaseLazyFragment {
             mBinding.tvRegenerate.setVisibility(View.GONE);
         }
         mBinding.elRegAddress.setFocusable(false);
+
         mBinding.slIsPublicCard.setDataIs(null);
+        // 默认为否
+        mBinding.slIsPublicCard.setTextAndKey("0","否");
+
         mBinding.slIsAzGps.setDataIs((dialog, which) -> {
 
             if (which == 0) {

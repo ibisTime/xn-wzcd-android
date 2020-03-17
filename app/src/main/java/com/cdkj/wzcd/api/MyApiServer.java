@@ -49,6 +49,7 @@ import com.cdkj.wzcd.model.SalesmanModel;
 import com.cdkj.wzcd.model.SystemParameterModel;
 import com.cdkj.wzcd.model.TodoBean;
 import com.cdkj.wzcd.model.UserModel;
+import com.cdkj.wzcd.model.VersionModel;
 import com.cdkj.wzcd.model.ZrdModel;
 import com.cdkj.wzcd.model.event.IdCardModel;
 
@@ -62,6 +63,14 @@ import retrofit2.http.POST;
  */
 
 public interface MyApiServer {
+
+    /**
+     * 获取版本
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<VersionModel>> getVersion(@Field("code") String code,
+                                                     @Field("json") String json);
 
 
     /**
