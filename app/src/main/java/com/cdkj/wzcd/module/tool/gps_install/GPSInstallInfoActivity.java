@@ -200,8 +200,9 @@ public class GPSInstallInfoActivity extends AbsBaseLoadActivity {
         map.put("applyStatus", "2");
         map.put("useStatus", "0");
         map.put("applyUser", SPUtilHelper.getUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
-        Call call = RetrofitUtils.createApi(MyApiServer.class).getGpsList("632707", StringUtils.getJsonToString(map));
+        Call call = RetrofitUtils.createApi(MyApiServer.class).getGpsList("632708", StringUtils.getJsonToString(map));
 
 //        showLoadingDialog();
 

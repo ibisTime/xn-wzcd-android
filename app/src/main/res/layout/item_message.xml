@@ -23,6 +23,8 @@
                 android:layout_height="wrap_content"
                 android:text="你有新的“待派发”征信单"
                 android:textColor="#ff333333"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="14sp"
                 />
 

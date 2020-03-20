@@ -347,6 +347,12 @@ public class SPUtilHelper {
         saveUserName("");
         saveUserPhoto("");
         saveUserNickName("");
+        saveRoleCode("");
+        saveUserCompanyCode("");
+        saveTeamCode("");
+        saveTeamName("");
+        saveDepartmentName("");
+        savePostName("");
         saveisTradepwdFlag(false);
         saveUserIsBindCard(false);
     }

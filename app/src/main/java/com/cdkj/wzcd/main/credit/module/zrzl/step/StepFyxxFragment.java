@@ -97,7 +97,10 @@ public class StepFyxxFragment extends BaseLazyFragment {
 
     private void initView() {
 
+        // 设置控件不可输入
         mBinding.elLoanAmount.setFocusable(false);
+        mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elCarFunds3.setFocusable(false);
 
         if (isDetail) {
             BaseViewUtil.setUnFocusable(mBinding.llInput);
@@ -211,13 +214,13 @@ public class StepFyxxFragment extends BaseLazyFragment {
                 return;
             }
 
-            setCarFunds3(bean.getValue1(), bean.getValue3(), bean.getValue4());
+            setCarFunds3(bean.getValue1(), bean.getValue2(), bean.getValue3());
         }
     }
 
     private void setRepointAmount(String loanAmountStr, String rebateRateStr, String tooleRateStr) {
 
-        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr)||TextUtils.isEmpty(tooleRateStr)) {
+        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr) || TextUtils.isEmpty(tooleRateStr)) {
             return;
         }
 
@@ -230,11 +233,9 @@ public class StepFyxxFragment extends BaseLazyFragment {
 
     }
 
-    private void setCarFunds3(String loanAmountStr, String rebateRateStr,
-                              String bankRateStr) {
+    private void setCarFunds3(String loanAmountStr, String rebateRateStr, String bankRateStr) {
         //车款3  （返存利率-银行利率）*贷款本金
-        if (TextUtils.isEmpty(loanAmountStr)  || TextUtils
-                .isEmpty(rebateRateStr) || TextUtils.isEmpty(bankRateStr)) {
+        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr) || TextUtils.isEmpty(bankRateStr)) {
             return;
         }
 

@@ -3,12 +3,14 @@ package com.cdkj.wzcd.main;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdkj.baselibrary.activitys.UpDataPhoneActivity;
 import com.cdkj.baselibrary.activitys.UpDataPwdActivity;
+import com.cdkj.baselibrary.api.BaseResponseModel;
 import com.cdkj.baselibrary.appmanager.MyCdConfig;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
@@ -19,11 +21,13 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.AppUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
+import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.BuildConfig;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
 import com.cdkj.wzcd.databinding.MainFrgUserBinding;
+import com.cdkj.wzcd.main.credit.bean.ConfirmBean;
 import com.cdkj.wzcd.model.UserModel;
 import com.cdkj.wzcd.model.VersionModel;
 import com.cdkj.wzcd.module.user.SignInActivity;
@@ -205,16 +209,39 @@ public class MainUserFragment extends BaseLazyFragment {
                 .setTitle(getString(com.cdkj.baselibrary.R.string.tips))
                 .setContentMsg("你确定要退出当前账号吗?")
                 .setPositiveBtn(getString(com.cdkj.baselibrary.R.string.sure), view -> {
-                    SPUtilHelper.logOutClear();
-                    UITipDialog.showSuccess(mActivity, "退出成功", dialogInterface -> {
-                        mActivity.finish();
-                        SignInActivity.open(mActivity, false);
-                    });
+
+                    sendPushToken();
+
                 })
                 .setNegativeBtn(getString(com.cdkj.baselibrary.R.string.cancel), null, false);
 
         commonDialog.show();
 
+    }
+
+    private void sendPushToken() {
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userId", SPUtilHelper.getUserId());
+
+        Call<BaseResponseModel<ConfirmBean>> confirm = RetrofitUtils.createApi(MyApiServer.class).confirm("805085", StringUtils.getJsonToString(map));
+        confirm.enqueue(new BaseResponseModelCallBack<ConfirmBean>(mActivity) {
+            @Override
+            protected void onSuccess(ConfirmBean data, String SucMessage) {
+
+                UITipDialog.showSuccess(mActivity, "退出成功", dialogInterface -> {
+                    SPUtilHelper.logOutClear();
+                    mActivity.finish();
+                    SignInActivity.open(mActivity, false);
+
+                });
+
+            }
+
+            @Override
+            protected void onFinish() {
+            }
+        });
     }
 
     /**
@@ -317,4 +344,6 @@ public class MainUserFragment extends BaseLazyFragment {
 
         commonDialog.show();
     }
+
+
 }

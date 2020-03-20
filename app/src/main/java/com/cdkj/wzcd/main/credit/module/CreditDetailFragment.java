@@ -18,6 +18,7 @@ import com.cdkj.wzcd.util.NodeHelper;
 
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN;
 import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN2;
+import static com.cdkj.baselibrary.appmanager.CdRouteHelper.DATA_SIGN3;
 import static com.cdkj.baselibrary.utils.DateUtil.DEFAULT_DATE_FMT;
 import static com.cdkj.wzcd.main.credit.CreditPageActivity.MATERIAL;
 

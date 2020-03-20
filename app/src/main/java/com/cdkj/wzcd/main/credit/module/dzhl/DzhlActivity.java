@@ -25,6 +25,7 @@ import com.cdkj.wzcd.main.credit.module.zrsh.ZrshActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import retrofit2.Call;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -67,6 +68,9 @@ public class DzhlActivity extends AbsBaseLoadActivity {
         code = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN);
 
         mBinding.dlDate.setText(DateUtil.format(new Date()));
+        mBinding.elLoanAmount.setFocusable(false);
+        mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elHeji.setFocusable(false);
     }
 
     private void initListener() {
@@ -112,6 +116,11 @@ public class DzhlActivity extends AbsBaseLoadActivity {
     }
 
     private void setView() {
+
+        mBinding.elLoanAmount.setText(bean.getLoanAmount());
+        mBinding.elRepointAmount.setText(bean.getRepointAmount());
+        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+
         List<BaseImageBean> list = new ArrayList<>();
         list.add(new BaseImageBean("", "billPdf"));
         mBinding.ilShuidan.init(this, list);

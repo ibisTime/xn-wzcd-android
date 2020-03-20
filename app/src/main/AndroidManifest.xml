@@ -180,6 +180,7 @@
         <activity android:name=".main.credit.module.gps.GPSApplyActivity2" />
         <activity android:name=".main.credit.module.gps.GPSSHActivity" />
         <activity android:name=".main.credit.module.gps.GPSSHDetialsActivity"></activity>
+        <activity android:name=".main.message.NoticeActivity" />
 
 
         <!--<activity-->

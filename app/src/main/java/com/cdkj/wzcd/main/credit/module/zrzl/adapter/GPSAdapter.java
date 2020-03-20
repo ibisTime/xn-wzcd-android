@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
@@ -86,9 +87,10 @@ public class GPSAdapter extends BaseQuickAdapter<GPSBean, BaseViewHolder> {
         Map<String, String> map = new HashMap<>();
         map.put("useStatus", "1");
         map.put("applyUser", item.getApplyUserId());
+        map.put("token", SPUtilHelper.getUserToken());
 
         Call call = RetrofitUtils.createApi(MyApiServer.class)
-                .getGPSSaleList("632707", StringUtils.getJsonToString(map));
+                .getGPSSaleList("632708", StringUtils.getJsonToString(map));
 
         call.enqueue(new BaseResponseListCallBack<GPSSaleBean>(mContext) {
 

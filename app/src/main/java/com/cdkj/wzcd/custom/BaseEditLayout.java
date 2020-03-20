@@ -188,6 +188,11 @@ public class BaseEditLayout extends LinearLayout {
         return mBinding.tvTitle.getText().toString().trim();
     }
 
+    /**
+     * 设置不可输入
+     *
+     * @param focusable 是否可输入
+     */
     public void setFocusable(boolean focusable) {
         mBinding.edtInput.setFocusable(focusable);
         mBinding.edtInput.setHint("");

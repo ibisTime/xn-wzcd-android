@@ -28,8 +28,6 @@ import com.cdkj.wzcd.main.credit.module.zrzl.ZrzlActivity;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlMonthAmountBean;
 import com.cdkj.wzcd.model.SystemParameterModel;
-import com.cdkj.wzcd.util.RequestUtil;
-import com.cdkj.wzcd.util.StringStaticFinal;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -128,7 +126,15 @@ public class StepDkxxFragment extends BaseLazyFragment {
     }
 
     private void initView() {
+        // 设置控件不可输入
         mBinding.elBankRate.setFocusable(false);
+        mBinding.elMonthAmount.setFocusable(false);
+        mBinding.elRepayFirstMonthAmount.setFocusable(false);
+        mBinding.elOpenCardAmount.setFocusable(false);
+        mBinding.elLoanRatio.setFocusable(false);
+        mBinding.elFee.setFocusable(false);
+        mBinding.elTotalFee.setFocusable(false);
+
         mBinding.slPeriods.setData("loan_period", (dialog, which) -> {
 
             ZrzlBean data = ((ZrzlActivity) mActivity).data;
@@ -182,7 +188,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
             // 车款2
             checkRepointAmount();
             // 车款3
-            checcarFunds3();
+            checkCarFunds3();
         }
     }
 
@@ -332,13 +338,9 @@ public class StepDkxxFragment extends BaseLazyFragment {
                 .setValue3(mBinding.elTotalRate.getText()));//总利率
     }
 
-    private void checcarFunds3() {
+    private void checkCarFunds3() {
 
         if (mBinding.elLoanAmount.checkNoTip()) {
-            return;
-        }
-
-        if (mBinding.elTotalRate.checkNoTip()) {
             return;
         }
 
@@ -352,9 +354,8 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
         EventBus.getDefault().post(new EventBean().setTag("set_carFunds3")
                 .setValue1(mBinding.elLoanAmount.getText())
-                .setValue2(mBinding.elTotalRate.getText())
-                .setValue3(mBinding.elRebateRate.getText())
-                .setValue4(mBinding.elBankRate.getText()));
+                .setValue2(mBinding.elRebateRate.getText())
+                .setValue3(mBinding.elBankRate.getText()));
     }
 
     private void doRequest() {

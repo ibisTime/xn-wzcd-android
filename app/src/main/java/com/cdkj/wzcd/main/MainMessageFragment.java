@@ -21,6 +21,7 @@ import com.cdkj.wzcd.databinding.MainFrgMessageBinding;
 import com.cdkj.wzcd.databinding.MainFrgUserBinding;
 import com.cdkj.wzcd.main.message.AgendaFragment;
 import com.cdkj.wzcd.main.message.MessageFragment;
+import com.cdkj.wzcd.main.message.NoticeFragment;
 import com.cdkj.wzcd.model.UserModel;
 import retrofit2.Call;
 
@@ -113,10 +114,12 @@ public class MainMessageFragment extends BaseLazyFragment {
 
         List<String> mTitles = new ArrayList<>();
         mTitles.add("代办事项");
+        mTitles.add("消息");
         mTitles.add("系统公告");
 
         List<Fragment> mFragments = new ArrayList<>();
         mFragments.add(AgendaFragment.getInstance());
+        mFragments.add(NoticeFragment.getInstance());
         mFragments.add(MessageFragment.getInstance(data.getDepartmentCode()));
 
         tablayoutAdapter.addFrag(mFragments, mTitles);

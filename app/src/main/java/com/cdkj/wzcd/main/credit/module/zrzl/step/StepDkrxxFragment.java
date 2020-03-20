@@ -230,6 +230,7 @@ public class StepDkrxxFragment extends BaseLazyFragment {
         hashMap.put("code", ((ZrzlActivity) mActivity).code);
         hashMap.put("creditUserList", upLits);
         hashMap.put("operator", SPUtilHelper.getUserId());
+        hashMap.put("type", "android");
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632530", StringUtils.getJsonToString(hashMap));

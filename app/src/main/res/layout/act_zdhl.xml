@@ -28,6 +28,27 @@
 
                 </LinearLayout>
 
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_loanAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
+                    app:title="车款1"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_repointAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
+                    app:title="车款2"/>
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_heji"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="money"
+                    app:title="支付合计"/>
+
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_team"
                     app:isRequired="true"

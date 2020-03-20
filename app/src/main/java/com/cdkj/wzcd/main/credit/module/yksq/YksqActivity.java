@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
+
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
@@ -24,8 +25,10 @@ import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
 import com.cdkj.wzcd.main.credit.module.CreditDetailFragment;
 import com.cdkj.wzcd.main.credit.module.yksq.bean.TeamBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
+
 import retrofit2.Call;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -69,6 +72,10 @@ public class YksqActivity extends AbsBaseLoadActivity {
 
     private void init() {
         code = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN);
+
+        mBinding.elLoanAmount.setFocusable(false);
+        mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elHeji.setFocusable(false);
     }
 
     private void initListener() {
@@ -144,11 +151,15 @@ public class YksqActivity extends AbsBaseLoadActivity {
 
     private void setView(TeamBean data) {
 
+
+        mBinding.elLoanAmount.setText(bean.getLoanAmount());
+        mBinding.elRepointAmount.setText(bean.getRepointAmount());
+        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+
         mBinding.elTeam.setTextByRequest(data.getAccountNo());
         mBinding.elBank.setTextByRequest(data.getBankName());
         mBinding.elSub.setTextByRequest(data.getSubbranch());
-        mBinding.elInfo.setTextByRequest(
-                data.getName() + " " + MoneyUtils.showPrice(bean.getRepointAmount()) + "(车款2)");
+        mBinding.elInfo.setTextByRequest(data.getName());
 
     }
 

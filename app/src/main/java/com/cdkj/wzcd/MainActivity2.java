@@ -281,6 +281,10 @@ public class MainActivity2 extends AbsBaseLoadActivity {
 
     private void sendPushToken(String pushToken) {
 
+        if (TextUtils.isEmpty(SPUtilHelper.getUserId())){
+            return;
+        }
+
         HashMap<String, String> map = new HashMap<>();
         map.put("userId", SPUtilHelper.getUserId());
         map.put("deviceToken", pushToken);
@@ -289,7 +293,12 @@ public class MainActivity2 extends AbsBaseLoadActivity {
         confirm.enqueue(new BaseResponseModelCallBack<ConfirmBean>(this) {
             @Override
             protected void onSuccess(ConfirmBean data, String SucMessage) {
-                LogUtil.E("pppppp发送推送token成功" + SucMessage);
+                if (TextUtils.isEmpty(pushToken)){
+                    LogUtil.E("pppppp推送token注销成功" + SucMessage);
+                }else {
+                    LogUtil.E("pppppp发送推送token成功" + SucMessage);
+                }
+
             }
 
             @Override
@@ -302,6 +311,7 @@ public class MainActivity2 extends AbsBaseLoadActivity {
     protected void onDestroy() {
         super.onDestroy();
         XGPushManager.unregisterPush(this);
+        sendPushToken(null);
     }
 
     @Override

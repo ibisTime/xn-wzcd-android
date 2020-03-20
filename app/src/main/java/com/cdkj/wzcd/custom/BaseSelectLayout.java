@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
@@ -464,6 +465,10 @@ public class BaseSelectLayout extends LinearLayout {
 
     public String getTitle() {
         return mBinding.tvTitle.getText().toString().trim();
+    }
+
+    public TextView getContentView(){
+        return mBinding.tvContent;
     }
 
     public int getSelectIndex() {

@@ -31,6 +31,7 @@ import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlMonthAmountBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlReportBean;
 import com.cdkj.wzcd.main.message.bean.AgendaBean;
 import com.cdkj.wzcd.main.message.bean.MessageBean;
+import com.cdkj.wzcd.main.message.bean.NoticeBean;
 import com.cdkj.wzcd.model.AdvanceFundModel;
 import com.cdkj.wzcd.model.BanksModel;
 import com.cdkj.wzcd.model.CalculautorModel;
@@ -710,6 +711,18 @@ public interface MyApiServer {
     @FormUrlEncoded
     @POST("api")
     Call<BaseResponseModel<ResponseInListModel<AgendaBean>>> getAgendaPage(
+            @Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<ResponseInListModel<NoticeBean>>> getNoticePage(
             @Field("code") String code, @Field("json") String json);
 
     /**

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.View;
 
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
@@ -15,6 +16,7 @@ import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.DisplayHelper;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
@@ -25,6 +27,7 @@ import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -67,6 +70,7 @@ public class YkshActivity extends AbsBaseLoadActivity {
         mBaseBinding.titleView.setMidTitle("用款审核");
 
         init();
+        initView();
         initListener();
 
         getDetail();
@@ -75,7 +79,17 @@ public class YkshActivity extends AbsBaseLoadActivity {
     private void init() {
         code = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN);
 
+    }
+
+    private void initView() {
+
+        mBinding.elLoanAmount.setFocusable(false);
+        mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elHeji.setFocusable(false);
+
         mBinding.slIsContinueAdvance.setDataIs(null);
+        mBinding.slIsPay.setDataIs(null);
+        mBinding.slIsPay.getContentView().setPadding(DisplayHelper.dp2px(this, 20), 0, 0, 0);
     }
 
     private void initListener() {
@@ -126,6 +140,10 @@ public class YkshActivity extends AbsBaseLoadActivity {
 
     private void setView() {
 
+        mBinding.elLoanAmount.setText(bean.getLoanAmount());
+        mBinding.elRepointAmount.setText(bean.getRepointAmount());
+        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+
     }
 
     private void check() {
@@ -146,6 +164,7 @@ public class YkshActivity extends AbsBaseLoadActivity {
         hashMap.put("approveResult", approveResult);
         hashMap.put("approveNote", mBinding.rlApproveNote.getText());
         hashMap.put("isContinueAdvance", mBinding.slIsContinueAdvance.getDataKey());
+        hashMap.put("isPay", mBinding.slIsPay.getDataKey());
         hashMap.put("missionList", missionList);
 
         Call call = RetrofitUtils.getBaseAPiService()
