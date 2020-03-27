@@ -120,7 +120,7 @@ public class CreditActivity extends AbsBaseLoadActivity {
         steps.add(new ZrzlStepBean(false, "credit_zdrxx", "贷款人信息"));
         steps.add(new ZrzlStepBean(false, "credit_jjlxr", "紧急联系人"));
         steps.add(new ZrzlStepBean(false, "credit_dkxx", "贷款信息"));
-        steps.add(new ZrzlStepBean(false, "credit_fyxx", "费用信息"));
+//        steps.add(new ZrzlStepBean(false, "credit_fyxx", "费用信息"));
         steps.add(new ZrzlStepBean(false, "credit_clxx", "车辆信息"));
         steps.add(new ZrzlStepBean(false, "credit_dkclt", "贷款材料图"));
         steps.add(new ZrzlStepBean(false, "credit_smdct", "上门调查图"));
@@ -239,7 +239,7 @@ public class CreditActivity extends AbsBaseLoadActivity {
         fragments.add(StepDkrxxFragment.getInstance(true));
         fragments.add(StepJjlxrFragment.getInstance(true));
         fragments.add(StepDkxxFragment.getInstance(true));
-        fragments.add(StepFyxxFragment.getInstance(true));
+//        fragments.add(StepFyxxFragment.getInstance(true));
         fragments.add(StepClxxFragment.getInstance(true));
         fragments.add(StepDkcltFragment.getInstance(true));
         fragments.add(StepSmdctFragment.getInstance(true));

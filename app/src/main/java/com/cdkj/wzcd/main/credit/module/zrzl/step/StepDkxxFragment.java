@@ -32,6 +32,7 @@ import com.cdkj.wzcd.model.SystemParameterModel;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -94,8 +95,14 @@ public class StepDkxxFragment extends BaseLazyFragment {
 
     private void initListener() {
         mBinding.btnConfirm.setOnClickListener(view -> {
-            if (BaseViewUtil.check(mBinding.llInput)) {
-                doRequest();
+            if (BaseViewUtil.check(mBinding.llInputDkxx)) {
+
+                if (BaseViewUtil.check(mBinding.llInputFyxx)) {
+
+                    doRequest();
+
+                }
+
             }
         });
     }
@@ -126,6 +133,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
     }
 
     private void initView() {
+        // 贷款信息
         // 设置控件不可输入
         mBinding.elBankRate.setFocusable(false);
         mBinding.elMonthAmount.setFocusable(false);
@@ -160,7 +168,18 @@ public class StepDkxxFragment extends BaseLazyFragment {
         mBinding.elInvoicePrice.setTextWatcher(new Watcher());
 
         if (isDetail) {
-            BaseViewUtil.setUnFocusable(mBinding.llInput);
+            BaseViewUtil.setUnFocusable(mBinding.llInputDkxx);
+            mBinding.btnConfirm.setVisibility(View.GONE);
+        }
+
+        // 费用信息
+        // 设置控件不可输入
+        mBinding.elLoanAmountFy.setFocusable(false);
+        mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elCarFunds3.setFocusable(false);
+
+        if (isDetail) {
+            BaseViewUtil.setUnFocusable(mBinding.llInputFyxx);
             mBinding.btnConfirm.setVisibility(View.GONE);
         }
 
@@ -220,6 +239,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
             return;
         }
 
+        // 贷款信息
         mBinding.elLoanAmount.setText(data.getBankLoan().getLoanAmount());
         mBinding.slPeriods.setContentByKey(data.getBankLoan().getPeriods() + "");
         mBinding.elBankRate.setText(data.getBankLoan().getBankRate());
@@ -245,6 +265,24 @@ public class StepDkxxFragment extends BaseLazyFragment {
         mBinding.elSurchargeAmount.setText(data.getBankLoan().getSurchargeAmount());
         mBinding.rlNotes.setText(data.getBankLoan().getNotes());
 
+
+        // 费用信息
+        mBinding.elGpsFee.setText(data.getGpsFee());
+        mBinding.elFxAmount.setText(data.getFxAmount());
+        mBinding.elLyDeposit.setText(data.getLyDeposit());
+        mBinding.elOtherFee.setText(data.getOtherFee());
+        mBinding.elLoanAmountFy.setText(data.getLoanAmount());
+        mBinding.elRepointAmount.setText(data.getRepointAmount());
+        mBinding.elCarFunds3.setText(data.getCarFunds3());
+        mBinding.elCarFunds4.setText(data.getCarFunds4());
+        mBinding.elCarFunds5.setText(data.getCarFunds5());
+
+        if (null != data.getBankLoan()) {
+            setRepointAmount(data.getBankLoan().getLoanAmount(), data.getBankLoan().getRebateRate(), data.getBankLoan().getTotalRate());
+
+            setCarFunds3(data.getBankLoan().getLoanAmount(),
+                    data.getBankLoan().getRebateRate(), data.getBankLoan().getBankRate());
+        }
     }
 
     private void checkMonthAmount() {
@@ -317,8 +355,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
             return;
         }
 
-        EventBus.getDefault().post(new EventBean().setTag("set_loanAmount")
-                .setValue1(mBinding.elLoanAmount.getText()));
+        mBinding.elLoanAmountFy.setText(mBinding.elLoanAmount.getText());
 
     }
 
@@ -332,10 +369,7 @@ public class StepDkxxFragment extends BaseLazyFragment {
             return;
         }
 
-        EventBus.getDefault().post(new EventBean().setTag("set_repointAmount")
-                .setValue1(mBinding.elLoanAmount.getText())//贷款本金
-                .setValue2(mBinding.elRebateRate.getText())//烦存利率
-                .setValue3(mBinding.elTotalRate.getText()));//总利率
+        setRepointAmount(mBinding.elLoanAmount.getText(), mBinding.elRebateRate.getText(), mBinding.elTotalRate.getText());
     }
 
     private void checkCarFunds3() {
@@ -352,17 +386,15 @@ public class StepDkxxFragment extends BaseLazyFragment {
             return;
         }
 
-        EventBus.getDefault().post(new EventBean().setTag("set_carFunds3")
-                .setValue1(mBinding.elLoanAmount.getText())
-                .setValue2(mBinding.elRebateRate.getText())
-                .setValue3(mBinding.elBankRate.getText()));
+        setCarFunds3(mBinding.elLoanAmount.getText(), mBinding.elRebateRate.getText(), mBinding.elBankRate.getText());
     }
 
     private void doRequest() {
 
-        Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInput);
+        Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInputDkxx);
         map.put("code", ((ZrzlActivity) mActivity).code);
         map.put("operator", SPUtilHelper.getUserId());
+        map.putAll(mBinding.rlNotes.getMap());
 
         Call call = RetrofitUtils.getBaseAPiService()
                 .successRequest("632532", StringUtils.getJsonToString(map));
@@ -372,10 +404,9 @@ public class StepDkxxFragment extends BaseLazyFragment {
         call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(mActivity) {
             @Override
             protected void onSuccess(IsSuccessModes data, String SucMessage) {
-                UITipDialog.showSuccess(mActivity, "保存成功", dialogInterface -> {
-                    EventBus.getDefault()
-                            .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("3"));
-                });
+
+
+                doFYRequest();
             }
 
             @Override
@@ -400,6 +431,73 @@ public class StepDkxxFragment extends BaseLazyFragment {
             }
 
         }
+
+    }
+
+
+    // ------------------ 费用信息 ------------------
+
+    private void setRepointAmount(String loanAmountStr, String rebateRateStr, String tooleRateStr) {
+
+        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr) || TextUtils.isEmpty(tooleRateStr)) {
+            return;
+        }
+
+        BigDecimal loanAmount = new BigDecimal(loanAmountStr.trim());
+        BigDecimal rebateRate = new BigDecimal(rebateRateStr.trim());
+        BigDecimal tooleRate = new BigDecimal(tooleRateStr.trim());
+        //车款2的计算公式为  (总利率-返存利率)*贷款本金
+
+        mBinding.elRepointAmount.setText(loanAmount.multiply(tooleRate.subtract(rebateRate)).toPlainString());
+
+    }
+
+    private void setCarFunds3(String loanAmountStr, String rebateRateStr, String bankRateStr) {
+        //车款3  （返存利率-银行利率）*贷款本金
+        if (TextUtils.isEmpty(loanAmountStr) || TextUtils.isEmpty(rebateRateStr) || TextUtils.isEmpty(bankRateStr)) {
+            return;
+        }
+
+        BigDecimal loanAmount = new BigDecimal(loanAmountStr.trim());
+        BigDecimal rebateRate = new BigDecimal(rebateRateStr.trim());
+        BigDecimal bankRate = new BigDecimal(bankRateStr.trim());
+
+        BigDecimal rate = rebateRate.subtract(bankRate);
+
+        mBinding.elCarFunds3.setText(loanAmount.multiply(rate).toPlainString());
+
+    }
+
+    private void doFYRequest() {
+
+        Map<String, String> map = BaseViewUtil.buildMap(mBinding.llInputFyxx);
+        map.put("code", ((ZrzlActivity) mActivity).code);
+        map.put("operator", SPUtilHelper.getUserId());
+
+        Call call = RetrofitUtils.getBaseAPiService()
+                .successRequest("632533", StringUtils.getJsonToString(map));
+
+        addCall(call);
+
+        call.enqueue(new BaseResponseModelCallBack<IsSuccessModes>(mActivity) {
+            @Override
+            protected void onSuccess(IsSuccessModes data, String SucMessage) {
+//                UITipDialog.showSuccess(mActivity, "保存成功", dialogInterface -> {
+//                    EventBus.getDefault()
+//                            .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("4"));
+//                });
+
+                UITipDialog.showSuccess(mActivity, "保存成功", dialogInterface -> {
+                    EventBus.getDefault()
+                            .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("3"));
+                });
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
 
     }
 }

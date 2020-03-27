@@ -2,6 +2,7 @@ package com.cdkj.wzcd.main.credit.adapter;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import com.cdkj.baselibrary.utils.DateUtil;
 import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.wzcd.R;
@@ -24,7 +25,7 @@ public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseView
     // 节点类型
     private String type;
 
-    public CreditPageAdapter(@Nullable List<CreditPageBean> data,String type) {
+    public CreditPageAdapter(@Nullable List<CreditPageBean> data, String type) {
         super(R.layout.item_zrzl, data);
         this.type = type;
     }
@@ -36,7 +37,7 @@ public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseView
 
         if (!TextUtils.isEmpty(type) && MATERIAL.equals(type)) {
             helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getMaterialNodeCode()));
-        }else {
+        } else {
             helper.setText(R.id.tv_status, NodeHelper.getNameOnTheCode(item.getCurNodeCode()));
         }
 
@@ -47,6 +48,8 @@ public class CreditPageAdapter extends BaseQuickAdapter<CreditPageBean, BaseView
         helper.setText(R.id.tv_time,
                 "开始时间：" + DateUtil.formatStringData(item.getApplyDatetime(), DEFAULT_DATE_FMT));
 
+        helper.setGone(R.id.tv_advanceFund, !TextUtils.isEmpty(item.getAdvanceFundDatetime()));
+        helper.setGone(R.id.tv_bankFk, !TextUtils.isEmpty(item.getBankFkDatetime()));
 
     }
 }

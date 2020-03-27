@@ -93,6 +93,8 @@ public class CreditPageBean implements Serializable {
     private String loanBankName;
     private String subbranchBankName;
     private String regionName;
+    private String advanceFundDatetime;
+    private String bankFkDatetime;
     private int periods;
 
     public String getCode() {
@@ -421,6 +423,22 @@ public class CreditPageBean implements Serializable {
 
     public void setRegionName(String regionName) {
         this.regionName = regionName;
+    }
+
+    public String getAdvanceFundDatetime() {
+        return advanceFundDatetime;
+    }
+
+    public void setAdvanceFundDatetime(String advanceFundDatetime) {
+        this.advanceFundDatetime = advanceFundDatetime;
+    }
+
+    public String getBankFkDatetime() {
+        return bankFkDatetime;
+    }
+
+    public void setBankFkDatetime(String bankFkDatetime) {
+        this.bankFkDatetime = bankFkDatetime;
     }
 
     public int getPeriods() {

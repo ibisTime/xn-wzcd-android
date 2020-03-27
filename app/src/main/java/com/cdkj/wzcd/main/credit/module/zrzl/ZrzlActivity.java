@@ -128,7 +128,7 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
         steps.add(new ZrzlStepBean(false, "zrzl_zdrxx", "贷款人信息"));
         steps.add(new ZrzlStepBean(false, "zrzl_jjlxr", "紧急联系人"));
         steps.add(new ZrzlStepBean(false, "zrzl_dkxx", "贷款信息"));
-        steps.add(new ZrzlStepBean(false, "zrzl_fyxx", "费用信息"));
+//        steps.add(new ZrzlStepBean(false, "zrzl_fyxx", "费用信息"));
         steps.add(new ZrzlStepBean(false, "zrzl_clxx", "车辆信息"));
         steps.add(new ZrzlStepBean(false, "zrzl_dkclt", "贷款材料图"));
         steps.add(new ZrzlStepBean(false, "zrzl_smdct", "上门调查图"));
@@ -163,7 +163,7 @@ public class ZrzlActivity extends AbsBaseLoadActivity {
         fragments.add(StepDkrxxFragment.getInstance(false));
         fragments.add(StepJjlxrFragment.getInstance(false));//3
         fragments.add(StepDkxxFragment.getInstance(false));
-        fragments.add(StepFyxxFragment.getInstance(false));
+//        fragments.add(StepFyxxFragment.getInstance(false));
         fragments.add(StepClxxFragment.getInstance(false));//6
         fragments.add(StepDkcltFragment.getInstance(false));
         fragments.add(StepSmdctFragment.getInstance(false));

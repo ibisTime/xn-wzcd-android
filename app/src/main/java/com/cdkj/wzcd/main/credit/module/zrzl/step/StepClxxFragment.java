@@ -673,7 +673,7 @@ public class StepClxxFragment extends BaseLazyFragment {
     private void success() {
         UITipDialog.showSuccess(mActivity, "保存成功", dialogInterface -> {
             EventBus.getDefault()
-                    .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("5"));
+                    .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("4"));
         });
     }
 

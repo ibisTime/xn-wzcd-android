@@ -75,7 +75,7 @@ public class YksqActivity extends AbsBaseLoadActivity {
 
         mBinding.elLoanAmount.setFocusable(false);
         mBinding.elRepointAmount.setFocusable(false);
-        mBinding.elHeji.setFocusable(false);
+        mBinding.elGpsFee.setFocusable(false);
     }
 
     private void initListener() {
@@ -154,7 +154,7 @@ public class YksqActivity extends AbsBaseLoadActivity {
 
         mBinding.elLoanAmount.setText(bean.getLoanAmount());
         mBinding.elRepointAmount.setText(bean.getRepointAmount());
-        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+        mBinding.elGpsFee.setText(bean.getGpsFee());
 
         mBinding.elTeam.setTextByRequest(data.getAccountNo());
         mBinding.elBank.setTextByRequest(data.getBankName());

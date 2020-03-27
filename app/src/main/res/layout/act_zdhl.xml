@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
-        android:background="@color/white"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <ScrollView
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/ll_detail"
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
@@ -32,41 +34,52 @@
                     android:id="@+id/el_loanAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:inputType="money"
-                    app:title="车款1"/>
+                    app:title="车款1" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_repointAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:inputType="money"
-                    app:title="车款2"/>
+                    app:title="车款2" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_gpsFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:inputType="money"
+                    app:title="GPS费用" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_heji"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:inputType="money"
-                    app:title="支付合计"/>
+                    app:title="支付合计" />
 
                 <com.cdkj.wzcd.custom.BaseSelectLayout
                     android:id="@+id/sl_team"
-                    app:isRequired="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="收款账号选择"/>
+                    app:isRequired="true"
+                    app:title="收款账号选择" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_realName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="收款账户户名"/>
+                    app:title="收款账户户名" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_bankcardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="收款账号"/>
+                    app:title="收款账号" />
 
             </LinearLayout>
 
@@ -74,10 +87,10 @@
 
         <com.cdkj.wzcd.view.MyConfirmBtn
             android:id="@+id/btn_confirm"
-            app:txt_confirm_content="返回"
-            app:txt_confirm_content_right="确定"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:txt_confirm_content="返回"
+            app:txt_confirm_content_right="确定">
 
         </com.cdkj.wzcd.view.MyConfirmBtn>
 

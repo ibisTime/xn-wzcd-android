@@ -70,6 +70,7 @@ public class DzhlActivity extends AbsBaseLoadActivity {
         mBinding.dlDate.setText(DateUtil.format(new Date()));
         mBinding.elLoanAmount.setFocusable(false);
         mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elGpsFee.setFocusable(false);
         mBinding.elHeji.setFocusable(false);
     }
 
@@ -119,7 +120,26 @@ public class DzhlActivity extends AbsBaseLoadActivity {
 
         mBinding.elLoanAmount.setText(bean.getLoanAmount());
         mBinding.elRepointAmount.setText(bean.getRepointAmount());
-        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+        mBinding.elGpsFee.setText(bean.getGpsFee());
+        if (bean.getIsPay().equals("1")) {
+            // 是
+            mBinding.elLoanAmount.setVisibility(View.VISIBLE);
+            mBinding.elRepointAmount.setVisibility(View.VISIBLE);
+            mBinding.elGpsFee.setVisibility(View.VISIBLE);
+            mBinding.elHeji.setVisibility(View.VISIBLE);
+
+            mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount())
+                    .add(new BigDecimal(bean.getLoanAmount()))
+                    .subtract(new BigDecimal(bean.getGpsFee())).toPlainString());
+        }else {
+            // 否
+            mBinding.elLoanAmount.setVisibility(View.VISIBLE);
+            mBinding.elRepointAmount.setVisibility(View.GONE);
+            mBinding.elGpsFee.setVisibility(View.GONE);
+            mBinding.elHeji.setVisibility(View.VISIBLE);
+
+            mBinding.elHeji.setText(bean.getLoanAmount());
+        }
 
         List<BaseImageBean> list = new ArrayList<>();
         list.add(new BaseImageBean("", "billPdf"));

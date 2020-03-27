@@ -87,6 +87,7 @@ public class ZrzlBean implements Serializable {
     private String otherFee;
     private BankBean bank;
     private String teamName;
+    private String isPay;
     private String regionName;
     private String enterLocationName;
     private String rationaleDatetime;
@@ -387,6 +388,14 @@ public class ZrzlBean implements Serializable {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public String getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(String isPay) {
+        this.isPay = isPay;
     }
 
     public String getEnterLocationName() {

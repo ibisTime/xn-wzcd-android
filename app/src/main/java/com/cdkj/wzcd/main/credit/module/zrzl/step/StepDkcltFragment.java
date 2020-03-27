@@ -222,7 +222,7 @@ public class StepDkcltFragment extends BaseLazyFragment {
             protected void onSuccess(IsSuccessModes data, String SucMessage) {
                 UITipDialog.showSuccess(mActivity, "保存成功", dialogInterface -> {
                     EventBus.getDefault()
-                            .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("6"));
+                            .post(new EventBean().setTag(SET_UPLOAD_RESULT).setValue1("5"));
                 });
             }
 

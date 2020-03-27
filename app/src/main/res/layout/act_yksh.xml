@@ -30,26 +30,44 @@
 
                 </LinearLayout>
 
+                <com.cdkj.wzcd.custom.BaseSelectLayout
+                    android:id="@+id/sl_isPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isRequired="true"
+                    app:title="是否同时支付车款2" />
+
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_loanAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:inputType="money"
-                    app:title="车款1"/>
+                    app:title="车款1" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_repointAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:inputType="money"
-                    app:title="车款2"/>
+                    app:title="车款2" />
+
+                <com.cdkj.wzcd.custom.BaseEditLayout
+                    android:id="@+id/el_gpsFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:inputType="money"
+                    app:title="GPS费用" />
 
                 <com.cdkj.wzcd.custom.BaseEditLayout
                     android:id="@+id/el_heji"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="money"
-                    app:title="支付合计"/>
+                    app:title="支付合计" />
 
                 <com.cdkj.wzcd.custom.BaseMoreLayout
                     android:id="@+id/ml_rw"
@@ -63,13 +81,6 @@
                     android:layout_height="wrap_content"
                     app:isRequired="true"
                     app:title="是否继续垫资" />
-
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_isPay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:isRequired="true"
-                    app:title="是否同时支付车款2" />
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout
                     android:id="@+id/rl_approveNote"

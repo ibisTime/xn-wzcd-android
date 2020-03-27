@@ -1,6 +1,7 @@
 package com.cdkj.wzcd.main.credit.module.yksh;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.cdkj.wzcd.databinding.ActYkshBinding;
 import com.cdkj.wzcd.main.credit.module.CreditDetailFragment;
 import com.cdkj.wzcd.main.credit.module.yksh.bean.RwBean;
 import com.cdkj.wzcd.main.credit.module.zrzl.bean.ZrzlBean;
+import com.cdkj.wzcd.view.interfaces.MySelectInterface;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -85,10 +87,33 @@ public class YkshActivity extends AbsBaseLoadActivity {
 
         mBinding.elLoanAmount.setFocusable(false);
         mBinding.elRepointAmount.setFocusable(false);
+        mBinding.elGpsFee.setFocusable(false);
         mBinding.elHeji.setFocusable(false);
 
         mBinding.slIsContinueAdvance.setDataIs(null);
-        mBinding.slIsPay.setDataIs(null);
+        mBinding.slIsPay.setDataIs((dialog, which) -> {
+
+            if (which == 0) {
+                // 是
+                mBinding.elLoanAmount.setVisibility(View.VISIBLE);
+                mBinding.elRepointAmount.setVisibility(View.VISIBLE);
+                mBinding.elGpsFee.setVisibility(View.VISIBLE);
+                mBinding.elHeji.setVisibility(View.VISIBLE);
+
+                mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount())
+                        .add(new BigDecimal(bean.getLoanAmount()))
+                        .subtract(new BigDecimal(bean.getGpsFee())).toPlainString());
+            }else {
+                // 否
+                mBinding.elLoanAmount.setVisibility(View.VISIBLE);
+                mBinding.elRepointAmount.setVisibility(View.GONE);
+                mBinding.elGpsFee.setVisibility(View.GONE);
+                mBinding.elHeji.setVisibility(View.VISIBLE);
+
+                mBinding.elHeji.setText(bean.getLoanAmount());
+            }
+
+        });
         mBinding.slIsPay.getContentView().setPadding(DisplayHelper.dp2px(this, 20), 0, 0, 0);
     }
 
@@ -142,11 +167,15 @@ public class YkshActivity extends AbsBaseLoadActivity {
 
         mBinding.elLoanAmount.setText(bean.getLoanAmount());
         mBinding.elRepointAmount.setText(bean.getRepointAmount());
-        mBinding.elHeji.setText(new BigDecimal(bean.getRepointAmount()).add(new BigDecimal(bean.getLoanAmount())).toPlainString());
+        mBinding.elGpsFee.setText(bean.getGpsFee());
 
     }
 
     private void check() {
+
+        if (mBinding.slIsPay.check()) {
+            return;
+        }
 
         if (mBinding.slIsContinueAdvance.check()) {
             return;

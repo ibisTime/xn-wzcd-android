@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,202 +18,296 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/ll_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_loanAmount"
-                    app:field="loanAmount"
+                <LinearLayout
+                    android:id="@+id/ll_input_dkxx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:isRequired="true"
-                    app:title="贷款本金"/>
+                    android:orientation="vertical">
 
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_periods"
-                    app:field="periods"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:isRequired="true"
-                    app:title="贷款期数"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_loanAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="loanAmount"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="贷款本金" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_bankRate"
-                    app:field="bankRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:isRequired="true"
-                    app:title="银行利率"/>
+                    <com.cdkj.wzcd.custom.BaseSelectLayout
+                        android:id="@+id/sl_periods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="periods"
+                        app:isRequired="true"
+                        app:title="贷款期数" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_totalRate"
-                    app:field="totalRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:isRequired="true"
-                    app:title="总利率"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_bankRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="bankRate"
+                        app:inputType="rate"
+                        app:isRequired="true"
+                        app:title="银行利率" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_rebateRate"
-                    app:field="rebateRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:isRequired="true"
-                    app:title="返存利率"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_totalRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="totalRate"
+                        app:inputType="rate"
+                        app:isRequired="true"
+                        app:title="总利率" />
 
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_isAdvanceFund"
-                    app:field="isAdvanceFund"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:isRequired="true"
-                    app:title="是否垫资"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_rebateRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="rebateRate"
+                        app:inputType="rate"
+                        app:isRequired="true"
+                        app:title="返存利率" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_monthAmount"
-                    app:field="monthAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:isRequired="true"
-                    app:title="月供"/>
+                    <com.cdkj.wzcd.custom.BaseSelectLayout
+                        android:id="@+id/sl_isAdvanceFund"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="isAdvanceFund"
+                        app:isRequired="true"
+                        app:title="是否垫资" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_repayFirstMonthAmount"
-                    app:field="repayFirstMonthAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:isRequired="true"
-                    app:title="首月还款额"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_monthAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="monthAmount"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="月供" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_openCardAmount"
-                    app:field="openCardAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:isRequired="true"
-                    app:title="开卡金额"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_repayFirstMonthAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="repayFirstMonthAmount"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="首月还款额" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_discountRate"
-                    app:field="discountRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:title="贴息利率"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_openCardAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="openCardAmount"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="开卡金额" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_discountAmount"
-                    app:field="discountAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:title="贴息金额"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_discountRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="discountRate"
+                        app:inputType="rate"
+                        app:title="贴息利率" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_invoicePrice"
-                    app:field="invoicePrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:isRequired="true"
-                    app:title="发票价格"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_discountAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="discountAmount"
+                        app:inputType="money"
+                        app:title="贴息金额" />
 
-                <com.cdkj.wzcd.custom.BaseDateLayout
-                    android:id="@+id/dl_wanFactor"
-                    app:field="wanFactor"
-                    app:dateType="ymd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:title="开票日期"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_invoicePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="invoicePrice"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="发票价格" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_loanRatio"
-                    app:field="loanRatio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="phone"
-                    app:title="贷款成数"/>
+                    <com.cdkj.wzcd.custom.BaseDateLayout
+                        android:id="@+id/dl_wanFactor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dateType="ymd"
+                        app:field="wanFactor"
+                        app:title="开票日期" />
 
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_rateType"
-                    app:field="rateType"
-                    app:isRequired="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:title="利率类型"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_loanRatio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="loanRatio"
+                        app:inputType="phone"
+                        app:title="贷款成数" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_fee"
-                    app:field="fee"
-                    app:isRequired="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:title="服务费"/>
+                    <com.cdkj.wzcd.custom.BaseSelectLayout
+                        android:id="@+id/sl_rateType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="rateType"
+                        app:isRequired="true"
+                        app:title="利率类型" />
 
-                <com.cdkj.wzcd.custom.BaseSelectLayout
-                    android:id="@+id/sl_isDiscount"
-                    app:field="isDiscount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:title="是否贴息"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_fee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="fee"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="服务费" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/sl_highCashAmount"
-                    app:field="highCashAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:title="高抛金额"/>
+                    <com.cdkj.wzcd.custom.BaseSelectLayout
+                        android:id="@+id/sl_isDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="isDiscount"
+                        app:title="是否贴息" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_totalFee"
-                    app:field="totalFee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:title="费用总额"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/sl_highCashAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="highCashAmount"
+                        app:inputType="money"
+                        app:title="高抛金额" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_customerBearRate"
-                    app:field="customerBearRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:title="客户承担利率"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_totalFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="totalFee"
+                        app:inputType="money"
+                        app:title="费用总额" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_surchargeRate"
-                    app:field="surchargeRate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="rate"
-                    app:title="附加费率"/>
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_customerBearRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="customerBearRate"
+                        app:inputType="rate"
+                        app:title="客户承担利率" />
 
-                <com.cdkj.wzcd.custom.BaseEditLayout
-                    android:id="@+id/el_surchargeAmount"
-                    app:field="surchargeAmount"
-                    android:layout_width="match_parent"
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_surchargeRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:field="surchargeRate"
+                        app:inputType="rate"
+                        app:title="附加费率" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_surchargeAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="surchargeAmount"
+                        app:inputType="money"
+                        app:title="附加费" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_input_fyxx"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    app:inputType="money"
-                    app:title="附加费"/>
+                    android:orientation="vertical">
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_gpsFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="gpsFee"
+                        app:inputType="money"
+                        app:isRequired="true"
+                        app:title="GPS费" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_fxAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="fxAmount"
+                        app:inputType="money"
+                        app:title="担保风险金" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_lyDeposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="lyDeposit"
+                        app:inputType="money"
+                        app:title="履约押金" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_otherFee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="otherFee"
+                        app:inputType="money"
+                        app:title="其他费用" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_loanAmountFy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="loanAmount"
+                        app:inputType="money"
+                        app:title="车款1" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_repointAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="repointAmount"
+                        app:inputType="money"
+                        app:title="车款2" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_carFunds3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="carFunds3"
+                        app:inputType="money"
+                        app:title="车款3" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_carFunds4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="carFunds4"
+                        app:inputType="money"
+                        app:title="车款4" />
+
+                    <com.cdkj.wzcd.custom.BaseEditLayout
+                        android:id="@+id/el_carFunds5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:field="carFunds5"
+                        app:inputType="money"
+                        app:title="车款5" />
+
+                </LinearLayout>
 
                 <com.cdkj.wzcd.custom.BaseRemarkLayout
                     android:id="@+id/rl_notes"
-                    app:field="notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:title="备注事项"/>
-
+                    app:field="notes"
+                    app:title="备注事项" />
 
             </LinearLayout>
 
@@ -229,7 +325,7 @@
                 android:background="@drawable/shape_btn_bg_std"
                 android:text="保存"
                 android:textColor="#ffffffff"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
