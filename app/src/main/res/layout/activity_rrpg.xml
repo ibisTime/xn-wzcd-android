@@ -92,7 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:txt_confirm_content="提交">
+            app:txt_confirm_content="退回"
+            app:txt_confirm_content_right="提交">
 
         </com.cdkj.wzcd.view.MyConfirmBtn>
     </LinearLayout>

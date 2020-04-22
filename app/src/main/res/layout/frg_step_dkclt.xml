@@ -36,6 +36,13 @@
                     app:title="户口本" />
 
                 <com.cdkj.wzcd.custom.BaseImageLayout
+                    android:id="@+id/il_driveCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectMultiple="true"
+                    app:title="驾驶证" />
+
+                <com.cdkj.wzcd.custom.BaseImageLayout
                     android:id="@+id/il_hk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

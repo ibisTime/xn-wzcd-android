@@ -32,7 +32,7 @@ public class AgendaAdapter extends BaseQuickAdapter<AgendaBean, BaseViewHolder> 
         helper.setText(R.id.tv_time,
                 DateUtil.formatStringData(item.getCreateDatetime(), DEFAULT_DATE_FMT));
 
-        helper.setText(R.id.tv_info, "待办事项");
+        helper.setText(R.id.tv_info, item.getBizCode());
 
 
     }

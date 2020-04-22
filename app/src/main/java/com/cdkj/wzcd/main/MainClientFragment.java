@@ -74,10 +74,10 @@ public class MainClientFragment extends BaseLazyFragment {
 
     private void initListener() {
         mBinding.tvSearch.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(mBinding.etSearch.getText().toString())) {
-                ToastUtil.show(mActivity, "请输入客户姓名，手机号，身份证号");
-                return;
-            }
+//            if (TextUtils.isEmpty(mBinding.etSearch.getText().toString())) {
+//                ToastUtil.show(mActivity, "请输入客户姓名，手机号，身份证号");
+//                return;
+//            }
 
             keyword = mBinding.etSearch.getText().toString();
             mRefreshHelper.onDefaultMRefresh(true);

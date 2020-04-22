@@ -93,9 +93,16 @@ public class QrpgActivity extends AbsBaseLoadActivity {
                 doRequest("1");
             }
         });
+
         //接收评估
         mBinding.btnConfirm2.setOnConfirmListener(view -> {
-            doRequest2();
+            showDoubleWarnListen("是否退回上一节点?", view1 -> {
+                doRequest2("0");
+            });
+        });
+
+        mBinding.btnConfirm2.setOnConfirmRightListener(view -> {
+            doRequest2("1");
         });
     }
 
@@ -249,9 +256,13 @@ public class QrpgActivity extends AbsBaseLoadActivity {
     /**
      * 接收评估
      */
-    private void doRequest2() {
+    private void doRequest2(String approveResult) {
 
         HashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+
+        // 1通过，0退回
+        hashMap.put("approveResult", approveResult);
+
         hashMap.put("code", code);
         hashMap.put("operator", SPUtilHelper.getUserId());
 

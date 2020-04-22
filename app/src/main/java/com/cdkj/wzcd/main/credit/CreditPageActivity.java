@@ -2,19 +2,27 @@ package com.cdkj.wzcd.main.credit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.cdkj.baselibrary.api.ResponseInListModel;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
+import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.base.AbsRefreshListActivity;
+import com.cdkj.baselibrary.interfaces.BaseRefreshCallBack;
+import com.cdkj.baselibrary.interfaces.RefreshHelper;
 import com.cdkj.baselibrary.nets.BaseResponseListCallBack;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
+import com.cdkj.baselibrary.utils.ToastUtil;
+import com.cdkj.wzcd.R;
 import com.cdkj.wzcd.api.MyApiServer;
+import com.cdkj.wzcd.databinding.ActCreditPageBinding;
 import com.cdkj.wzcd.main.credit.adapter.CreditPageAdapter;
 import com.cdkj.wzcd.main.credit.bean.CreditPageBean;
 import com.cdkj.wzcd.main.credit.bean.JurisdictionBean;
@@ -44,7 +52,9 @@ import retrofit2.Call;
  * @author : qianLei
  * @since : 2019/12/26 13:57
  */
-public class CreditPageActivity extends AbsRefreshListActivity {
+public class CreditPageActivity extends AbsBaseLoadActivity {
+
+    private ActCreditPageBinding mBinding;
 
     public static String MATERIAL = "0";
     public static String CUR = "1";
@@ -52,6 +62,10 @@ public class CreditPageActivity extends AbsRefreshListActivity {
     ArrayList<String> curNodeCodeList;
     private boolean isShowCrate;
     private String type;
+
+    private String keyword;
+
+    protected RefreshHelper mRefreshHelper;
 
     public static void open(Context context, ArrayList<String> nodeList, String type) {
         if (context == null) {
@@ -81,7 +95,128 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         context.startActivity(intent);
     }
 
+
     @Override
+    public View addMainView() {
+        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.act_credit_page, null, false);
+
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void afterCreate(Bundle savedInstanceState) {
+
+        setShowLine(false);
+
+        init();
+        initListener();
+
+        initRefreshHelper(10);
+        //获取用户权限  显示隐藏右上角的新建按钮
+        if (isShowCrate) {
+            getJurisdiction();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRefreshHelper.onDefaultMRefresh(true);
+    }
+
+    private void init() {
+        curNodeCodeList = getIntent().getStringArrayListExtra(CdRouteHelper.DATA_SIGN);
+        isShowCrate = getIntent().getBooleanExtra(CdRouteHelper.DATA_SIGN2, false);
+        type = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN3);
+
+        if (curNodeCodeList.isEmpty()) {
+            return;
+        }
+
+        for (String node : curNodeCodeList) {
+
+            if (node.equals("a1") || node.equals("a1x")) {
+                mBinding.llSearchRoot.setVisibility(View.GONE);
+                mBaseBinding.titleView.setMidTitle("准入资料");
+            } else if (node.equals("a2")) {
+                mBaseBinding.titleView.setMidTitle("准入审核");
+            } else if (node.equals("h1")) {
+                mBinding.llSearchRoot.setVisibility(View.GONE);
+                mBaseBinding.titleView.setMidTitle("确认评估");
+            } else if (node.equals("h2")) {
+                mBaseBinding.titleView.setMidTitle("接收评估");
+            } else if (node.equals("b1")) {
+                mBinding.llSearchRoot.setVisibility(View.GONE);
+                mBaseBinding.titleView.setMidTitle("用款申请");
+            } else if (node.equals("b3")) {
+                mBaseBinding.titleView.setMidTitle("用款审核");
+            } else if (node.equals("b4")) {
+                mBaseBinding.titleView.setMidTitle("制单回录");
+            } else if (node.equals("b5")) {
+                mBaseBinding.titleView.setMidTitle("垫资回录");
+            } else if (node.equals("c1")) {
+                mBaseBinding.titleView.setMidTitle("理件");
+            } else if (node.equals("c2")) {
+                mBaseBinding.titleView.setMidTitle("打件");
+            } else if (node.equals("d1")) {
+                mBaseBinding.titleView.setMidTitle("银行收件");
+            } else if (node.equals("d2")) {
+                mBaseBinding.titleView.setMidTitle("银行提交");
+            } else if (node.equals("d3")) {
+                mBaseBinding.titleView.setMidTitle("录入放款");
+            } else if (node.equals("d4")) {
+                mBaseBinding.titleView.setMidTitle("确认收款");
+            } else if (node.equals("f2")) {
+                mBaseBinding.titleView.setMidTitle("入档");
+            }
+
+        }
+
+    }
+
+    private void initListener() {
+        mBinding.tvSearch.setOnClickListener(v -> {
+//            if (TextUtils.isEmpty(mBinding.etSearch.getText().toString())) {
+//                ToastUtil.show(this, "请输入客户姓名，订单号，身份证号");
+//                return;
+//            }
+
+            keyword = mBinding.etSearch.getText().toString();
+            mRefreshHelper.onDefaultMRefresh(true);
+
+        });
+    }
+
+    /**
+     * 初始化刷新相关
+     */
+    protected void initRefreshHelper(int limit) {
+        mRefreshHelper = new RefreshHelper(this, new BaseRefreshCallBack(this) {
+            @Override
+            public View getRefreshLayout() {
+                return mBinding.refreshLayout;
+            }
+
+            @Override
+            public RecyclerView getRecyclerView() {
+                return mBinding.rv;
+            }
+
+            @Override
+            public RecyclerView.Adapter getAdapter(List listData) {
+                return getListAdapter(listData);
+            }
+
+            @Override
+            public void getListDataRequest(int pageIndex, int limit, boolean isShowDialog) {
+                getListRequest(pageIndex, limit, isShowDialog);
+            }
+        });
+        mRefreshHelper.init(limit);
+
+    }
+
     public RecyclerView.Adapter getListAdapter(List listData) {
         CreditPageAdapter mAdapter = new CreditPageAdapter(listData, type);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -98,10 +233,10 @@ public class CreditPageActivity extends AbsRefreshListActivity {
         return mAdapter;
     }
 
-    @Override
     public void getListRequest(int pageIndex, int limit, boolean isShowDialog) {
         Map<String, Object> map = RetrofitUtils.getNodeListMap();
 
+        map.put("keyword", keyword);
         map.put("start", pageIndex + "");
         map.put("limit", limit + "");
 
@@ -140,18 +275,6 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
     }
 
-    @Override
-    public void afterCreate(Bundle savedInstanceState) {
-
-        init();
-
-        initRefreshHelper(10);
-        //获取用户权限  显示隐藏右上角的新建按钮
-        if (isShowCrate) {
-            getJurisdiction();
-        }
-
-    }
 
     private void getJurisdiction() {
 
@@ -182,59 +305,6 @@ public class CreditPageActivity extends AbsRefreshListActivity {
 
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mRefreshHelper.onDefaultMRefresh(true);
-    }
-
-    private void init() {
-        curNodeCodeList = getIntent().getStringArrayListExtra(CdRouteHelper.DATA_SIGN);
-        isShowCrate = getIntent().getBooleanExtra(CdRouteHelper.DATA_SIGN2, false);
-        type = getIntent().getStringExtra(CdRouteHelper.DATA_SIGN3);
-
-        if (curNodeCodeList.isEmpty()) {
-            return;
-        }
-
-        for (String node : curNodeCodeList) {
-
-            if (node.equals("a1") || node.equals("a1x")) {
-                mBaseBinding.titleView.setMidTitle("准入资料");
-            } else if (node.equals("a2")) {
-                mBaseBinding.titleView.setMidTitle("准入审核");
-            } else if (node.equals("h1")) {
-                mBaseBinding.titleView.setMidTitle("确认评估");
-            } else if (node.equals("h2")) {
-                mBaseBinding.titleView.setMidTitle("接收评估");
-            } else if (node.equals("b1")) {
-                mBaseBinding.titleView.setMidTitle("用款申请");
-            } else if (node.equals("b3")) {
-                mBaseBinding.titleView.setMidTitle("用款审核");
-            } else if (node.equals("b4")) {
-                mBaseBinding.titleView.setMidTitle("制单回录");
-            } else if (node.equals("b5")) {
-                mBaseBinding.titleView.setMidTitle("垫资回录");
-            } else if (node.equals("c1")) {
-                mBaseBinding.titleView.setMidTitle("理件");
-            } else if (node.equals("c2")) {
-                mBaseBinding.titleView.setMidTitle("打件");
-            } else if (node.equals("d1")) {
-                mBaseBinding.titleView.setMidTitle("银行收件");
-            } else if (node.equals("d2")) {
-                mBaseBinding.titleView.setMidTitle("银行提交");
-            } else if (node.equals("d3")) {
-                mBaseBinding.titleView.setMidTitle("录入放款");
-            } else if (node.equals("d4")) {
-                mBaseBinding.titleView.setMidTitle("确认收款");
-            } else if (node.equals("f2")) {
-                mBaseBinding.titleView.setMidTitle("入档");
-            }
-
-        }
-
     }
 
     private void onItemClick(CreditPageBean item) {
@@ -305,11 +375,20 @@ public class CreditPageActivity extends AbsRefreshListActivity {
             case "h1":
                 QrpgActivity.open(this, item.getCode(), false);
                 break;
+
             case "h2":
                 QrpgActivity.open(this, item.getCode(), true);
                 break;
 
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mRefreshHelper != null) {
+            mRefreshHelper.onDestroy();
+        }
     }
 }

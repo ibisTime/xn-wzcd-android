@@ -4,8 +4,8 @@ ext {
             buildToolsVersion: "27.0.2",
             minSdkVersion    : 19,
             targetSdkVersion : 27,
-            versionCode      : 7,
-            versionName      : "3.4.8",
+            versionCode      : 8,
+            versionName      : "3.4.9",
     ]
 
     cdcommon = [

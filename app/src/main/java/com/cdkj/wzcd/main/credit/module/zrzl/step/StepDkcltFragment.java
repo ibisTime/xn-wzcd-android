@@ -98,7 +98,6 @@ public class StepDkcltFragment extends BaseLazyFragment {
     private void initView() {
 
         List<BaseImageBean> list = new ArrayList<>();
-        list.add(new BaseImageBean("驾驶证", "driveCard"));
         list.add(new BaseImageBean("结婚证", "marryPdf"));
         list.add(new BaseImageBean("离婚证", "divorcePdf"));
         list.add(new BaseImageBean("单身证明", "singleProve"));
@@ -107,6 +106,7 @@ public class StepDkcltFragment extends BaseLazyFragment {
         list.add(new BaseImageBean("产权证内容页", "housePropertyCardPdf"));
         mBinding.ilInfo.init(mActivity, list);
 
+        mBinding.ilDriveCard.initMultiple(mActivity, "driveCard");
         mBinding.ilHk.initMultiple(mActivity, "hkBookFirstPage");
         mBinding.ilBank.initMultiple(mActivity, "bankJourFirstPage");
         mBinding.ilZfb.initMultiple(mActivity, "zfbJour");
@@ -147,10 +147,6 @@ public class StepDkcltFragment extends BaseLazyFragment {
 
                 for (ZrzlBean.AttachmentsBean bean : attachments) {
 
-                    if (bean.getKname().equals("drive_card")) {
-                        mBinding.ilInfo.setData("driveCard", bean.getUrl());
-                    }
-
                     if (bean.getKname().equals("marry_pdf")) {
                         mBinding.ilInfo.setData("marryPdf", bean.getUrl());
                     }
@@ -175,6 +171,9 @@ public class StepDkcltFragment extends BaseLazyFragment {
                         mBinding.ilInfo.setData("housePropertyCardPdf", bean.getUrl());
                     }
 
+                    if (bean.getKname().equals("drive_card")) {
+                        mBinding.ilDriveCard.setData(bean.getUrl());
+                    }
                     if (bean.getKname().equals("hk_book_first_page")) {
                         mBinding.ilHk.setData(bean.getUrl());
                     }

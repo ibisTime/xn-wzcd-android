@@ -76,11 +76,15 @@ public class DzhlActivity extends AbsBaseLoadActivity {
 
     private void initListener() {
         mBinding.btnConfirm.setOnConfirmListener(view -> {
-            finish();
+            showDoubleWarnListen("是否退回上一节点?", view1 -> {
+                doRequest("0");
+            });
         });
 
         mBinding.btnConfirm.setOnConfirmRightListener(view -> {
-            doRequest();
+            if (check()){
+                doRequest("1");
+            }
         });
     }
 
@@ -147,25 +151,27 @@ public class DzhlActivity extends AbsBaseLoadActivity {
         mBinding.elAmount.setText(bean.getLoanAmount());
     }
 
-    private void check() {
+    private boolean check() {
 
         if (mBinding.dlDate.check()) {
-            return;
+            return false;
         }
         if (mBinding.elAmount.check()) {
-            return;
+            return false;
         }
         if (mBinding.ilShuidan.check()) {
-            return;
+            return false;
         }
 
+        return true;
     }
 
-    private void doRequest() {
-
-        check();
+    private void doRequest(String approveResult) {
 
         HashMap<String, String> hashMap = new LinkedHashMap<String, String>();
+
+        // 1通过，0退回
+        hashMap.put("approveResult", approveResult);
 
         hashMap.put("code", bean.getCode());
         hashMap.put("operator", SPUtilHelper.getUserId());

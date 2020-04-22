@@ -98,7 +98,7 @@
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:txt_confirm_content="返回"
+            app:txt_confirm_content="退回"
             app:txt_confirm_content_right="确定">
 
         </com.cdkj.wzcd.view.MyConfirmBtn>

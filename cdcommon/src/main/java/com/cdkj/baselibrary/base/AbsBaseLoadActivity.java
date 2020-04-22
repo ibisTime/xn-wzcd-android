@@ -106,6 +106,17 @@ public abstract class AbsBaseLoadActivity extends BaseActivity {
     }
 
     /**
+     * 是否显示title
+     *
+     * @param isShow
+     */
+    protected void setShowLine(boolean isShow) {
+        mBaseBinding.viewV.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
+
+
+    /**
      * 设置title背景信息
      */
     protected void setTitleBg() {

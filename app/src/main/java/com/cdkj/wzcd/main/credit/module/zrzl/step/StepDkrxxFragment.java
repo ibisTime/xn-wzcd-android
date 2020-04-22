@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import com.cdkj.baselibrary.appmanager.CdRouteHelper;
 import com.cdkj.baselibrary.appmanager.SPUtilHelper;
 import com.cdkj.baselibrary.base.BaseLazyFragment;
+import com.cdkj.baselibrary.dialog.CommonDialog;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.model.DataDictionary;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.eventmodels.EventBean;
+import com.cdkj.baselibrary.model.eventmodels.EventFinishAll;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
@@ -133,6 +135,19 @@ public class StepDkrxxFragment extends BaseLazyFragment {
         mAdapter = new DkrxxAdapter(list);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             StepDkrxxActivity.open(mActivity, mAdapter.getItem(position), position, isDetail);
+        });
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+
+            showDoubleWarnListen("您确定要清除该征信人资料吗？", v -> {
+                DkrxxBean item = mAdapter.getItem(position);
+                DkrxxBean bean = new DkrxxBean(item.getLoanRole(), item.getLoanRoleName());
+
+                list.remove(position);
+                list.add(position, bean);
+                mAdapter.notifyDataSetChanged();
+            });
+
+
         });
         mBinding.rv.setAdapter(mAdapter);
         mBinding.rv.setLayoutManager(
@@ -269,4 +284,14 @@ public class StepDkrxxFragment extends BaseLazyFragment {
 
     }
 
+
+    protected void showDoubleWarnListen(String str, CommonDialog.OnPositiveListener onPositiveListener) {
+
+        CommonDialog commonDialog = new CommonDialog(mActivity).builder()
+                .setTitle(getString(com.cdkj.baselibrary.R.string.tips)).setContentMsg(str)
+                .setPositiveBtn(getString(com.cdkj.baselibrary.R.string.sure), onPositiveListener)
+                .setNegativeBtn(getString(com.cdkj.baselibrary.R.string.cancel), null, false);
+
+        commonDialog.show();
+    }
 }
